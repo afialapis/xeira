@@ -3,12 +3,15 @@
   "main": "lib/index.js",
   "cjs": "dist/both-pkg.cjs.js",
   "browser": "dist/both-pkg.umd.js",
-  "module": "dist/both-pkg.es.js",  
+  "module": "dist/both-pkg.es.js",
   "scripts": {
     "clean": "rm -fr dist/* && rm -fr lib/*",
     "lint": "node ../../bin/xeira.js lint src",
     "compile": "node ../../bin/xeira.js compile src lib",
     "bundle": "node ../../bin/xeira.js bundle",
     "all": "npm run clean && npm run lint && npm run compile && npm run bundle"
+  },
+  "dependencies": {
+    "farrapa-colors": "^1.0.4"
   }
 }

@@ -1,20 +1,22 @@
-import autoExternal from 'rollup-plugin-node-externals'
-import replace from '@rollup/plugin-replace'
-import babel from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import { terser } from 'rollup-plugin-terser'
+const {externals} = require('rollup-plugin-node-externals')
+const replace = require('@rollup/plugin-replace')
+const {babel} = require('@rollup/plugin-babel')
+const {nodeResolve} = require('@rollup/plugin-node-resolve')
+const commonjs = require('@rollup/plugin-commonjs')
+const { terser } = require('rollup-plugin-terser')
 const NODE_ENV = 'production'
 
 
 const rollupInputPlugins= () => {
   return [
-    autoExternal(),
+    externals({
+      deps: true
+    }),
     replace({
       preventAssignment: true,
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
-    resolve(),
+    nodeResolve(),
     commonjs(),
     babel({
       exclude: 'node_modules/**',
@@ -23,9 +25,9 @@ const rollupInputPlugins= () => {
       /*
       presets: [
           ["@babel/preset-env", {"targets": {"esmodules": true}}]
-      ]*/
-
-    })    
+      ]
+      */
+    })
   ]
 
 }
@@ -44,7 +46,7 @@ const rollupOutputPlugins= (withTerser) => {
 
 
 
-export {
+module.exports = {
   rollupInputPlugins,
   rollupOutputPlugins
 }

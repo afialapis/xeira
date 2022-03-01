@@ -1,6 +1,6 @@
 const path = require('path')
 const {rollupOutputPlugins} = require('./plugins')
-const {toTitleCase} = require('farrapa-trings')
+const {toTitleCase} = require('farrapa-strings')
 
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
 
@@ -11,7 +11,7 @@ const titlefyPkgName = (package_name) => {
 }
 
 const makeGlobals = (pkgJson) => {
-  const pkgs= Object.keys(pkgJson.dependencies)
+  const pkgs= Object.keys(pkgJson.dependencies || {})
   const globals= {}
   pkgs.map((n) => {
     globals[n]= titlefyPkgName(n)
@@ -100,4 +100,6 @@ const rollupOutputs = (pkgPath, pkgJson) => {
 }
 
 
-export {rollupOutputs}
+module.exports = {
+  rollupOutputs
+}

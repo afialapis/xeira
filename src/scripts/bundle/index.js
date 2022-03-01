@@ -13,4 +13,30 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const execSync = require('child_process').execSync;
+const { getXeiraConfig } = require('../../utils/config');
+const { rollupBundle } = require('./rollup')
+
+
+async function xeiraBundle(pkgPath) {
+
+  // get xeira config
+  const xeiraConfig = getXeiraConfig(pkgPath);
+  
+  if (xeiraConfig.bundleWithRollup) {
+    await rollupBundle(pkgPath, xeiraConfig)
+  } else {
+    console.warn('[xeira] bundle: bundler not specified or not implement yet')
+  }
+}
+
+
+(async () => {
+
+  const pkgPath= process.env.PWD;
+
+  await xeiraBundle(pkgPath)
+})().catch((error) => {
+  process.exitCode = 1;
+  console.error(error);
+});
+

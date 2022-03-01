@@ -83,4 +83,6 @@ async function rollupBuild(inputOptions, outputOptionsList) {
 }
 
 
-export {rollupBuild}
+module.exports = {
+  rollupBuild
+}
