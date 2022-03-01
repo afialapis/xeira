@@ -37,7 +37,6 @@ async function compileFile (basePath, filePath, destPath, babelCfg) {
   const { code } = await transformFileAsync(path.join(basePath, filePath), babelCfg);
 
   const destFileFolder = path.dirname(realDestPath)
-  console.log(destFileFolder)
   
   try {
     await access(destFileFolder)
@@ -48,7 +47,13 @@ async function compileFile (basePath, filePath, destPath, babelCfg) {
 }
 
 async function compileDirectory (basePath, sourcePath, destPath, babelCfg) {
-  const files = await readdir(path.join(basePath, sourcePath))
+  let files= []
+  try {
+    files = await readdir(path.join(basePath, sourcePath))
+  } catch(e) {
+    console.error(`[xeira] compile: Folder ${path.join(basePath, sourcePath)} does not exist`)
+    return
+  }
 
   return Promise.all(
     files.map(async (file) => {
@@ -76,9 +81,19 @@ async function compileDirectory (basePath, sourcePath, destPath, babelCfg) {
     : './babel.config';
   
   const babelCfg = require(babelCfgName);
+
+  const args = process.argv.slice(2);
+  let sourcePath= 'src'
+  let destPath = 'lib'
+  if (args.length==2) {
+    sourcePath = args[0] || 'src'
+    destPath = args[1] || 'lib'
+  } else {
+    console.warn(`[xeira] compile: no params passed, so taking defaults. npx xeira compile [src] [lib].`)
+  }
   
 
-  await compileDirectory(pkgPath, 'scripts', 'lib', babelCfg)
+  await compileDirectory(pkgPath, sourcePath, destPath, babelCfg)
 
 })().catch((error) => {
   process.exitCode = 1;
