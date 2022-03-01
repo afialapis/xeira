@@ -31,6 +31,7 @@ let xeiraDefaultConfig= {
   // Probably offering alternatives some day
   linter: 'eslint',
   compiler: 'babel',
+  minifier: 'uglify', // None ?
   bundler: 'rollup', // 'webpack',
 
   product: 'package', // 'app',

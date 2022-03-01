@@ -17,6 +17,7 @@ process.on('unhandledRejection', err => {
 const path = require('path');
 const {readdir, stat, writeFile, mkdir, access} = require('fs/promises');
 const {transformFileAsync} = require("@babel/core");
+const UglifyJS = require("uglify-js");
 
 const { getXeiraConfig } = require('../../utils/config');
 const pkgPath= process.env.PWD;
@@ -29,13 +30,11 @@ function removeTopParent(fpath) {
 }
 
 
-async function compileFile (basePath, filePath, destPath, babelCfg) {
+async function compileFile (basePath, filePath, destPath, callback) {
+  const realSourcePath = path.join(basePath, filePath)
   const withouParent = removeTopParent(filePath);
   const realDestPath = path.join(basePath, destPath, withouParent);
-  console.log(`[xeira] compiling ${path.join(basePath, filePath)} ==> ${realDestPath}...`);
-
-  const { code } = await transformFileAsync(path.join(basePath, filePath), babelCfg);
-
+  
   const destFileFolder = path.dirname(realDestPath)
   
   try {
@@ -43,10 +42,13 @@ async function compileFile (basePath, filePath, destPath, babelCfg) {
   } catch(e) {
     await mkdir(destFileFolder)
   }
-  return await writeFile(realDestPath, code);
+
+  console.log(`[xeira] compiling ${realSourcePath} ==> ${realDestPath}...`);
+  
+  return await callback(realSourcePath, realDestPath)
 }
 
-async function compileDirectory (basePath, sourcePath, destPath, babelCfg) {
+async function compileDirectory (basePath, sourcePath, destPath, callback) {
   let files= []
   try {
     files = await readdir(path.join(basePath, sourcePath))
@@ -60,10 +62,10 @@ async function compileDirectory (basePath, sourcePath, destPath, babelCfg) {
       const filePath= path.join(sourcePath, file)
       const stats= await stat(filePath)
       if (stats.isDirectory()) {
-        return await compileDirectory(basePath, filePath, destPath, babelCfg)
+        return await compileDirectory(basePath, filePath, destPath, callback)
       } else if (stats.isFile()) {
         if (file.endsWith('.js')) {
-          return await compileFile(basePath, filePath, destPath, babelCfg)
+          return await compileFile(basePath, filePath, destPath, callback)
         }
       }
   }))
@@ -81,6 +83,8 @@ async function compileDirectory (basePath, sourcePath, destPath, babelCfg) {
     : './babel.config';
   
   const babelCfg = require(babelCfgName);
+  
+  const uglifyCfg = require('./uglify.config')
 
   const args = process.argv.slice(2);
   let sourcePath= 'src'
@@ -93,7 +97,16 @@ async function compileDirectory (basePath, sourcePath, destPath, babelCfg) {
   }
   
 
-  await compileDirectory(pkgPath, sourcePath, destPath, babelCfg)
+  await compileDirectory(pkgPath, sourcePath, destPath, async (filepath, destpath) => {
+    if (xeiraConfig.compileWithBabel) {
+      let { code } = await transformFileAsync(filepath, babelCfg);
+      if (xeiraConfig.minifyWithUglify) {
+        const result= UglifyJS.minify(code, uglifyCfg);
+        code= result.code
+      }
+      return await writeFile(destpath, code);
+    }
+  })
 
 })().catch((error) => {
   process.exitCode = 1;

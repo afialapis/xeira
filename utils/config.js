@@ -36,6 +36,10 @@ class XeiraConfig {
     return this.config.compiler == 'babel'
   }
 
+  get minifyWithUglify() {
+    return this.config.minifier == 'uglify'
+  }
+
   get bundleWithRollup() {
     return this.config.bundler == 'rollup'
   }
