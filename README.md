@@ -26,4 +26,9 @@ Index for all the building tools your package or app needs
     in order to make xeira easy customizable by just
     extending that common place
   
+  · config:
 
+    product: 'package', // 'app',
+    target: 'node', // 'browser', 'all',
+
+    probably not needed, on bundle time we already have main/cjs/browser/module
