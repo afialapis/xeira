@@ -131,7 +131,7 @@ function objectToJs(config) {
   const xeiraConfigName = path.join(pkgPath, 'xeira.json');
 
   const eslintConfig = getEslintConfig(xeiraConfig);
-  const eslintConfigName = path.join(pkgPath, 'eslintrc.js');
+  const eslintConfigName = path.join(pkgPath, '.eslintrc.js');
 
   const babelConfig = getBabelConfig(xeiraConfig);
   const babelConfigName = path.join(pkgPath, '.babelrc');

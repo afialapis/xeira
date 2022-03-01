@@ -1,0 +1,14 @@
+{
+  "name": "browser-pkg",
+  "main": "lib/index.js",
+  "cjs": "dist/browser-pkg.cjs.js",
+  "browser": "dist/browser-pkg.umd.js",
+  "module": "dist/browser-pkg.es.js",  
+  "scripts": {
+    "clean": "rm -fr dist && rm -fr lib",
+    "lint": "node ../bin/xeira.js lint src",
+    "compile": "node ../bin/xeira.js compile src lib",
+    "bundle": "node ../bin/xeira.js bundle",
+    "all": "npm run clean && npm run lint && npm run compile && npm run bundle"
+  }
+}

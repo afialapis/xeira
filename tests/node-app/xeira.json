@@ -1,0 +1,10 @@
+{
+  "linter": "eslint",
+  "compiler": "babel",
+  "minifier": "uglify",
+  "bundler": "rollup",
+  "product": "app",
+  "target": "node",
+  "react": false,
+  "monorepo": false
+}

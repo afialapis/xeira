@@ -1,0 +1,14 @@
+{
+  "name": "node-app",
+  "main": "lib/index.js",
+  "cjs": "dist/node-app.cjs.js",
+  "browser": "dist/node-app.umd.js",
+  "module": "dist/node-app.es.js",  
+  "scripts": {
+    "clean": "rm -fr dist && rm -fr lib",
+    "lint": "node ../bin/xeira.js lint src",
+    "compile": "node ../bin/xeira.js compile src lib",
+    "bundle": "node ../bin/xeira.js bundle",
+    "all": "npm run clean && npm run lint && npm run compile && npm run bundle"
+  }
+}

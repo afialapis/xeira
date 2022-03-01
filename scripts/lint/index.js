@@ -37,7 +37,7 @@ if (args.length>=1) {
   // prepare eslint options
   let overrideConfig
   try {
-    overrideConfig = require(path.join(pkgPath, 'eslintrc.js')) 
+    overrideConfig = require(path.join(pkgPath, '.eslintrc.js')) 
   } catch(e) {
     const getEslintConfig = require('./eslint.config') 
     overrideConfig = getEslintConfig(xeiraConfig)

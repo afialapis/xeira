@@ -5,7 +5,7 @@ const {rollupInput} = require('./inputs')
 const {rollupOutputs} = require('./outputs')
 
 async function rollup_bundle(pkgPath, xeiraConfig) {
-  const pkgJson = await readFile(path.join(pkgPath, 'pckage.json'))
+  const pkgJson = await readFile(path.join(pkgPath, 'package.json'))
 
   const input = rollupInput(pkgPath, pkgJson)
   const outputs= rollupOutputs(pkgPath, pkgJson)
