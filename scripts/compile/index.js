@@ -78,8 +78,13 @@ async function compileDirectory (basePath, sourcePath, destPath, callback) {
   const xeiraConfig = getXeiraConfig(pkgPath);
   
   // prepae babel options
-  const getBabelConfig = require('./babel.config');
-  const babelConfig = getBabelConfig(xeiraConfig);
+  let babelConfig
+  try {
+    babelConfig = require(path.join(pkgPath, '.babelrc'))
+  } catch(e) {
+    const getBabelConfig = require('./babel.config');
+    babelConfig = getBabelConfig(xeiraConfig);
+  }  
   
   const getUglifyConfig = require('./uglify.config');
   const uglifyCfg = getUglifyConfig(xeiraConfig);

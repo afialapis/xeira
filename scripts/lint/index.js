@@ -34,9 +34,15 @@ if (args.length>=1) {
   const xeiraPath = path.resolve(__dirname);
   const xeiraConfig = getXeiraConfig(pkgPath);
   
-  // prepae eslint options
-  const getEslintConfig = require('./eslint.config') 
-  const overrideConfig = getEslintConfig(xeiraConfig)
+  // prepare eslint options
+  let overrideConfig
+  try {
+    overrideConfig = require(path.join(pkgPath, 'eslintrc.js')) 
+  } catch(e) {
+    const getEslintConfig = require('./eslint.config') 
+    overrideConfig = getEslintConfig(xeiraConfig)
+  }
+  
   const ignorePath = path.join(xeiraPath, '.eslintignore');
 
   const options= {
