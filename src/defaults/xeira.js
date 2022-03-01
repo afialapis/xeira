@@ -1,9 +1,9 @@
 function getXeiraDefaultConfig() { 
   return {
     // Probably offering alternatives some day
-    linter: 'eslint',
-    compiler: 'babel',
-    minifier: 'uglify', // None ?
+    linter: 'eslint', // 'none'
+    compiler: 'babel', // 'none'
+    minifier: 'uglify', // 'none'
     bundler: 'rollup', // 'webpack',
 
     product: 'package', // 'app',

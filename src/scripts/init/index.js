@@ -34,7 +34,7 @@ const configQuestions = [
   {
     type: 'select',
     name: 'product',
-    message: 'Which product are you shipping?',
+    message: 'Which kind of product are you shipping?',
     choices: [
       { title: 'package', value: 'package' },
       { title: 'app', value: 'app'},
@@ -46,7 +46,7 @@ const configQuestions = [
   {
     type: 'select',
     name: 'target',
-    message: 'Which is yourtarget?',
+    message: 'Which is its target environment?',
     choices: [
       { title: 'node', value: 'node' },
       { title: 'browser', value: 'browser'},
@@ -67,7 +67,40 @@ const configQuestions = [
     name: 'monorepo',
     message: 'Are you starting a monorepo?',
     initial: false
-  }
+  },
+  
+  {
+    type: 'select',
+    name: 'linter',
+    message: 'Which linter will you use?',
+    choices: [
+      { title: 'eslint', value: 'eslint' },
+      { title: 'none', value: 'none', disabled: true},
+    ],
+    initial: 0
+  },
+
+  {
+    type: 'select',
+    name: 'compiler',
+    message: 'What about the compiler?',
+    choices: [
+      { title: 'babel', value: 'babel' },
+      { title: 'none', value: 'none'},
+    ],
+    initial: 0
+  },  
+
+  {
+    type: 'select',
+    name: 'bundler',
+    message: 'Which bundler will do the magic for you?',
+    choices: [
+      { title: 'rollup', value: 'rollup' },
+      { title: 'none', value: 'none', disabled: true},
+    ],
+    initial: 0
+  },    
 ];
 
 async function xeiraInit() {
@@ -79,16 +112,19 @@ async function xeiraInit() {
   };
 
   const xeiraConfigName = path.join(pkgPath, 'xeira.json');
-
-  const eslintConfig = getEslintConfig(xeiraConfig);
-  const eslintConfigName = path.join(pkgPath, '.eslintrc.js');
-
-  const babelConfig = getBabelConfig(xeiraConfig);
-  const babelConfigName = path.join(pkgPath, '.babelrc');
-
   await saveObjectToJsonSafe(xeiraConfigName, xeiraConfig);
-  await saveObjectToJsSafe(eslintConfigName, eslintConfig);
-  await saveObjectToJsonSafe(babelConfigName, babelConfig);
+
+  if (xeiraConfig.linter == 'eslint') {
+    const eslintConfig = getEslintConfig(xeiraConfig);
+    const eslintConfigName = path.join(pkgPath, '.eslintrc.js');
+    await saveObjectToJsSafe(eslintConfigName, eslintConfig);
+  }
+
+  if (xeiraConfig.compiler == 'babel') {
+    const babelConfig = getBabelConfig(xeiraConfig);
+    const babelConfigName = path.join(pkgPath, '.babelrc');  
+    await saveObjectToJsonSafe(babelConfigName, babelConfig);
+  }
 }
 
 

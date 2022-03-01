@@ -13,43 +13,8 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const path = require('path');
-const { ESLint } = require("eslint");
 const { getXeiraConfig } = require('../../utils/config');
-const {getEslintConfig, getEslintIgnorePath} = require('../../defaults/eslint');
-
-
-async function xeiraLint(pkgPath, sourcePath) {
-
-  // get xeira config
-  const xeiraConfig = getXeiraConfig(pkgPath);
-  
-  // prepare eslint options
-  let overrideConfig
-  try {
-    overrideConfig = require(path.join(pkgPath, '.eslintrc.js')) 
-  } catch(e) {
-    overrideConfig = getEslintConfig(xeiraConfig);
-  }
-  
-  const ignorePath = getEslintIgnorePath();
-
-  const options= {
-    ignorePath,
-    useEslintrc: false,
-    overrideConfig
-  }
-
-  // call eslint's node api
-  const eslint = new ESLint(options);
-
-  const results = await eslint.lintFiles([path.join(pkgPath, sourcePath)]);
-
-  const formatter = await eslint.loadFormatter("stylish");
-  const resultText = formatter.format(results);
-
-  console.log(resultText);
-}
+const {lintWithEslint} = require('./eslint');
 
 (async () => {
 
@@ -63,7 +28,16 @@ async function xeiraLint(pkgPath, sourcePath) {
     console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [.].`)
   }
 
-  await xeiraLint(pkgPath, sourcePath)
+  // get xeira config
+  const xeiraConfig = getXeiraConfig(pkgPath);
+
+  if (xeiraConfig.lintWithEslint) {
+    await lintWithEslint(pkgPath, xeiraConfig, sourcePath)
+  } else {
+    console.warn(`[xeira] lint: no linter specified in xeira settings.`)
+  }
+
+  
 })().catch((error) => {
   process.exitCode = 1;
   console.error(error);
