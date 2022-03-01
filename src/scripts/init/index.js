@@ -13,12 +13,13 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const {writeFile, access} = require('fs/promises');
-const os = require('os');
+
 const path = require('path');
 const prompts = require('prompts');
-const getBabelConfig = require('../compile/babel.config');
-const getEslintConfig = require('../lint/eslint.config');
+const {saveObjectToJsonSafe, saveObjectToJsSafe} = require('../../utils/io')
+const {getXeiraDefaultConfig} = require('../../defaults/xeira')
+const {getBabelConfig} = require('../../defaults/babel');
+const {getEslintConfig} = require('../../defaults/eslint');
 
 const pkgPath= process.env.PWD
 
@@ -28,24 +29,6 @@ const pkgPath= process.env.PWD
  *   => If true, then the other options are package-level.
  *   => How to handle that?
  */
-
-let xeiraDefaultConfig= {
-  // Probably offering alternatives some day
-  linter: 'eslint',
-  compiler: 'babel',
-  minifier: 'uglify', // None ?
-  bundler: 'rollup', // 'webpack',
-
-  product: 'package', // 'app',
-  target: 'node', // 'browser', 'all',
-  react: false,
-
-  // This can be previously tried to be guessed (/packages or .pnpm-workspace.yaml),
-  // if not, ask anyway
-  monorepo: false,
-
-}
-
 
 const configQuestions = [
   {
@@ -87,44 +70,11 @@ const configQuestions = [
   }
 ];
 
-async function saveFileSafe(filename, content) {
-  try {
-    await access(filename)
-
-    const questions= [{
-      type: 'confirm',
-      name: 'overwrite',
-      message: `${path.basename(filename)} already exists. Do you wanrt to overwrite it?`,
-      initial: false      
-    }]
-
-    const answers = await prompts(questions)
-
-    if (answers.overwrite !== true) {
-      return
-    }
-  } catch(e) {}
-
-  await writeFile(
-    filename,
-    content
-  )
-}
-
-function objectToJson(config) {
-  return JSON.stringify(config, null, 2) + os.EOL
-}
-function objectToJs(config) {
-  return `module.exports = ${objectToJson(config)}`
-}
-
-
-(async () => {
-
+async function xeiraInit() {
   const configAnswers = await prompts(configQuestions); 
 
   const xeiraConfig = {
-    ...xeiraDefaultConfig,
+    ...getXeiraDefaultConfig(),
     ...configAnswers
   };
 
@@ -136,8 +86,15 @@ function objectToJs(config) {
   const babelConfig = getBabelConfig(xeiraConfig);
   const babelConfigName = path.join(pkgPath, '.babelrc');
 
-  await saveFileSafe(xeiraConfigName, objectToJson(xeiraConfig));
-  await saveFileSafe(eslintConfigName, objectToJs(eslintConfig));
-  await saveFileSafe(babelConfigName, objectToJson(babelConfig));
+  await saveObjectToJsonSafe(xeiraConfigName, xeiraConfig);
+  await saveObjectToJsSafe(eslintConfigName, eslintConfig);
+  await saveObjectToJsonSafe(babelConfigName, babelConfig);
+}
 
-})();
+
+(async () => {
+  await xeiraInit()
+})().catch((error) => {
+  process.exitCode = 1;
+  console.error(error);
+});

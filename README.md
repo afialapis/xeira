@@ -4,6 +4,12 @@ Index for all the building tools your package or app needs
 
 
 ## TODO
+  · init
+    
+    also init the files:
+      - .gitignore
+      - .npmignore
+      - monorepo relateds
 
   · default params:
     

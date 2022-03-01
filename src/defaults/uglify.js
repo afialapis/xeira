@@ -1,4 +1,4 @@
-module.exports= function getUglifyConfig (xeiraConfig) {
+function getUglifyConfig (_xeiraConfig) {
   return {
     toplevel: true,
     compress: {
@@ -12,4 +12,8 @@ module.exports= function getUglifyConfig (xeiraConfig) {
   */`
     }    
   }
+}
+
+module.exports= {
+  getUglifyConfig
 }

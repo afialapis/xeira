@@ -1,4 +1,5 @@
-const getBabelConfig = require('../compile/babel.config');
+const path = require('path');
+const {getBabelConfig} = require('./babel');
 
 function _getParserOptions (xeiraConfig) {
   const babelConfig = getBabelConfig(xeiraConfig);
@@ -29,7 +30,6 @@ function _getExtends (xeiraConfig) {
   return base
 }
 
-
 function _getPlugins (xeiraConfig) {
   if (xeiraConfig.usesReact) {
     return [
@@ -39,7 +39,6 @@ function _getPlugins (xeiraConfig) {
   }
   return undefined
 }
-
 
 function _getSettings (xeiraConfig) {
   if (xeiraConfig.usesReact) {
@@ -101,10 +100,7 @@ function _getRules (xeiraConfig) {
   return base
 }
 
-
-
-module.exports= function getEslintConfig(xeiraConfig) {
-
+function getEslintConfig(xeiraConfig) {
   return {
     root: true,
     parser: "@babel/eslint-parser",
@@ -120,4 +116,14 @@ module.exports= function getEslintConfig(xeiraConfig) {
     },
     rules: _getRules(xeiraConfig)
   }
+}
+
+
+function getEslintIgnorePath() {
+  return path.join(__dirname, '.eslintignore')
+}
+
+module.exports= {
+  getEslintConfig,
+  getEslintIgnorePath
 }

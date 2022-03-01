@@ -5,10 +5,10 @@
   "browser": "dist/browser-app.umd.js",
   "module": "dist/browser-app.es.js",  
   "scripts": {
-    "clean": "rm -fr dist && rm -fr lib",
-    "lint": "node ../bin/xeira.js lint src",
-    "compile": "node ../bin/xeira.js compile src lib",
-    "bundle": "node ../bin/xeira.js bundle",
+    "clean": "rm -fr dist/* && rm -fr lib/*",
+    "lint": "node ../../bin/xeira.js lint src",
+    "compile": "node ../../bin/xeira.js compile src lib",
+    "bundle": "node ../../bin/xeira.js bundle",
     "all": "npm run clean && npm run lint && npm run compile && npm run bundle"
   }
 }

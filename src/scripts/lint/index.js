@@ -16,22 +16,12 @@ process.on('unhandledRejection', err => {
 const path = require('path');
 const { ESLint } = require("eslint");
 const { getXeiraConfig } = require('../../utils/config');
-const pkgPath= process.env.PWD;
+const {getEslintConfig, getEslintIgnorePath} = require('../../defaults/eslint');
 
 
-const args = process.argv.slice(2);
-let sourcePath= pkgPath
-if (args.length>=1) {
-  sourcePath = path.join(pkgPath, args[0] || '')
-} else {
-  console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [.].`)
-}
+async function xeiraLint(pkgPath, sourcePath) {
 
-
-(async function main() {
-  
   // get xeira config
-  const xeiraPath = path.resolve(__dirname);
   const xeiraConfig = getXeiraConfig(pkgPath);
   
   // prepare eslint options
@@ -39,11 +29,10 @@ if (args.length>=1) {
   try {
     overrideConfig = require(path.join(pkgPath, '.eslintrc.js')) 
   } catch(e) {
-    const getEslintConfig = require('./eslint.config') 
-    overrideConfig = getEslintConfig(xeiraConfig)
+    overrideConfig = getEslintConfig(xeiraConfig);
   }
   
-  const ignorePath = path.join(xeiraPath, '.eslintignore');
+  const ignorePath = getEslintIgnorePath();
 
   const options= {
     ignorePath,
@@ -54,12 +43,27 @@ if (args.length>=1) {
   // call eslint's node api
   const eslint = new ESLint(options);
 
-  const results = await eslint.lintFiles([sourcePath]);
+  const results = await eslint.lintFiles([path.join(pkgPath, sourcePath)]);
 
   const formatter = await eslint.loadFormatter("stylish");
   const resultText = formatter.format(results);
 
   console.log(resultText);
+}
+
+(async () => {
+
+  const pkgPath= process.env.PWD;
+
+  const args = process.argv.slice(2);
+  let sourcePath= ''
+  if (args.length>=1) {
+    sourcePath = args[0] || ''
+  } else {
+    console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [.].`)
+  }
+
+  await xeiraLint(pkgPath, sourcePath)
 })().catch((error) => {
   process.exitCode = 1;
   console.error(error);

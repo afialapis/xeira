@@ -1,4 +1,4 @@
-module.exports= function getBabelConfig (xeiraConfig) { 
+function getBabelConfig (xeiraConfig) { 
   let presets= [
     ["@babel/preset-env", {"targets": {"esmodules": true}}]
   ]
@@ -9,4 +9,8 @@ module.exports= function getBabelConfig (xeiraConfig) {
     presets,
     plugins: []
   }
+}
+
+module.exports= {
+  getBabelConfig
 }

@@ -1,0 +1,7 @@
+{
+  "name": "a-try-on-init",
+  "scripts": {
+    "clean": "rm -fr xeira.json .babelrc .eslintrc.js",
+    "init": "npm run clean && node ../../bin/xeira.js init"
+  }
+}
