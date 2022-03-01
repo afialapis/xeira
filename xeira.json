@@ -4,9 +4,7 @@
   "minifier": "uglify",
   "bundler": "rollup",
   "product": "package",
-  "target": "node",
+  "target": "both",
   "react": false,
   "monorepo": false
 }
-
-    

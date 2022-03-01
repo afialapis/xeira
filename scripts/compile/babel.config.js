@@ -1,6 +1,12 @@
-module.exports= { 
-  "presets": [
+module.exports= function getBabelConfig (xeiraConfig) { 
+  let presets= [
     ["@babel/preset-env", {"targets": {"esmodules": true}}]
-  ],
-  "plugins": []
+  ]
+  if (xeiraConfig.usesReact) {
+    presets.append("@babel/preset-react")
+  }
+  return {
+    presets,
+    plugins: []
+  }
 }

@@ -18,6 +18,16 @@ const { ESLint } = require("eslint");
 const { getXeiraConfig } = require('../../utils/config');
 const pkgPath= process.env.PWD;
 
+
+const args = process.argv.slice(2);
+let sourcePath= pkgPath
+if (args.length>=1) {
+  sourcePath = path.join(pkgPath, args[0] || '')
+} else {
+  console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [.].`)
+}
+
+
 (async function main() {
   
   // get xeira config
@@ -25,23 +35,20 @@ const pkgPath= process.env.PWD;
   const xeiraConfig = getXeiraConfig(pkgPath);
   
   // prepae eslint options
-  const eslintCfgName = xeiraConfig.usesReact
-    ? 'eslintrc.react.js'
-    : 'eslintrc.js';
-  
-  const overrideConfigFile = path.join(xeiraPath, eslintCfgName);
+  const getEslintConfig = require('./eslint.config') 
+  const overrideConfig = getEslintConfig(xeiraConfig)
   const ignorePath = path.join(xeiraPath, '.eslintignore');
 
   const options= {
     ignorePath,
     useEslintrc: false,
-    overrideConfigFile
+    overrideConfig
   }
 
   // call eslint's node api
   const eslint = new ESLint(options);
 
-  const results = await eslint.lintFiles([pkgPath]);
+  const results = await eslint.lintFiles([sourcePath]);
 
   const formatter = await eslint.loadFormatter("stylish");
   const resultText = formatter.format(results);

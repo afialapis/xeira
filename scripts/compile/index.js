@@ -40,10 +40,10 @@ async function compileFile (basePath, filePath, destPath, callback) {
   try {
     await access(destFileFolder)
   } catch(e) {
-    await mkdir(destFileFolder)
+    await mkdir(destFileFolder, { recursive: true })
   }
 
-  console.log(`[xeira] compiling ${realSourcePath} ==> ${realDestPath}...`);
+  console.log(`[xeira] compiling ${filePath} ==> ${path.join(destPath, withouParent)}...`);
   
   return await callback(realSourcePath, realDestPath)
 }
@@ -77,14 +77,12 @@ async function compileDirectory (basePath, sourcePath, destPath, callback) {
   // get xeira config
   const xeiraConfig = getXeiraConfig(pkgPath);
   
-  // prepae eslint options
-  const babelCfgName = xeiraConfig.usesReact
-    ? './babel.react.config'
-    : './babel.config';
+  // prepae babel options
+  const getBabelConfig = require('./babel.config');
+  const babelConfig = getBabelConfig(xeiraConfig);
   
-  const babelCfg = require(babelCfgName);
-  
-  const uglifyCfg = require('./uglify.config')
+  const getUglifyConfig = require('./uglify.config');
+  const uglifyCfg = getUglifyConfig(xeiraConfig);
 
   const args = process.argv.slice(2);
   let sourcePath= 'src'
@@ -99,7 +97,7 @@ async function compileDirectory (basePath, sourcePath, destPath, callback) {
 
   await compileDirectory(pkgPath, sourcePath, destPath, async (filepath, destpath) => {
     if (xeiraConfig.compileWithBabel) {
-      let { code } = await transformFileAsync(filepath, babelCfg);
+      let { code } = await transformFileAsync(filepath, babelConfig);
       if (xeiraConfig.minifyWithUglify) {
         const result= UglifyJS.minify(code, uglifyCfg);
         code= result.code
