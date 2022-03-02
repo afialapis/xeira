@@ -1,11 +1,6 @@
-class XeiraConfig {
-  constructor(pkgPath) {
-    try {
-      this.config = require(`${pkgPath}/xeira.json`)
-    } catch(e) {
-      console.error('[xeira] xeira.json not found!')
-      console.error(e)
-    }
+module.exports = class XeiraConfigObj {
+  constructor(config) {
+    this.config= config
   }
 
   get isAnApp() {
@@ -51,15 +46,5 @@ class XeiraConfig {
   get isAMonoRepo() {
     return this.config.monorepo !== false
   }
-
 }
 
-
-function getXeiraConfig(pkgPath) {
-  const xc= new XeiraConfig(pkgPath)
-  return xc 
-}
-
-module.exports = {
-  getXeiraConfig
-}

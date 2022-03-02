@@ -11,21 +11,23 @@ function _objectToJs(config) {
   return `module.exports = ${__objectToJson(config)}`
 }
 
-async function _saveFileSafe(filename, content) {
+async function _saveFileWithConfirm(filename, content, force, message) {
   try {
     await access(filename)
+    
+    if (! force) {
+      const questions= [{
+        type: 'confirm',
+        name: 'overwrite',
+        message: message || `${path.basename(filename)} already exists. Do you wanrt to overwrite it?`,
+        initial: false      
+      }]
 
-    const questions= [{
-      type: 'confirm',
-      name: 'overwrite',
-      message: `${path.basename(filename)} already exists. Do you wanrt to overwrite it?`,
-      initial: false      
-    }]
+      const answers = await prompts(questions)
 
-    const answers = await prompts(questions)
-
-    if (answers.overwrite !== true) {
-      return
+      if (answers.overwrite !== true) {
+        return
+      }
     }
   } catch(e) {}
 
@@ -35,12 +37,12 @@ async function _saveFileSafe(filename, content) {
   )
 }
 
-async function saveObjectToJsonSafe(filename, obj) {
-  await _saveFileSafe(filename, __objectToJson(obj))
+async function saveObjectToJsonWithConfirm(filename, obj, force) {
+  await _saveFileWithConfirm(filename, __objectToJson(obj), force)
 }
 
-async function saveObjectToJsSafe(filename, obj) {
-  await _saveFileSafe(filename, _objectToJs(obj))
+async function saveObjectToJsWithConfirm(filename, obj, force) {
+  await _saveFileWithConfirm(filename, _objectToJs(obj), force)
 }
 
 function removeTopParent(fpath) {
@@ -53,5 +55,5 @@ function removeTopParent(fpath) {
 
 
 module.exports= {
-  saveObjectToJsonSafe, saveObjectToJsSafe, removeTopParent
+  saveObjectToJsonWithConfirm, saveObjectToJsWithConfirm, removeTopParent
 }

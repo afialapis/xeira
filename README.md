@@ -32,3 +32,10 @@ Index for all the building tools your package or app needs
     target: 'node', // 'browser', 'all',
 
     probably not needed, on bundle time we already have main/cjs/browser/module
+
+
+
+
+https://nodejs.org/api/packages.html#packages_package_entry_points
+https://nodejs.org/api/packages.html#packages_conditional_exports
+

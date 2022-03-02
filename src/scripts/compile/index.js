@@ -13,7 +13,7 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const { getXeiraConfig } = require('../../utils/config');
+const { getXeiraConfigObj } = require('../../config/xeira');
 const { compileWithBabel } = require('./babel');
 const { noCompile } = require('./nocompile');
 const { minimifyWithUglify } = require('./uglify');
@@ -22,7 +22,7 @@ const { minimifyWithUglify } = require('./uglify');
 async function xeiraCompile(pkgPath, sourcePath, destPath) {
   
   // get xeira config
-  const xeiraConfig = getXeiraConfig(pkgPath);
+  const xeiraConfig = getXeiraConfigObj(pkgPath);
 
   // minifier callback
   const minimifyCallback = (code) => {

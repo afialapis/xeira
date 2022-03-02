@@ -13,7 +13,7 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const { getXeiraConfig } = require('../../utils/config');
+const { getXeiraConfigObj } = require('../../config/xeira');
 const {lintWithEslint} = require('./eslint');
 
 (async () => {
@@ -29,7 +29,7 @@ const {lintWithEslint} = require('./eslint');
   }
 
   // get xeira config
-  const xeiraConfig = getXeiraConfig(pkgPath);
+  const xeiraConfig = getXeiraConfigObj(pkgPath);
 
   if (xeiraConfig.lintWithEslint) {
     await lintWithEslint(pkgPath, xeiraConfig, sourcePath)

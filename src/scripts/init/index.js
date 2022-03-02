@@ -16,10 +16,11 @@ process.on('unhandledRejection', err => {
 
 const path = require('path');
 const prompts = require('prompts');
-const {saveObjectToJsonSafe, saveObjectToJsSafe} = require('../../utils/io')
-const {getXeiraDefaultConfig} = require('../../defaults/xeira')
-const {getBabelConfig} = require('../../defaults/babel');
-const {getEslintConfig} = require('../../defaults/eslint');
+const {saveObjectToJsonWithConfirm} = require('../../utils/io')
+const {pkgJsonUpdate} = require('../../utils/pkgJson')
+const {getXeiraDefaultConfig} = require('../../config/xeira')
+const {getBabelConfigPath} = require('../../config/babel');
+const {getEslintConfigPath} = require('../../config/eslint');
 
 const pkgPath= process.env.PWD
 
@@ -54,20 +55,6 @@ const configQuestions = [
     ],
     initial: 0
   },
-
-  {
-    type: 'confirm',
-    name: 'react',
-    message: 'Are you going to work with React?',
-    initial: false
-  },
-
-  {
-    type: 'confirm',
-    name: 'monorepo',
-    message: 'Are you starting a monorepo?',
-    initial: false
-  },
   
   {
     type: 'select',
@@ -101,6 +88,20 @@ const configQuestions = [
     ],
     initial: 0
   },    
+
+  {
+    type: 'confirm',
+    name: 'react',
+    message: 'Are you going to work with React?',
+    initial: false
+  },
+
+  {
+    type: 'confirm',
+    name: 'monorepo',
+    message: 'Are you starting a monorepo?',
+    initial: false
+  },  
 ];
 
 async function xeiraInit() {
@@ -112,18 +113,16 @@ async function xeiraInit() {
   };
 
   const xeiraConfigName = path.join(pkgPath, 'xeira.json');
-  await saveObjectToJsonSafe(xeiraConfigName, xeiraConfig);
+  await saveObjectToJsonWithConfirm(xeiraConfigName, xeiraConfig, true);
 
   if (xeiraConfig.linter == 'eslint') {
-    const eslintConfig = getEslintConfig(xeiraConfig);
-    const eslintConfigName = path.join(pkgPath, '.eslintrc.js');
-    await saveObjectToJsSafe(eslintConfigName, eslintConfig);
+    const eslintConfigPath = getEslintConfigPath(xeiraConfig);
+    await pkgJsonUpdate (pkgPath, 'eslintConfig', {"extends": [eslintConfigPath]})
   }
 
   if (xeiraConfig.compiler == 'babel') {
-    const babelConfig = getBabelConfig(xeiraConfig);
-    const babelConfigName = path.join(pkgPath, '.babelrc');  
-    await saveObjectToJsonSafe(babelConfigName, babelConfig);
+    const babelConfigPath = getBabelConfigPath(xeiraConfig);
+    await pkgJsonUpdate (pkgPath, 'babel', {"extends": babelConfigPath})
   }
 }
 

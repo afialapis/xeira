@@ -13,14 +13,14 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const { getXeiraConfig } = require('../../utils/config');
+const { getXeiraConfigObj } = require('../../configs/make/xeira');
 const { rollupBundle } = require('./rollup')
 
 
 async function xeiraBundle(pkgPath) {
 
   // get xeira config
-  const xeiraConfig = getXeiraConfig(pkgPath);
+  const xeiraConfig = getXeiraConfigObj(pkgPath);
   
   if (xeiraConfig.bundleWithRollup) {
     await rollupBundle(pkgPath, xeiraConfig)

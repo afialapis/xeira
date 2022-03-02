@@ -5,10 +5,19 @@
   "browser": "dist/browser-pkg.umd.js",
   "module": "dist/browser-pkg.es.js",  
   "scripts": {
+    "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../.. xeira",
     "clean": "rm -fr dist/* && rm -fr lib/*",
-    "lint": "node ../../bin/xeira.js lint src",
-    "compile": "node ../../bin/xeira.js compile src lib",
+    "lint": "npm run make_link && node ../../bin/xeira.js lint src",
+    "compile": "npm run make_link && node ../../bin/xeira.js compile src lib",
     "bundle": "node ../../bin/xeira.js bundle",
     "all": "npm run clean && npm run lint && npm run compile && npm run bundle"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint"
+    ]
+  },
+  "babel": {
+    "extends": "./node_modules/xeira/configs/babel"
   }
 }

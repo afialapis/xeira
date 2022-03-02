@@ -1,6 +1,7 @@
 const path = require('path');
 const { ESLint } = require("eslint");
-const {getEslintConfig, getEslintIgnorePath} = require('../../defaults/eslint');
+const {getEslintConfig, getEslintIgnorePath} = require('../../config/eslint');
+const { pkgJsonRead } = require('../../utils/pkgJson');
  
 async function lintWithEslint(pkgPath, xeiraConfig, sourcePath) {
 
@@ -9,7 +10,15 @@ async function lintWithEslint(pkgPath, xeiraConfig, sourcePath) {
   try {
     overrideConfig = require(path.join(pkgPath, '.eslintrc.js')) 
   } catch(e) {
-    overrideConfig = getEslintConfig(xeiraConfig);
+    const pkgJson = pkgJsonRead(pkgPath)
+    if (pkgJson.eslintConfig != undefined) {
+      overrideConfig = pkgJson.eslintConfig
+      if (overrideConfig.extends) {
+        overrideConfig.extends= overrideConfig.extends.map(p => p.replace('./node_modules/xeira/configs', path.join(__dirname,'../../../configs')))
+      }
+    } else {
+      overrideConfig = getEslintConfig(xeiraConfig);
+    }
   }
   
   const ignorePath = getEslintIgnorePath();

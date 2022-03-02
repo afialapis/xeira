@@ -1,8 +1,10 @@
-module.exports = {
-  "root": true,
-  "parser": "@babel/eslint-parser",
-  "extends": ["eslint:recommended"],
-  "parserOptions": {
+
+const babelConfig = require('./babel')
+
+module.exports= {
+  root: true,
+  parser: "@babel/eslint-parser",
+  parserOptions: {
     "ecmaVersion": 7,
     "sourceType": "module",
     "ecmaFeatures": {
@@ -12,22 +14,18 @@ module.exports = {
       "experimentalObjectRestSpread": true
     },
     "requireConfigFile": false,
-    "presets": [
-      ["@babel/preset-env", {
-        "targets": {
-          "esmodules": true
-        }
-      }],
-    ],
-    "plugins": []
+    ...babelConfig  
   },
-  "env": {
-    "browser": true,
-    "mocha": true,
-    "node": true,
-    "es6": true
+  extends:  [
+    "eslint:recommended"
+  ],
+  env: {
+    browser: true,
+    mocha: true,
+    node: true,
+    es6: true
   },
-  "rules": {
+  rules: {
     "semi": 0,
     "vars-on-top": 0,
     "spaced-comment": 0,
@@ -51,13 +49,10 @@ module.exports = {
     "no-var": 1,
     "no-trailing-spaces": 0,
     "no-unused-expressions": 0,
-    "no-unused-vars": [1, {
-      "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_"
-    }],
+    "no-unused-vars": [1, {"argsIgnorePattern": "^_", "varsIgnorePattern": "^_"}],
     "no-inner-declarations": 0,
     "space-before-function-paren": 0,
     "global-require": 0,
-    "no-empty": 0,
+    "no-empty": 0
   }
 }
