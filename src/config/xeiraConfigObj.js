@@ -27,8 +27,8 @@ module.exports = class XeiraConfigObj {
     return this.config.linter == 'eslint'
   }
 
-  get compileWithBabel() {
-    return this.config.compiler == 'babel'
+  get transpileWithBabel() {
+    return this.config.transpiler == 'babel'
   }
 
   get minifyWithUglify() {

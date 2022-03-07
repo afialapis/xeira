@@ -1,9 +1,9 @@
 module.exports= {
   // Probably offering alternatives some day
   linter: 'eslint', // 'none'
-  compiler: 'babel', // 'none'
+  transpiler: 'babel', // 'none'
   minifier: 'uglify', // 'none'
-  bundler: 'rollup', // 'webpack',
+  bundler: 'rollup', // 'webpack', 'esbuild'
 
   product: 'package', // 'app',
   target: 'node', // 'browser', 'all',

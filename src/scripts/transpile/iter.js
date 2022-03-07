@@ -3,7 +3,7 @@ const {readdir, stat, mkdir, access} = require('fs/promises');
 const { removeTopParent } = require('../../utils/io');
 
  
-async function _compileFile (basePath, filePath, destPath, callback) {
+async function _transpileFile (basePath, filePath, destPath, callback) {
   const realSourcePath = path.join(basePath, filePath)
   const withouParent = removeTopParent(filePath);
   const realDestPath = path.join(basePath, destPath, withouParent);
@@ -21,12 +21,12 @@ async function _compileFile (basePath, filePath, destPath, callback) {
   return await callback(realSourcePath, realDestPath)
 }
 
-async function compileDirectory (basePath, sourcePath, destPath, callback) {
+async function transpileDirectory (basePath, sourcePath, destPath, callback) {
   let files= []
   try {
     files = await readdir(path.join(basePath, sourcePath))
   } catch(e) {
-    console.error(`[xeira] compile: Folder ${path.join(basePath, sourcePath)} does not exist`)
+    console.error(`[xeira] transpile: Folder ${path.join(basePath, sourcePath)} does not exist`)
     return
   }
 
@@ -35,15 +35,15 @@ async function compileDirectory (basePath, sourcePath, destPath, callback) {
       const filePath= path.join(sourcePath, file)
       const stats= await stat(filePath)
       if (stats.isDirectory()) {
-        return await compileDirectory(basePath, filePath, destPath, callback)
+        return await transpileDirectory(basePath, filePath, destPath, callback)
       } else if (stats.isFile()) {
         if (file.endsWith('.js')) {
-          return await _compileFile(basePath, filePath, destPath, callback)
+          return await _transpileFile(basePath, filePath, destPath, callback)
         }
       }
   }))
 }
 
 module.exports = {
-  compileDirectory
+  transpileDirectory
 }

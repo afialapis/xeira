@@ -14,12 +14,12 @@ process.on('unhandledRejection', err => {
 });
 
 const { getXeiraConfigObj } = require('../../config/xeira');
-const { compileWithBabel } = require('./babel');
-const { noCompile } = require('./nocompile');
+const { transpileWithBabel } = require('./babel');
+const { noTranspile } = require('./notranspile');
 const { minimifyWithUglify } = require('./uglify');
 
 
-async function xeiraCompile(pkgPath, sourcePath, destPath) {
+async function xeiraTranspile(pkgPath, sourcePath, destPath) {
   
   // get xeira config
   const xeiraConfig = getXeiraConfigObj(pkgPath);
@@ -32,10 +32,10 @@ async function xeiraCompile(pkgPath, sourcePath, destPath) {
     return code
   }
   
-  if (xeiraConfig.compileWithBabel) {
-    await compileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback)
+  if (xeiraConfig.transpileWithBabel) {
+    await transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback)
   } else {
-    await noCompile(pkgPath, sourcePath, destPath, minimifyCallback)
+    await noTranspile(pkgPath, sourcePath, destPath, minimifyCallback)
   }
 }
 
@@ -51,10 +51,10 @@ async function xeiraCompile(pkgPath, sourcePath, destPath) {
     sourcePath = args[0] || 'src'
     destPath = args[1] || 'lib'
   } else {
-    console.warn(`[xeira] compile: no params passed, so taking defaults. npx xeira compile [src] [lib].`)
+    console.warn(`[xeira] transpile: no params passed, so taking defaults. npx xeira transpile [src] [lib].`)
   }
 
-  await xeiraCompile(pkgPath, sourcePath, destPath)
+  await xeiraTranspile(pkgPath, sourcePath, destPath)
 })().catch((error) => {
   process.exitCode = 1;
   console.error(error);

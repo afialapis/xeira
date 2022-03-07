@@ -1,7 +1,7 @@
 {
   "linter": "eslint",
-  "compiler": "babel",
-  "minifier": "uglify",
+  "transpiler": "babel",
+  "minifier": "none",
   "bundler": "rollup",
   "product": "package",
   "target": "both",

@@ -26,14 +26,14 @@ const cjsOutputs = (file) => {
       file: file,
       format: 'cjs',
       exports: 'named',
-      plugins: rollupOutputPlugins(false)
+      plugins: rollupOutputPlugins(true, false)
     }, 
     // CommonJs .min
     {
       file: minifyExtension(file),
       format: 'cjs',
       exports: 'named',
-      plugins: rollupOutputPlugins(true)
+      plugins: rollupOutputPlugins(true, true)
     },     
   ]
 }
@@ -45,14 +45,14 @@ const moduleOutputs = (file) => {
       file: file,
       format: 'es',
       exports: 'named',
-      plugins: rollupOutputPlugins(false)
+      plugins: rollupOutputPlugins(true, false)
     },
     // ES module .min
     {
       file: minifyExtension(file),
       format: 'es',
       exports: 'named',
-      plugins: rollupOutputPlugins(true)
+      plugins: rollupOutputPlugins(true, true)
     },    
   ]
 }
@@ -64,7 +64,7 @@ const umdOutputs = (file, name, globals) => {
       file: file,
       format: 'umd',
       name: titlefyPkgName(name),
-      plugins: rollupOutputPlugins(false),
+      plugins: rollupOutputPlugins(false, false),
       globals
     },
     // UMD .min
@@ -72,13 +72,13 @@ const umdOutputs = (file, name, globals) => {
       file: minifyExtension(file),
       format: 'umd',
       name: titlefyPkgName(name),
-      plugins: rollupOutputPlugins(true),
+      plugins: rollupOutputPlugins(false, true),
       globals
     }
   ]
 }
 
-const rollupOutputs = (pkgPath, pkgJson) => {
+const rollupOutputs = (pkgPath, pkgJson, xeiraConfig) => {
   const resolve_to_pkg = (f) => {
     return path.join(pkgPath, f)
   }

@@ -24,6 +24,7 @@
     "@babel/core": "^7.17.5",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-modules": "^0.1.5",
     "@babel/preset-react": "^7.16.7",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^21.0.2",
@@ -45,9 +46,11 @@
     "uglify-js": "^3.15.2"
   },
   "eslintConfig": {
-    "extends": ["./src/configs/eslint"]
-  } ,
+    "extends": [
+      "./configs/eslint"
+    ]
+  },
   "babel": {
-    "extends": "./src/configs/babel"
+    "extends": "./configs/babel"
   }
 }

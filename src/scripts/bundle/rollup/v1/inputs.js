@@ -1,8 +1,8 @@
 const {rollupInputPlugins} = require('./plugins')
 
 
-const rollupInput = (pkgPath, pkgJson) => {
-  const _inputPlugins= rollupInputPlugins()
+const rollupInput = (pkgPath, pkgJson, xeiraConfig) => {
+  const _inputPlugins= rollupInputPlugins(xeiraConfig)
 
   return {
     input: pkgJson.main,

@@ -1,10 +1,10 @@
 const path = require('path');
-const {compileDirectory} = require('./iter');
+const {transpileDirectory} = require('./iter');
 const {access, writeFile} = require('fs/promises');
 const {transformFileAsync} = require("@babel/core");
 const { pkgJsonRead } = require('../../utils/pkgJson');
 
-async function compileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback) {
+async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback) {
  
   // prepae babel options
   let babelConfig
@@ -29,7 +29,7 @@ async function compileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, mini
 
   }  
 
-  await compileDirectory(pkgPath, sourcePath, destPath, async (filepath, destpath) => {
+  await transpileDirectory(pkgPath, sourcePath, destPath, async (filepath, destpath) => {
     let { code } = await transformFileAsync(filepath, babelConfig);
     code = minimifyCallback(code);
     return await writeFile(destpath, code);
@@ -37,5 +37,5 @@ async function compileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, mini
 }
 
 module.exports = {
-  compileWithBabel
+  transpileWithBabel
 }

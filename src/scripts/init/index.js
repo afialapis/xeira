@@ -69,8 +69,8 @@ const configQuestions = [
 
   {
     type: 'select',
-    name: 'compiler',
-    message: 'What about the compiler?',
+    name: 'transpiler',
+    message: 'What about the transpiler?',
     choices: [
       { title: 'babel', value: 'babel' },
       { title: 'none', value: 'none'},
@@ -120,7 +120,7 @@ async function xeiraInit() {
     await pkgJsonUpdate (pkgPath, 'eslintConfig', {"extends": [eslintConfigPath]})
   }
 
-  if (xeiraConfig.compiler == 'babel') {
+  if (xeiraConfig.transpiler == 'babel') {
     const babelConfigPath = getBabelConfigPath(xeiraConfig);
     await pkgJsonUpdate (pkgPath, 'babel', {"extends": babelConfigPath})
   }

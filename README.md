@@ -14,7 +14,7 @@ Index for all the building tools your package or app needs
   · default params:
     
     lint [src]
-    compile [src] [lib]
+    transpile [src] [lib]
 
     Take them from:
     [lib] => dirname of pkgJson.main
@@ -39,3 +39,8 @@ Index for all the building tools your package or app needs
 https://nodejs.org/api/packages.html#packages_package_entry_points
 https://nodejs.org/api/packages.html#packages_conditional_exports
 
+https://github.com/rollup/rollup-starter-lib
+https://github.com/rollup/rollup-starter-app
+https://github.com/PepsRyuu/nollup
+
+https://github.com/remix-run/react-router/blob/main/rollup.config.js

@@ -1,6 +1,6 @@
 {
   "name": "both-pkg",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "cjs": "dist/both-pkg.cjs.js",
   "browser": "dist/both-pkg.umd.js",
   "module": "dist/both-pkg.es.js",
@@ -8,12 +8,12 @@
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../.. xeira",
     "clean": "rm -fr dist/* && rm -fr lib/*",
     "lint": "npm run make_link && node ../../bin/xeira.js lint src",
-    "compile": "npm run make_link && node ../../bin/xeira.js compile src lib",
+    "transpile": "npm run make_link && node ../../bin/xeira.js transpile src lib",
     "bundle": "node ../../bin/xeira.js bundle",
-    "all": "npm run clean && npm run lint && npm run compile && npm run bundle"
+    "all": "npm run clean && npm run lint && npm run transpile && npm run bundle"
   },
   "dependencies": {
-    "farrapa-colors": "^1.0.4"
+    "farrapa-objects": "^1.0.4"
   },
   "eslintConfig": {
     "extends": [

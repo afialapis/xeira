@@ -13,7 +13,7 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const { getXeiraConfigObj } = require('../../configs/make/xeira');
+const { getXeiraConfigObj } = require('../../config/xeira');
 const { rollupBundle } = require('./rollup')
 
 
