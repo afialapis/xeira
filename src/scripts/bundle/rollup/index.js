@@ -7,7 +7,7 @@ const {rollupModulesForUmd} = require('./umd')
 const {makeMainFile} = require('./main_index')
 
 async function rollupBundle(pkgPath, xeiraConfig) {
-  const pkgp = (p) => path.join(pkgPath, p)
+  const pkgp = (p) => p!=undefined ? path.join(pkgPath, p) : undefined
 
   const pkgJson = require(pkgp('package.json'))
 
