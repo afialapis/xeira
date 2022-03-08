@@ -10,20 +10,16 @@
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 process.on('unhandledRejection', err => {
-  throw err;
+  throw err
 });
-
 
 const path = require('path');
 const prompts = require('prompts');
 const {saveObjectToJsonWithConfirm} = require('../../utils/io')
-const {pkgJsonUpdate} = require('../../utils/pkgJson')
-const {getXeiraDefaultConfig} = require('../../config/xeira')
-const {getBabelConfigPath} = require('../../config/babel');
-const {getEslintConfigPath} = require('../../config/eslint');
-
+const {pkgJsonRead, pkgJsonUpdate} = require('../../utils/pkgJson')
+const {getXeiraDefaultConfig, getXeiraConfigObj} = require('../../config/xeira')
+const configQuestions = require('./questions')
 const pkgPath= process.env.PWD
-
 
 /*
  * About monorepos
@@ -31,99 +27,27 @@ const pkgPath= process.env.PWD
  *   => How to handle that?
  */
 
-const configQuestions = [
-  {
-    type: 'select',
-    name: 'product',
-    message: 'Which kind of product are you shipping?',
-    choices: [
-      { title: 'package', value: 'package' },
-      { title: 'app', value: 'app'},
-      { title: 'others', value: 'other', disabled: true },
-    ],
-    initial: 0
-  },
-  
-  {
-    type: 'select',
-    name: 'target',
-    message: 'Which is its target environment?',
-    choices: [
-      { title: 'node', value: 'node' },
-      { title: 'browser', value: 'browser'},
-      { title: 'both', value: 'both'},
-    ],
-    initial: 0
-  },
-  
-  {
-    type: 'select',
-    name: 'linter',
-    message: 'Which linter will you use?',
-    choices: [
-      { title: 'eslint', value: 'eslint' },
-      { title: 'none', value: 'none', disabled: true},
-    ],
-    initial: 0
-  },
-
-  {
-    type: 'select',
-    name: 'transpiler',
-    message: 'What about the transpiler?',
-    choices: [
-      { title: 'babel', value: 'babel' },
-      { title: 'none', value: 'none'},
-    ],
-    initial: 0
-  },  
-
-  {
-    type: 'select',
-    name: 'bundler',
-    message: 'Which bundler will do the magic for you?',
-    choices: [
-      { title: 'rollup', value: 'rollup' },
-      { title: 'none', value: 'none', disabled: true},
-    ],
-    initial: 0
-  },    
-
-  {
-    type: 'confirm',
-    name: 'react',
-    message: 'Are you going to work with React?',
-    initial: false
-  },
-
-  {
-    type: 'confirm',
-    name: 'monorepo',
-    message: 'Are you starting a monorepo?',
-    initial: false
-  },  
-];
-
 async function xeiraInit() {
+  // Prompt questions
   const configAnswers = await prompts(configQuestions); 
 
-  const xeiraConfig = {
+  // Prepare xeira config data
+  const xeiraConfigData = {
     ...getXeiraDefaultConfig(),
     ...configAnswers
-  };
-
-  const xeiraConfigName = path.join(pkgPath, 'xeira.json');
-  await saveObjectToJsonWithConfirm(xeiraConfigName, xeiraConfig, true);
-
-  if (xeiraConfig.linter == 'eslint') {
-    const eslintConfigPath = getEslintConfigPath(xeiraConfig);
-    await pkgJsonUpdate (pkgPath, 'eslintConfig', {"extends": [eslintConfigPath]})
   }
 
-  if (xeiraConfig.transpiler == 'babel') {
-    const babelConfigPath = getBabelConfigPath(xeiraConfig);
-    await pkgJsonUpdate (pkgPath, 'babel', {"extends": babelConfigPath})
-  }
+  // Save xeira config data
+  const xeiraConfigName = path.join(pkgPath, 'xeira.json')
+  await saveObjectToJsonWithConfirm(xeiraConfigName, xeiraConfigData, true)
+
+  // Prepare xeira config object
+  const xeiraConfig = getXeiraConfigObj(xeiraConfigData)
+
+  // Update package.json
+  const pkgJson = pkgJsonRead(pkgPath)
+  const pkgJsonValues= xeiraConfig.makePkgJsonValues(pkgJson.name)
+  await pkgJsonUpdate (pkgPath, pkgJsonValues)
 }
 
 

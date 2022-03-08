@@ -1,8 +1,13 @@
 const XeiraConfigObj = require('./xeiraConfigObj')
 
 
-function getXeiraConfigObj(pkgPath) {
-  const config = require(`${pkgPath}/xeira.json`)
+function getXeiraConfigObj(pkgPathOrConfig) {
+  let config
+  if (typeof pkgPathOrConfig == 'string') {
+    config = require(`${pkgPathOrConfig}/xeira.json`)
+  } else {
+    config = pkgPathOrConfig
+  }
   const xeiraObj= new XeiraConfigObj(config)
   return xeiraObj 
 }

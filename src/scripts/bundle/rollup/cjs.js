@@ -1,12 +1,9 @@
-const path = require('path')
 const {nodeResolve} = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
 
 const {rollupBanner} = require('./banner')
 
-function rollupModulesForCjs(xeiraConfig, pkgPath, pkgJson, input) {
-  const main_file = path.join(pkgPath, pkgJson.main)
-
+function rollupModulesForCjs(xeiraConfig, pkgJson, input, output) {
   const inputOptions= {
     input,
     plugins: [
@@ -16,7 +13,7 @@ function rollupModulesForCjs(xeiraConfig, pkgPath, pkgJson, input) {
 
   const outputs= [
     {
-      file: main_file,
+      file: output,
       format: 'cjs',
       exports: 'named',
       banner: rollupBanner(pkgJson)

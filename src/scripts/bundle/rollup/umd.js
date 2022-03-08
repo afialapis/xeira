@@ -1,4 +1,3 @@
-const path = require('path')
 const {externals} = require('rollup-plugin-node-externals')
 const replace = require('@rollup/plugin-replace')
 const {babel} = require('@rollup/plugin-babel')
@@ -35,8 +34,7 @@ const makeGlobals = (pkgJson) => {
 }
 
 
-function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJson, input) {
-  const browser_file = path.join(pkgPath, pkgJson.browser)
+function rollupModulesForUmd(xeiraConfig, pkgJson, input, output) {
 
   const inputOptions= {
     input,
@@ -73,7 +71,7 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJson, input) {
 
   const outputs= [
     {
-      file: browser_file,
+      file: output,
       format: 'umd',
       exports: 'named',
       banner: rollupBanner(pkgJson),
@@ -82,7 +80,7 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJson, input) {
       globals: makeGlobals(pkgJson)      
     },
     {
-      file: minifyExtension(browser_file),
+      file: minifyExtension(output),
       format: 'umd',
       exports: 'named',
       banner: rollupBanner(pkgJson),

@@ -1,18 +1,13 @@
-const path = require('path')
 const {externals} = require('rollup-plugin-node-externals')
 const replace = require('@rollup/plugin-replace')
 const {babel} = require('@rollup/plugin-babel')
 const {nodeResolve} = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
-//const { terser } = require('rollup-plugin-terser')
 const NODE_ENV = 'production'
 
-const addSuffix = pathToFile => pathToFile.replace(/\.js$/, '.node.js');
 const {rollupBanner} = require('./banner')
 
-function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJson, input) {
-  const module_file = path.join(pkgPath, pkgJson.module)
-
+function rollupModulesForEsmNode(xeiraConfig, pkgJson, input, output) {
   const inputOptions= {
     input,
     plugins: [
@@ -48,7 +43,7 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJson, input) {
 
   const outputs= [
     {
-      file: addSuffix(module_file),
+      file: output,
       format: 'esm',
       exports: 'named',
       banner: rollupBanner(pkgJson)

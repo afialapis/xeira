@@ -1,4 +1,3 @@
-const path = require('path')
 const {externals} = require('rollup-plugin-node-externals')
 const replace = require('@rollup/plugin-replace')
 const {babel} = require('@rollup/plugin-babel')
@@ -10,8 +9,7 @@ const NODE_ENV = 'production'
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
 const {rollupBanner} = require('./banner')
 
-function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJson, input) {
-  const module_file = path.join(pkgPath, pkgJson.module)
+function rollupModulesForEsm(xeiraConfig, pkgJson, input, output) {
 
   const inputOptions= {
     input,
@@ -59,14 +57,14 @@ function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJson, input) {
 
   const outputs= [
     {
-      file: module_file,
+      file: output,
       format: 'esm',
       exports: 'named',
       banner: rollupBanner(pkgJson),
       sourcemap: true
     },
     {
-      file: minifyExtension(module_file),
+      file: minifyExtension(output),
       format: 'esm',
       exports: 'named',
       banner: rollupBanner(pkgJson),

@@ -54,6 +54,27 @@ var src = {};
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+var src = {};
+
+/**
+ * both-pkg v0.0.0
+ *
+ * Copyright (c) -no-author-
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+(function (exports) {
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var src = {};
 
 /**
@@ -136,6 +157,11 @@ var bothPkg_1 = src.bothPkg = bothPkg;
 
 exports.bothPkg = bothPkg_1;
 exports["default"] = src;
+}(src));
+
+var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+
+exports["default"] = index;
 }(src));
 
 var index = /*@__PURE__*/getDefaultExportFromCjs(src);
