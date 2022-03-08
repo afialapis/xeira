@@ -91,13 +91,9 @@ module.exports = class XeiraConfigObj {
 
 
   getUmdOutput(pkgName) {
-    if (this.isTargetingBrowser) {
-      return `${this.bundleFolder}/${pkgName}.umd.js`
-    }
-    return undefined
+    return `${this.bundleFolder}/${pkgName}.umd.js`
   }  
 
-  
   getMainFileForNodeSuffix() {
     return NODE_MAIN
   }
@@ -106,8 +102,8 @@ module.exports = class XeiraConfigObj {
     if (this.isTargetingNode) {
       const suffix = this.getMainFileForNodeSuffix()
       const output = suffix=='cjs'
-        ? this.getCjsModule(pkgName)
-        : this.getUmdModule(pkgName)
+        ? this.getCjsOutput(pkgName)
+        : this.getUmdOutput(pkgName)
       return addSuffix(output, 'main')
     }
     return undefined    
@@ -120,7 +116,7 @@ module.exports = class XeiraConfigObj {
     if (this.isTargetingNode) {
       return this.getMainFileForNode(pkgName)
     }
-    return addSuffix(this.getUmdModule(pkgName), 'main')
+    return addSuffix(this.getUmdOutput(pkgName), 'main')
   }
 
   makePkgJsonValues(pkgName) {
@@ -131,8 +127,11 @@ module.exports = class XeiraConfigObj {
         import: this.getEsmOutput(pkgName),
         default: this.getMainFile(pkgName)
       },
-      module: this.getEsmOutput(pkgName),
-      browser: this.getUmdOutput(pkgName)
+      module: this.getEsmOutput(pkgName)
+    }
+
+    if (this.isTargetingBrowser) {
+      pkgJsonValues.browser= this.getUmdOutput(pkgName)
     }
     
     if (this.linter == 'eslint') {

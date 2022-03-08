@@ -1,9 +1,11 @@
 {
-  "name": "both-pkg",
-  "main": "src/index.js",
-  "cjs": "dist/both-pkg.cjs.js",
-  "browser": "dist/both-pkg.umd.js",
-  "module": "dist/both-pkg.es.js",
+  "main": "./dist/both-pkg.umd.main.js",
+  "exports": {
+    "import": "./dist/both-pkg.esm.js",
+    "default": "./dist/both-pkg.umd.main.js"
+  },
+  "module": "./dist/both-pkg.esm.js",
+
   "scripts": {
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../.. xeira",
     "clean": "rm -fr dist/* && rm -fr lib/*",

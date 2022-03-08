@@ -4,10 +4,10 @@
   "minifier": "uglify",
   "bundler": "rollup",
   "product": "package",
-  "target": "both",
+  "target": "node",
   "react": false,
   "monorepo": false,
-  "source_index": "/src/index.js",
+  "source_index": "./src/index.js",
   "transpile_folder": "none",
-  "bundle_folder": "/dist"
+  "bundle_folder": "./dist"
 }

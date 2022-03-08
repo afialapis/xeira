@@ -1,4 +1,4 @@
-module.exports [
+module.exports = [
   // app or package?
   {
     type: 'select',
@@ -32,7 +32,7 @@ module.exports [
     name: 'source_index',
     message: 'Which is your source index',
     choices: [
-      { title: '/src/index.js', value: '/src/index.js' },
+      { title: './src/index.js', value: './src/index.js' },
       { title: 'index.js', value: 'index.js'},
     ],
     initial: 0
@@ -57,11 +57,10 @@ module.exports [
     message: 'Which folder do you want your transpiled code in?',
     choices: [
       { title: 'none', value: 'none', message: 'I need no transpilation'},
-      { title: '/lib', value: '/lib' },
+      { title: './lib', value: './lib' },
     ],
     initial: 0
   },  
-
 
   {
     type: prev => prev !== 'none' ? 'select' : null,
@@ -80,9 +79,9 @@ module.exports [
     name: 'bundle_folder',
     message: 'Pick a folder for your bundles',
     choices: [
-      { title: '/dist', value: '/dist' },
-      { title: '/build', value: '/build' },
-      { title: '/lib', value: '/lib' },
+      { title: './dist', value: './dist' },
+      { title: './build', value: './build' },
+      { title: './lib', value: './lib' },
       { title: 'none', value: 'none', disabled: true},
     ],
     initial: 0
