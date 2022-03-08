@@ -1,5 +1,5 @@
 const {objClone} = require('farrapa-objects')
-const {fooit} = require('foo');
+const {fooit} = require('./foo');
 
 
 const bothPkg = (f) => {

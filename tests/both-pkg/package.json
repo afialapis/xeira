@@ -1,4 +1,5 @@
 {
+  "name": "both-pkg",
   "main": "./dist/both-pkg.umd.main.js",
   "exports": {
     "import": "./dist/both-pkg.esm.js",
