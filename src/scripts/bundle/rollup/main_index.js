@@ -18,4 +18,6 @@ async function makeMainFile (pkgName, suffix, destpath) {
   return await writeFile(destpath, content)
 }
 
-export {makeMainFile}
+module.exports= {
+  makeMainFile
+}
