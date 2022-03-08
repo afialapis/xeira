@@ -11,7 +11,7 @@ async function rollupBundle(pkgPath, xeiraConfig) {
 
   const pkgJson = require(pkgp('package.json'))
 
-  const input = xeiraConfig.sourceIndex
+  const input = pkgp(xeiraConfig.sourceIndex)
 
   const cjs_output = pkgp(xeiraConfig.getCjsOutput(pkgJson.name))
   const esm_output = pkgp(xeiraConfig.getEsmOutput(pkgJson.name))
