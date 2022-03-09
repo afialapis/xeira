@@ -75,10 +75,10 @@ async function rollupBuild(inputOptions, outputOptionsList) {
   }
 
   if (buildFailed) {
-    console.log(red(`[build] Errors when building ${inputOptions.input}`))
+    console.log(red(`[bundle] Errors when bundling ${inputOptions.input}`))
     process.exit(1)
   } else {
-    console.log(green(`[build] Built ${inputOptions.input} successfully!`))
+    console.log(green(`[bundle] Bundled ${outputOptionsList[0].file} successfully!`))
   }
 }
 

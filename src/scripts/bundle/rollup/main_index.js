@@ -2,13 +2,13 @@ const {writeFile} = require('fs/promises');
 
 function renderFile (pkgName, suffix) {
   return `
-    /* eslint-env node */
+/* eslint-env node */
 
-    if (process.env.NODE_ENV === "production") {
-      module.exports = require("./${pkgName}.${suffix}.min.js");
-    } else {
-      module.exports = require("./${pkgName}.${suffix}.js");
-    }  
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./${pkgName}.${suffix}.min.js");
+} else {
+  module.exports = require("./${pkgName}.${suffix}.js");
+}  
   `
 }
 

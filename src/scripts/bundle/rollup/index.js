@@ -22,15 +22,15 @@ async function rollupBundle(pkgPath, xeiraConfig) {
   if (cjs_output) {
     await rollupBuild(...rollupModulesForCjs(xeiraConfig, pkgJson, input, cjs_output))
   }
-
-  if (esm_node_output) {
-    await rollupBuild(...rollupModulesForEsmNode(xeiraConfig, pkgJson, input, esm_output))
-  }
-
+  
   if (esm_output) {
     await rollupBuild(...rollupModulesForEsm(xeiraConfig, pkgJson, input, esm_output))
   }
 
+  if (esm_node_output) {
+    await rollupBuild(...rollupModulesForEsmNode(xeiraConfig, pkgJson, input, esm_output))
+  }
+  
   if (umd_output) {
     await rollupBuild(...rollupModulesForUmd(xeiraConfig, pkgJson, input, umd_output))
   }

@@ -1,4 +1,4 @@
-const {objClone} = require('farrapa-objects')
+const fobj= require('farrapa-objects')
 const {fooit} = require('./foo');
 
 
@@ -17,7 +17,7 @@ const bothPkg = (f) => {
       'judas': 'priest'
     }
   };
-  let obj3= fooit(objClone(obj2));
+  let obj3= fooit(fobj.objClone(obj2));
   console.log(`Called both-pkg's bothPkg() => ${JSON.stringify(obj3)}`);
 };
 

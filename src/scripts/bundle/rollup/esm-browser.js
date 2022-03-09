@@ -21,10 +21,18 @@ function rollupModulesForEsm(xeiraConfig, pkgJson, input, output) {
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      nodeResolve(),
-      commonjs(),
+      nodeResolve({
+        //mainFields: ['main']
+      }),
+      commonjs({
+        // node-resolve searchs for  ['module', 'main'] by default
+        // we need to avoid errors like:
+        //   Error: 'default' is not exported by node_modules/farrapa-objects/dist/farrapa-objects.es.js, imported by farrapa-objects?commonjs-external
+        // 
+        esmExternals: true
+      }),
       babel({
-        exclude: /node_modules/,
+        exclude: 'node_modules/**',
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
         
         // TODO
@@ -36,10 +44,10 @@ function rollupModulesForEsm(xeiraConfig, pkgJson, input, output) {
 
         presets: [
 
-          [ "@babel/preset-modules",
+          [ "@babel/preset-env",
             {
               // Don't spoof `.name` for Arrow Functions, which breaks when minified anyway.
-              loose: true,
+              //loose: true,
             },
           ],
           ... xeiraConfig.usesReact
@@ -58,14 +66,14 @@ function rollupModulesForEsm(xeiraConfig, pkgJson, input, output) {
   const outputs= [
     {
       file: output,
-      format: 'esm',
+      format: 'es',
       exports: 'named',
       banner: rollupBanner(pkgJson),
       sourcemap: true
     },
     {
       file: minifyExtension(output),
-      format: 'esm',
+      format: 'es',
       exports: 'named',
       banner: rollupBanner(pkgJson),
       plugins: [

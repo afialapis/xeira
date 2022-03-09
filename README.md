@@ -29,7 +29,7 @@ Index for all the building tools your package or app needs
   · config:
 
     product: 'package', // 'app',
-    target: 'node', // 'browser', 'all',
+    target: 'node', // 'browser', 'both',
 
     probably not needed, on bundle time we already have main/cjs/browser/module
 

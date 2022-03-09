@@ -1,7 +1,7 @@
 module.exports= {
 
   product: 'package', // 'app',
-  target: 'node', // 'browser', 'all',
+  target: 'node', // 'browser', 'both',
 
   source_index: './src/index.js', // 'index.js'
 

@@ -8,7 +8,8 @@ function rollupModulesForCjs(xeiraConfig, pkgJson, input, output) {
     input,
     plugins: [
       nodeResolve(),
-      commonjs(),]
+      commonjs()
+    ]
   }
 
   const outputs= [

@@ -19,7 +19,9 @@ function rollupModulesForEsmNode(xeiraConfig, pkgJson, input, output) {
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       nodeResolve(),
-      commonjs(),
+      commonjs({
+        esmExternals: true
+      }),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -52,7 +54,6 @@ function rollupModulesForEsmNode(xeiraConfig, pkgJson, input, output) {
 
   return[inputOptions, outputs]
 }
-
 
 module.exports= {
   rollupModulesForEsmNode

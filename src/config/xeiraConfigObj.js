@@ -4,7 +4,7 @@ const {getEslintConfigPath} = require('./eslint')
 const addSuffix = (s, suf) => s.replace(/\.js$/, `.${suf}.js`);
 
 
-const NODE_MAIN = 'cjs' // 'umd'
+const NODE_MAIN = 'umd' // 'cjs'
 
 module.exports = class XeiraConfigObj {
   constructor(config) {
@@ -20,15 +20,15 @@ module.exports = class XeiraConfigObj {
   } 
 
   get isTargetingBoth() {
-    return this.config.target == 'all'
+    return this.config.target == 'both'
   }
 
   get isTargetingBrowser() {
-    return ( (this.config.target == 'browser') || (this.config.target == 'all') )
+    return (this.config.target == 'browser') || (this.config.target == 'both')
   }
   
   get isTargetingNode() {
-    return ( (this.config.target == 'node') || (this.config.target == 'all') )
+    return (this.config.target == 'node') || (this.config.target == 'both')
   }  
 
   get sourceIndex() {
@@ -84,7 +84,7 @@ module.exports = class XeiraConfigObj {
 
   getEsmNodeOutput(pkgName) {
     if (this.isTargetingNode) {
-      return addSuffix(this.getEsmModule(pkgName), 'node')
+      return addSuffix(this.getEsmOutput(pkgName), 'node')
     }
     return undefined
   }
