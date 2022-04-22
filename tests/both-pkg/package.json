@@ -1,12 +1,20 @@
 {
   "name": "both-pkg",
-  "main": "./dist/both-pkg.umd.main.js",
+  "type": "commonjs",
+  "main": "./dist/both-pkg.cjs",
   "exports": {
-    "import": "./dist/both-pkg.esm.js",
-    "default": "./dist/both-pkg.umd.main.js"
+    ".": [
+      {
+        "import": "./dist/both-pkg.mjs",
+        "require": "./dist/both-pkg.cjs",
+        "default": "./dist/both-pkg.cjs"
+      },
+      "./dist/both-pkg.cjs"
+    ]
   },
-  "module": "./dist/both-pkg.esm.js",
-
+  "cjs": "dist/both-pkg.cjs",
+  "module": "dist/both-pkg.mjs",
+  "browser": "dist/both-pkg.umd.js",
   "scripts": {
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../.. xeira",
     "clean": "rm -fr dist/* && rm -fr lib/*",
@@ -16,7 +24,7 @@
     "all": "npm run clean && npm run lint && npm run transpile && npm run bundle"
   },
   "dependencies": {
-    "farrapa-objects": "^1.0.4"
+    "farrapa-collections": "^1.0.5"
   },
   "eslintConfig": {
     "extends": [

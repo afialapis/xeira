@@ -7,18 +7,21 @@ const NODE_ENV = 'production'
 
 const {rollupBanner} = require('./banner')
 
-function rollupModulesForEsmNode(xeiraConfig, pkgJson, input, output) {
+function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
   const inputOptions= {
     input,
     plugins: [
       externals({
-        deps: true
+        packagePath: pkgJsonPath
       }),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      nodeResolve(),
+      nodeResolve({
+        rootDir: pkgPath,
+        exportConditions: ['node'],
+      }),
       commonjs({
         esmExternals: true
       }),
@@ -34,7 +37,10 @@ function rollupModulesForEsmNode(xeiraConfig, pkgJson, input, output) {
         babelHelpers: 'bundled',
 
         presets: [
-          ["@babel/preset-env", { loose: true }],
+          ["@babel/preset-env", { 
+            bugfixes: true,
+            loose: true 
+          }],
           ... xeiraConfig.usesReact
             ? ['@babel/preset-react']
             : []

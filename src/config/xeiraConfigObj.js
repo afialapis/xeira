@@ -1,7 +1,7 @@
 const {getBabelConfigPath} = require('./babel')
 const {getEslintConfigPath} = require('./eslint')
 
-const addSuffix = (s, suf) => s.replace(/\.js$/, `.${suf}.js`);
+const addSuffix = (s, suf) => s.replace(/\.js$/, `.${suf}.js`).replace(/\.mjs$/, `.${suf}.mjs`).replace(/\.cjs$/, `.${suf}.cjs`);
 
 
 const NODE_MAIN = 'umd' // 'cjs'
@@ -73,13 +73,13 @@ module.exports = class XeiraConfigObj {
 
   getCjsOutput(pkgName) {
     if (this.isTargetingNode) {
-      return `${this.bundleFolder}/${pkgName}.cjs.js`
+      return `${this.bundleFolder}/${pkgName}.cjs`
     }
     return undefined
   }
 
   getEsmOutput(pkgName) {
-    return `${this.bundleFolder}/${pkgName}.esm.js`
+    return `${this.bundleFolder}/${pkgName}.mjs`
   }
 
   getEsmNodeOutput(pkgName) {
@@ -89,9 +89,13 @@ module.exports = class XeiraConfigObj {
     return undefined
   }
 
-
   getUmdOutput(pkgName) {
     return `${this.bundleFolder}/${pkgName}.umd.js`
+  }  
+
+  getUmdFullBundleOutput(pkgName) {
+    const umd= this.getUmdOutput(pkgName)
+    return addSuffix(umd, 'bundle')
   }  
 
   getMainFileForNodeSuffix() {

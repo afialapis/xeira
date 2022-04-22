@@ -1,14 +1,22 @@
+const {externals} = require('rollup-plugin-node-externals')
 const {nodeResolve} = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
-
 const {rollupBanner} = require('./banner')
 
-function rollupModulesForCjs(xeiraConfig, pkgJson, input, output) {
+function rollupModulesForCjs(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
   const inputOptions= {
     input,
     plugins: [
-      nodeResolve(),
-      commonjs()
+      externals({
+        packagePath: pkgJsonPath
+      }),
+      nodeResolve({
+        rootDir: pkgPath,
+        exportConditions: ['node'],
+      }),
+      commonjs({
+        esmExternals: true
+      })
     ]
   }
 
@@ -21,7 +29,7 @@ function rollupModulesForCjs(xeiraConfig, pkgJson, input, output) {
     }
   ]
 
-  return[inputOptions, outputs]
+  return [inputOptions, outputs]
 }
 
 

@@ -6,29 +6,26 @@ const commonjs = require('@rollup/plugin-commonjs')
 const { terser } = require('rollup-plugin-terser')
 const NODE_ENV = 'production'
 
-const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
+const minifyExtension = pathToFile => pathToFile.replace(/\.mjs$/, '.min.mjs');
 const {rollupBanner} = require('./banner')
 
-function rollupModulesForEsm(xeiraConfig, pkgJson, input, output) {
+function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
 
   const inputOptions= {
     input,
     plugins: [
-      externals({
-        deps: true
-      }),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
+      externals({
+        packagePath: pkgJsonPath
+      }),
       nodeResolve({
-        //mainFields: ['main']
+        rootDir: pkgPath,
+        exportConditions: ['node'],
       }),
       commonjs({
-        // node-resolve searchs for  ['module', 'main'] by default
-        // we need to avoid errors like:
-        //   Error: 'default' is not exported by node_modules/farrapa-objects/dist/farrapa-objects.es.js, imported by farrapa-objects?commonjs-external
-        // 
         esmExternals: true
       }),
       babel({
@@ -43,11 +40,10 @@ function rollupModulesForEsm(xeiraConfig, pkgJson, input, output) {
         babelHelpers: 'bundled',
 
         presets: [
-
-          [ "@babel/preset-env",
+          [ "@babel/preset-modules",
             {
               // Don't spoof `.name` for Arrow Functions, which breaks when minified anyway.
-              //loose: true,
+              loose: true,
             },
           ],
           ... xeiraConfig.usesReact

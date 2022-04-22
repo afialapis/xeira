@@ -10,43 +10,46 @@ const {rollupBanner} = require('./banner')
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
 
 function toTitleCase(str) {
-  return str.replace(
+  let s= str.replace(
     /\w*/g,
     function(txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
-  );
+  )
+  s= s.charAt(0).toLowerCase() + s.substr(1);
+  s= s.replace(/-/g,'')
+  return s
 }
 
-const titlefyPkgName = (package_name) => {
-  const suffix= package_name.replace('farrapa-', '')
-  return `farrapa${toTitleCase(suffix)}`
-
-}
 
 const makeGlobals = (pkgJson) => {
   const pkgs= Object.keys(pkgJson.dependencies)
   const globals= {}
   pkgs.map((n) => {
-    globals[n]= titlefyPkgName(n)
+    globals[n]= toTitleCase(n)
   })
   return globals
 }
 
 
-function rollupModulesForUmd(xeiraConfig, pkgJson, input, output) {
+function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output, bundleDeps= false) {
 
   const inputOptions= {
     input,
     plugins: [
       externals({
-        deps: true
+        packagePath: pkgJsonPath,
+        deps: !bundleDeps,
+        peerDeps: !bundleDeps
       }),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      nodeResolve(),
+      nodeResolve({
+        rootDir: pkgPath,
+        exportConditions: ['node'],
+      }),
       commonjs({
         esmExternals: true
       }),
@@ -62,7 +65,10 @@ function rollupModulesForUmd(xeiraConfig, pkgJson, input, output) {
         babelHelpers: 'bundled',
 
         presets: [
-          ["@babel/preset-env", { loose: true }],
+          ["@babel/preset-env", { 
+            bugfixes: true,
+            loose: true 
+          }],
           ... xeiraConfig.usesReact
             ? ['@babel/preset-react']
             : []
@@ -78,7 +84,7 @@ function rollupModulesForUmd(xeiraConfig, pkgJson, input, output) {
       exports: 'named',
       banner: rollupBanner(pkgJson),
       sourcemap: true,
-      name: titlefyPkgName(pkgJson.name),
+      name: toTitleCase(pkgJson.name),
       globals: makeGlobals(pkgJson)      
     },
     {
@@ -89,7 +95,7 @@ function rollupModulesForUmd(xeiraConfig, pkgJson, input, output) {
       plugins: [
         terser({ ecma: 8, safari10: true })
       ],
-      name: titlefyPkgName(pkgJson.name),
+      name: toTitleCase(pkgJson.name),
       globals: makeGlobals(pkgJson)   
     }    
   ]
