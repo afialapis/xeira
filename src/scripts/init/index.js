@@ -19,6 +19,7 @@ const {saveObjectToJsonWithConfirm} = require('../../utils/io')
 const {pkgJsonRead, pkgJsonUpdate} = require('../../utils/pkgJson')
 const {getXeiraDefaultConfig, getXeiraConfigObj} = require('../../config/xeira')
 const configQuestions = require('./questions')
+const makePkgJsonValues = require('./pkgJsonValues')
 const pkgPath= process.env.PWD
 
 /*
@@ -46,7 +47,7 @@ async function xeiraInit() {
 
   // Update package.json
   const pkgJson = pkgJsonRead(pkgPath)
-  const pkgJsonValues= xeiraConfig.makePkgJsonValues(pkgJson.name)
+  const pkgJsonValues= makePkgJsonValues(xeiraConfig, pkgJson.name)
   await pkgJsonUpdate (pkgPath, pkgJsonValues)
 }
 

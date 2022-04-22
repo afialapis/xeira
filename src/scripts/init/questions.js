@@ -32,7 +32,9 @@ module.exports = [
     name: 'source_index',
     message: 'Which is your source index',
     choices: [
+      { title: './src/index.mjs', value: './src/index.mjs' },
       { title: './src/index.js', value: './src/index.js' },
+      { title: './src/index.cjs', value: './src/index.cjs' },
       { title: 'index.js', value: 'index.js'},
     ],
     initial: 0

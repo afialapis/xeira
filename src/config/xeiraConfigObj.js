@@ -1,6 +1,3 @@
-const {getBabelConfigPath} = require('./babel')
-const {getEslintConfigPath} = require('./eslint')
-
 const addSuffix = (s, suf) => s.replace(/\.js$/, `.${suf}.js`).replace(/\.mjs$/, `.${suf}.mjs`).replace(/\.cjs$/, `.${suf}.cjs`);
 
 
@@ -107,8 +104,8 @@ module.exports = class XeiraConfigObj {
       const suffix = this.getMainFileForNodeSuffix()
       const output = suffix=='cjs'
         ? this.getCjsOutput(pkgName)
-        : this.getUmdOutput(pkgName)
-      return addSuffix(output, 'main')
+        : addSuffix(this.getUmdOutput(pkgName), 'main')
+      return output
     }
     return undefined    
   }
@@ -123,33 +120,5 @@ module.exports = class XeiraConfigObj {
     return addSuffix(this.getUmdOutput(pkgName), 'main')
   }
 
-  makePkgJsonValues(pkgName) {
-
-    let pkgJsonValues= {
-      main: this.getMainFile(pkgName),
-      exports: {
-        import: this.getEsmOutput(pkgName),
-        default: this.getMainFile(pkgName)
-      },
-      module: this.getEsmOutput(pkgName)
-    }
-
-    if (this.isTargetingBrowser) {
-      pkgJsonValues.browser= this.getUmdOutput(pkgName)
-    }
-    
-    if (this.linter == 'eslint') {
-      const eslintConfigPath = getEslintConfigPath(this)
-      pkgJsonValues['eslintConfig']= {"extends": [eslintConfigPath]}
-    }
-  
-    if (this.transpiler == 'babel') {
-      const babelConfigPath = getBabelConfigPath(this)
-      pkgJsonValues['babel']= {"extends": babelConfigPath}
-      
-    }
-
-    return pkgJsonValues
-  }
 }
 

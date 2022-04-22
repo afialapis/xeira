@@ -5,10 +5,13 @@
     "clean": "rm -fr node_modules && rm -fr xeira.json .babelrc .eslintrc.js && cp -f package.json.original package.json",
     "init": "npm run make_link && npm run clean && node ../../bin/xeira.js init"
   },
-  "main": "./dist/a-try-on-init.cjs.main.js",
+  "main": "./dist/a-try-on-init.umd.main.js",
   "exports": {
-    "import": "./dist/a-try-on-init.esm.js",
-    "default": "./dist/a-try-on-init.cjs.main.js"
+    "import": "./dist/a-try-on-init.mjs",
+    "default": "./dist/a-try-on-init.umd.main.js",
+    "require": "./dist/a-try-on-init.cjs"
   },
-  "module": "./dist/a-try-on-init.esm.js"
+  "module": "./dist/a-try-on-init.mjs",
+  "cjs": "./dist/a-try-on-init.cjs",
+  "browser": "./dist/a-try-on-init.umd.js"
 }
