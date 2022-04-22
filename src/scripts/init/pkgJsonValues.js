@@ -9,12 +9,16 @@ function makePkgJsonValues(xeiraConfig, pkgName) {
       import: xeiraConfig.getEsmOutput(pkgName),
       default: xeiraConfig.getMainFile(pkgName)
     },
-    module: xeiraConfig.getEsmOutput(pkgName)
+    module: xeiraConfig.getEsmOutput(pkgName),
+    type: 'module'
   }
 
   if (xeiraConfig.isTargetingNode) {
     pkgJsonValues.exports['require']= xeiraConfig.getCjsOutput(pkgName)
     pkgJsonValues['cjs']= xeiraConfig.getCjsOutput(pkgName)
+    if (xeiraConfig.isTargetingNodeOnly) {
+      pkgJsonValues['type']= 'commonjs'
+    }
   }
 
   if (xeiraConfig.isTargetingBrowser) {

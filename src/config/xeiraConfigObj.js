@@ -20,12 +20,20 @@ module.exports = class XeiraConfigObj {
     return this.config.target == 'both'
   }
 
+  get isTargetingBrowserOnly() {
+    return this.config.target == 'browser'
+  }
+
   get isTargetingBrowser() {
-    return (this.config.target == 'browser') || (this.config.target == 'both')
+    return this.isTargetingBrowserOnly || this.isTargetingBoth
   }
   
+  get isTargetingNodeOnly() {
+    return this.config.target == 'node'
+  }  
+
   get isTargetingNode() {
-    return (this.config.target == 'node') || (this.config.target == 'both')
+    return this.isTargetingNodeOnly || this.isTargetingBoth
   }  
 
   get sourceIndex() {
