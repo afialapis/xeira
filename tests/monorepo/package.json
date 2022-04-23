@@ -1,0 +1,8 @@
+{
+  "name": "monorepo",
+  "scripts": {
+    "make_link": "rm -fr node_modules && mkdir -p node_modules && ln -fs ../../ node_modules/xeira",
+    "init": "npm run make_link && npm run clean && node ../../bin/xeira.js init"
+  },
+  "version": "0.0.0"
+}
