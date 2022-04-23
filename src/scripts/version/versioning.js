@@ -29,10 +29,13 @@ function _updateVersionValue(version, versionType) {
 
 function _getMonorepoPackageList(pkgPath, filterPattern) {
   
-  return  readdirSync(pkgPath, { withFileTypes: true })
+  let pkgs=  readdirSync(path.join(pkgPath, 'packages'), { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name)
-      .filter(dirname => dirname.toLowerCase().indexOf(filterPattern.toLowerCase())>=0)
+  if (filterPattern) {
+      pkgs= pkgs.filter(dirname => dirname.toLowerCase().indexOf(filterPattern.toLowerCase())>=0)
+  }
+  return pkgs
 }
 
 
@@ -55,7 +58,7 @@ async function versioning(pkgPath, xeiraConfig, versionType, filterPattern)
       const changes= {
         version: newVersion
       }
-      const promise= pkgJsonUpdate (pkgPath, changes, true)
+      const promise= pkgJsonUpdate (pkgJsonPath, changes, true)
       promises.push(promise)
     }
   }
