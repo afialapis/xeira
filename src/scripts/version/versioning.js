@@ -7,7 +7,11 @@ function _updateVersionValue(version, versionType) {
     return versionType
   }
 
-  let [major, minor, patch]= version.split('.').map(v => parseInt(v))
+  let major= 0, minor= 0, patch= 0
+  
+  if (version != undefined) {
+    [major, minor, patch]= version.split('.').map(v => parseInt(v))
+  }
   
   if (versionType=='major') {
     major+= 1
@@ -38,10 +42,9 @@ async function versioning(pkgPath, xeiraConfig, versionType, filterPattern)
 
   if (xeiraConfig.isAMonoRepo) {
     const pkgList= _getMonorepoPackageList(pkgPath, filterPattern)
-    pkgJsonPaths= pkgList.map(pkgName => path.join(pkgPath, 'packages', pkgName, 'package.json'))
+    pkgJsonPaths= pkgList.map(pkgName => path.join(pkgPath, 'packages', pkgName))
   } else {
-    const pkgJsonPath = path.join(pkgPath, 'package.json')
-    pkgJsonPaths.push(pkgJsonPath)
+    pkgJsonPaths.push(pkgPath)
   }
 
   let promises= []
@@ -52,7 +55,7 @@ async function versioning(pkgPath, xeiraConfig, versionType, filterPattern)
       const changes= {
         version: newVersion
       }
-      const promise= pkgJsonUpdate (pkgPath, changes)
+      const promise= pkgJsonUpdate (pkgPath, changes, true)
       promises.push(promise)
     }
   }

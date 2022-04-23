@@ -13,5 +13,6 @@
   },
   "module": "./dist/a-try-on-init.mjs",
   "cjs": "./dist/a-try-on-init.cjs",
-  "browser": "./dist/a-try-on-init.umd.js"
+  "browser": "./dist/a-try-on-init.umd.js",
+  "version": "0.1.2"
 }
