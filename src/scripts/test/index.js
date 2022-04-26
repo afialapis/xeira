@@ -13,4 +13,16 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-const execSync = require('child_process').execSync;
+// const execSync = require('child_process').execSync;
+
+(async () => {
+
+
+  // foo
+
+})().catch((error) => {
+  const {testHelp} = require('../help/actions')
+  const pkgPath= process.env.PWD;
+  process.exitCode = 1;
+  testHelp(pkgPath, error)
+});

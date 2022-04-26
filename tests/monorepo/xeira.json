@@ -3,7 +3,7 @@
   "target": "both",
   "source_index": "./src/index.js",
   "linter": "eslint",
-  "transpile_folder": "none",
+  "transpile_folder": null,
   "transpiler": "babel",
   "minifier": "uglify",
   "bundle_folder": "./dist",

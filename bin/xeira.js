@@ -17,14 +17,17 @@
  
  const spawn = require('cross-spawn');
  const args = process.argv.slice(2);
+
+ const xeiraActions= ['init', 'lint', 'transpile', 'bundle', 'version', 'test', 'help']
  
  const scriptIndex = args.findIndex(
-   x => x === 'init' || x === 'lint' || x === 'transpile' || x === 'bundle' || x === 'version' || x === 'test'
+   x => xeiraActions.indexOf(x) >= 0
  );
+
  const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
  const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 
- if (['init', 'lint', 'transpile', 'bundle', 'version', 'test'].includes(script)) {
+ if (xeiraActions.includes(script)) {
    const result = spawn.sync(
      process.execPath,
      nodeArgs
@@ -50,9 +53,13 @@
    }
    process.exit(result.status);
  } else {
-   console.log('Unknown script "' + script + '".');
-   console.log('Perhaps you need to update xeira?');
-   console.log(
-     'See: https://github.com/afialapis/xeira'
-   );
+    const {globalHelp} = require('../src/scripts/help/actions')
+
+    process.exitCode = 1;
+    const msg= `Unknown script ${script}`
+    const extra= `
+      Perhaps you need to update xeira?
+      Check https://github.com/afialapis/xeira
+    `
+    globalHelp({message: msg}, extra)
  }

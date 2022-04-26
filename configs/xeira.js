@@ -6,11 +6,11 @@ module.exports= {
   source_index: './src/index.js', // 'index.js'
 
   // Probably offering alternatives some day
-  linter: 'eslint', // 'none'
+  linter: 'eslint', // undefined
   
-  transpile_folder: 'none', // './lib
-  transpiler: 'babel', // 'none'
-  minifier: 'uglify', // 'none'
+  transpile_folder: undefined, // './lib
+  transpiler: 'babel', // undefined
+  minifier: 'uglify', // undefined
 
   bundle_folder: './dist', // './build', './lib'
   bundler: 'rollup', // 'webpack', 'esbuild'

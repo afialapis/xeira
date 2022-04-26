@@ -56,7 +56,9 @@ async function xeiraTranspile(pkgPath, sourcePath, destPath) {
 
   await xeiraTranspile(pkgPath, sourcePath, destPath)
 })().catch((error) => {
+  const {transpileHelp} = require('../help/actions')
+  const pkgPath= process.env.PWD;
   process.exitCode = 1;
-  console.error(error);
+  transpileHelp(pkgPath, error)
 });
 

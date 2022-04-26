@@ -39,6 +39,8 @@ const {lintWithEslint} = require('./eslint');
 
   
 })().catch((error) => {
+  const {lintHelp} = require('../help/actions')
+  const pkgPath= process.env.PWD;
   process.exitCode = 1;
-  console.error(error);
+  lintHelp(pkgPath, error)
 });

@@ -9,6 +9,6 @@
   "monorepo": false,
   "source_index_x": "/src/cjs/index.cjs",
   "source_index": "/src/mjs/index.mjs",
-  "transpile_folder": "none",
+  "transpile_folder": null,
   "bundle_folder": "/dist"
 }

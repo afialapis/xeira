@@ -2,10 +2,10 @@ const path = require('path');
 const prompts = require('prompts');
 const {saveObjectToJsonWithConfirm} = require('./io');
 
-const _pkgJsonPath = (pkgPath) => path.join(pkgPath, 'package.json')
+const pkgJsonPath = (pkgPath) => path.join(pkgPath, 'package.json')
 
 function pkgJsonRead (pkgPath) {
-  const pkgJson = require( _pkgJsonPath(pkgPath) )
+  const pkgJson = require( pkgJsonPath(pkgPath) )
   return pkgJson
 }
 
@@ -46,7 +46,7 @@ async function pkgJsonUpdate (pkgPath, changes, force, message) {
     pkgJson[key]= value
   }
 
-  await saveObjectToJsonWithConfirm(_pkgJsonPath(pkgPath), pkgJson, /*force*/ true)
+  await saveObjectToJsonWithConfirm(pkgJsonPath(pkgPath), pkgJson, /*force*/ true)
 
 }
 

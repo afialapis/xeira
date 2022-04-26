@@ -47,7 +47,7 @@ module.exports = [
     message: 'Which linter will you use?',
     choices: [
       { title: 'eslint', value: 'eslint' },
-      { title: 'none', value: 'none', disabled: true},
+      { title: 'none', value: undefined, disabled: true},
     ],
     initial: 0
   },
@@ -58,18 +58,18 @@ module.exports = [
     name: 'transpile_folder',
     message: 'Which folder do you want your transpiled code in?',
     choices: [
-      { title: 'none', value: 'none', message: 'I need no transpilation'},
+      { title: 'none', value: undefined, message: 'I need no transpilation'},
       { title: './lib', value: './lib' },
     ],
     initial: 0
   },  
 
   {
-    type: prev => prev !== 'none' ? 'select' : null,
+    type: prev => prev !== undefined ? 'select' : null,
     name: 'transpiler',
     message: 'Pick a transpiler',
     choices: [
-      { title: 'none', value: 'none'},
+      { title: 'none', value: undefined},
       { title: 'babel', value: 'babel' },
     ],
     initial: 0
@@ -84,18 +84,18 @@ module.exports = [
       { title: './dist', value: './dist' },
       { title: './build', value: './build' },
       { title: './lib', value: './lib' },
-      { title: 'none', value: 'none', disabled: true},
+      { title: 'none', value: undefined, disabled: true},
     ],
     initial: 0
   },  
 
   {
-    type: prev => prev !== 'none' ? 'select' : null,
+    type: prev => prev !== undefined ? 'select' : null,
     name: 'bundler',
     message: 'Pick the bundler',
     choices: [
       { title: 'rollup', value: 'rollup' },
-      { title: 'none', value: 'none', disabled: true},
+      { title: 'none', value: undefined, disabled: true},
     ],
     initial: 0
   },    

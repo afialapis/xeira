@@ -35,8 +35,11 @@ async function xeiraBundle(pkgPath) {
   const pkgPath= process.env.PWD;
 
   await xeiraBundle(pkgPath)
+  
 })().catch((error) => {
+  const {bundleHelp} = require('../help/actions')
+  const pkgPath= process.env.PWD;
   process.exitCode = 1;
-  console.error(error);
+  bundleHelp(pkgPath, error)
 });
 

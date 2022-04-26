@@ -45,7 +45,7 @@ module.exports = class XeiraConfigObj {
   }
 
   get transpile() {
-    return this.config.transpile_folder !== 'none'
+    return this.config?.transpile_folder !== undefined
   }
 
   get transpileFolder() {
@@ -119,7 +119,7 @@ module.exports = class XeiraConfigObj {
   }
 
   getMainFile(pkgName) {
-    if (this.transpileFolder !== 'none' && this.target == 'node') {
+    if (this.transpileFolder !== undefined && this.target == 'node') {
       return `${this.transpileFolder}/index.js`
     }
     if (this.isTargetingNode) {

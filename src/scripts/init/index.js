@@ -55,6 +55,8 @@ async function xeiraInit() {
 (async () => {
   await xeiraInit()
 })().catch((error) => {
+  const {initHelp} = require('../help/actions')
+  const pkgPath= process.env.PWD;
   process.exitCode = 1;
-  console.error(error);
+  initHelp(pkgPath, error)
 });

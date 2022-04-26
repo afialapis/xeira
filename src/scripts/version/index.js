@@ -17,6 +17,7 @@ process.on('unhandledRejection', err => {
 
   const {getXeiraConfigObj} = require('../../config/xeira')
   const versioning = require('./versioning')
+  
 
   const pkgPath= process.env.PWD;
   
@@ -46,15 +47,8 @@ process.on('unhandledRejection', err => {
   await versioning(pkgPath, xeiraConfig, versionType, filterPattern)
   
 })().catch((error) => {
+  const {versionHelp} = require('../help/actions')
+  const pkgPath= process.env.PWD;
   process.exitCode = 1;
-  const msg= `[xeira] version: error ${error.message}. 
-  Usage:
-  
-  > npx xeira version patch|minor|major|0.1.2
-
-  If you are in a monorepo:
-
-  > npx xeira version patch|minor|major|0.1.2 [-filter <pattern>]
-  `
-  console.error(msg)
+  versionHelp(pkgPath, error)
 });
