@@ -68,6 +68,10 @@ module.exports = class XeiraConfigObj {
     return this.config.bundler == 'rollup'
   }
 
+  get testFolder() {
+    return this.config.test_folder
+  }
+
   get usesReact() {
     return this.config.react !== false
   }

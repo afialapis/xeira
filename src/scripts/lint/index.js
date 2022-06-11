@@ -36,8 +36,6 @@ const {lintWithEslint} = require('./eslint');
   } else {
     console.warn(`[xeira] lint: no linter specified in xeira settings.`)
   }
-
-  
 })().catch((error) => {
   const {lintHelp} = require('../help/actions')
   const pkgPath= process.env.PWD;

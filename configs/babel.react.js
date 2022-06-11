@@ -1,4 +1,4 @@
-const base = require('/babel')
+const base = require('./babel')
 
 module.exports= {
   presets: [

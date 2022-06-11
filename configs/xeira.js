@@ -15,6 +15,8 @@ module.exports= {
   bundle_folder: './dist', // './build', './lib'
   bundler: 'rollup', // 'webpack', 'esbuild'
 
+  test_folder: './test', // './tests'
+
   react: false,
 
   // This can be previously tried to be guessed (/packages or .pnpm-workspace.yaml),

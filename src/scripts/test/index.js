@@ -13,12 +13,26 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-// const execSync = require('child_process').execSync;
+const { getXeiraConfigObj } = require('../../config/xeira');
+const {testWithMocha} = require('./mocha');
+
 
 (async () => {
 
+  const pkgPath= process.env.PWD;
 
-  // foo
+  // get xeira config
+  const xeiraConfig = getXeiraConfigObj(pkgPath);  
+
+  const args = process.argv.slice(2);
+  let testPath= xeiraConfig.testFolder
+  if (args.length>=1) {
+    if (args[0]) {
+      testPath = args[0]
+    }
+  }
+
+  await testWithMocha(pkgPath, xeiraConfig, testPath)
 
 })().catch((error) => {
   const {testHelp} = require('../help/actions')
