@@ -14,7 +14,11 @@ async function lintWithEslint(pkgPath, xeiraConfig, sourcePath) {
     if (pkgJson.eslintConfig != undefined) {
       overrideConfig = pkgJson.eslintConfig
       if (overrideConfig.extends) {
-        overrideConfig.extends= overrideConfig.extends.map(p => p.replace('./node_modules/xeira/configs', path.join(__dirname,'../../../configs')))
+        if (Array.isArray(overrideConfig.extends)) {
+          overrideConfig.extends= overrideConfig.extends.map(p => p.replace('./node_modules/xeira/configs', path.join(__dirname,'../../../configs')))
+        } else {
+          overrideConfig.extends= overrideConfig.extends.replace('./node_modules/xeira/configs', path.join(__dirname,'../../../configs'))
+        }
       }
     } else {
       overrideConfig = getEslintConfig(xeiraConfig);

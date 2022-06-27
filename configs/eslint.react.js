@@ -2,7 +2,7 @@
 const base = require('./eslint')
 const babelConfig = require('./babel.react')
 
-module.exports= {
+const xx= {
   ...base,
   parserOptions: {
     ...base.parserOptions,
@@ -12,6 +12,9 @@ module.exports= {
     ...base.extends,
     "plugin:react/recommended"
   ],
+  env: {
+    ...base.env,
+  },
   plugins: [
     "react",
     "react-hooks"
@@ -34,3 +37,6 @@ module.exports= {
     "react-hooks/exhaustive-deps": "warn"     
   }
 }
+
+//console.log(xx)
+module.exports= xx

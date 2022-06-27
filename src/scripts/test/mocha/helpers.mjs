@@ -1,6 +1,6 @@
 //import { mount, configure} from 'enzyme';
 import pkg from 'enzyme';
-const { mount, configure} = pkg;
+const { configure, mount, shallow } = pkg;
 
 
 import { expect } from 'chai';
@@ -32,9 +32,16 @@ const mount_wrap = (component) => {
   return wrapper  
 }
 
+const shallow_wrap = (component) => {
+  const wrapper= shallow(component, {
+    attachTo: container
+  })
+  return wrapper  
+}
+
 global.expect= expect
 global.mount= mount_wrap
-
+global.shallow = shallow_wrap
 
 
 //  "test-command": "mocha --exit --timeout 500 --slow 300 --require @babel/register --require ./test/dom.js --require ignore-styles ./test/helpers.js ",
