@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Index for all the building tools your package or app needs",
   "bin": "bin/xeira.js",
   "exports": {
@@ -19,7 +19,7 @@
     "url": "https://github.com/afialapis/xeira/issues"
   },
   "homepage": "https://github.com/afialapis/xeira#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.2",
     "@babel/eslint-parser": "^7.18.2",
