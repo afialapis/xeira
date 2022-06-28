@@ -1,11 +1,10 @@
-const path = require('path')
-const xeiraConfigsPath= path.join(__dirname, '../../configs')
+const path = require('path');
 
 function _getEslintConfigName (xeiraConfig) { 
   return `eslint${xeiraConfig.usesReact ? '.react' : ''}`
 }
 
-function getEslintConfigPathForPkgJson (xeiraConfig) { 
+function getEslintConfigPath (xeiraConfig) { 
   const name = _getEslintConfigName(xeiraConfig)
 
   return `./node_modules/xeira/configs/${name}`
@@ -14,17 +13,17 @@ function getEslintConfigPathForPkgJson (xeiraConfig) {
 
 
 function getEslintConfig (xeiraConfig) { 
-  const config = require(path.join(xeiraConfigsPath, _getEslintConfigName(xeiraConfig)))
+  const config = require(path.join('../../configs', _getEslintConfigName(xeiraConfig)))
   return config
 }
 
 
 function getEslintIgnorePath() {
-  return path.join(xeiraConfigsPath, '.eslintignore')
+  return path.join(__dirname, '../../configs/.eslintignore')
 }
 
 module.exports= {
   getEslintConfig,
   getEslintIgnorePath,
-  getEslintConfigPathForPkgJson
+  getEslintConfigPath
 }

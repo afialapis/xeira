@@ -1,23 +1,21 @@
-const path = require('path')
-const xeiraConfigsPath= path.join(__dirname, '../../configs')
-
+const path = require('path');
 
 function _getBabelConfigName (xeiraConfig) { 
   return `babel${xeiraConfig.usesReact ? '.react' : ''}`
 }
 
-function getBabelConfigPathForPkgJson (xeiraConfig) { 
+function getBabelConfigPath (xeiraConfig) { 
   const name = _getBabelConfigName(xeiraConfig)
   
   return `./node_modules/xeira/configs/${name}`
 }
 
 function getBabelConfig (xeiraConfig) { 
-  const config = require(path.join(xeiraConfigsPath, _getBabelConfigName(xeiraConfig)))
+  const config = require(path.join('../../configs', _getBabelConfigName(xeiraConfig)))
   return config
 }
 
 module.exports= {
   getBabelConfig,
-  getBabelConfigPathForPkgJson
+  getBabelConfigPath
 }

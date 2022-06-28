@@ -1,5 +1,5 @@
-const {getBabelConfigPathForPkgJson} = require('../../config/babel')
-const {getEslintConfigPathForPkgJson} = require('../../config/eslint')
+const {getBabelConfigPath} = require('../../config/babel')
+const {getEslintConfigPath} = require('../../config/eslint')
 
 function makePkgJsonValues(xeiraConfig, pkgName) {
 
@@ -26,12 +26,12 @@ function makePkgJsonValues(xeiraConfig, pkgName) {
   }
   
   if (xeiraConfig.linter == 'eslint') {
-    const eslintConfigPath = getEslintConfigPathForPkgJson(xeiraConfig)
+    const eslintConfigPath = getEslintConfigPath(xeiraConfig)
     pkgJsonValues['eslintConfig']= {"extends": [eslintConfigPath]}
   }
 
   if (xeiraConfig.transpiler == 'babel') {
-    const babelConfigPath = getBabelConfigPathForPkgJson(xeiraConfig)
+    const babelConfigPath = getBabelConfigPath(xeiraConfig)
     pkgJsonValues['babel']= {"extends": babelConfigPath}
     
   }
