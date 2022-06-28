@@ -1,8 +1,8 @@
 {
   "name": "xeira",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Index for all the building tools your package or app needs",
-  "bin": "bin/index.js",
+  "bin": "bin/xeira.js",
   "exports": {
     "./configs": "./src/configs"
   },
