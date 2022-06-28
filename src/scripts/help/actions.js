@@ -51,8 +51,8 @@ function _log_help(action, usage, extra, error= undefined) {
 }
 
 const _initUsage = `\t${_bl('npx xeira')} ${_bb('init')}`
-const _lintUsage =  `\t${_bl('npx xeira')} ${_bb('lint')} [path]`
-const _transpileUsage = `  \t${_bl('npx xeira')} ${_bb('transpile')}`
+const _lintUsage =  `\t${_bl('npx xeira')} ${_bb('lint')} [path (default is ./)]`
+const _transpileUsage = `  \t${_bl('npx xeira')} ${_bb('transpile')} [suorce_path (default is ./src)] [dest_path (default is ./lib)]`
 const _bundleUsage = `\t${_bl('npx xeira')} ${_bb('bundle')}`
 const _testUsage = `\t${_bl('npx xeira')} ${_bb('test')} [path (default is ./test)]`
 const _versionUsage = `\t${_bl('npx xeira')} ${_bb('version')} patch|minor|major|0.1.2 [-filter <pattern>]`

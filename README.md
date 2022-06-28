@@ -2,8 +2,53 @@
 
 Index for all the building tools your package or app needs
 
+# Install
 
+```
+  npm i -D xeira
+```
 
-https://github.com/PepsRyuu/nollup
+# Actions
 
-https://github.com/remix-run/react-router/blob/main/rollup.config.js
+## init
+
+```
+  npx xeira init
+```
+
+## lint
+
+```
+  npx xeira lint [folder (default= ./) ]
+```
+
+## transpile
+
+```
+  npx xeira transpile [source_folder (default= ./src) dest_folder (default= ./lib)]
+```
+
+## bundle
+
+```
+  npx xeira bundle
+```
+
+## test
+
+```
+  npx xeira test [folder (default= ./test) ]
+```
+
+## version
+
+```
+  npx xeira version patch|minor|major|0.1.2 [-filter <pattern>]
+```
+
+## help
+
+```
+  npx xeira help
+```
+

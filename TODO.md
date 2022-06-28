@@ -1,24 +1,31 @@
-· Init
-  · add nice scripts entries?
+# Init phase
 
-    "bundle": "npx xeira bundle" ???
-      igual de largo que
-      > npm run bundle
-      ... pero igual mejor recordable el npm run
-  
-  · add a command like:
-    "npx xeira help"
+## add nice scripts entries?
 
-    que muestre ayuda sobre scripts de Xeira
+Like:
 
-  · add a command like:
-    "npx xeira scripts"
+```
+  "bundle": "npx xeira bundle",
+```
 
-    que liste los 'scripts' de un package.json 
+`npm run bundle` is equally shorter as `npx xeira bundle`, but maybe easier to remember, more standard.
+
+# Other commands
 
 
-· Docs? Or leave it for docaine?
+## Docs?
 
-· Tests? 
-  · How to handle the /tests bundle?
-  · wrap mocha call
+Or leave it for docaine?
+
+
+## Dev Server?
+
+https://github.com/PepsRyuu/nollup
+
+
+
+
+
+
+
+https://github.com/remix-run/react-router/blob/main/rollup.config.js
