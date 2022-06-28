@@ -50,7 +50,7 @@ function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
             ? [ "@babel/preset-react",
                 {
                   // Compile JSX Spread to Object.assign(), which is reliable in ESM browsers.
-                  useBuiltIns: true,
+                  //useBuiltIns: true,
                 },
               ]
             : [],
