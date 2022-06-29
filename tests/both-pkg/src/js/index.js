@@ -16,7 +16,7 @@ const collections= [
   })  
 ]
 
-const bothPkg = (f) => {
+const bothPkg = (_f) => {
   const total= collTotalBy(collections, 'money')
   console.log(`Total money => ${total}`);
 };

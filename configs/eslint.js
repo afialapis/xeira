@@ -1,7 +1,7 @@
 
-const babelConfig = require('./babel')
+import babelConfig from './babel.mjs'
 
-module.exports= {
+export default {
   root: true,
   parser: "@babel/eslint-parser",
   parserOptions: {

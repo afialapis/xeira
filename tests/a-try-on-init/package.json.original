@@ -3,6 +3,6 @@
   "scripts": {
     "make_link": "rm -fr node_modules && mkdir -p node_modules && ln -fs ../../ node_modules/xeira",
     "clean": "rm -fr node_modules && rm -fr xeira.json .babelrc .eslintrc.js && cp -f package.json.original package.json",
-    "init": "npm run make_link && npm run clean && node ../../bin/xeira.js init"
+    "init": "npm run make_link && npm run clean && node ../../bin/xeira.mjs init"
   }
 }

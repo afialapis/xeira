@@ -1,8 +1,8 @@
 
-const base = require('./eslint')
-const babelConfig = require('./babel.react')
+import base from './eslint.js'
+import babelConfig from './babel.react.mjs'
 
-const xx= {
+export default {
   ...base,
   parserOptions: {
     ...base.parserOptions,
@@ -37,6 +37,3 @@ const xx= {
     "react-hooks/exhaustive-deps": "warn"     
   }
 }
-
-//console.log(xx)
-module.exports= xx

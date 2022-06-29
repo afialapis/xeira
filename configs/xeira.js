@@ -1,4 +1,4 @@
-module.exports= {
+export default {
 
   product: 'package', // 'app',
   target: 'node', // 'browser', 'both',
