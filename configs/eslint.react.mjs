@@ -6,7 +6,11 @@ export default {
   ...base,
   parserOptions: {
     ...base.parserOptions,
-    ...babelConfig
+    babelOptions: {
+      // babelrc: false,
+      // configFile: false,
+      ...babelConfig 
+    }
   },
   extends:  [
     ...base.extends,
@@ -37,3 +41,4 @@ export default {
     "react-hooks/exhaustive-deps": "warn"     
   }
 }
+

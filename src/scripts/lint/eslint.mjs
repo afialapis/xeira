@@ -7,7 +7,7 @@ import lodash from 'lodash'
 import { ESLint } from "eslint"
 import {getEslintConfig, getEslintIgnorePath} from '../../config/eslint.mjs'
 import { pkgJsonRead } from '../../utils/pkgJson.mjs'
-import { readJsonFile } from '../../utils/json.mjs'
+//import { readJsonFile } from '../../utils/json.mjs'
  
 async function lintPrepareOptions(pkgPath, xeiraConfig) {
   const baseConfig = await getEslintConfig(xeiraConfig)
@@ -21,7 +21,7 @@ async function lintPrepareOptions(pkgPath, xeiraConfig) {
         ? eslintExtends
         : [eslintExtends]
 
-      for (var p of configPaths) {
+      for (const p of configPaths) {
         const configPath= path.join(pkgPath, p)
         const config= await import(configPath)
         lodash.merge(overrideConfig, config.default)
@@ -75,7 +75,8 @@ async function lintWithEslint(pkgPath, xeiraConfig, sourcePath) {
     ignorePath,
     useEslintrc: false,
     baseConfig,
-    overrideConfig
+    overrideConfig,
+    extensions: ['.js', '.ts', '.mjs', '.cjs']
   }
 
   // call eslint's node api

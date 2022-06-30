@@ -29,12 +29,12 @@
   "dependencies": {
     "farrapa-collections": "^1.0.7"
   },
-  "babel_XXXXX": {
+  "babel_XXX": {
     "extends": "./node_modules/xeira/configs/babel.react.cjs"
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/xeira/configs/eslint.react.mjs"
+      "./node_modules/xeira/configs/eslint.react.cjs"
     ]
   },
   "version": "0.0.1"

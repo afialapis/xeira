@@ -14,7 +14,11 @@ module.exports = {
       "experimentalObjectRestSpread": true
     },
     "requireConfigFile": false,
-    ...babelConfig  
+    "babelOptions": {
+      // babelrc: false,
+      // configFile: false,
+      ...babelConfig 
+    }
   },
   extends:  [
     "eslint:recommended"

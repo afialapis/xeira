@@ -6,7 +6,11 @@ module.exports = {
   ...base,
   parserOptions: {
     ...base.parserOptions,
-    ...babelConfig
+    babelOptions: {
+      // babelrc: false,
+      // configFile: false,
+      ...babelConfig 
+    }
   },
   extends:  [
     ...base.extends,
