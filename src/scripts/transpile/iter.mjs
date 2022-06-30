@@ -21,6 +21,7 @@ async function _transpileFile (basePath, filePath, destPath, callback) {
   return await callback(realSourcePath, realDestPath)
 }
 
+
 async function transpileDirectory (basePath, sourcePath, destPath, callback) {
   let files= []
   try {
@@ -37,7 +38,9 @@ async function transpileDirectory (basePath, sourcePath, destPath, callback) {
       if (stats.isDirectory()) {
         return await transpileDirectory(basePath, filePath, destPath, callback)
       } else if (stats.isFile()) {
-        if (file.endsWith('.js')) {
+        const extension= path.extname(file)
+        const okExt = ['.js', '.ts', '.mjs', '.cjs', '.jsx', '.es6'].indexOf(extension) >= 0
+        if (okExt) {
           return await _transpileFile(basePath, filePath, destPath, callback)
         }
       }

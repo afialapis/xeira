@@ -7,7 +7,7 @@ import {execSync} from 'child_process'
 
 async function testWithMocha(pkgPath, xeiraConfig, testPath) {
 
-  const babelRegPath=  path.join(__dirname, 'babel.cjs')
+  const babelRegPath=  path.join(__dirname, 'babel.mjs')
   const mochaDOMPath=  path.join(__dirname, 'dom.mjs')
   const mochaHelpersPath=  path.join(__dirname, 'helpers.mjs')
   const fullTestPath= path.join(pkgPath, testPath)
@@ -27,7 +27,7 @@ async function testWithMocha(pkgPath, xeiraConfig, testPath) {
     '--require ignore-styles',
     mochaHelpersPath,
     //`$(find ${fullTestPath} -name '*.js' ! -path '**/_*.js')`
-    `${fullTestPath}/**/*.{ts,js,mjs,cjs}`
+    `${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`
   ]
 
   const command= `${mocha} ${params.join(' ')}`

@@ -1,21 +1,21 @@
 # configs
 
-  hacer la cosa de pkgJson ("eslintConfig" y "babel") para leerlos luego?
-  o mejor que xeira ya lo haga por defecto? (en teoria ya lo hace)
+## eslint / babel
 
-  esta bien respetar custom configs de ambos, pero por movidas de CJS/MJS
-  nos metemos en berenjenales. Porque en ambos tenemos que intentar
-  OBVIAR CONFIGURATION FILES y pasar todo por runtime:
+  Ver como funcionaria en entornos donde se especifiquen ficheros de configuración propios.
+  Sobretodo, en lo relativo a CJS / MJS. 
 
-    -- eslint: se puede y ya lo hacemos, pero como tira de Babel,
-       hay que ver bien como dejar Babel.
-       Porque si se sobreescribe la config en babel, corremos el riesgo de
-       intentar leer CJS y obtener errores.... se pueden solventar automaticamente????
-       O quiza algo del palo: en 'xeira' solo aceptamos JSON ()
+  -- ESLint no soporta MJS, no debería haber problemas por ahí.
+  -- Babel soporta MJS solo de forma asíncrona, es decir que ojo cuidado
 
-       https://babeljs.io/docs/en/babel-core#loadoptions
 
-  Para que funcione MOCHA:
+## mocha
+
+### Use it programatically
+
+  so we can do things like passing the good BABEL config
+
+### Para que funcione MOCHA:
      
     Si PKG.type = 'module'
       El filename debe ser unit.cjs, para que pase por babel
