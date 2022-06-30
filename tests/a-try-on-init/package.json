@@ -12,7 +12,15 @@
     "require": "./dist/a-try-on-init.cjs"
   },
   "module": "./dist/a-try-on-init.mjs",
+  "type": "module",
   "cjs": "./dist/a-try-on-init.cjs",
   "browser": "./dist/a-try-on-init.umd.js",
-  "version": "0.1.2"
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "babel": {
+    "extends": "./node_modules/xeira/configs/babel.react.cjs"
+  }
 }

@@ -1,5 +1,5 @@
-import {getBabelConfigPath} from '../../config/babel'
-import {getEslintConfigPath} from '../../config/eslint'
+import {getBabelConfigPath} from '../../config/babel.mjs'
+import {getEslintConfigPath} from '../../config/eslint.mjs'
 
 function makePkgJsonValues(xeiraConfig, pkgName) {
 
@@ -25,12 +25,12 @@ function makePkgJsonValues(xeiraConfig, pkgName) {
     pkgJsonValues.browser= xeiraConfig.getUmdOutput(pkgName)
   }
   
-  if (xeiraConfig.linter == 'eslint') {
+  if (xeiraConfig.lintWithEslint) {
     const eslintConfigPath = getEslintConfigPath(xeiraConfig)
     pkgJsonValues['eslintConfig']= {"extends": [eslintConfigPath]}
   }
 
-  if (xeiraConfig.transpiler == 'babel') {
+  if (xeiraConfig.transpileWithBabel) {
     const babelConfigPath = getBabelConfigPath(xeiraConfig)
     pkgJsonValues['babel']= {"extends": babelConfigPath}
     

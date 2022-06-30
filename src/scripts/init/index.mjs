@@ -9,7 +9,7 @@
 import path from 'path'
 import prompts from 'prompts'
 import {initHelp} from '../help/actions.mjs'
-import {saveObjectToJsonWithConfirm} from '../../utils/io'
+import {saveObjectToJsonWithConfirm} from '../../utils/io.mjs'
 import {pkgJsonRead, pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 import {getXeiraDefaultConfig, getXeiraConfigObj} from '../../config/xeira.mjs'
 import {configQuestions} from './questions.mjs'

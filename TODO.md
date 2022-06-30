@@ -31,14 +31,6 @@
 
 # Init phase
 
-## add package.json/eslintConfig
-
-it is necessary to make ESLint work in the editor
-
-## add package.json/babel?
-
-Not needed for Xeira, but probably needed by other tools like dev servers and so
-
 ## add nice scripts entries?
 
 Like:

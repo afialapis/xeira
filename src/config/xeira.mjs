@@ -15,8 +15,8 @@ async function getXeiraConfigObj(pkgPathOrConfig) {
 }
 
 async function getXeiraDefaultConfig() { 
-  const config = require('../../configs/xeira')
-  return config
+  const config = await import('../../configs/xeira.mjs')
+  return config.default
 }
 
 export {
