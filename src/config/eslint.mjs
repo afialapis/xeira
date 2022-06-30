@@ -4,7 +4,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 function _getEslintConfigName (xeiraConfig) { 
-  return `eslint${xeiraConfig.usesReact ? '.react' : ''}.js`
+  return `eslint${xeiraConfig.usesReact ? '.react' : ''}.mjs`
 }
 
 function getEslintConfigPath (xeiraConfig) { 

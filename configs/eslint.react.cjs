@@ -1,8 +1,8 @@
 
-import base from './eslint.js'
-import babelConfig from './babel.react.mjs'
+const base = require('./eslint.cjs')
+const babelConfig = require('./babel.react.cjs')
 
-export default {
+module.exports = {
   ...base,
   parserOptions: {
     ...base.parserOptions,

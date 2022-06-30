@@ -34,7 +34,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/xeira/configs/eslint.react.js"
+      "./node_modules/xeira/configs/eslint.react.mjs"
     ]
   },
   "version": "0.0.1"
