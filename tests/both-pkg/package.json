@@ -23,7 +23,7 @@
     "transpile": "npm run --silent make_link && node ../../bin/xeira.mjs transpile src lib",
     "bundle": "npm run clean && node ../../bin/xeira.mjs bundle",
     "test": "node --trace-warnings ../../bin/xeira.mjs test",
-    "test2": "node --trace-warnings ../../bin/xeira.mjs test --timeout 500 --bail ./test",
+    "test2": "node --trace-warnings ../../bin/xeira.mjs test --timeout 500 --bail ./test/hook.mjs ./test/unit.cjs",
     "all": "npm run clean && npm run lint && npm run transpile && npm run bundle",
     "version": "npm run --silent make_link && node ../../bin/xeira.mjs version"
   },

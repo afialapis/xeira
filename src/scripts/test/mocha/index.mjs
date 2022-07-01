@@ -2,7 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
+import {stat} from 'fs/promises'
 import {execSync} from 'child_process'
 
 const _MOCHA_NON_BOOLEAN_ARGS= [
@@ -28,9 +28,9 @@ const _MOCHA_NON_BOOLEAN_ARGS= [
 
 ]
 
-function _parseMochaArgs(args, xeiraConfig) {
+async function _parseMochaArgs(args, pkgPath, xeiraConfig) {
 
-  let testPath= xeiraConfig.testFolder
+  let testPaths= []
   let extraParams= []
   
   for (let i=0; i<args.length; i++) {
@@ -42,14 +42,26 @@ function _parseMochaArgs(args, xeiraConfig) {
         i+= 1
       }
     } else {
-      //if (extraParams.indexOf(args[i])<0) {
-        testPath= args[i]
-      //}
+      const fullTestPath= path.join(pkgPath, args[i])
+      const stats= await stat(fullTestPath)
+      if (stats.isFile()) {
+        testPaths.push(fullTestPath)
+      } else if (stats.isDirectory()) {
+        testPaths.push(`${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`)
+      } else {
+        // we assume it is a pattern string already
+        testPaths.push(fullTestPath)
+      }
     }
   }
   
+  let testPathStr= xeiraConfig.testFolder
+  if (testPaths.length) {
+    testPathStr= testPaths.join(' ')
+  }
+  
 
-  return [extraParams, testPath]
+  return [extraParams, testPathStr]
 
 }
 
@@ -59,8 +71,8 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
   const mochaDOMPath=  path.join(__dirname, 'dom.mjs')
   const mochaHelpersPath=  path.join(__dirname, 'helpers.mjs')
 
-  const [extraParams, testPath]= _parseMochaArgs(args, xeiraConfig)
-  const fullTestPath= path.join(pkgPath, testPath)
+  const [extraParams, testPathStr]= await _parseMochaArgs(args, pkgPath, xeiraConfig)
+  
 
   //const mocha= 'npx mocha'
   const mocha= 'mocha'
@@ -78,7 +90,8 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
     ...extraParams || [],
     mochaHelpersPath,
     //`$(find ${fullTestPath} -name '*.js' ! -path '**/_*.js')`
-    `${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`
+    //`${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`
+    testPathStr
   ]
 
   const command= `${mocha} ${params.join(' ')}`
