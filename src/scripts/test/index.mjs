@@ -10,6 +10,7 @@ import { getXeiraConfigObj } from '../../config/xeira.mjs'
 import { testWithMocha } from './mocha/index.mjs'
 import { testHelp } from '../help/actions.mjs'
 
+
 (async () => {
 
   const pkgPath= process.env.PWD
@@ -18,14 +19,8 @@ import { testHelp } from '../help/actions.mjs'
   const xeiraConfig = await getXeiraConfigObj(pkgPath)  
 
   const args = process.argv.slice(2)
-  let testPath= xeiraConfig.testFolder
-  if (args.length>=1) {
-    if (args[0]) {
-      testPath = args[0]
-    }
-  }
 
-  await testWithMocha(pkgPath, xeiraConfig, testPath)
+  await testWithMocha(pkgPath, xeiraConfig, args)
 
 })().catch((error) => {
   
