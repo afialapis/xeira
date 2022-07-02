@@ -15,28 +15,25 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var farrapaCollections = require('farrapa-collections');
 
 function fooit(obj) {
-  obj.foo= 'bar';
-  return obj
+  obj.foo = 'bar';
+  return obj;
 }
 
-const collections= [
-  fooit({
-    'id': 1,
-    'name': 'Max Power',
-    'age': 37,
-    'money': 99.99
-  }),
-  fooit({
-    'id': 2,
-    'name': 'Min Weak',
-    'age': 25,
-    'money': 33.33
-  })  
-];
+var collections = [fooit({
+  'id': 1,
+  'name': 'Max Power',
+  'age': 37,
+  'money': 99.99
+}), fooit({
+  'id': 2,
+  'name': 'Min Weak',
+  'age': 25,
+  'money': 33.33
+})];
 
-const getMoney = () => {
-  const total= farrapaCollections.collTotalBy(collections, 'money');
-  return total
+var getMoney = function getMoney() {
+  var total = farrapaCollections.collTotalBy(collections, 'money');
+  return total;
 };
 
 exports.getMoney = getMoney;

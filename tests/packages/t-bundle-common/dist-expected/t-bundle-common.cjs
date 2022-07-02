@@ -58,40 +58,39 @@ function getAugmentedNamespace(n) {
 var require$$0 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections__namespace);
 
 function fooit$1(obj) {
-  obj.foo= 'bar';
-  return obj
+  obj.foo = 'bar';
+  return obj;
 }
 
-var foo= {
+var foo = {
   fooit: fooit$1
 };
 
-const {collTotalBy} = require$$0;
-const {fooit} = foo;
+var _require = require$$0,
+    collTotalBy = _require.collTotalBy;
 
-const collections= [
-  fooit({
-    'id': 1,
-    'name': 'Max Power',
-    'age': 37,
-    'money': 99.99
-  }),
-  fooit({
-    'id': 2,
-    'name': 'Min Weak',
-    'age': 25,
-    'money': 33.33
-  })  
-];
+var _require2 = foo,
+    fooit = _require2.fooit;
 
-const getMoney = () => {
-  const total= collTotalBy(collections, 'money');
-  return total
+var collections = [fooit({
+  'id': 1,
+  'name': 'Max Power',
+  'age': 37,
+  'money': 99.99
+}), fooit({
+  'id': 2,
+  'name': 'Min Weak',
+  'age': 25,
+  'money': 33.33
+})];
+
+var getMoney = function getMoney() {
+  var total = collTotalBy(collections, 'money');
+  return total;
 };
 
-
 var src = {
-  getMoney
+  getMoney: getMoney
 };
 
 exports["default"] = src;

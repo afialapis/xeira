@@ -5,7 +5,7 @@
     "clean-version": "cp -f package.json.original package.json",
     "x-reset": "npm run --silent clean-version && rm -fr node_modules && rm -fr package-lock.json",
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
-    "x-prepare": "npm i && npm run --silent make_link",
+    "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
     "x-version-patch": "node ../../../bin/xeira.mjs version patch",
     "x-version-minor": "node ../../../bin/xeira.mjs version minor",
     "x-version-major": "node ../../../bin/xeira.mjs version major",

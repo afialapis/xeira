@@ -38,22 +38,6 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
   const inputOptions= {
     input,
     plugins: [
-      externals({
-        packagePath: pkgJsonPath,
-        deps: !bundleDeps,
-        peerDeps: !bundleDeps
-      }),
-      replace({
-        preventAssignment: true,
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      nodeResolve({
-        rootDir: pkgPath,
-        exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
-      }),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -74,6 +58,22 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
             ? ['@babel/preset-react']
             : []
         ]
+      }),      
+      externals({
+        packagePath: pkgJsonPath,
+        deps: !bundleDeps,
+        peerDeps: !bundleDeps
+      }),
+      replace({
+        preventAssignment: true,
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      nodeResolve({
+        rootDir: pkgPath,
+        exportConditions: ['node'],
+      }),
+      commonjs({
+        esmExternals: true
       })
     ]
   }

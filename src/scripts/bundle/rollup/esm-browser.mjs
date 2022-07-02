@@ -15,20 +15,6 @@ function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
   const inputOptions= {
     input,
     plugins: [
-      replace({
-        preventAssignment: true,
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      externals({
-        packagePath: pkgJsonPath
-      }),
-      nodeResolve({
-        rootDir: pkgPath,
-        exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
-      }),
       babel({
         exclude: 'node_modules/**',
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -56,6 +42,20 @@ function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
               ]
             : [],
         ]
+      }),      
+      replace({
+        preventAssignment: true,
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      externals({
+        packagePath: pkgJsonPath
+      }),
+      nodeResolve({
+        rootDir: pkgPath,
+        exportConditions: ['node'],
+      }),
+      commonjs({
+        esmExternals: true
       })
     ]
   }

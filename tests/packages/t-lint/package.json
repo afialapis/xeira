@@ -4,7 +4,7 @@
   "scripts": {
     "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
-    "x-prepare": "npm i && npm run --silent make_link",
+    "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
     "x-lint-ok": "node ../../../bin/xeira.mjs lint src",
     "x-lint-warn": "node ../../../bin/xeira.mjs lint test",
     "x-run": "npm run --silent x-lint-ok && npm run --silent x-lint-warn"

@@ -45,9 +45,11 @@ var foo = {
 var {
   collTotalBy
 } = require$$0;
+
 var {
   fooit
 } = foo;
+
 var collections = [fooit({
   'id': 1,
   'name': 'Max Power',

@@ -42,8 +42,12 @@ var foo = {
   fooit: fooit$1
 };
 
-var collTotalBy = require$$0.collTotalBy;
-var fooit = foo.fooit;
+var _require = require$$0,
+    collTotalBy = _require.collTotalBy;
+
+var _require2 = foo,
+    fooit = _require2.fooit;
+
 var collections = [fooit({
   'id': 1,
   'name': 'Max Power',

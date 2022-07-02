@@ -1,6 +1,6 @@
 # Problems
 
-· t-bundle-esm-react not working
+· t-bundle-esm-common not working
 · how do we decide to put type: module on package.json?
 
 

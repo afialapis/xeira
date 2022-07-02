@@ -216,8 +216,12 @@
     fooit: fooit$1
   };
 
-  var collTotalBy = farrapaCollections.collTotalBy;
-  var fooit = foo.fooit;
+  var _require = farrapaCollections,
+      collTotalBy = _require.collTotalBy;
+
+  var _require2 = foo,
+      fooit = _require2.fooit;
+
   var collections = [fooit({
     'id': 1,
     'name': 'Max Power',
