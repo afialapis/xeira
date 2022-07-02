@@ -1,0 +1,30 @@
+{
+  "name": "t-test",
+  "type": "module",
+  "scripts": {
+    "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
+    "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
+    "x-prepare": "npm i && npm run --silent make_link",
+    "test_cmd": "node --trace-warnings ../../../bin/xeira.mjs test",
+    "test-common": "npm run --silent test_cmd ./test/common",
+    "test-common-react": "npm run --silent test_cmd ./test/common-react",
+    "test-common-consuming-esm": "npm run --silent test_cmd ./test/common-consuming-esm/before.mjs ./test/common-consuming-esm/unit.cjs",
+    "test-common-consuming-esm-react": "npm run --silent test_cmd ./test/common-consuming-esm-react/before.mjs ./test/common-consuming-esm-react/unit.cjs",
+    "x-run": "npm run --silent test-common && npm run --silent test-common-react && npm run --silent test-common-consuming-esm && npm run --silent test-common-consuming-esm-react"
+    
+  },
+  "dependencies": {
+    "farrapa-collections": "^1.0.7",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
+  },
+  "babel": {
+    "extends": "./node_modules/xeira/configs/babel.react.cjs"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}

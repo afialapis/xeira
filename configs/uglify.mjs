@@ -1,3 +1,7 @@
+// const UGLIFY_PREAMBLE= `/** 
+// * uglified by xeira using uglify-js
+// */`
+
 export default {
   toplevel: true,
   compress: {
@@ -5,9 +9,6 @@ export default {
   },
   output: {
     beautify: false,
-    preamble: 
-`/** 
-* uglified by xeira using uglify-js
-*/`
+    // preamble: UGLIFY_PREAMBLE
   }    
 }

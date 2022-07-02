@@ -55,9 +55,11 @@ async function _parseMochaArgs(args, pkgPath, xeiraConfig) {
     }
   }
   
-  let testPathStr= xeiraConfig.testFolder
+  let testPathStr= ''
   if (testPaths.length) {
     testPathStr= testPaths.join(' ')
+  } else {
+    testPathStr = `${xeiraConfig.testFolder}/**/*.{ts,js,mjs,cjs,jsx,es6}`
   }
   
 
@@ -95,6 +97,8 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
   ]
 
   const command= `${mocha} ${params.join(' ')}`
+
+  // console.log(command)
 
   execSync(
     command, 

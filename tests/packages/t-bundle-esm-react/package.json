@@ -1,0 +1,41 @@
+{
+  "name": "t-bundle-esm-react",
+  "type": "module",
+  "main": "./dist/t-bundle-esm-react.cjs",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/t-bundle-esm-react.mjs",
+        "require": "./dist/t-bundle-esm-react.cjs",
+        "default": "./dist/t-bundle-esm-react.cjs"
+      },
+      "./dist/t-bundle-esm-react.cjs"
+    ]
+  },
+  "cjs": "dist/t-bundle-esm-react.cjs",
+  "module": "dist/t-bundle-esm-react.mjs",
+  "browser": "dist/t-bundle-esm-react.umd.js",
+  "scripts": {
+    "clean-dist": "rm -fr dist/*",
+    "x-reset": "npm run --silent clean-dist && rm -fr node_modules && rm -fr package-lock.json",
+    "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
+    "x-prepare": "npm i && npm run --silent make_link",
+    
+    "bundle": "npm run --silent clean-dist && node ../../../bin/xeira.mjs bundle",
+    "x-run": "npm run --silent bundle"
+  },
+  "dependencies": {
+    "farrapa-collections": "^1.0.7",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
+  },
+  "babel": {
+    "extends": "./node_modules/xeira/configs/babel.react.cjs"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}

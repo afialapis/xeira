@@ -1,3 +1,9 @@
+# Problems
+
+· t-bundle-esm-react not working
+· how do we decide to put type: module on package.json?
+
+
 # configs
 
 ## eslint / babel
