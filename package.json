@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Index for all the building tools your package or app needs",
   "type": "module",
   "bin": "bin/xeira.mjs",
