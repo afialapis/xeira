@@ -45,9 +45,10 @@ async function babelRegister() {
     //  // Setting this to false will disable the cache.
     //  cache: true,
     
-    
     presets: [
-      ["@babel/preset-env", {"targets": {"esmodules": true}}],
+      ["@babel/preset-env", {
+        "targets": {"esmodules": true}
+      }],
       "@babel/preset-react"
     ],
     plugins: []  

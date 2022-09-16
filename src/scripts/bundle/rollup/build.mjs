@@ -1,5 +1,5 @@
 import { rollup } from 'rollup'
-import {red, green} from 'farrapa-colors'
+import {red, green, cyan} from 'farrapa-colors'
 
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   for (const outputOptions of outputOptionsList) {
@@ -75,10 +75,10 @@ async function rollupBuild(inputOptions, outputOptionsList) {
   }
 
   if (buildFailed) {
-    console.log(red(`[bundle] Errors when bundling ${outputOptionsList[0].file}`))
+    console.log(`[xeira][bundle] ${red('Error')} when bundling ${cyan(outputOptionsList[0].file)}`)
     process.exit(1)
   } else {
-    console.log(green(`[bundle] Bundled ${outputOptionsList[0].file} successfully!`))
+    console.log(`[xeira][bundle] Bundled ${cyan(outputOptionsList[0].file)} ${green('successfully!')}`)
   }
 }
 

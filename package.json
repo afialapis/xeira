@@ -5,10 +5,25 @@
   "type": "module",
   "bin": "bin/xeira.mjs",
   "exports": {
-    "./configs": "./src/configs"
+    "./configs": "./src/configs",
+    "./utils-dev": "./src/utils-dev"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "x-run-t-bundle-common": "cd tests/packages/t-bundle-common && npm run --silent x-run",
+    "x-run-t-bundle-common-react": "cd tests/packages/t-bundle-common-react && npm run --silent x-run",
+    "x-run-t-bundle-esm": "cd tests/packages/t-bundle-esm && npm run --silent x-run",
+    "x-run-t-bundle-esm-react": "cd tests/packages/t-bundle-esm-react && npm run --silent x-run",
+    "x-run-t-init": "cd tests/packages/t-init && npm run --silent x-run",
+    "x-run-t-lint": "cd tests/packages/t-lint && npm run --silent x-run",
+    "x-run-t-test-common-react": "cd tests/packages/t-test-common-react && npm run --silent x-run",
+    "x-run-t-test-esm": "cd tests/packages/t-test-esm && npm run --silent x-run",
+    "x-run-t-test-esm-react": "echo \"Skipping: cd tests/packages/t-test-esm-react && npm run --silent x-run\"",
+    "x-run-t-transpile-common": "cd tests/packages/t-transpile-common && npm run --silent x-run",
+    "x-run-t-transpile-esm": "cd tests/packages/t-transpile-esm && npm run --silent x-run",
+    "x-run-t-transpile-esm-uglify": "cd tests/packages/t-transpile-esm-uglify && npm run --silent x-run",
+    "x-run-t-version": "cd tests/packages/t-version && npm run --silent x-run",
+    "x-run-packages": "npm run x-run-t-bundle-common && npm run --silent x-run-t-bundle-common-react && npm run --silent x-run-t-bundle-esm && npm run --silent x-run-t-bundle-esm-react && npm run --silent x-run-t-init && npm run --silent x-run-t-lint && npm run --silent x-run-t-test-common-react && npm run --silent x-run-t-test-esm && npm run --silent x-run-t-test-esm-react && npm run --silent x-run-t-transpile-common && npm run --silent x-run-t-transpile-esm && npm run --silent x-run-t-transpile-esm-uglify && npm run --silent x-run-t-version",
+    "test": "npm run x-run-packages"
   },
   "repository": {
     "type": "git",
@@ -69,5 +84,9 @@
   },
   "babel": {
     "extends": "./configs/babel.cjs"
+  },
+  "devDependencies": {
+    "diff": "^5.1.0",
+    "rollup-plugin-postcss": "^4.0.2"
   }
 }

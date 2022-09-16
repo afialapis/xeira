@@ -3,12 +3,39 @@ import replace from '@rollup/plugin-replace'
 import {babel} from '@rollup/plugin-babel'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import { terser } from 'rollup-plugin-terser'
 import scss from 'rollup-plugin-postcss'
 import {rollupBanner} from './banner.mjs'
-
 const NODE_ENV = 'production'
 
-function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
+
+const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
+
+function toTitleCase(str) {
+  let s= str.replace(
+    /\w*/g,
+    function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+  )
+  s= s.charAt(0).toLowerCase() + s.substr(1);
+  s= s.replace(/-/g,'')
+  return s
+}
+
+
+const makeGlobals = (pkgJson) => {
+  const pkgs= Object.keys(pkgJson.dependencies)
+  const globals= {}
+  pkgs.map((n) => {
+    globals[n]= toTitleCase(n)
+  })
+  return globals
+}
+
+
+function rollupModulesForIife(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output, bundleDeps= false) {
+
   const inputOptions= {
     input,
     plugins: [
@@ -32,10 +59,11 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, inp
             ? ['@babel/preset-react']
             : []
         ]
-      }),
-
+      }),      
       externals({
-        packagePath: pkgJsonPath
+        packagePath: pkgJsonPath,
+        deps: !bundleDeps,
+        peerDeps: !bundleDeps
       }),
       replace({
         preventAssignment: true,
@@ -55,15 +83,30 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, inp
   const outputs= [
     {
       file: output,
-      format: 'esm',
+      format: 'iife',
       exports: 'named',
-      banner: rollupBanner(pkgJson)
-    }
+      banner: rollupBanner(pkgJson),
+      sourcemap: true,
+      name: toTitleCase(pkgJson.name),
+      globals: makeGlobals(pkgJson)      
+    },
+    {
+      file: minifyExtension(output),
+      format: 'iife',
+      exports: 'named',
+      banner: rollupBanner(pkgJson),
+      plugins: [
+        terser({ ecma: 8, safari10: true })
+      ],
+      name: toTitleCase(pkgJson.name),
+      globals: makeGlobals(pkgJson)   
+    }    
   ]
 
   return[inputOptions, outputs]
 }
 
+
 export {
-  rollupModulesForEsmNode
+  rollupModulesForIife
 }

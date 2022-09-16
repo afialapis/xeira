@@ -107,6 +107,15 @@ export class XeiraConfigObj {
     return addSuffix(umd, 'bundle')
   }  
 
+  getIifeOutput(pkgName) {
+    return `${this.bundleFolder}/${pkgName}.iife.js`
+  }  
+
+  getIifeFullBundleOutput(pkgName) {
+    const iife= this.getIifeOutput(pkgName)
+    return addSuffix(iife, 'bundle')
+  }    
+
   getMainFileForNodeSuffix() {
     return NODE_MAIN
   }

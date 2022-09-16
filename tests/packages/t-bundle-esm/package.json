@@ -20,9 +20,9 @@
     "x-reset": "npm run --silent clean-dist && rm -fr node_modules && rm -fr package-lock.json",
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
     "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
-    
+    "x-compare": "node ../../../src/utils-dev/diff.mjs dist dist-expected",    
     "bundle": "npm run --silent clean-dist && node ../../../bin/xeira.mjs bundle",
-    "x-run": "npm run --silent bundle"
+    "x-run": "npm run --silent bundle && npm run --silent x-compare"
   },
   "dependencies": {
     "farrapa-collections": "^1.0.7"

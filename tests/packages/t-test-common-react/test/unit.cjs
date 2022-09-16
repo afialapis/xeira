@@ -1,7 +1,7 @@
-const {getMoney} = require('../../src/cjs/index')
+const {getMoney} = require('../src/index')
 
 const expect= global.expect
-describe('t-test-common', function () {
+describe('t-test-common-react', function () {
   this.timeout(100)
 
   it("check getMoney", () => {   

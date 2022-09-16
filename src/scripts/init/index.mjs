@@ -21,7 +21,18 @@ import {makePkgJsonValues} from './pkgJsonValues.mjs'
  *   => How to handle that?
  */
 
-async function xeiraInit(pkgPath) {
+async function xeiraInit(pkgPath, injectValues) {
+  // Inject values if any
+  if ((injectValues!=undefined) && (injectValues.length>0) ) {
+    const parsedValues= injectValues.map(v => 
+      v=='true'
+      ? true
+      : v=='false'
+        ? false
+        : v)
+    prompts.inject(parsedValues)
+  }
+
   // Prompt questions
   const configAnswers = await prompts(configQuestions)
 
@@ -47,7 +58,10 @@ async function xeiraInit(pkgPath) {
 
 (async () => {
   const pkgPath= process.env.PWD
-  await xeiraInit(pkgPath)
+
+  const injectValues = process.argv.slice(2)
+
+  await xeiraInit(pkgPath, injectValues)
 
 })().catch((error) => {
   const pkgPath= process.env.PWD

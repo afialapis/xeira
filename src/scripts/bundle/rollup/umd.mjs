@@ -4,6 +4,7 @@ import {babel} from '@rollup/plugin-babel'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
+import scss from 'rollup-plugin-postcss'
 import {rollupBanner} from './banner.mjs'
 const NODE_ENV = 'production'
 
@@ -74,7 +75,8 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
       }),
       commonjs({
         esmExternals: true
-      })
+      }),
+      scss()
     ]
   }
 

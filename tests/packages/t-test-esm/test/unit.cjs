@@ -1,7 +1,7 @@
 const {getMoney} = require('./esm_pkg.cjs')
 const expect= global.expect
 
-describe('t-test-common-consuming-esm', function () {
+describe('t-test-esm', function () {
   // this.timeout(100)
 
   it("check getMoney", async () => {   

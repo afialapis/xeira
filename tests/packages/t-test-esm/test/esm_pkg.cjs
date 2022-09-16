@@ -13,7 +13,7 @@
 let _moneyPkg;
 const _getmoneyPkg = async () => {
   if (!_moneyPkg) {
-    _moneyPkg = await import("../../src/mjs/index.mjs");
+    _moneyPkg = await import("../src/index.mjs");
   }
 
   return _moneyPkg;

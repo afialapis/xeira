@@ -1,9 +1,21 @@
 # Problems
 
-· how do we decide to put type: module on package.json?
+## t-test-esm-react
+ 
+Even working with "type: module", when testing we get the error:
+
+```
+Error [ERR_REQUIRE_ESM]: 
+  require() of ES Module .../t-test-esm-react/src/index.js 
+     from .../t-test-esm-react/test/esm_pkg.cjs 
+     not supported.
+```
+
+It is solved if /src uses .mjs extension
 
 
-# configs
+
+# Configs
 
 ## eslint / babel
 
@@ -14,9 +26,9 @@
   -- Babel soporta MJS solo de forma asíncrona, es decir que ojo cuidado
 
 
-## mocha
+## Mocha
 
-### Use it programatically
+### Use it programmatically
 
   so we can do things like passing the good BABEL config
 
@@ -30,9 +42,36 @@
     Si PKG.type != 'module',
        las anteriores condiciones aplican
 
-    
+
+# Tests
+
+## packages/t-init
+ 
+Ver si `prompts` permite tests automatizados y poder probarlo desde pkgJson.x-run-t-init
 
 
+
+# Demo (/ Serve)
+
+2 scenarios:
+  - if app, serve main ./index.js or ./cli/index.js
+  - if pkg, serve some ./demo/index.js 
+
+Notice it's always DEV time
+
+Testing Nollup in Formiga, checking why externals[] does not work
+ (we need globals{} but its not introduced)
+ => Lets open some Issue and investigate
+
+
+
+# CSS
+
+What about bundling CSS
+  - Package NO? Hmmm
+  - APP Yes
+
+  - Use injected CSS on <head> (default behavior, inside bundled .js)
 
 # Init phase
 

@@ -1,11 +1,12 @@
 {
   "name": "t-init",
   "scripts": {
-    "clean-init": "rm -fr xeira.json && cp -f package.json.original package.json",
+    "clean-init": "rm -fr xe && rm -fr xeira.json && cp -f package.json.original package.json",
     "x-reset": "npm run --silent clean-init && rm -fr node_modules && rm -fr package-lock.json",
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
-    "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
-    "x-init": "npm run --silent clean-init && node ../../../bin/xeira.mjs init",
-    "x-run": "npm run --silent x-init"
+    "x-prepare": "npm run --silent x-reset && npm i && npm run --silent make_link",
+    "x-init": "npm run --silent clean-init && mkdir xe && node ../../../bin/xeira.mjs init package both ./src/index.js eslint ./lib babel ./dist rollup ./test true false && cp xeira.json ./xe/xeira.json && cp package.json ./xe/package.json",
+    "x-compare": "node ../../../src/utils-dev/diff.mjs xe xe-expected",
+    "x-run": "npm run --silent x-init && npm run --silent x-compare"
   }
 }

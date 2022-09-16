@@ -2,6 +2,7 @@ import {externals} from 'rollup-plugin-node-externals'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import {babel} from '@rollup/plugin-babel'
+import scss from 'rollup-plugin-postcss'
 import {rollupBanner} from './banner.mjs'
 
 function rollupModulesForCjs(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
@@ -40,7 +41,8 @@ function rollupModulesForCjs(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
       }),
       commonjs({
         esmExternals: true
-      })
+      }),
+      scss()
     ]
   }
   

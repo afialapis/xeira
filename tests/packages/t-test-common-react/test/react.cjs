@@ -1,5 +1,5 @@
 const React = require('react')
-const {MoneyDiv} = require('../../src/cjs/index')
+const {MoneyDiv} = require('../src/index')
 
 const expect= global.expect
 const mount= global.mount
