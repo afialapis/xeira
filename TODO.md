@@ -43,14 +43,6 @@ It is solved if /src uses .mjs extension
        las anteriores condiciones aplican
 
 
-# Tests
-
-## packages/t-init
- 
-Ver si `prompts` permite tests automatizados y poder probarlo desde pkgJson.x-run-t-init
-
-
-
 # Demo (/ Serve)
 
 2 scenarios:
