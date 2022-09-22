@@ -6,7 +6,7 @@
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
     "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
     "test": "node --trace-warnings ../../../bin/xeira.mjs test ./test/before.mjs ./test/unit.cjs",
-    "x-run": "npm run --silent test"
+    "x-run": "echo \"Skipping [npm run --silent test] \""
   },
   "dependencies": {
     "farrapa-collections": "^1.0.7",

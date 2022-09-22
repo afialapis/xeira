@@ -13,27 +13,14 @@ Error [ERR_REQUIRE_ESM]:
 
 It is solved if /src uses .mjs extension
 
-# Demo (/ Serve)
+# demo
 
-2 scenarios:
-  - if app, serve main ./index.js or ./cli/index.js
-  - if pkg, serve some ./demo/index.js 
-
-Notice it's always DEV time
-https://github.com/PepsRyuu/nollup
-
-
-Fix on Nollup:
+Waiting for this fix on Nollup:
 https://github.com/PepsRyuu/nollup/issues/239
 
-
-MAKE IT RUN WITHOUT EXTERNALSSSSSSSSSSSSSSSSSSSSSS
-MAYBE PASS ETERNALS BY PARAM
-
- npx xeira demo --externals
-
- review other command options... are --??????
-
+State clearly that:
+· Rollup: no externals
+· Nollup: using externals, so index.html must be touched.
 
 
 # Configs
@@ -85,6 +72,17 @@ Like:
 ```
 
 `npm run bundle` is equally shorter as `npx xeira bundle`, but maybe easier to remember, more standard.
+
+## some command helper to change xeira configs?
+
+Like:
+
+```
+npx xeira config
+```
+
+And then prompts do some helpful actions
+
 
 # Other commands
 
