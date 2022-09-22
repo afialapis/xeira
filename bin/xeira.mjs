@@ -27,7 +27,7 @@ import {globalHelp} from '../src/scripts/help/actions.mjs'
 
 const args = process.argv.slice(2)
 
-const xeiraActions= ['init', 'lint', 'transpile', 'bundle', 'version', 'test', 'help']
+const xeiraActions= ['init', 'lint', 'transpile', 'bundle', 'version', 'test', 'demo', 'help']
 
 const scriptIndex = args.findIndex(
   x => xeiraActions.indexOf(x) >= 0

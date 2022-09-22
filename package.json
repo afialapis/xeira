@@ -14,6 +14,9 @@
     "x-run-t-bundle-esm": "cd tests/packages/t-bundle-esm && npm run --silent x-run",
     "x-run-t-bundle-esm-react": "cd tests/packages/t-bundle-esm-react && npm run --silent x-run",
     "x-run-t-init": "cd tests/packages/t-init && npm run --silent x-run",
+    "x-run-t-demo-init": "cd tests/packages/t-demo-init && npm run --silent x-run",
+    "x-run-t-demo-rollup": "cd tests/packages/t-demo-rollup && npm run --silent x-run",
+    "x-run-t-demo-nollup": "cd tests/packages/t-demo-nollup && npm run --silent x-run",
     "x-run-t-lint": "cd tests/packages/t-lint && npm run --silent x-run",
     "x-run-t-test-common-react": "cd tests/packages/t-test-common-react && npm run --silent x-run",
     "x-run-t-test-esm": "cd tests/packages/t-test-esm && npm run --silent x-run",
@@ -22,7 +25,7 @@
     "x-run-t-transpile-esm": "cd tests/packages/t-transpile-esm && npm run --silent x-run",
     "x-run-t-transpile-esm-uglify": "cd tests/packages/t-transpile-esm-uglify && npm run --silent x-run",
     "x-run-t-version": "cd tests/packages/t-version && npm run --silent x-run",
-    "x-run-packages": "npm run x-run-t-bundle-common && npm run --silent x-run-t-bundle-common-react && npm run --silent x-run-t-bundle-esm && npm run --silent x-run-t-bundle-esm-react && npm run --silent x-run-t-init && npm run --silent x-run-t-lint && npm run --silent x-run-t-test-common-react && npm run --silent x-run-t-test-esm && npm run --silent x-run-t-test-esm-react && npm run --silent x-run-t-transpile-common && npm run --silent x-run-t-transpile-esm && npm run --silent x-run-t-transpile-esm-uglify && npm run --silent x-run-t-version",
+    "x-run-packages": "npm run x-run-t-bundle-common && npm run --silent x-run-t-bundle-common-react && npm run --silent x-run-t-bundle-esm && npm run --silent x-run-t-bundle-esm-react && npm run --silent x-run-t-init && npm run --silent x-run-t-demo-init && npm run --silent x-run-t-demo-rollup && npm run --silent x-run-t-demo-nollup && npm run --silent x-run-t-lint && npm run --silent x-run-t-test-common-react && npm run --silent x-run-t-test-esm && npm run --silent x-run-t-test-esm-react && npm run --silent x-run-t-transpile-common && npm run --silent x-run-t-transpile-esm && npm run --silent x-run-t-transpile-esm-uglify && npm run --silent x-run-t-version",
     "test": "npm run x-run-packages"
   },
   "repository": {
@@ -43,10 +46,6 @@
     "@babel/preset-modules": "^0.1.5",
     "@babel/preset-react": "^7.18.6",
     "@babel/register": "^7.18.6",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.1",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-replace": "^4.0.0",
     "chai": "^4.3.6",
     "cross-spawn": "^7.0.3",
     "enzyme": "^3.11.0",
@@ -63,7 +62,6 @@
     "mocha": "^10.0.0",
     "prompts": "^2.4.2",
     "rollup": "^2.75.7",
-    "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-node-externals": "^4.1.0",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-terser": "^7.0.2",
@@ -79,14 +77,23 @@
   },
   "eslintConfig": {
     "extends": [
-      "./configs/eslint.cjs"
+      "./configs/eslint.react.cjs"
     ]
   },
   "babel": {
-    "extends": "./configs/babel.cjs"
+    "extends": "./configs/babel.react.cjs"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-replace": "^4.0.0",
     "diff": "^5.1.0",
-    "rollup-plugin-postcss": "^4.0.2"
+    "node-sass": "^7.0.3",
+    "nollup": "^0.20.1",
+    "postcss": "^8.4.16",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-serve": "^2.0.1"
   }
 }

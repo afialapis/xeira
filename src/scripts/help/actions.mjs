@@ -53,6 +53,7 @@ const _lintUsage =  `\t${_bl('npx xeira')} ${_bb('lint')} [path (default is ./)]
 const _transpileUsage = `  \t${_bl('npx xeira')} ${_bb('transpile')} [suorce_path (default is ./src)] [dest_path (default is ./lib)]`
 const _bundleUsage = `\t${_bl('npx xeira')} ${_bb('bundle')}`
 const _testUsage = `\t${_bl('npx xeira')} ${_bb('test')} [path (default is ./test)]`
+const _demoUsage = `\t${_bl('npx xeira')} ${_bb('demo')} [init [force]]`
 const _versionUsage = `\t${_bl('npx xeira')} ${_bb('version')} patch|minor|major|0.1.2 [-filter <pattern>]`
 const _helpUsage = `\t${_bl('npx xeira')} ${_bb('help')}`
 
@@ -91,6 +92,13 @@ function testHelp(pkgPath, error= undefined) {
   _log_err(error) 
 }
 
+function demoHelp(pkgPath, error= undefined) {
+  const usage= _demoUsage
+  _log_help('demo', usage, '')
+  _log_err(error) 
+}
+
+
 function versionHelp(pkgPath, error= undefined) {
   const usage= _versionUsage
   const extra = `
@@ -127,6 +135,8 @@ function globalHelp(error= undefined, extra= undefined) {
     '\n',
     _testUsage,
     '\n',
+    _demoUsage,
+    '\n',
     _versionUsage,
     '\n',
     _helpUsage
@@ -144,6 +154,7 @@ export {
   transpileHelp,
   bundleHelp,
   testHelp,
+  demoHelp,
   versionHelp,
   helpHelp,
   globalHelp

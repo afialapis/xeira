@@ -3,7 +3,13 @@ export default {
   product: 'package', // 'app',
   target: 'node', // 'browser', 'both',
 
-  source_index: './src/index.js', // 'index.js'
+  source_index: './src/index.js', // 'index.js',
+
+  react: false,
+
+  // This can be previously tried to be guessed (/packages or .pnpm-workspace.yaml),
+  // if not, ask anyway
+  monorepo: false,
 
   // Probably offering alternatives some day
   linter: 'eslint', // undefined
@@ -17,9 +23,6 @@ export default {
 
   test_folder: './test', // './tests'
 
-  react: false,
-
-  // This can be previously tried to be guessed (/packages or .pnpm-workspace.yaml),
-  // if not, ask anyway
-  monorepo: false
+  demo_mode: 'auto',
+  demo_demoer: 'rollup'
 }

@@ -40,6 +40,12 @@ Index for all the building tools your package or app needs
   npx xeira test [folder (default= ./test) ]
 ```
 
+## demo
+
+```
+  npx xeira demo
+```
+
 ## version
 
 ```

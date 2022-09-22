@@ -24,6 +24,28 @@ function _parseDiff (diff) {
   return [ok, msg]
 }
 
+function _getFolderFiles (dir, files = []) {
+  const dirFiles = fs.readdirSync(dir)
+  for (const f of dirFiles) {
+    const fPath= path.join(dir, f)
+      const stat = fs.lstatSync(fPath)
+      if (stat.isDirectory()) {
+        _getFolderFiles(fPath, files)
+      } else {
+          files.push(fPath)
+      }
+  }
+  return files
+}
+
+function _getRelativeBasename (pkgPath, filePath) {
+  let relPath= filePath.replace(pkgPath, '')
+  if (relPath.indexOf(path.sep)==0) {
+    relPath= relPath.slice(1)
+  }
+  return relPath
+}
+
 function _compareTwoFiles (a, b) {
   const buff_a = fs.readFileSync(a, {encoding: 'utf-8'})
   const buff_b = fs.readFileSync(b, {encoding: 'utf-8'})
@@ -37,37 +59,32 @@ function _compareTwoFolders (pkgPath, aFolder, bFolder, debug= false) {
   const a= path.join(pkgPath, aFolder)
   const b= path.join(pkgPath, bFolder)
 
-  let filesOmitted= []
-  let filesUnwanted= []
+  const aFilenames = _getFolderFiles(a)
+  const bFilenames = _getFolderFiles(b)
+  
+  const aRelativeNames = aFilenames.map(n => _getRelativeBasename(a, n))
+  const bRelativeNames = bFilenames.map(n => _getRelativeBasename(b, n))
+
+  let filesUnwanted = bRelativeNames.filter(n => aRelativeNames.indexOf(n)<0)
+  let filesOmitted = aRelativeNames.filter(n => bRelativeNames.indexOf(n)<0)
   let filesOk= []
   let filesWithDiff= {}
 
-  const aFilenames = fs.readdirSync(a)
-  const bFilenames = fs.readdirSync(b)
-  
-  const aBasenames = aFilenames.map(n => path.basename(n))
-  const bBasenames = bFilenames.map(n => path.basename(n))
+  for (const aRelativeName of aRelativeNames) {
+    if (bRelativeNames.indexOf(aRelativeName)>=0) {
+      const path_a= path.join(a, aRelativeName)
+      const path_b= path.join(b, aRelativeName)
 
-  // existsSync:
-  filesUnwanted = bBasenames.filter(n => aBasenames.indexOf(n)<0)
-  filesOmitted = aBasenames.filter(n => bBasenames.indexOf(n)<0)
-
-  for (const aFilename of aFilenames) {
-    const aBasename = path.basename(aFilename)
-    if (bBasenames.indexOf(aBasename)>=0) {
-      const path_a= path.join(a, aBasename)
-      const path_b= path.join(b, aBasename)
-      
       const [ok, msg]= _compareTwoFiles(path_a, path_b)
 
       if (debug) {
-        console.log(`[xeira][diff] Compared file ${cyan(aBasename)}: ${ok ? green('Ok!') : red('ko :(')}`)
+        console.log(`[xeira][diff] Compared file ${cyan(aRelativeName)}: ${ok ? green('Ok!') : red('ko :(')}`)
       }
       
       if (! ok) {
-        filesWithDiff[aBasename]= msg
+        filesWithDiff[aRelativeName]= msg
       } else {
-        filesOk.push(aBasename)
+        filesOk.push(aRelativeName)
       }
       
     }
@@ -113,6 +130,7 @@ function _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug= false)
 const pkgPath= process.env.PWD
 
 const args = process.argv.slice(2)
+
 const distFolder = args[0]
 const truthFolder = args[1]
 const debug = args[2] || false

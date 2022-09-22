@@ -1,0 +1,17 @@
+{
+  "product": "package",
+  "target": "both",
+  "source_index": "./src/index.js",
+  "react": true,
+  "monorepo": false,
+  "linter": "eslint",
+  "transpile_folder": null,
+  "transpiler": "babel",
+  "minifier": "uglify",
+  "bundle_folder": null,
+  "bundler": null,
+  "test_folder": null,
+  "demo_mode": "auto",
+  "demo_demoer": "nollup"
+}
+

@@ -1,0 +1,26 @@
+{
+  "name": "t-demo-init",
+  "type": "module",
+  "scripts": {
+    "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
+    "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
+    "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
+    "x-prepare-rollup": "npm run --silent x-prepare && sed -i 's/\"demo_demoer.*/\"demo_demoer\": \"rollup\"/g' xeira.json",
+    "x-prepare-nollup": "npm run --silent x-prepare && sed -i 's/\"demo_demoer.*/\"demo_demoer\": \"nollup\"/g' xeira.json",
+    "x-demo-init": "node ../../../bin/xeira.mjs demo init force",
+    "x-compare-rollup": "node ../../../src/utils-dev/diff.mjs demo demo-expected-rollup",
+    "x-compare-nollup": "node ../../../src/utils-dev/diff.mjs demo demo-expected-nollup",
+    "x-run-rollup": "npm run --silent x-prepare-rollup && npm run --silent x-demo-init && npm run --silent x-compare-rollup",
+    "x-run-nollup": "npm run --silent x-prepare-nollup && npm run --silent x-demo-init && npm run --silent x-compare-nollup",
+    "x-run": "npm run --silent x-run-rollup && npm run --silent x-run-nollup"
+  },
+  "babel": {
+    "extends": "./node_modules/xeira/configs/babel.react.cjs"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}

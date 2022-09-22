@@ -8,6 +8,13 @@ export class XeiraConfigObj {
     this.config= config
   }
 
+  // _convEmptyValue(v) {
+  //   if ((v==null) || (v=='null') || (v=='none')) {
+  //     return undefined
+  //   }
+  //   return v || undefined
+  // }  
+
   get isAnApp() {
     return this.config.product == 'app'
   }
@@ -141,5 +148,13 @@ export class XeiraConfigObj {
     return addSuffix(this.getUmdOutput(pkgName), 'main')
   }
 
-}
+
+  hasDemo() {
+    return this.config?.demo_mode == 'auto'
+  }
+  getDemoer() {
+    return this.config?.demo_demoer || 'rollup'
+  }
+}  
+
 

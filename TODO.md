@@ -13,6 +13,27 @@ Error [ERR_REQUIRE_ESM]:
 
 It is solved if /src uses .mjs extension
 
+# Demo (/ Serve)
+
+2 scenarios:
+  - if app, serve main ./index.js or ./cli/index.js
+  - if pkg, serve some ./demo/index.js 
+
+Notice it's always DEV time
+https://github.com/PepsRyuu/nollup
+
+
+Fix on Nollup:
+https://github.com/PepsRyuu/nollup/issues/239
+
+
+MAKE IT RUN WITHOUT EXTERNALSSSSSSSSSSSSSSSSSSSSSS
+MAYBE PASS ETERNALS BY PARAM
+
+ npx xeira demo --externals
+
+ review other command options... are --??????
+
 
 
 # Configs
@@ -43,18 +64,6 @@ It is solved if /src uses .mjs extension
        las anteriores condiciones aplican
 
 
-# Demo (/ Serve)
-
-2 scenarios:
-  - if app, serve main ./index.js or ./cli/index.js
-  - if pkg, serve some ./demo/index.js 
-
-Notice it's always DEV time
-
-Testing Nollup in Formiga, checking why externals[] does not work
- (we need globals{} but its not introduced)
- => Lets open some Issue and investigate
-
 
 
 # CSS
@@ -84,15 +93,3 @@ Like:
 
 Or leave it for docaine?
 
-
-## Dev Server?
-
-https://github.com/PepsRyuu/nollup
-
-
-
-
-
-
-
-https://github.com/remix-run/react-router/blob/main/rollup.config.js
