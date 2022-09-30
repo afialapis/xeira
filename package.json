@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -10,7 +10,6 @@
   },
   "scripts": {
     "reset": "rm -fr package-lock.json && rm -fr node_modules && npm i && ./scripts/reset.sh",
-    "postinstall": "./scripts/postinstall.sh",
     "lint": "eslint .",
     "test": "./scripts/test.sh"
   },
