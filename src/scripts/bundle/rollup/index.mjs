@@ -25,7 +25,7 @@ async function rollupBundle(pkgPath, xeiraConfig) {
   const iife_output = pkgp(xeiraConfig.getIifeOutput(pkgJson.name))
   const iife_bundle_output = pkgp(xeiraConfig.getIifeFullBundleOutput(pkgJson.name))
 
-  const node_main = pkgp(xeiraConfig.getMainFileForNode(pkgJson.name))
+  const [main_file_suffix, main_file] = xeiraConfig.getMainFile(pkgJson.name) 
 
   if (cjs_output) {
     await rollupBuild(...rollupModulesForCjs(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, cjs_output))
@@ -55,10 +55,8 @@ async function rollupBundle(pkgPath, xeiraConfig) {
     await rollupBuild(...rollupModulesForIife(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, iife_bundle_output, true))
   }  
 
-
-  if (node_main) {
-    const suffix = xeiraConfig.getMainFileForNodeSuffix()
-    await makeMainFile (pkgJson.name, suffix, node_main)
+  if (main_file_suffix) {
+    await makeMainFile (pkgJson.name, main_file_suffix, pkgp(main_file))
   }
 
 }

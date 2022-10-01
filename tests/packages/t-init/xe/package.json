@@ -10,10 +10,10 @@
     "x-compare": "node ../../../src/utils-dev/diff.mjs xe xe-expected",
     "x-run": "npm run --silent x-init && npm run --silent x-compare"
   },
-  "main": "./dist/t-init.umd.main.js",
+  "main": "./lib/index.js",
   "exports": {
     "import": "./dist/t-init.mjs",
-    "default": "./dist/t-init.umd.main.js",
+    "default": "./lib/index.js",
     "require": "./dist/t-init.cjs"
   },
   "module": "./dist/t-init.mjs",

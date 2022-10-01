@@ -2,12 +2,13 @@ import {getBabelConfigPath} from '../../config/babel.mjs'
 import {getEslintConfigPath} from '../../config/eslint.mjs'
 
 function makePkgJsonValues(xeiraConfig, pkgName) {
+  const [_main_file_suffix, main_file] = xeiraConfig.getMainFile(pkgName) 
 
   let pkgJsonValues= {
-    main: xeiraConfig.getMainFile(pkgName),
+    main: main_file,
     exports: {
       import: xeiraConfig.getEsmOutput(pkgName),
-      default: xeiraConfig.getMainFile(pkgName)
+      default: main_file
     },
     module: xeiraConfig.getEsmOutput(pkgName),
     // type: 'module'

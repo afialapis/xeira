@@ -52,7 +52,7 @@ export class XeiraConfigObj {
   }
 
   get transpile() {
-    return this.config?.transpile_folder !== undefined
+    return this.config?.transpile_folder != undefined
   }
 
   get transpileFolder() {
@@ -128,24 +128,21 @@ export class XeiraConfigObj {
   }
 
   getMainFileForNode(pkgName) {
-    if (this.isTargetingNode) {
-      const suffix = this.getMainFileForNodeSuffix()
-      const output = suffix=='cjs'
-        ? this.getCjsOutput(pkgName)
-        : addSuffix(this.getUmdOutput(pkgName), 'main')
-      return output
-    }
-    return undefined    
+    const suffix = this.getMainFileForNodeSuffix()
+    const output = suffix=='cjs'
+      ? this.getCjsOutput(pkgName)
+      : addSuffix(this.getUmdOutput(pkgName), 'main')
+    return [suffix, output]
   }
 
   getMainFile(pkgName) {
-    if (this.transpileFolder !== undefined && this.target == 'node') {
-      return `${this.transpileFolder}/index.js`
+    if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
+      return [undefined, `${this.transpileFolder}/index.js`]
     }
     if (this.isTargetingNode) {
       return this.getMainFileForNode(pkgName)
     }
-    return addSuffix(this.getUmdOutput(pkgName), 'main')
+    return ['umd', addSuffix(this.getUmdOutput(pkgName), 'main')]
   }
 
 
