@@ -41,6 +41,11 @@ Current demoers work with some limitations:
 
   so we can do things like passing the good BABEL config
 
+  https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
+  https://github.com/mochajs/mocha-examples/blob/master/packages/programmatic-usage/tests/run_mocha.js
+  
+  https://blog.testdouble.com/posts/2021-10-29-testing-esm-with-mocha-and-testdouble/
+
 ### Para que funcione MOCHA:
      
     Si PKG.type = 'module'

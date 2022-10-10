@@ -87,6 +87,8 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
     '--bail',
     //'--require @babel/register',
     `--require ${babelRegPath}`,
+    //`--loader=testdouble`,
+    //// `--extension js,cjs,mjs,jsx`,
     `--require ${mochaDOMPath}`,
     '--require ignore-styles',
     ...extraParams || [],

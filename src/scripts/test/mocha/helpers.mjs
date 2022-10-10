@@ -3,7 +3,12 @@ import pkg from 'enzyme';
 const { configure, mount, shallow } = pkg;
 
 
-import { expect } from 'chai';
+import chai from 'chai'
+// import chaiAsPromised from 'chai-as-promised'
+// import * as td from 'testdouble'
+// 
+// chai.use(chaiAsPromised)
+
 
 import Adapter from 'enzyme-adapter-react-16';
 //import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -16,7 +21,8 @@ before(function(){
   container = document.createElement("div")
   container.id = "react"
   // Append container to the body is needed to avoid the error: 
-  //   Error: The target 'rdp-form-control-1' could not be identified in the dom, tip: check spelling at tests.bundle.js:82798:13
+  //   Error: The target 'rdp-form-control-1' could not be identified in the dom, 
+  //     tip: check spelling at tests.bundle.js:82798:13
   // See: https://github.com/reactstrap/reactstrap/issues/773    
   document.body.appendChild(container)
 })
@@ -39,9 +45,16 @@ const shallow_wrap = (component) => {
   return wrapper  
 }
 
-global.expect= expect
+global.expect= chai.expect
 global.mount= mount_wrap
 global.shallow = shallow_wrap
+// global.td = td;
+// 
+// export const mochaHooks = {
+//   afterEach() {
+//     td.reset();
+//   }
+// };
 
 
 //  "test-command": "mocha --exit --timeout 500 --slow 300 --require @babel/register --require ./test/dom.js --require ignore-styles ./test/helpers.js ",

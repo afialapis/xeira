@@ -1,6 +1,6 @@
 import React from 'react'
 import {collTotalBy} from 'farrapa-collections'
-import {fooit} from './foo.js'
+import {fooit} from './foo.mjs'
 
 const collections= [
   fooit({

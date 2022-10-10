@@ -22,9 +22,8 @@
 let _moneyPkg
 const _getmoneyPkg = async () => {
   if (!_moneyPkg) {
-    _moneyPkg = await import("../src/index.js");
+    _moneyPkg = await import("../src/index.mjs");
   }
-
 
   return _moneyPkg;
 };
@@ -34,6 +33,6 @@ const _resolve = async () => Promise.all([
   global.moneyPkg = await _getmoneyPkg()
 ]);
 
-export {
+module.exports = {
   _resolve,
 };

@@ -8,6 +8,7 @@
 
 import { getXeiraConfigObj } from '../../config/xeira.mjs'
 import { testWithMocha } from './mocha/index.mjs'
+import { testWithMochaAPI } from './mocha_api/index.mjs'
 import { testHelp } from '../help/actions.mjs'
 
 
@@ -21,6 +22,7 @@ import { testHelp } from '../help/actions.mjs'
   const args = process.argv.slice(2)
 
   await testWithMocha(pkgPath, xeiraConfig, args)
+  //await testWithMochaAPI(pkgPath, xeiraConfig, args)
 
 })().catch((error) => {
   

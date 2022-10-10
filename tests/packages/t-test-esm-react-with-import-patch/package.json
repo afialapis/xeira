@@ -1,12 +1,12 @@
 {
-  "name": "t-test-esm-react",
+  "name": "t-test-esm-react-with-import-patch",
   "type": "module",
   "scripts": {
     "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
     "make_link": "mkdir -p node_modules && cd node_modules && rm -fr xeira && ln -fs ../../../../ xeira",
     "x-prepare": "npm run x-reset && npm i && npm run --silent make_link",
     "x-test-cmd": "node --trace-warnings ../../../bin/xeira.mjs test",
-    "test": "npm run x-test-cmd ./test/unit.mjs",
+    "test": "npm run x-test-cmd ./test/before.mjs ./test/unit.cjs",
     "x-run": "echo \"Skipping [npm run --silent test] \""
   },
   "dependencies": {
@@ -14,7 +14,7 @@
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1"
   },
-  "_________________babel": {
+  "babel": {
     "extends": "./node_modules/xeira/configs/babel.react.cjs"
   },
   "eslintConfig": {
