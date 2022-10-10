@@ -1,5 +1,7 @@
 # TO SOLVE
 
+# tests
+
 ## t-test-esm-react
  
 Even working with "type: module", when testing we get the error:
@@ -11,7 +13,33 @@ Error [ERR_REQUIRE_ESM]:
      not supported.
 ```
 
-It is solved if /src uses .mjs extension
+It is solved if /src uses .cjs extension
+
+
+### Use Mocha programmatically
+
+  so we can do things like passing the good BABEL config
+
+  https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
+  https://github.com/mochajs/mocha-examples/blob/master/packages/programmatic-usage/tests/run_mocha.js
+
+  https://blog.testdouble.com/posts/2021-10-29-testing-esm-with-mocha-and-testdouble/
+
+  => pero mantenemos el error inicial. Parseamos a CJS el /test/***, pero desde alli se
+    hace require() de contenido en /src que esta en MJS.
+
+### Para que funcione MOCHA:
+     
+    Si PKG.type = 'module'
+      El filename debe ser unit.cjs, para que pase por babel
+      --require @babel/register, y que el PKG."babel"."extends" apunte al correcto babel.cjs
+      --require babel.cjs (donde pasamos las opts a @babel/require), no es necesario PKG."babel"."extends"
+    
+    Si PKG.type != 'module',
+       las anteriores condiciones aplican
+
+
+
 
 ## demo
 
@@ -21,6 +49,8 @@ Current demoers work with some limitations:
           `index.html` must be touched.
           Check `test-nollup-with-externals-and-react` repo,
             which should help to solve this and remove the limitation.
+
+# use better fields in xeira.json
 
 
 # TO BE BETTER TESTED
@@ -35,26 +65,7 @@ Current demoers work with some limitations:
 
 # TO IMPROVE
 
-## Mocha
 
-### Use it programmatically
-
-  so we can do things like passing the good BABEL config
-
-  https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
-  https://github.com/mochajs/mocha-examples/blob/master/packages/programmatic-usage/tests/run_mocha.js
-  
-  https://blog.testdouble.com/posts/2021-10-29-testing-esm-with-mocha-and-testdouble/
-
-### Para que funcione MOCHA:
-     
-    Si PKG.type = 'module'
-      El filename debe ser unit.cjs, para que pase por babel
-      --require @babel/register, y que el PKG."babel"."extends" apunte al correcto babel.cjs
-      --require babel.cjs (donde pasamos las opts a @babel/require), no es necesario PKG."babel"."extends"
-    
-    Si PKG.type != 'module',
-       las anteriores condiciones aplican
 # CSS
 
 What about bundling CSS
