@@ -137,7 +137,7 @@ export class XeiraConfigObj {
 
   getMainFile(pkgName) {
     if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
-      return [undefined, `${this.transpileFolder}/index.js`]
+      return [undefined, `${this.transpileFolder}/index.cjs`]
     }
     if (this.isTargetingNode) {
       return this.getMainFileForNode(pkgName)

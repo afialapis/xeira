@@ -3,9 +3,9 @@ import {readdir, stat, mkdir, access} from 'fs/promises'
 import { removeTopParent } from '../../utils/io.mjs'
 
  
-async function _transpileFile (basePath, filePath, destPath, callback) {
+async function _transpileFile (basePath, filePath, destPath, forceExtension, callback) {
   const realSourcePath = path.join(basePath, filePath)
-  const withouParent = removeTopParent(filePath);
+  const withouParent = removeTopParent(filePath).replace('.mjs', '.'+forceExtension);
   const realDestPath = path.join(basePath, destPath, withouParent);
   
   const destFileFolder = path.dirname(realDestPath)
@@ -22,7 +22,7 @@ async function _transpileFile (basePath, filePath, destPath, callback) {
 }
 
 
-async function transpileDirectory (basePath, sourcePath, destPath, callback) {
+async function transpileDirectory (basePath, sourcePath, destPath, forceExtension, callback) {
   let files= []
   try {
     files = await readdir(path.join(basePath, sourcePath))
@@ -36,12 +36,12 @@ async function transpileDirectory (basePath, sourcePath, destPath, callback) {
       const filePath= path.join(sourcePath, file)
       const stats= await stat(filePath)
       if (stats.isDirectory()) {
-        return await transpileDirectory(basePath, filePath, destPath, callback)
+        return await transpileDirectory(basePath, filePath, destPath, forceExtension, callback)
       } else if (stats.isFile()) {
         const extension= path.extname(file)
         const okExt = ['.js', '.ts', '.mjs', '.cjs', '.jsx', '.es6'].indexOf(extension) >= 0
         if (okExt) {
-          return await _transpileFile(basePath, filePath, destPath, callback)
+          return await _transpileFile(basePath, filePath, destPath, forceExtension, callback)
         }
       }
   }))

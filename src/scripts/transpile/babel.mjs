@@ -12,7 +12,7 @@ import { transformFileAsync } from "@babel/core"
 import { transpileDirectory } from './iter.mjs'
 import {getBabelConfig} from '../../config/babel.mjs'
 
-async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback) {
+async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback, forceExtension= 'cjs') {
 
   // https://babeljs.io/docs/en/babel-core#loadoptions
 
@@ -44,9 +44,12 @@ async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, mi
 
   const babelConfig = await getBabelConfig(xeiraConfig);
 
-  await transpileDirectory(pkgPath, sourcePath, destPath, async (filepath, destpath) => {
+  babelConfig.sourceType= 'unambiguous'
+
+  await transpileDirectory(pkgPath, sourcePath, destPath, forceExtension, async (filepath, destpath) => {
     let { code } = await transformFileAsync(filepath, babelConfig);
     code = await minimifyCallback(code);
+    code = code.replace(/\.mjs/g, '.'+forceExtension)
     return await writeFile(destpath, code);
   })
 }
