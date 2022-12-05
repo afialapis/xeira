@@ -37,12 +37,12 @@ async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, mi
   //      }
   //
   //    } else {      
-  //      babelConfig = await getBabelConfig(xeiraConfig)
+  //      babelConfig = await getBabelConfig(xeiraConfig, pkgPath)
   //    }
   //
   //  }  
 
-  const babelConfig = await getBabelConfig(xeiraConfig)
+  const babelConfig = await getBabelConfig(xeiraConfig, pkgPath)
 
   
   babelConfig.sourceType= 'unambiguous'

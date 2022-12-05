@@ -5,6 +5,7 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
 import {rollupBanner} from './banner.mjs'
+import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 
 const NODE_ENV = 'production'
 
@@ -12,6 +13,7 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, inp
   const inputOptions= {
     input,
     plugins: [
+      ...getRollupPluginForResolvingAliases(pkgPath),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/

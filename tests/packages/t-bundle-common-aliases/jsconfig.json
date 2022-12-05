@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@here": ["./src"],
+      "@deep": ["./src/some/arch"]
+    }
+  }
+}

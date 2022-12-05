@@ -101,7 +101,7 @@ async function testWithMochaAPI(pkgPath, xeiraConfig, args) {
   //  ]
 
 
-  const babelConfig = await getBabelConfig(xeiraConfig);
+  const babelConfig = await getBabelConfig(xeiraConfig, pkgPath);
   
   console.log('babel config is:')
   console.log(babelConfig)

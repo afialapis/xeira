@@ -82,3 +82,24 @@ config file: `xeira.json`.
   npx xeira help
 ```
 
+
+# Others
+
+## Aliases supported
+
+Define your aliases just for your editor. In your root folder, file `jsconfig.json`:
+
+```json
+  {
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "*": ["src/*"],
+        "test/*": ["test/*"],
+        "underscore": ["lodash"]
+      }
+    }
+  }
+```
+And `xeira` will use them both for transpiling and bundling.
+

@@ -4,12 +4,14 @@ import commonjs from '@rollup/plugin-commonjs'
 import {babel} from '@rollup/plugin-babel'
 import scss from 'rollup-plugin-postcss'
 import {rollupBanner} from './banner.mjs'
+import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 
 function rollupModulesForCjs(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
 
   const inputOptions= {
     input,
     plugins: [
+      ...getRollupPluginForResolvingAliases(pkgPath),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/

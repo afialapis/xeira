@@ -6,6 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import scss from 'rollup-plugin-postcss'
 import {rollupBanner} from './banner.mjs'
+import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 const NODE_ENV = 'production'
 
 
@@ -39,6 +40,7 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
   const inputOptions= {
     input,
     plugins: [
+      ...getRollupPluginForResolvingAliases(pkgPath),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
