@@ -30,7 +30,6 @@
     'age': 25,
     'money': 33.33
   })];
-
   var getMoney = function getMoney() {
     var total = farrapaCollections.collTotalBy(collections, 'money');
     return total;

@@ -49,15 +49,12 @@ var foo = /*#__PURE__*/Object.freeze({
 var require$$2 = /*@__PURE__*/getAugmentedNamespace(foo);
 
 var React = require$$0;
-
 var {
   collTotalBy
 } = require$$1;
-
 var {
   fooit
 } = require$$2;
-
 var collections = [fooit({
   'id': 1,
   'name': 'Max Power',
@@ -69,18 +66,15 @@ var collections = [fooit({
   'age': 25,
   'money': 33.33
 })];
-
 var getMoney = () => {
   var total = collTotalBy(collections, 'money');
   return total;
 };
-
 var MoneyDiv = () => {
   return /*#__PURE__*/React.createElement("div", {
     id: "money-div"
   }, getMoney());
 };
-
 var src = {
   MoneyDiv
 };

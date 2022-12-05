@@ -3,6 +3,8 @@
 test_pkg() {
   PREVDIR=$PWD
   cd tests/packages/$1
+  echo ""
+  echo "Testing $1..."
   npm run --silent x-run
   cd $PREVDIR
 }

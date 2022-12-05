@@ -37,7 +37,6 @@ function fooit$1(obj) {
   obj.foo = 'bar';
   return obj;
 }
-
 var foo = {
   fooit: fooit$1
 };
@@ -45,11 +44,9 @@ var foo = {
 var {
   collTotalBy
 } = require$$0;
-
 var {
   fooit
 } = foo;
-
 var collections = [fooit({
   'id': 1,
   'name': 'Max Power',
@@ -61,12 +58,10 @@ var collections = [fooit({
   'age': 25,
   'money': 33.33
 })];
-
 var getMoney = () => {
   var total = collTotalBy(collections, 'money');
   return total;
 };
-
 var src = {
   getMoney
 };

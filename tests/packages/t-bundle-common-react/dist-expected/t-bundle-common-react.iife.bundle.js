@@ -276,13 +276,10 @@ var tBundleCommonReact = (function (exports) {
 	var require$$2 = /*@__PURE__*/getAugmentedNamespace(foo);
 
 	var React = react.exports;
-
 	var _require = farrapaCollections,
-	    collTotalBy = _require.collTotalBy;
-
+	  collTotalBy = _require.collTotalBy;
 	var _require2 = require$$2,
-	    fooit = _require2.fooit;
-
+	  fooit = _require2.fooit;
 	var collections = [fooit({
 	  'id': 1,
 	  'name': 'Max Power',
@@ -294,18 +291,15 @@ var tBundleCommonReact = (function (exports) {
 	  'age': 25,
 	  'money': 33.33
 	})];
-
 	var getMoney = function getMoney() {
 	  var total = collTotalBy(collections, 'money');
 	  return total;
 	};
-
 	var MoneyDiv = function MoneyDiv() {
 	  return /*#__PURE__*/React.createElement("div", {
 	    id: "money-div"
 	  }, getMoney());
 	};
-
 	var src = {
 	  MoneyDiv: MoneyDiv
 	};

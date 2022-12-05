@@ -208,17 +208,14 @@ var tBundleCommon = (function (exports) {
     obj.foo = 'bar';
     return obj;
   }
-
   var foo = {
     fooit: fooit$1
   };
 
   var _require = farrapaCollections,
-      collTotalBy = _require.collTotalBy;
-
+    collTotalBy = _require.collTotalBy;
   var _require2 = foo,
-      fooit = _require2.fooit;
-
+    fooit = _require2.fooit;
   var collections = [fooit({
     'id': 1,
     'name': 'Max Power',
@@ -230,12 +227,10 @@ var tBundleCommon = (function (exports) {
     'age': 25,
     'money': 33.33
   })];
-
   var getMoney = function getMoney() {
     var total = collTotalBy(collections, 'money');
     return total;
   };
-
   var src = {
     getMoney: getMoney
   };

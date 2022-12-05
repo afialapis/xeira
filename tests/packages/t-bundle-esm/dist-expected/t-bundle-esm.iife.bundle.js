@@ -41,7 +41,6 @@ var tBundleEsm = (function (exports) {
     'age': 25,
     'money': 33.33
   })];
-
   var getMoney = function getMoney() {
     var total = collTotalBy(collections, 'money');
     return total;

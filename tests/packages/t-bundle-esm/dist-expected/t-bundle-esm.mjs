@@ -26,7 +26,6 @@ var collections = [fooit({
   'age': 25,
   'money': 33.33
 })];
-
 var getMoney = () => {
   var total = collTotalBy(collections, 'money');
   return total;

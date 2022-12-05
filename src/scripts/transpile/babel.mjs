@@ -37,20 +37,31 @@ async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, mi
   //      }
   //
   //    } else {      
-  //      babelConfig = await getBabelConfig(xeiraConfig);
+  //      babelConfig = await getBabelConfig(xeiraConfig)
   //    }
   //
   //  }  
 
-  const babelConfig = await getBabelConfig(xeiraConfig);
+  const babelConfig = await getBabelConfig(xeiraConfig)
 
+  
   babelConfig.sourceType= 'unambiguous'
+  
+  //babelConfig.presets.filter(p => p[0]=='@babel/preset-env')[0][1].modules= 'commonjs'
+  babelConfig.plugins= [
+    ...babelConfig.plugins,
+    "@babel/plugin-transform-modules-commonjs",
+    ['module-extension', {
+      mjs: 'cjs',
+    }]    
+  ]
+
 
   await transpileDirectory(pkgPath, sourcePath, destPath, forceExtension, async (filepath, destpath) => {
-    let { code } = await transformFileAsync(filepath, babelConfig);
-    code = await minimifyCallback(code);
-    code = code.replace(/\.mjs/g, '.'+forceExtension)
-    return await writeFile(destpath, code);
+    let { code } = await transformFileAsync(filepath, babelConfig)
+    code = await minimifyCallback(code)
+    //code = code.replace(/\.mjs/g, '.'+forceExtension)
+    return await writeFile(destpath, code)
   })
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -27,6 +27,7 @@
     "@babel/cli": "^7.18.6",
     "@babel/core": "^7.18.6",
     "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.19.6",
     "@babel/preset-env": "^7.18.6",
     "@babel/preset-modules": "^0.1.5",
     "@babel/preset-react": "^7.18.6",
@@ -80,5 +81,8 @@
   },
   "babel": {
     "extends": "./configs/babel.react.cjs"
+  },
+  "devDependencies": {
+    "babel-plugin-module-extension": "^0.1.3"
   }
 }

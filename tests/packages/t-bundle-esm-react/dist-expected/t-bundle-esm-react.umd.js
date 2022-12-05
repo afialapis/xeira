@@ -34,12 +34,10 @@
     'age': 25,
     'money': 33.33
   })];
-
   var getMoney = function getMoney() {
     var total = farrapaCollections.collTotalBy(collections, 'money');
     return total;
   };
-
   var MoneyDiv = function MoneyDiv() {
     return /*#__PURE__*/React__default["default"].createElement("div", {
       id: "money-div"

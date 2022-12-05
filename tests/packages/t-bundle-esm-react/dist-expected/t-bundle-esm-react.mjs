@@ -27,12 +27,10 @@ var collections = [fooit({
   'age': 25,
   'money': 33.33
 })];
-
 var getMoney = () => {
   var total = collTotalBy(collections, 'money');
   return total;
 };
-
 var MoneyDiv = () => {
   return /*#__PURE__*/React.createElement("div", {
     id: "money-div"
