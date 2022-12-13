@@ -1,3 +1,4 @@
+import { readFileSync, writeFileSync } from 'fs'
 import {writeFile, access} from 'fs/promises'
 import os from 'os'
 import path from 'path'
@@ -52,8 +53,19 @@ function removeTopParent(fpath) {
   return path.join(...parts);
 }
 
+function renderJsTmpl(source, dest, changes) {
+
+  let content= readFileSync(source, {encoding: 'utf-8'})
+  Object.keys(changes).map((search) => {
+    const repl= changes[search]
+    const re = new RegExp(search, 'g')
+    content= content.replace(re, repl)
+  })
+
+  writeFileSync(dest, content, {encoding: 'utf-8'})
+}
 
 
 export {
-  saveObjectToJsonWithConfirm, saveObjectToJsWithConfirm, removeTopParent
+  saveObjectToJsonWithConfirm, saveObjectToJsWithConfirm, removeTopParent, renderJsTmpl
 }

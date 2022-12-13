@@ -4,6 +4,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 import {stat} from 'fs/promises'
 import {execSync} from 'child_process'
+import { renderJsTmpl } from '../../../utils/io.mjs'
+import { getBabelPluginForResolvingAliases, hasAliases } from '../../../utils/aliases.mjs'
+import { unlink } from 'fs'
 
 const _MOCHA_NON_BOOLEAN_ARGS= [
   '--global', '--globals', 
@@ -67,9 +70,29 @@ async function _parseMochaArgs(args, pkgPath, xeiraConfig) {
 
 }
 
-async function testWithMocha(pkgPath, xeiraConfig, args) {
+function _makeBabelTempFile(pkgPath, xeiraConfig) {
+  const source= path.join(__dirname, 'babel.mjs.tmpl')
+  const dest= path.join(pkgPath, '.test.babel.mjs')
 
-  const babelRegPath=  path.join(__dirname, 'babel.mjs')
+  const alias_plugin= getBabelPluginForResolvingAliases (xeiraConfig, pkgPath)
+  let plugins= []
+  if (alias_plugin) {
+    plugins= [alias_plugin]
+  }
+  const changes= {
+    'PLUGINS': JSON.stringify(plugins, undefined, 4)
+  }
+  renderJsTmpl(source, dest, changes)
+  return dest
+}
+
+
+async function testWithMocha(pkgPath, xeiraConfig, args) {
+  const withAliases= hasAliases(pkgPath)
+  
+  const babelRegPath= withAliases
+    ? _makeBabelTempFile(pkgPath, xeiraConfig)
+    : path.join(__dirname, 'babel.mjs')
   const mochaDOMPath=  path.join(__dirname, 'dom.mjs')
   const mochaHelpersPath=  path.join(__dirname, 'helpers.mjs')
 
@@ -108,6 +131,10 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
       cwd: pkgPath,
       stdio: [0, 1, 2]
     });
+  
+  if (withAliases) {
+    unlink(babelRegPath, () => {})
+  }
 }
 
 export {

@@ -81,7 +81,13 @@ function _aliasesRead (pkgPath) {
 }
 
 
-
+function hasAliases(pkgPath) {
+  const aliases = _aliasesRead(pkgPath)
+  if (!aliases) {
+    return false
+  }
+  return true
+}
 
 function getBabelPluginForResolvingAliases (xeiraConfig, pkgPath) { 
   const aliases = _aliasesRead(pkgPath)
@@ -147,4 +153,4 @@ function getRollupPluginForResolvingAliases (pkgPath) {
 }
 
 
-export {getBabelPluginForResolvingAliases, getRollupPluginForResolvingAliases}
+export {hasAliases, getBabelPluginForResolvingAliases, getRollupPluginForResolvingAliases}
