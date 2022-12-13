@@ -2,7 +2,8 @@ import path from 'path'
 import { existsSync } from 'node:fs';
 import {readJsonFileSync} from './json.mjs'
 import { resolvePath } from 'babel-plugin-module-resolver'
-import alias from '@rollup/plugin-alias';
+import alias_plugin from '@rollup/plugin-alias';
+import {red} from 'farrapa-colors'
 
 /*
 const _parseExport = (o) => {
@@ -66,11 +67,15 @@ function _aliasesRead (pkgPath) {
     Object.keys(rpaths).map(alias => {
       const rpath= rpaths[alias][0]
       aliases[alias]= path.join(pkgPath, baseUrl, rpath)
+
+      if (alias.indexOf('*')>=0) {
+        console.error(`[xeira] Aliases error: ${red("don't use wildcards on aliases, it may not work here")}.`)
+      }
     })
     return aliases
   } catch(e) {
     console.error(`[xeira] Error searching aliases:`)
-    console.error(e)
+    console.error(red(e))
   }
   return undefined
 }
@@ -134,7 +139,7 @@ function getRollupPluginForResolvingAliases (pkgPath) {
     })
   })
 
-  const plugin= alias({
+  const plugin= alias_plugin({
     entries
   })
 

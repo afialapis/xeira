@@ -4,10 +4,11 @@ import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-postcss'
+import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = (pkgName, input, output) => {
+const makeSimpleConfig = (pkgPath, pkgName, input, output) => {
   return {
     input: input,
     output: {
@@ -16,6 +17,7 @@ const makeSimpleConfig = (pkgName, input, output) => {
       name: pkgName
     },
     plugins: [
+      ...getRollupPluginForResolvingAliases(pkgPath),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)

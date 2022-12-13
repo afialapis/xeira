@@ -16,7 +16,7 @@ async function demoWithRollup(pkgPath, xeiraConfig) {
   const output = demoDefaults.output
   //const contentBase = path.join(pkgPath, demoDefaults.contentBase)
   const port = demoDefaults.port
-  const [inputOptions, outputOptions]= makeSimpleConfig(pkgName, input, output, demoDefaults.contentBase, port)
+  const [inputOptions, outputOptions]= makeSimpleConfig(pkgPath, pkgName, input, output, demoDefaults.contentBase, port)
 
   await rollupBuild(inputOptions, [outputOptions])
   rollupWatch({

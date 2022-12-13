@@ -7,13 +7,15 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
+import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = (pkgName, input, output, contentBase, port) => {
+const makeSimpleConfig = (pkgPath, pkgName, input, output, contentBase, port) => {
   const inputOptions= {
     input: input,
     plugins: [
+      ...getRollupPluginForResolvingAliases(pkgPath),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)

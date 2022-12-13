@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@here": ["./src"],
-      "@deep": ["./src/some/arch"]
+      "deep": ["./src/some/arch"]
     }
   }
 }

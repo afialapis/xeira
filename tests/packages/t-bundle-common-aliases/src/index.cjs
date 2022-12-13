@@ -1,6 +1,6 @@
 const {collTotalBy} = require('farrapa-collections')
 const {fooit} = require('@here/foo.cjs')
-const {barit} = require('@deep/bar.cjs')
+const {barit} = require('deep/bar.cjs')
 
 const collections= [
   fooit({

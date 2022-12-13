@@ -11,7 +11,7 @@ async function demoWithNollup(pkgPath, xeiraConfig) {
   
   const pkgJson = await readJsonFile(path.join(pkgPath ,'package.json'))
   const pkgName = getJSValidPkgName(pkgJson.name)
-  let config= makeSimpleConfig(pkgName, demoDefaults.input, demoDefaults.output)
+  let config= makeSimpleConfig(pkgPath, pkgName, demoDefaults.input, demoDefaults.output)
 
   console.log(`[xeira][demo] Serving demo at ${cyan(`localhost:${demoDefaults.port}`)}`)
 
