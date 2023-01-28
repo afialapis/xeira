@@ -43,5 +43,5 @@ TODO.lst
 .old
 test/bundle.js
 
-./arredemo
-./tests/packages/t-site/arredemo
+arredemo
+tests/packages/t-site/arredemo
