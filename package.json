@@ -9,9 +9,12 @@
     "./utils-dev": "./src/utils-dev"
   },
   "scripts": {
+    "docs-clean": "rm -fr arredemo",
+    "docs-build": "npm run docs-clean && npx arredemo build",
     "reset": "rm -fr package-lock.json && rm -fr node_modules && npm i && ./scripts/reset.sh",
     "lint": "eslint .",
-    "test": "./scripts/test.sh"
+    "test": "./scripts/test.sh",
+    "prepare": "npm run docs-build"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,7 @@
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-replace": "^4.0.0",
+    "arredemo": "^0.0.4",
     "babel-plugin-module-extension": "^0.1.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "chai": "^4.3.6",

@@ -3,13 +3,14 @@
 > One web-dev-stack command to rule them all
 
 `xeira` aims to group all the Web Dev stack processes you need from a single, zero config, command.
-Under the hoods, it calls well know, community trusted tools:
+Under the hoods, it calls well known, community trusted tools:
 
-  · linting trough [ESLint](https://github.com/eslint/eslint)
-  - transpiling with [Babel](https://github.com/babel/babel)
-  - bundling with [Rollup](https://github.com/rollup/rollup)
-  - serving dev servers both with [Rollup](https://github.com/rollup/rollup) or [Nollup](https://github.com/PepsRyuu/nollup)
-  - testing with [Mocha](https://github.com/mochajs/mocha) and [Chai](https://github.com/chaijs/chai)
+- linting trough [ESLint](https://github.com/eslint/eslint)
+- transpiling with [Babel](https://github.com/babel/babel)
+- bundling with [Rollup](https://github.com/rollup/rollup)
+- serving dev servers both with [Rollup](https://github.com/rollup/rollup) or [Nollup](https://github.com/PepsRyuu/nollup)
+- testing with [Mocha](https://github.com/mochajs/mocha) and [Chai](https://github.com/chaijs/chai)
+- building static site for your package trough [arredemo](https://github.com/afialapis/arredemo)
 
 Future versions will try to add more tools (so, for example, letting you to pick your
 preferred bundler). It's also very opinionated, using pretty standard configurations.
@@ -73,6 +74,13 @@ config file: `xeira.json`.
 
 ```
   npx xeira version patch|minor|major|0.1.2 [-filter <pattern>]
+```
+
+
+## static site
+
+```
+  npx xeira site
 ```
 
 

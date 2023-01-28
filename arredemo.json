@@ -1,0 +1,13 @@
+{
+  "theme": "default",
+  "favicon": "logo/favicon/xeira.ico",
+  "logo": "logo/xeira.png",
+  "company": "Afialapis",
+  "url": "xeira.afialapis.com",
+  "doc_versions": null,
+  "md": {
+    "strip_details_tag": true,
+    "keep_summary_content": true
+  },
+  "demo_entry": null
+}

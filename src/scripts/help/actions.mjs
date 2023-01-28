@@ -55,6 +55,7 @@ const _bundleUsage = `\t${_bl('npx xeira')} ${_bb('bundle')}`
 const _testUsage = `\t${_bl('npx xeira')} ${_bb('test')} [path (default is ./test)]`
 const _demoUsage = `\t${_bl('npx xeira')} ${_bb('demo')} [init [force]]`
 const _versionUsage = `\t${_bl('npx xeira')} ${_bb('version')} patch|minor|major|0.1.2 [-filter <pattern>]`
+const _siteUsage = `\t${_bl('npx xeira')} ${_bb('site')}`
 const _helpUsage = `\t${_bl('npx xeira')} ${_bb('help')}`
 
 function initHelp(pkgPath, error= undefined) {
@@ -107,6 +108,12 @@ function versionHelp(pkgPath, error= undefined) {
   _log_err(error)
 }
 
+function siteHelp(pkgPath, error= undefined) {
+  const usage= _siteUsage
+  _log_help('site', usage, '')
+  _log_err(error)
+}
+
 function helpHelp(pkgPath, error= undefined) {
   const usage= _helpUsage
   _log_help('help', usage, '')
@@ -139,6 +146,8 @@ function globalHelp(error= undefined, extra= undefined) {
     '\n',
     _versionUsage,
     '\n',
+    _siteUsage,
+    '\n',
     _helpUsage
   ].join('\n')
 
@@ -156,6 +165,7 @@ export {
   testHelp,
   demoHelp,
   versionHelp,
+  siteHelp,
   helpHelp,
   globalHelp
 }
