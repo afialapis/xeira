@@ -9,12 +9,12 @@
     "./utils-dev": "./src/utils-dev"
   },
   "scripts": {
-    "docs-clean": "rm -fr arredemo",
-    "docs-build": "npm run docs-clean && npx arredemo build",
+    "site-clean": "rm -fr arredemo",
+    "site-build": "npm run site-clean && npx arredemo build",
     "reset": "rm -fr package-lock.json && rm -fr node_modules && npm i && ./scripts/reset.sh",
     "lint": "eslint .",
     "test": "./scripts/test.sh",
-    "prepare": "npm run docs-build"
+    "prepare": "npm run site-build"
   },
   "repository": {
     "type": "git",
