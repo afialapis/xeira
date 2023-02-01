@@ -1,7 +1,6 @@
 ![xeira logo](https://xeira.afialapis.com/logo.png)
 
 [![NPM Version](https://badge.fury.io/js/xeira.svg)](https://www.npmjs.com/package/xeira)
-[//]: # ([![Dependency Status](https://david-dm.org/afialapis/xeira.svg)](https://david-dm.org/afialapis/xeira))
 [![NPM Downloads](https://img.shields.io/npm/dm/xeira.svg?style=flat)](https://www.npmjs.com/package/xeira)
 
 > One web-dev-stack command to rule them all
