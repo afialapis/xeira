@@ -1,4 +1,5 @@
 import {externals} from 'rollup-plugin-node-externals'
+import json from '@rollup/plugin-json'
 import {babel} from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
@@ -18,6 +19,7 @@ const makeSimpleConfig = (pkgPath, pkgName, input, output) => {
     },
     plugins: [
       ...getRollupPluginForResolvingAliases(pkgPath),
+      json(),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)

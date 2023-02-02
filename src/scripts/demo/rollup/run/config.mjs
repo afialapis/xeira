@@ -1,5 +1,6 @@
-import {cyan} from 'farrapa-colors'
+
 //import {externals} from 'rollup-plugin-node-externals'
+import json from '@rollup/plugin-json'
 import {babel} from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
@@ -7,6 +8,8 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
+
+import {cyan} from 'farrapa-colors'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
 
 const NODE_ENV = 'development'
@@ -16,6 +19,7 @@ const makeSimpleConfig = (pkgPath, pkgName, input, output, contentBase, port) =>
     input: input,
     plugins: [
       ...getRollupPluginForResolvingAliases(pkgPath),
+      json(),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
