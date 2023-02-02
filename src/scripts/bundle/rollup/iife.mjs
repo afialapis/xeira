@@ -1,14 +1,16 @@
+import json from '@rollup/plugin-json'
+import {babel} from '@rollup/plugin-babel'
 import {externals} from 'rollup-plugin-node-externals'
 import replace from '@rollup/plugin-replace'
-import {babel} from '@rollup/plugin-babel'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import terser from '@rollup/plugin-terser'
 import scss from 'rollup-plugin-postcss'
+import terser from '@rollup/plugin-terser'
+
 import {rollupBanner} from './banner.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
-const NODE_ENV = 'production'
 
+const NODE_ENV = 'production'
 
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
 
@@ -24,7 +26,6 @@ function toTitleCase(str) {
   return s
 }
 
-
 const makeGlobals = (pkgJson) => {
   const pkgs= Object.keys(pkgJson.dependencies)
   const globals= {}
@@ -34,13 +35,13 @@ const makeGlobals = (pkgJson) => {
   return globals
 }
 
-
 function rollupModulesForIife(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output, bundleDeps= false) {
 
   const inputOptions= {
     input,
     plugins: [
       ...getRollupPluginForResolvingAliases(pkgPath),
+      json(),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/

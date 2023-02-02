@@ -1,9 +1,11 @@
+import json from '@rollup/plugin-json'
+import {babel} from '@rollup/plugin-babel'
 import {externals} from 'rollup-plugin-node-externals'
 import replace from '@rollup/plugin-replace'
-import {babel} from '@rollup/plugin-babel'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
+
 import {rollupBanner} from './banner.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 
@@ -14,6 +16,7 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, inp
     input,
     plugins: [
       ...getRollupPluginForResolvingAliases(pkgPath),
+      json(),
       babel({
         exclude: /node_modules/,
         /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -35,7 +38,6 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, inp
             : []
         ]
       }),
-
       externals({
         packagePath: pkgJsonPath
       }),
