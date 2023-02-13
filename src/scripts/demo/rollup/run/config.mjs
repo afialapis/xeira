@@ -22,6 +22,7 @@ const makeSimpleConfig = (pkgPath, pkgName, input, output, contentBase, port) =>
       json(),
       replace({
         preventAssignment: true,
+        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       babel({

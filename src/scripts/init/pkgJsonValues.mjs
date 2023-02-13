@@ -23,7 +23,9 @@ function makePkgJsonValues(xeiraConfig, pkgName) {
   }
 
   if (xeiraConfig.isTargetingBrowser) {
-    pkgJsonValues.browser= xeiraConfig.getUmdOutput(pkgName)
+    const iife= xeiraConfig.getIifeOutput(pkgName)
+    const umd= xeiraConfig.getUmdOutput(pkgName)
+    pkgJsonValues.browser= iife || umd
   }
   
   if (xeiraConfig.lintWithEslint) {

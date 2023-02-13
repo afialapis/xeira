@@ -43,6 +43,7 @@ function rollupModulesForEsmNode(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, inp
       }),
       replace({
         preventAssignment: true,
+        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       nodeResolve({

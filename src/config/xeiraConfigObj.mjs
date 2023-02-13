@@ -111,16 +111,25 @@ export class XeiraConfigObj {
 
   getUmdFullBundleOutput(pkgName) {
     const umd= this.getUmdOutput(pkgName)
-    return addSuffix(umd, 'bundle')
+    if (umd) {
+      return addSuffix(umd, 'bundle')
+    }
+    return undefined
   }  
 
   getIifeOutput(pkgName) {
-    return `${this.bundleFolder}/${pkgName}.iife.js`
+    if (this.isTargetingBrowser) {
+      return `${this.bundleFolder}/${pkgName}.iife.js`
+    }
+    return undefined
   }  
 
   getIifeFullBundleOutput(pkgName) {
     const iife= this.getIifeOutput(pkgName)
-    return addSuffix(iife, 'bundle')
+    if (iife) {
+      return addSuffix(iife, 'bundle')
+    }
+    return undefined
   }    
 
   getMainFileForNodeSuffix() {

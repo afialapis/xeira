@@ -18,7 +18,7 @@
   },
   "module": "./dist/t-init.mjs",
   "cjs": "./dist/t-init.cjs",
-  "browser": "./dist/t-init.umd.js",
+  "browser": "./dist/t-init.iife.js",
   "eslintConfig": {
     "extends": [
       "./node_modules/xeira/configs/eslint.react.cjs"
