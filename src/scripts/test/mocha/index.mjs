@@ -93,8 +93,12 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
   const babelRegPath= withAliases
     ? _makeBabelTempFile(pkgPath, xeiraConfig)
     : path.join(__dirname, 'babel.mjs')
-  const mochaDOMPath=  path.join(__dirname, 'dom.mjs')
-  const mochaHelpersPath=  path.join(__dirname, 'helpers.mjs')
+  
+  const helpersDir = path.join(__dirname, 'helpers')
+  const helperChaiPath=  path.join(helpersDir, 'chai.mjs')
+  const helperDOMPath=  path.join(helpersDir, 'dom.mjs')
+  const helperReactPath=  path.join(helpersDir, 'react.mjs')
+  
 
   const [extraParams, testPathStr]= await _parseMochaArgs(args, pkgPath, xeiraConfig)
   
@@ -112,10 +116,11 @@ async function testWithMocha(pkgPath, xeiraConfig, args) {
     `--require ${babelRegPath}`,
     //`--loader=testdouble`,
     //// `--extension js,cjs,mjs,jsx`,
-    `--require ${mochaDOMPath}`,
+    xeiraConfig.isTargetingBrowser ? `--require ${helperDOMPath}` : '',
     '--require ignore-styles',
     ...extraParams || [],
-    mochaHelpersPath,
+    helperChaiPath,
+    xeiraConfig.usesReact ? helperReactPath : '',
     //`$(find ${fullTestPath} -name '*.js' ! -path '**/_*.js')`
     //`${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`
     testPathStr
