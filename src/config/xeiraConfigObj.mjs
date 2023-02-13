@@ -106,7 +106,10 @@ export class XeiraConfigObj {
   }
 
   getUmdOutput(pkgName) {
-    return `${this.bundleFolder}/${pkgName}.umd.js`
+    if (this.isTargetingBrowser) {
+      return `${this.bundleFolder}/${pkgName}.umd.js`
+    }
+    return undefined
   }  
 
   getUmdFullBundleOutput(pkgName) {
