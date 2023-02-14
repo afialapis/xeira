@@ -8,7 +8,7 @@
  *
  * @license MIT
  */
-var tBundleEsm = (function (exports, farrapaCollections) {
+var tBundleEsm = (function (exports, trangallada) {
   'use strict';
 
   function fooit(obj) {
@@ -28,7 +28,7 @@ var tBundleEsm = (function (exports, farrapaCollections) {
     'money': 33.33
   })];
   var getMoney = function getMoney() {
-    var total = farrapaCollections.collTotalBy(collections, 'money');
+    var total = trangallada.collTotalBy(collections, 'money');
     return total;
   };
 
@@ -38,5 +38,5 @@ var tBundleEsm = (function (exports, farrapaCollections) {
 
   return exports;
 
-})({}, farrapaCollections);
+})({}, trangallada);
 //# sourceMappingURL=t-bundle-esm.iife.js.map

@@ -11,7 +11,7 @@
     
   },
   "dependencies": {
-    "farrapa-collections": "^1.0.7"
+    "trangallada": "^0.0.3"
   },
   "babel": {
     "extends": "./node_modules/xeira/configs/babel.cjs"

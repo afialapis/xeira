@@ -8,7 +8,7 @@
  *
  * @license MIT
  */
-import { collTotalBy } from 'farrapa-collections';
+import { collTotalBy } from 'trangallada';
 
 function fooit(obj) {
   obj.foo = 'bar';

@@ -1,7 +1,7 @@
 var React = require('react');
 var {
   collTotalBy
-} = require('farrapa-collections');
+} = require('trangallada');
 var {
   fooit
 } = require('./foo');

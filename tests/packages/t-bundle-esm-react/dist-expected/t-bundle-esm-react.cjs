@@ -13,7 +13,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var React = require('react');
-var farrapaCollections = require('farrapa-collections');
+var trangallada = require('trangallada');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -36,7 +36,7 @@ var collections = [fooit({
   'money': 33.33
 })];
 var getMoney = function getMoney() {
-  var total = farrapaCollections.collTotalBy(collections, 'money');
+  var total = trangallada.collTotalBy(collections, 'money');
   return total;
 };
 var MoneyDiv = function MoneyDiv() {

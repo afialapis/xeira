@@ -8,7 +8,7 @@
  *
  * @license MIT
  */
-var tBundleCommon = (function (exports, farrapaCollections) {
+var tBundleCommon = (function (exports, trangallada) {
 	'use strict';
 
 	function _interopNamespace(e) {
@@ -29,7 +29,7 @@ var tBundleCommon = (function (exports, farrapaCollections) {
 		return Object.freeze(n);
 	}
 
-	var farrapaCollections__namespace = /*#__PURE__*/_interopNamespace(farrapaCollections);
+	var trangallada__namespace = /*#__PURE__*/_interopNamespace(trangallada);
 
 	function getAugmentedNamespace(n) {
 	  var f = n.default;
@@ -52,7 +52,7 @@ var tBundleCommon = (function (exports, farrapaCollections) {
 		return a;
 	}
 
-	var require$$0 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections__namespace);
+	var require$$0 = /*@__PURE__*/getAugmentedNamespace(trangallada__namespace);
 
 	function fooit$1(obj) {
 	  obj.foo = 'bar';
@@ -91,5 +91,5 @@ var tBundleCommon = (function (exports, farrapaCollections) {
 
 	return exports;
 
-})({}, farrapaCollections);
+})({}, trangallada);
 //# sourceMappingURL=t-bundle-common.iife.js.map

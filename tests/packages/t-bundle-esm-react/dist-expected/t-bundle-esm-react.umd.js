@@ -9,10 +9,10 @@
  * @license MIT
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('farrapa-collections')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', 'farrapa-collections'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tBundleEsmReact = {}, global.react, global.farrapaCollections));
-})(this, (function (exports, React, farrapaCollections) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('trangallada')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', 'trangallada'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tBundleEsmReact = {}, global.react, global.trangallada));
+})(this, (function (exports, React, trangallada) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -35,7 +35,7 @@
     'money': 33.33
   })];
   var getMoney = function getMoney() {
-    var total = farrapaCollections.collTotalBy(collections, 'money');
+    var total = trangallada.collTotalBy(collections, 'money');
     return total;
   };
   var MoneyDiv = function MoneyDiv() {

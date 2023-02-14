@@ -1,4 +1,4 @@
-import {collTotalBy} from 'farrapa-collections'
+import {collTotalBy} from 'trangallada'
 import {fooit} from './foo.mjs'
 
 const collections= [

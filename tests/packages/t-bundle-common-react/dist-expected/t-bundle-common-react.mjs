@@ -9,7 +9,7 @@
  * @license MIT
  */
 import * as react from 'react';
-import * as farrapaCollections from 'farrapa-collections';
+import * as trangallada from 'trangallada';
 
 function getAugmentedNamespace(n) {
   var f = n.default;
@@ -34,7 +34,7 @@ function getAugmentedNamespace(n) {
 
 var require$$0 = /*@__PURE__*/getAugmentedNamespace(react);
 
-var require$$1 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections);
+var require$$1 = /*@__PURE__*/getAugmentedNamespace(trangallada);
 
 function fooit$1(obj) {
   obj.foo = 'bar';

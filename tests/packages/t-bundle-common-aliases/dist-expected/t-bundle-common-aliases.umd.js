@@ -9,10 +9,10 @@
  * @license MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('farrapa-collections')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'farrapa-collections'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tBundleCommonAliases = {}, global.farrapaCollections));
-})(this, (function (exports, farrapaCollections) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('trangallada')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'trangallada'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tBundleCommonAliases = {}, global.trangallada));
+})(this, (function (exports, trangallada) { 'use strict';
 
 	function _interopNamespace(e) {
 		if (e && e.__esModule) return e;
@@ -32,7 +32,7 @@
 		return Object.freeze(n);
 	}
 
-	var farrapaCollections__namespace = /*#__PURE__*/_interopNamespace(farrapaCollections);
+	var trangallada__namespace = /*#__PURE__*/_interopNamespace(trangallada);
 
 	function getAugmentedNamespace(n) {
 	  var f = n.default;
@@ -55,7 +55,7 @@
 		return a;
 	}
 
-	var require$$0 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections__namespace);
+	var require$$0 = /*@__PURE__*/getAugmentedNamespace(trangallada__namespace);
 
 	function fooit$1(obj) {
 	  obj.foo = 'bar';

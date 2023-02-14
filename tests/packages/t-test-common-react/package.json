@@ -9,7 +9,7 @@
     "x-run": "npm run --silent test"
   },
   "dependencies": {
-    "farrapa-collections": "^1.0.7",
+    "trangallada": "^0.0.3",
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1"
   },

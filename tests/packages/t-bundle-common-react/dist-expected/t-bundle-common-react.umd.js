@@ -9,10 +9,10 @@
  * @license MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('farrapa-collections')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'react', 'farrapa-collections'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tBundleCommonReact = {}, global.react, global.farrapaCollections));
-})(this, (function (exports, react, farrapaCollections) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('trangallada')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'react', 'trangallada'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tBundleCommonReact = {}, global.react, global.trangallada));
+})(this, (function (exports, react, trangallada) { 'use strict';
 
 	function _interopNamespace(e) {
 		if (e && e.__esModule) return e;
@@ -33,7 +33,7 @@
 	}
 
 	var react__namespace = /*#__PURE__*/_interopNamespace(react);
-	var farrapaCollections__namespace = /*#__PURE__*/_interopNamespace(farrapaCollections);
+	var trangallada__namespace = /*#__PURE__*/_interopNamespace(trangallada);
 
 	function getAugmentedNamespace(n) {
 	  var f = n.default;
@@ -58,7 +58,7 @@
 
 	var require$$0 = /*@__PURE__*/getAugmentedNamespace(react__namespace);
 
-	var require$$1 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections__namespace);
+	var require$$1 = /*@__PURE__*/getAugmentedNamespace(trangallada__namespace);
 
 	function fooit$1(obj) {
 	  obj.foo = 'bar';

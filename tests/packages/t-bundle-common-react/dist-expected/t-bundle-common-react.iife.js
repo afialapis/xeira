@@ -8,7 +8,7 @@
  *
  * @license MIT
  */
-var tBundleCommonReact = (function (exports, react, farrapaCollections) {
+var tBundleCommonReact = (function (exports, react, trangallada) {
 	'use strict';
 
 	function _interopNamespace(e) {
@@ -30,7 +30,7 @@ var tBundleCommonReact = (function (exports, react, farrapaCollections) {
 	}
 
 	var react__namespace = /*#__PURE__*/_interopNamespace(react);
-	var farrapaCollections__namespace = /*#__PURE__*/_interopNamespace(farrapaCollections);
+	var trangallada__namespace = /*#__PURE__*/_interopNamespace(trangallada);
 
 	function getAugmentedNamespace(n) {
 	  var f = n.default;
@@ -55,7 +55,7 @@ var tBundleCommonReact = (function (exports, react, farrapaCollections) {
 
 	var require$$0 = /*@__PURE__*/getAugmentedNamespace(react__namespace);
 
-	var require$$1 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections__namespace);
+	var require$$1 = /*@__PURE__*/getAugmentedNamespace(trangallada__namespace);
 
 	function fooit$1(obj) {
 	  obj.foo = 'bar';
@@ -104,5 +104,5 @@ var tBundleCommonReact = (function (exports, react, farrapaCollections) {
 
 	return exports;
 
-})({}, react, farrapaCollections);
+})({}, react, trangallada);
 //# sourceMappingURL=t-bundle-common-react.iife.js.map

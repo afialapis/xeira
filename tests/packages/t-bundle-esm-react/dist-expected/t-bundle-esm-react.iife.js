@@ -8,7 +8,7 @@
  *
  * @license MIT
  */
-var tBundleEsmReact = (function (exports, React, farrapaCollections) {
+var tBundleEsmReact = (function (exports, React, trangallada) {
   'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -32,7 +32,7 @@ var tBundleEsmReact = (function (exports, React, farrapaCollections) {
     'money': 33.33
   })];
   var getMoney = function getMoney() {
-    var total = farrapaCollections.collTotalBy(collections, 'money');
+    var total = trangallada.collTotalBy(collections, 'money');
     return total;
   };
   var MoneyDiv = function MoneyDiv() {
@@ -47,5 +47,5 @@ var tBundleEsmReact = (function (exports, React, farrapaCollections) {
 
   return exports;
 
-})({}, react, farrapaCollections);
+})({}, react, trangallada);
 //# sourceMappingURL=t-bundle-esm-react.iife.js.map

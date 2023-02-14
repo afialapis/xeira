@@ -1,13 +1,13 @@
 var React = require('react');
 var {
   collTotalBy
-} = require('farrapa-collections');
+} = require('trangallada');
 var {
   fooit
-} = require("./foo");
+} = require("./foo.cjs");
 var {
   barit
-} = require("./some/arch/bar");
+} = require("./some/arch/bar.cjs");
 var collections = [fooit({
   'id': 1,
   'name': 'Max Power',

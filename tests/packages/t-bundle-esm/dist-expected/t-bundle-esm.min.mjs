@@ -8,4 +8,4 @@
  *
  * @license MIT
  */
-import{collTotalBy as e}from"farrapa-collections";function o(e){return e.foo="bar",e}var a=[o({id:1,name:"Max Power",age:37,money:99.99}),o({id:2,name:"Min Weak",age:25,money:33.33})],n=()=>e(a,"money");export{n as getMoney};
+import{collTotalBy as a}from"trangallada";function e(a){return a.foo="bar",a}var n=[e({id:1,name:"Max Power",age:37,money:99.99}),e({id:2,name:"Min Weak",age:25,money:33.33})],o=()=>a(n,"money");export{o as getMoney};

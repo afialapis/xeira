@@ -1,7 +1,7 @@
 const React = require('react')
-const {collTotalBy} = require('farrapa-collections')
-const {fooit} = require('@here/foo')
-const {barit} = require('@deep/bar')
+const {collTotalBy} = require('trangallada')
+const {fooit} = require('@here/foo.cjs')
+const {barit} = require('@deep/bar.cjs')
 
 const collections= [
   fooit({

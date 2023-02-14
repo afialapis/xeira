@@ -1,5 +1,5 @@
 const React = require('react')
-const {collTotalBy} = require('farrapa-collections')
+const {collTotalBy} = require('trangallada')
 const {fooit} = require('./foo')
 
 const collections= [

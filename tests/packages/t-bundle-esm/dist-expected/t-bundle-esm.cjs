@@ -12,7 +12,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var farrapaCollections = require('farrapa-collections');
+var trangallada = require('trangallada');
 
 function fooit(obj) {
   obj.foo = 'bar';
@@ -31,7 +31,7 @@ var collections = [fooit({
   'money': 33.33
 })];
 var getMoney = function getMoney() {
-  var total = farrapaCollections.collTotalBy(collections, 'money');
+  var total = trangallada.collTotalBy(collections, 'money');
   return total;
 };
 

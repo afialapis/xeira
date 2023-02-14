@@ -13,7 +13,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var react = require('react');
-var farrapaCollections = require('farrapa-collections');
+var trangallada = require('trangallada');
 
 function _interopNamespace(e) {
 	if (e && e.__esModule) return e;
@@ -34,7 +34,7 @@ function _interopNamespace(e) {
 }
 
 var react__namespace = /*#__PURE__*/_interopNamespace(react);
-var farrapaCollections__namespace = /*#__PURE__*/_interopNamespace(farrapaCollections);
+var trangallada__namespace = /*#__PURE__*/_interopNamespace(trangallada);
 
 function getAugmentedNamespace(n) {
   var f = n.default;
@@ -59,7 +59,7 @@ function getAugmentedNamespace(n) {
 
 var require$$0 = /*@__PURE__*/getAugmentedNamespace(react__namespace);
 
-var require$$1 = /*@__PURE__*/getAugmentedNamespace(farrapaCollections__namespace);
+var require$$1 = /*@__PURE__*/getAugmentedNamespace(trangallada__namespace);
 
 function fooit$1(obj) {
   obj.foo = 'bar';

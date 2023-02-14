@@ -1,4 +1,4 @@
-const {collTotalBy} = require('farrapa-collections')
+const {collTotalBy} = require('trangallada')
 const {fooit} = require('@here/foo.cjs')
 const {barit} = require('deep/bar.cjs')
 

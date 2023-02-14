@@ -9,7 +9,7 @@
  * @license MIT
  */
 import React from 'react';
-import { collTotalBy } from 'farrapa-collections';
+import { collTotalBy } from 'trangallada';
 
 function fooit(obj) {
   obj.foo = 'bar';
