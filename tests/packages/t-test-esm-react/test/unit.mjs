@@ -4,7 +4,7 @@ import {MoneyDiv} from '../src/index.mjs'
 const expect= global.expect
 const mount= global.mount
 
-describe('t-test-common-consuming-esm-react', function () {
+describe('t-test-esm-react', function () {
   // this.timeout(100)
 
   it("test MoneyDiv", () => {

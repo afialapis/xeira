@@ -1,11 +1,11 @@
 {
   "name": "xeira",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
   "exports": {
-    "./configs": "./src/configs",
+    "./configs": "./configs",
     "./utils-dev": "./src/utils-dev"
   },
   "scripts": {
@@ -16,6 +16,11 @@
     "test": "./scripts/test.sh",
     "prepare": "npm run site-build"
   },
+  "files": [
+    "bin",
+    "configs",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/afialapis/xeira.git"
@@ -42,7 +47,7 @@
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-terser": "^0.4.0",
-    "arredemo": "^0.0.8",
+    "arredemo": "^0.0.9",
     "babel-plugin-module-extension": "^0.1.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "chai": "^4.3.6",

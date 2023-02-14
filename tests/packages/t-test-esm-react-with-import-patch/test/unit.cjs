@@ -3,7 +3,7 @@ const React = require('react')
 const expect= global.expect
 const mount= global.mount
 
-describe('t-test-common-consuming-esm-react', function () {
+describe('t-test-esm-react-with-import-patch', function () {
   // this.timeout(100)
 
   it("test MoneyDiv", () => {

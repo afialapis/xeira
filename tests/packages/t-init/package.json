@@ -9,22 +9,5 @@
     "x-init": "npm run --silent clean-init && mkdir xe && node ../../../bin/xeira.mjs init package both ./src/index.js true false eslint ./lib babel ./dist rollup ./test auto rollup && cp xeira.json ./xe/xeira.json && cp package.json ./xe/package.json",
     "x-compare": "node ../../../src/utils-dev/diff.mjs xe xe-expected",
     "x-run": "npm run --silent x-init && npm run --silent x-compare"
-  },
-  "main": "./lib/index.cjs",
-  "exports": {
-    "import": "./dist/t-init.mjs",
-    "default": "./lib/index.cjs",
-    "require": "./dist/t-init.cjs"
-  },
-  "module": "./dist/t-init.mjs",
-  "cjs": "./dist/t-init.cjs",
-  "browser": "./dist/t-init.iife.js",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/xeira/configs/eslint.react.cjs"
-    ]
-  },
-  "babel": {
-    "extends": "./node_modules/xeira/configs/babel.react.cjs"
   }
 }
