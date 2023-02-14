@@ -9,7 +9,7 @@ import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
-import {cyan} from 'farrapa-colors'
+import {cyan} from '../../../../utils/colors.mjs'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
 
 const NODE_ENV = 'development'

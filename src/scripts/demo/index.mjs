@@ -12,7 +12,7 @@ import { initDemoFolderForNollup } from './nollup/init/index.mjs'
 import { demoWithRollup } from './rollup/run/index.mjs'
 import { initDemoFolderForRollup } from './rollup/init/index.mjs'
 import { demoHelp } from '../help/actions.mjs'
-import {red, cyan} from 'farrapa-colors'
+import {red, cyan} from '../../utils/colors.mjs'
 
 (async () => {
  

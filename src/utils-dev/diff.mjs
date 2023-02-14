@@ -1,7 +1,7 @@
 import {diffLines} from 'diff'
 import fs from 'fs'
 import path from 'path'
-import {red, green, gray, cyan} from 'farrapa-colors'
+import {red, green, gray, cyan} from '../utils/colors.mjs'
 
 function _parseDiff (diff) {
   let ok= true
@@ -99,7 +99,7 @@ function _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug= false)
  {
   
 
-  const [filesOk, filesWithDiff, filesOmitted, filesUnwanted]= _compareTwoFolders(pkgPath, truthFolder, distFolder, debug)
+  const [_filesOk, filesWithDiff, filesOmitted, filesUnwanted]= _compareTwoFolders(pkgPath, truthFolder, distFolder, debug)
 
   const all_ok = (Object.keys(filesWithDiff).length + filesOmitted.length + filesUnwanted.length) == 0
 

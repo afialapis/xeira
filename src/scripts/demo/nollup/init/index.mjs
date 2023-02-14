@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import {red, green, cyan} from 'farrapa-colors'
+import {red, green, cyan} from '../../../../utils/colors.mjs'
 import { readJsonFile } from '../../../../utils/json.mjs'
 import { fileURLToPath } from 'url'
 

@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import {readJsonFileSync} from './json.mjs'
 import { resolvePath } from 'babel-plugin-module-resolver'
 import alias_plugin from '@rollup/plugin-alias';
-import {red} from 'farrapa-colors'
+import {red} from '../utils/colors.mjs'
 
 /*
 const _parseExport = (o) => {

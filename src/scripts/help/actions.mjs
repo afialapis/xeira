@@ -2,7 +2,7 @@ import {blue_bold,
        blue_light, 
        red_light, 
        red_bold,
-       yellow_italic} from'farrapa-colors'
+       yellow_italic} from'../../utils/colors.mjs'
 
 const _bl= blue_light 
 const _bb= blue_bold

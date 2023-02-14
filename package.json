@@ -59,8 +59,6 @@
     "eslint": "^8.18.0",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "farrapa-colors": "^1.0.7",
-    "farrapa-strings": "^1.0.7",
     "ignore-styles": "^5.0.1",
     "jsdom": "^20.0.0",
     "lodash": "^4.17.21",

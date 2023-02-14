@@ -4,7 +4,7 @@ import demoDefaults from '../../defaults.mjs'
 import {makeSimpleConfig} from './config.mjs'
 import { readJsonFile } from '../../../../utils/json.mjs'
 import { getJSValidPkgName } from '../../../../utils/names.mjs'
-import {cyan} from 'farrapa-colors'
+import {cyan} from '../../../../utils/colors.mjs'
 
 // eslint-disable-next-line no-unused-vars
 async function demoWithNollup(pkgPath, xeiraConfig) {

@@ -1,5 +1,5 @@
 import { rollup } from 'rollup'
-import {red, green, cyan} from 'farrapa-colors'
+import {red, green, cyan} from '../../../utils/colors.mjs'
 
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   for (const outputOptions of outputOptionsList) {
