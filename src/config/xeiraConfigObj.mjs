@@ -1,3 +1,4 @@
+import path from 'path'
 const addSuffix = (s, suf) => s.replace(/\.js$/, `.${suf}.js`).replace(/\.mjs$/, `.${suf}.mjs`).replace(/\.cjs$/, `.${suf}.cjs`);
 
 
@@ -47,6 +48,10 @@ export class XeiraConfigObj {
     return this.config.source_index
   }
 
+  get sourceFolder() {
+    return path.dirname(this.sourceIndex)
+  }  
+
   get lintWithEslint() {
     return this.config.linter == 'eslint'
   }
@@ -89,13 +94,13 @@ export class XeiraConfigObj {
 
   getCjsOutput(pkgName, destPath) {
     if (this.isTargetingNode) {
-      return `${destPath || this.bundleFolder}/${pkgName}.cjs`
+      return path.join(destPath || this.bundleFolder, `${pkgName}.cjs`)
     }
     return undefined
   }
 
   getEsmOutput(pkgName, destPath) {
-    return `${destPath || this.bundleFolder}/${pkgName}.mjs`
+    return path.join(destPath || this.bundleFolder, `${pkgName}.mjs`)
   }
 
   getEsmNodeOutput(pkgName, destPath) {
@@ -107,7 +112,7 @@ export class XeiraConfigObj {
 
   getUmdOutput(pkgName, destPath) {
     if (this.isTargetingBrowser) {
-      return `${destPath || this.bundleFolder}/${pkgName}.umd.js`
+      return path.join(destPath || this.bundleFolder, `${pkgName}.umd.js`)
     }
     return undefined
   }  
@@ -122,7 +127,8 @@ export class XeiraConfigObj {
 
   getIifeOutput(pkgName, destPath) {
     if (this.isTargetingBrowser) {
-      return `${destPath || this.bundleFolder}/${pkgName}.iife.js`
+      return path.join(destPath || this.bundleFolder, `${pkgName}.iife.js`)
+
     }
     return undefined
   }  
@@ -149,7 +155,7 @@ export class XeiraConfigObj {
 
   getMainFile(pkgName, destPath) {
     if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
-      return [undefined, `${this.transpileFolder}/index.cjs`]
+      return [undefined, path.join(this.transpileFolder, 'index.cjs')]
     }
     if (this.isTargetingNode) {
       return this.getMainFileForNode(pkgName, destPath)

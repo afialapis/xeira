@@ -15,20 +15,18 @@ import {lintHelp} from '../help/actions.mjs'
 (async () => {
 
   const pkgPath= process.env.PWD
-
-  const args = process.argv.slice(2)
-  let sourcePath= './src'
-  if (args.length>=1) {
-    sourcePath = args[0] || ''
-  //} else {
-  //  console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [./src].`)
-  }
-
   // get xeira config
   const xeiraConfig = await getXeiraConfigObj(pkgPath)
+  const defSourcePath = xeiraConfig.sourceFolder  
+
+  const args = process.argv.slice(2)
+  let sourcePath= undefined
+  if (args.length>=1) {
+    sourcePath = args[0]
+  }
 
   if (xeiraConfig.lintWithEslint) {
-    await lintWithEslint(pkgPath, xeiraConfig, sourcePath)
+    await lintWithEslint(pkgPath, xeiraConfig, sourcePath || defSourcePath)
   } else {
     console.warn(`[xeira] lint: no linter specified in xeira settings.`)
   }

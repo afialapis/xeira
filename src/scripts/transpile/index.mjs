@@ -25,11 +25,14 @@ async function xeiraTranspile(pkgPath, sourcePath, destPath) {
     }
     return code
   }
+
+  const theSourcePath= sourcePath || xeiraConfig.sourceFolder
+  const theDestPath= destPath || xeiraConfig.transpileFolder
   
   if (xeiraConfig.transpileWithBabel) {
-    await transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback)
+    await transpileWithBabel(pkgPath, xeiraConfig, theSourcePath, theDestPath, minimifyCallback)
   } else {
-    await noTranspile(pkgPath, sourcePath, destPath, minimifyCallback)
+    await noTranspile(pkgPath, theSourcePath, theDestPath, minimifyCallback)
   }
 }
 
@@ -38,13 +41,11 @@ async function xeiraTranspile(pkgPath, sourcePath, destPath) {
   const pkgPath= process.env.PWD
 
   const args = process.argv.slice(2)
-  let sourcePath= 'src'
-  let destPath = 'lib'
+  let sourcePath= undefined
+  let destPath = undefined
   if (args.length==2) {
-    sourcePath = args[0] || 'src'
-    destPath = args[1] || 'lib'
-  //} else {
-  //  console.warn(`[xeira] transpile: no params passed, so taking defaults. npx xeira transpile [src] [lib].`)
+    sourcePath = args[0]
+    destPath = args[1]
   }
 
   await xeiraTranspile(pkgPath, sourcePath, destPath)

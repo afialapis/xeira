@@ -41,7 +41,7 @@ config file: `xeira.json`.
 ## lint
 
 ```
-  npx xeira lint [folder (default= ./) ]
+  npx xeira lint [folder (default= ./src) ]
 ```
 
 
@@ -55,7 +55,7 @@ config file: `xeira.json`.
 ## bundle
 
 ```
-  npx xeira bundle
+  npx xeira bundle [source_index (default= ./src/index.js) dest_folder (default= ./dist)]
 ```
 
 
