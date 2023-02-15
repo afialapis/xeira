@@ -43,8 +43,8 @@ async function xeiraTranspile(pkgPath, sourcePath, destPath) {
   if (args.length==2) {
     sourcePath = args[0] || 'src'
     destPath = args[1] || 'lib'
-  } else {
-    console.warn(`[xeira] transpile: no params passed, so taking defaults. npx xeira transpile [src] [lib].`)
+  //} else {
+  //  console.warn(`[xeira] transpile: no params passed, so taking defaults. npx xeira transpile [src] [lib].`)
   }
 
   await xeiraTranspile(pkgPath, sourcePath, destPath)

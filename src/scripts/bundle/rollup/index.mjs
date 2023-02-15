@@ -8,24 +8,24 @@ import {rollupModulesForIife} from './iife.mjs'
 import {makeMainFile} from './main_index.mjs'
 import {readJsonFile} from '../../../utils/json.mjs'
 
-async function rollupBundle(pkgPath, xeiraConfig) {
+async function rollupBundle(pkgPath, xeiraConfig, sourceIndex, destPath) {
   const pkgp = (p) => p!=undefined ? path.join(pkgPath, p) : undefined
 
   const pkgJsonPath = pkgp('package.json')
 
   const pkgJson = await readJsonFile(pkgJsonPath)
 
-  const input = pkgp(xeiraConfig.sourceIndex)
+  const input = pkgp(sourceIndex)
 
-  const cjs_output = pkgp(xeiraConfig.getCjsOutput(pkgJson.name))
-  const esm_output = pkgp(xeiraConfig.getEsmOutput(pkgJson.name))
-  const esm_node_output = pkgp(xeiraConfig.getEsmNodeOutput(pkgJson.name))
-  const umd_output = pkgp(xeiraConfig.getUmdOutput(pkgJson.name))
-  const umd_bundle_output = pkgp(xeiraConfig.getUmdFullBundleOutput(pkgJson.name))
-  const iife_output = pkgp(xeiraConfig.getIifeOutput(pkgJson.name))
-  const iife_bundle_output = pkgp(xeiraConfig.getIifeFullBundleOutput(pkgJson.name))
+  const cjs_output = pkgp(xeiraConfig.getCjsOutput(pkgJson.name, destPath))
+  const esm_output = pkgp(xeiraConfig.getEsmOutput(pkgJson.name, destPath))
+  const esm_node_output = pkgp(xeiraConfig.getEsmNodeOutput(pkgJson.name, destPath))
+  const umd_output = pkgp(xeiraConfig.getUmdOutput(pkgJson.name, destPath))
+  const umd_bundle_output = pkgp(xeiraConfig.getUmdFullBundleOutput(pkgJson.name, destPath))
+  const iife_output = pkgp(xeiraConfig.getIifeOutput(pkgJson.name, destPath))
+  const iife_bundle_output = pkgp(xeiraConfig.getIifeFullBundleOutput(pkgJson.name, destPath))
 
-  const [main_file_suffix, main_file] = xeiraConfig.getMainFile(pkgJson.name) 
+  const [main_file_suffix, main_file] = xeiraConfig.getMainFile(pkgJson.name, destPath) 
 
   if (cjs_output) {
     await rollupBuild(...rollupModulesForCjs(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, cjs_output))

@@ -56,7 +56,7 @@ export class XeiraConfigObj {
   }
 
   get transpileFolder() {
-    return this.config.transpile_folder
+    return this.config.transpile_folder || 'lib'
   }
 
   get transpileWithBabel() {
@@ -68,7 +68,7 @@ export class XeiraConfigObj {
   }
 
   get bundleFolder() {
-    return this.config.bundle_folder
+    return this.config.bundle_folder || 'dist'
   }
 
   get bundleWithRollup() {
@@ -76,7 +76,7 @@ export class XeiraConfigObj {
   }
 
   get testFolder() {
-    return this.config.test_folder
+    return this.config.test_folder || 'tests'
   }
 
   get usesReact() {
@@ -87,48 +87,48 @@ export class XeiraConfigObj {
     return this.config.monorepo !== false
   }
 
-  getCjsOutput(pkgName) {
+  getCjsOutput(pkgName, destPath) {
     if (this.isTargetingNode) {
-      return `${this.bundleFolder}/${pkgName}.cjs`
+      return `${destPath || this.bundleFolder}/${pkgName}.cjs`
     }
     return undefined
   }
 
-  getEsmOutput(pkgName) {
-    return `${this.bundleFolder}/${pkgName}.mjs`
+  getEsmOutput(pkgName, destPath) {
+    return `${destPath || this.bundleFolder}/${pkgName}.mjs`
   }
 
-  getEsmNodeOutput(pkgName) {
+  getEsmNodeOutput(pkgName, destPath) {
     if (this.isTargetingNode) {
-      return addSuffix(this.getEsmOutput(pkgName), 'node')
+      return addSuffix(this.getEsmOutput(pkgName, destPath), 'node')
     }
     return undefined
   }
 
-  getUmdOutput(pkgName) {
+  getUmdOutput(pkgName, destPath) {
     if (this.isTargetingBrowser) {
-      return `${this.bundleFolder}/${pkgName}.umd.js`
+      return `${destPath || this.bundleFolder}/${pkgName}.umd.js`
     }
     return undefined
   }  
 
-  getUmdFullBundleOutput(pkgName) {
-    const umd= this.getUmdOutput(pkgName)
+  getUmdFullBundleOutput(pkgName, destPath) {
+    const umd= this.getUmdOutput(pkgName, destPath)
     if (umd) {
       return addSuffix(umd, 'bundle')
     }
     return undefined
   }  
 
-  getIifeOutput(pkgName) {
+  getIifeOutput(pkgName, destPath) {
     if (this.isTargetingBrowser) {
-      return `${this.bundleFolder}/${pkgName}.iife.js`
+      return `${destPath || this.bundleFolder}/${pkgName}.iife.js`
     }
     return undefined
   }  
 
-  getIifeFullBundleOutput(pkgName) {
-    const iife= this.getIifeOutput(pkgName)
+  getIifeFullBundleOutput(pkgName, destPath) {
+    const iife= this.getIifeOutput(pkgName, destPath)
     if (iife) {
       return addSuffix(iife, 'bundle')
     }
@@ -139,22 +139,22 @@ export class XeiraConfigObj {
     return NODE_MAIN
   }
 
-  getMainFileForNode(pkgName) {
+  getMainFileForNode(pkgName, destPath) {
     const suffix = this.getMainFileForNodeSuffix()
     const output = suffix=='cjs'
-      ? this.getCjsOutput(pkgName)
-      : addSuffix(this.getUmdOutput(pkgName), 'main')
+      ? this.getCjsOutput(pkgName, destPath)
+      : addSuffix(this.getUmdOutput(pkgName, destPath), 'main')
     return [suffix, output]
   }
 
-  getMainFile(pkgName) {
+  getMainFile(pkgName, destPath) {
     if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
       return [undefined, `${this.transpileFolder}/index.cjs`]
     }
     if (this.isTargetingNode) {
-      return this.getMainFileForNode(pkgName)
+      return this.getMainFileForNode(pkgName, destPath)
     }
-    return ['umd', addSuffix(this.getUmdOutput(pkgName), 'main')]
+    return ['umd', addSuffix(this.getUmdOutput(pkgName, destPath), 'main')]
   }
 
 

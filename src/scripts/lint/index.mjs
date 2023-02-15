@@ -17,11 +17,11 @@ import {lintHelp} from '../help/actions.mjs'
   const pkgPath= process.env.PWD
 
   const args = process.argv.slice(2)
-  let sourcePath= ''
+  let sourcePath= './src'
   if (args.length>=1) {
     sourcePath = args[0] || ''
-  } else {
-    console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [.].`)
+  //} else {
+  //  console.warn(`[xeira] lint: no params passed, so linting the whole package folder. npx xeira lint [./src].`)
   }
 
   // get xeira config

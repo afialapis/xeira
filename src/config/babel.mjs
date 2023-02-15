@@ -16,8 +16,6 @@ async function getBabelConfig (xeiraConfig, pkgPath) {
 
   const plugin = getBabelPluginForResolvingAliases(xeiraConfig, pkgPath)
   if (plugin) {
-
-    // console.log(`Adding aliases. Root ${path.join(pkgPath, path.dirname(xeiraConfig.sourceIndex))}. Aliases ${JSON.stringify(aliases)}`)
     config= {
       ...config,
       plugins: [
