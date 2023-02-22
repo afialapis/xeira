@@ -1,6 +1,8 @@
 import path from 'path'
 import {readdir, stat, mkdir, access} from 'fs/promises'
 import { removeTopParent } from '../../utils/io.mjs'
+import { log_error } from '../../utils/log.mjs';
+import { blue } from '../../utils/colors.mjs';
 
  
 async function _transpileFile (basePath, filePath, destPath, forceExtension, callback) {
@@ -15,8 +17,6 @@ async function _transpileFile (basePath, filePath, destPath, forceExtension, cal
   } catch(e) {
     await mkdir(destFileFolder, { recursive: true })
   }
-
-  console.log(`[xeira] transpiling ${filePath} ==> ${path.join(destPath, withouParent)}...`);
   
   return await callback(realSourcePath, realDestPath)
 }
@@ -27,14 +27,15 @@ async function transpileDirectory (basePath, sourcePath, destPath, forceExtensio
   try {
     files = await readdir(path.join(basePath, sourcePath))
   } catch(e) {
-    console.error(`[xeira] transpile: Folder ${path.join(basePath, sourcePath)} does not exist`)
+    log_error('transpile', `Folder ${blue(path.join(basePath, sourcePath))} does not exist`)
     return
   }
 
   return Promise.all(
     files.map(async (file) => {
+      const wholeFilePath= path.join(basePath, sourcePath, file)
       const filePath= path.join(sourcePath, file)
-      const stats= await stat(filePath)
+      const stats= await stat(wholeFilePath)
       if (stats.isDirectory()) {
         return await transpileDirectory(basePath, filePath, destPath, forceExtension, callback)
       } else if (stats.isFile()) {

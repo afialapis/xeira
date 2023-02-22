@@ -1,0 +1,22 @@
+{
+  "name": "t-c-test-common-react-17",
+  "type": "commonjs",
+  "scripts": {
+    "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run x-reset && npm i",
+    "test": "npx xeira test --files=/test",
+    "x-run": "npm run --silent test"
+  },
+  "dependencies": {
+    "trangallada": "^0.0.3",
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2",
+    "xeira": "file:../../../"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}

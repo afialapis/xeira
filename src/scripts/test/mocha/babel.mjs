@@ -7,7 +7,7 @@
 
 async function babelRegister() {
 
-  // const babelConfig = await getBabelConfig(xeiraConfig, pkgPath);
+  // const babelConfig = await getBabelConfig(xeiraConfig);
 
   const register = await import("@babel/register/experimental-worker.js")
 

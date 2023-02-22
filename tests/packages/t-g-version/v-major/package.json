@@ -1,0 +1,26 @@
+{
+  "name": "t-g-version",
+  "type": "module",
+  "scripts": {
+    "clean-version": "cp -f package.json.original package.json",
+    "x-reset": "npm run --silent clean-version && rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run x-reset && npm i",
+    "x-version-patch": "npx xeira version --type=patch",
+    "x-version-minor": "npx xeira version --type=minor",
+    "x-version-major": "npx xeira version --type=major",
+    "x-version-number": "npx xeira version --number=4.5.6",
+    "x-compare-patch": "cp package.json v-temp && node node_modules/xeira/src/utils-dev/diff.mjs v-temp v-patch",
+    "x-compare-minor": "cp package.json v-temp && node node_modules/xeira/src/utils-dev/diff.mjs v-temp v-minor",
+    "x-compare-major": "cp package.json v-temp && node node_modules/xeira/src/utils-dev/diff.mjs v-temp v-major",
+    "x-compare-number": "cp package.json v-temp && node node_modules/xeira/src/utils-dev/diff.mjs v-temp v-number",
+    "x-run-patch": "npm run --silent x-version-patch && npm run --silent x-compare-patch",
+    "x-run-minor": "npm run --silent x-version-minor && npm run --silent x-compare-minor",
+    "x-run-major": "npm run --silent x-version-major && npm run --silent x-compare-major",
+    "x-run-number": "npm run --silent x-version-number && npm run --silent x-compare-number",
+    "x-run": "npm run --silent clean-version && npm run --silent x-run-patch && npm run --silent x-run-minor && npm run --silent x-run-major && npm run --silent x-run-number"
+  },
+  "dependencies": {
+    "xeira": "file:../../../"
+  },
+  "version": "1.1.2"
+}

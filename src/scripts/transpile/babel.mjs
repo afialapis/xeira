@@ -1,64 +1,36 @@
-// import path from 'path'
-// import { fileURLToPath } from 'url'
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
-
-
-//import { access, writeFile } from 'fs/promises'
 import { writeFile } from 'fs/promises'
-// import { transformFileAsync, loadOptions } from "@babel/core"
 import { transformFileAsync } from "@babel/core"
-// import { pkgJsonRead } from '../../utils/pkgJson.mjs'
 import { transpileDirectory } from './iter.mjs'
 import {getBabelConfig} from '../../config/babel.mjs'
+import { log_info } from '../../utils/log.mjs'
+import { blue, blue_light } from '../../utils/colors.mjs'
 
-async function transpileWithBabel(pkgPath, xeiraConfig, sourcePath, destPath, minimifyCallback, forceExtension= 'cjs') {
+async function transpileWithBabel(xeiraConfig, minimifyCallback, forceExtension= 'cjs') {
+  log_info(xeiraConfig, 'transpile', `Transpiling folder ${blue(xeiraConfig.sourceFolder)} to ${blue(xeiraConfig.transpileFolder)} (forcing files to be ${blue(forceExtension)})`)
 
-  // https://babeljs.io/docs/en/babel-core#loadoptions
-
-  // TODO
-  // It makes no sense to read pkgJson.babel (it's xceira stuff)
-  // We need to decide how to read possible custom config files
- 
-  //  // prepae babel options
-  //  let babelConfig
-  //  try {
-  //    const babelrc= path.join(pkgPath, '.babelrc')
-  //    await access(babelrc)
-  //    babelConfig = await import(babelrc)
-  //  } catch(e) {
-  //
-  //    const pkgJson = await pkgJsonRead(pkgPath)
-  //    if (pkgJson.babel != undefined) {
-  //      babelConfig = pkgJson.babel
-  //
-  //      if (babelConfig.extends) {
-  //        babelConfig.extends= babelConfig.extends.replace('./node_modules/xeira/configs', path.join(__dirname,'../../../configs'))
-  //      }
-  //
-  //    } else {      
-  //      babelConfig = await getBabelConfig(xeiraConfig, pkgPath)
-  //    }
-  //
-  //  }  
-
-  const babelConfig = await getBabelConfig(xeiraConfig, pkgPath)
-
+  // apply some particular mod on babel config
+  const customBabelConfig= {
+    sourceType: 'unambiguous',
+    //babelConfig.presets.filter(p => p[0]=='@babel/preset-env')[0][1].modules= 'commonjs'
+    plugins: [
+      "@babel/plugin-transform-modules-commonjs",
+      ['module-extension', {
+        mjs: 'cjs',
+      }]    
+    ]
+  }
   
-  babelConfig.sourceType= 'unambiguous'
   
-  //babelConfig.presets.filter(p => p[0]=='@babel/preset-env')[0][1].modules= 'commonjs'
-  babelConfig.plugins= [
-    ...babelConfig.plugins,
-    "@babel/plugin-transform-modules-commonjs",
-    ['module-extension', {
-      mjs: 'cjs',
-    }]    
-  ]
+  await transpileDirectory(xeiraConfig.pkgPath, xeiraConfig.sourceFolder, xeiraConfig.transpileFolder, forceExtension, async (filepath, destpath) => {
+    // Log clean filenames
+    const cleanFrom= filepath.replace(xeiraConfig.pkgPath, '')
+    const cleanTo= destpath.replace(xeiraConfig.pkgPath, '')
+    log_info(xeiraConfig, 'transpile', `Transpiling ${blue_light(cleanFrom)} to ${blue_light(cleanTo)}`)
+    
+    // Merge all involved babel configs
+    const mergedConfig= await getBabelConfig(xeiraConfig, filepath, customBabelConfig)
 
-
-  await transpileDirectory(pkgPath, sourcePath, destPath, forceExtension, async (filepath, destpath) => {
-    let { code } = await transformFileAsync(filepath, babelConfig)
+    let { code } = await transformFileAsync(filepath, mergedConfig)
     code = await minimifyCallback(code)
     //code = code.replace(/\.mjs/g, '.'+forceExtension)
     return await writeFile(destpath, code)

@@ -6,30 +6,35 @@ import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-postcss'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
+import { getBabelConfig } from '../../../../config/babel.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = (pkgPath, pkgName, input, output) => {
+const makeSimpleConfig = async (xeiraConfig, name, input, output) => {
+  const customBabelConfig= {
+    exclude: 'node_modules/**',
+    /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
+    babelHelpers: 'bundled'
+  }
+
+  const mergedBabelConfig= await getBabelConfig(xeiraConfig, input, customBabelConfig)
+
   return {
     input: input,
     output: {
       file: output,
       format: 'iife', // umd, iife because of nollup
-      name: pkgName
+      name: name
     },
     plugins: [
-      ...getRollupPluginForResolvingAliases(pkgPath),
+      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
       json(),
       replace({
         preventAssignment: true,
         'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      babel({
-        exclude: 'node_modules/**',
-        /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-        babelHelpers: 'bundled'
-      }),
+      babel(mergedBabelConfig),
       externals(),
       nodeResolve(),
       commonjs(),

@@ -1,0 +1,19 @@
+{
+  "name": "t-a-init",
+  "scripts": {
+    "clean-init": "rm -fr xe && rm -fr xeira.json && cp -f package.json.original package.json",
+    "x-reset": "npm run --silent clean-init && rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run --silent x-reset && npm i",
+    "x-init-manual": "npx xeira init",
+    "x-init-fly-prepare": "npm run --silent clean-init",
+    "x-init-fly": "npx xeira init --product=package --target=both --source_index=./src/index.js --react=true --monorepo=false --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true",
+    "x-init-fly-after": "mkdir xe && cp xeira.json ./xe/xeira.json && cp package.json ./xe/package.json",
+    "x-init": "npm run --silent x-init-fly-prepare && npm run --silent x-init-fly  && npm run --silent x-init-after",
+    "x-compare": "node ../../../src/utils-dev/diff.mjs xe xe-expected",
+    "x-run": "npm run --silent x-init && npm run --silent x-compare"
+  },
+  "dependencies": {
+    "xeira": "file:../../../"
+  },
+  "version": "0.0.1"
+}

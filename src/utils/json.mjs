@@ -1,5 +1,6 @@
 import fsPromises from 'fs/promises'
 import {readFileSync} from 'fs'
+import { log_error } from './log.mjs'
 
 async function readJsonFile(jsonPath) {
   try {
@@ -7,18 +8,20 @@ async function readJsonFile(jsonPath) {
     const obj = JSON.parse(data)
     return obj
   } catch (err){
-    console.log(err)
+    log_error('readJsonFile', err)
     return {}
   }
 }
 
-function readJsonFileSync(jsonPath) {
+function readJsonFileSync(jsonPath, silent= false) {
   try {
     const data = readFileSync(jsonPath, {encoding:'utf8', flag:'r'})
     const obj = JSON.parse(data)
     return obj
   } catch (err){
-    console.log(err)
+    if (!silent) {
+      log_error('readJsonFileSync', err)
+    }
     return {}
   }
 }

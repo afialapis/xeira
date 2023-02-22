@@ -1,32 +1,42 @@
 # TO SOLVE
 
-# tests
+## tests
 
-## t-test-esm-react
+### Use Mocha programmatically
+
+  · so we can use: getBabelConfig()
+
+  · info:
+
+  https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
+  https://github.com/mochajs/mocha-examples/blob/master/packages/programmatic-usage/tests/run_mocha.js
+  https://blog.testdouble.com/posts/2021-10-29-testing-esm-with-mocha-and-testdouble/
+
+  · but this errors persists:
+    
+    We transpile code in /test/**. But dependencies in there (like 
+    ```import X from '../src/index.mjs``` are not
+
+### Even on command-base solution
+
+  · use: getBabelConfig()
+
+
+### t-c-test-esm-react
  
 Even working with "type: module", when testing we get the error:
 
 ```
 Error [ERR_REQUIRE_ESM]: 
-  require() of ES Module .../t-test-esm-react/src/index.js 
-     from .../t-test-esm-react/test/esm_pkg.cjs 
+  require() of ES Module .../t-c-test-esm-react/src/index.js 
+     from .../t-c-test-esm-react/test/esm_pkg.cjs 
      not supported.
 ```
 
 It is solved if /src uses .cjs extension
 
 
-### Use Mocha programmatically
 
-  so we can do things like passing the good BABEL config
-
-  https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
-  https://github.com/mochajs/mocha-examples/blob/master/packages/programmatic-usage/tests/run_mocha.js
-
-  https://blog.testdouble.com/posts/2021-10-29-testing-esm-with-mocha-and-testdouble/
-
-  => pero mantenemos el error inicial. Parseamos a CJS el /test/***, pero desde alli se
-    hace require() de contenido en /src que esta en MJS.
 
 ### Para que funcione MOCHA:
      

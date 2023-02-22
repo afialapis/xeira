@@ -89,18 +89,18 @@ function hasAliases(pkgPath) {
   return true
 }
 
-function getBabelPluginForResolvingAliases (xeiraConfig, pkgPath) { 
-  const aliases = _aliasesRead(pkgPath)
+function getBabelPluginForResolvingAliases (xeiraConfig) { 
+  const aliases = _aliasesRead(xeiraConfig.pkgPath)
   if (!aliases) {
     return undefined
   }
 
   const aliasNames= Object.keys(aliases)
 
-  // console.log(`Adding aliases. Root ${path.join(pkgPath, path.dirname(xeiraConfig.sourceIndex))}. Aliases ${JSON.stringify(aliases)}`)
+  // console.log(`Adding aliases. Root ${path.join(xeiraConfig.pkgPath, path.dirname(xeiraConfig.sourceIndex))}. Aliases ${JSON.stringify(aliases)}`)
   const plugin=
     ['babel-plugin-module-resolver', {
-      "root": [path.join(pkgPath, path.dirname(xeiraConfig.sourceIndex))],
+      "root": [path.join(xeiraConfig.pkgPath, path.dirname(xeiraConfig.sourceIndex))],
       "alias": aliases,
       resolvePath: (sourcePath, currentFile, opts) => {
         /**

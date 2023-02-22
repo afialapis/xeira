@@ -48,6 +48,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-terser": "^0.4.0",
     "arredemo": "^0.0.9",
+    "babel-merge": "^3.0.0",
     "babel-plugin-module-extension": "^0.1.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "chai": "^4.3.6",
@@ -75,7 +76,8 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^2.0.1",
     "testdouble": "^3.16.6",
-    "uglify-js": "^3.16.1"
+    "uglify-js": "^3.16.1",
+    "yargs": "^17.6.2"
   },
   "overrides": {
     "enzyme": {
@@ -90,7 +92,7 @@
       "./configs/eslint.react.cjs"
     ]
   },
-  "babel": {
+  "babel_XXX": {
     "extends": "./configs/babel.react.cjs"
   }
 }

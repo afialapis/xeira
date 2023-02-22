@@ -5,33 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 'use strict'
-
-import { getXeiraConfigObj } from '../../config/xeira.mjs'
+import { blue, cyan } from '../../utils/colors.mjs'
+import { log_info, log_warn } from '../../utils/log.mjs'
 import {lintWithEslint} from './eslint.mjs'
-import {lintHelp} from '../help/actions.mjs'
 
-
-
-(async () => {
-
-  const pkgPath= process.env.PWD
-  // get xeira config
-  const xeiraConfig = await getXeiraConfigObj(pkgPath)
-  const defSourcePath = xeiraConfig.sourceFolder  
-
-  const args = process.argv.slice(2)
-  let sourcePath= undefined
-  if (args.length>=1) {
-    sourcePath = args[0]
-  }
-
+async function xeiraLint(xeiraConfig, folder) {
+  
   if (xeiraConfig.lintWithEslint) {
-    await lintWithEslint(pkgPath, xeiraConfig, sourcePath || defSourcePath)
+    
+    log_info(xeiraConfig, 'lint', `Linting folder ${blue(folder)} with ${cyan('eslint')}`)
+
+    await lintWithEslint(xeiraConfig, folder )
   } else {
-    console.warn(`[xeira] lint: no linter specified in xeira settings.`)
+    log_warn('lint', 'Nothing to lint: no linter specified in xeira settings')
   }
-})().catch((error) => {
-  const pkgPath= process.env.PWD
-  process.exitCode = 1
-  lintHelp(pkgPath, error)
-})
+
+}
+
+export default xeiraLint

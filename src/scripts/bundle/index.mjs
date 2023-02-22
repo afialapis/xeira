@@ -6,41 +6,14 @@
  */
 'use strict'
 
-import  { getXeiraConfigObj } from '../../config/xeira.mjs'
 import  { rollupBundle } from './rollup/index.mjs'
-import  { bundleHelp } from '../help/actions.mjs'
 
-async function xeiraBundle(pkgPath, sourceIndex, destPath) {
-  // get xeira config
-  const xeiraConfig = await getXeiraConfigObj(pkgPath)
-  
+async function xeiraBundle(xeiraConfig) {
   if (xeiraConfig.bundleWithRollup) {
-    await rollupBundle(pkgPath, xeiraConfig, sourceIndex || xeiraConfig.sourceIndex, destPath || xeiraConfig.bundleFolder)
+    await rollupBundle(xeiraConfig)
   } else {
     console.warn('[xeira] bundle: bundler not specified or not implement yet')
   }
 }
 
-
-(async () => {
-  const pkgPath= process.env.PWD
-
-
-  const args = process.argv.slice(2)
-  let sourceIndex= undefined
-  let destPath = undefined
-  if (args.length>=1) {
-    sourceIndex = args[0] || undefined
-  }
-  if (args.length>=2) {
-    destPath = args[1] || undefined
-  }
-
-  await xeiraBundle(pkgPath, sourceIndex, destPath)
-  
-})().catch((error) => {
-  const pkgPath= process.env.PWD
-  process.exitCode = 1
-  bundleHelp(pkgPath, error)
-})
-
+export default xeiraBundle

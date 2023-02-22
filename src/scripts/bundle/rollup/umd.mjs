@@ -9,6 +9,7 @@ import terser from '@rollup/plugin-terser'
 
 import {rollupBanner} from './banner.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
+import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = 'production'
 
@@ -36,34 +37,37 @@ const makeGlobals = (pkgJson) => {
 }
 
 
-function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output, bundleDeps= false) {
+async function rollupModulesForUmd(xeiraConfig, pkgJsonPath, pkgJson, input, output, bundleDeps= false) {
+  const customBabelConfig= {
+    exclude: /node_modules/,
+    /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
+    
+    // TODO
+    //  xeiraConfig.isAnApp()
+    //  ? 'runtime' https://github.com/rollup/plugins/tree/master/packages/babel#injected-helpers
+    //  : bundled
+    
+    babelHelpers: 'bundled',
+
+    presets: [
+      ["@babel/preset-env", { 
+        bugfixes: true,
+        loose: true 
+      }],
+      ... xeiraConfig.usesReact
+        ? ['@babel/preset-react']
+        : []
+    ]
+  }
+
+  const mergedBabelConfig= await getBabelConfig(xeiraConfig, input, customBabelConfig)
 
   const inputOptions= {
     input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(pkgPath),
+      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
       json(),
-      babel({
-        exclude: /node_modules/,
-        /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-        
-        // TODO
-        //  xeiraConfig.isAnApp()
-        //  ? 'runtime' https://github.com/rollup/plugins/tree/master/packages/babel#injected-helpers
-        //  : bundled
-        
-        babelHelpers: 'bundled',
-
-        presets: [
-          ["@babel/preset-env", { 
-            bugfixes: true,
-            loose: true 
-          }],
-          ... xeiraConfig.usesReact
-            ? ['@babel/preset-react']
-            : []
-        ]
-      }),      
+      babel(mergedBabelConfig),      
       externals({
         packagePath: pkgJsonPath,
         deps: !bundleDeps,
@@ -75,7 +79,7 @@ function rollupModulesForUmd(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       nodeResolve({
-        rootDir: pkgPath,
+        rootDir: xeiraConfig.pkgPath,
         exportConditions: ['node'],
       }),
       commonjs({

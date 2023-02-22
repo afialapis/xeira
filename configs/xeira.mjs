@@ -24,5 +24,7 @@ export default {
   test_folder: './test', // './tests'
 
   demo_mode: 'auto',
-  demo_demoer: 'rollup'
+  demo_demoer: 'rollup',
+
+  verbose: true
 }

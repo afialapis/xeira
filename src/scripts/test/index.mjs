@@ -6,27 +6,14 @@
  */
 'use strict'
 
-import { getXeiraConfigObj } from '../../config/xeira.mjs'
 import { testWithMocha } from './mocha/index.mjs'
-import { testWithMochaAPI } from './mocha_api/index.mjs'
-import { testHelp } from '../help/actions.mjs'
+//import { testWithMochaAPI } from './mocha_api/index.mjs'
 
+async function xeiraTest(xeiraConfig, extraParams, testPathStr) {
 
-(async () => {
+  await testWithMocha(xeiraConfig, extraParams, testPathStr)
+  //await testWithMochaAPI(xeiraConfig, extraParams, testPathStr)
 
-  const pkgPath= process.env.PWD
+}
 
-  // get xeira config
-  const xeiraConfig = await getXeiraConfigObj(pkgPath)  
-
-  const args = process.argv.slice(2)
-
-  await testWithMocha(pkgPath, xeiraConfig, args)
-  //await testWithMochaAPI(pkgPath, xeiraConfig, args)
-
-})().catch((error) => {
-  
-  const pkgPath= process.env.PWD
-  process.exitCode = 1
-  testHelp(pkgPath, error)
-})
+export default xeiraTest

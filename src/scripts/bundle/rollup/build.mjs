@@ -1,5 +1,6 @@
 import { rollup } from 'rollup'
 import {red, green, cyan} from '../../../utils/colors.mjs'
+import { log_always, log_error } from '../../../utils/log.mjs';
 
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   for (const outputOptions of outputOptionsList) {
@@ -75,10 +76,10 @@ async function rollupBuild(inputOptions, outputOptionsList) {
   }
 
   if (buildFailed) {
-    console.log(`[xeira][bundle] ${red('Error')} when bundling ${cyan(outputOptionsList[0].file)}`)
+    log_error('bundle', `Error when bundling ${outputOptionsList[0].file}`)
     process.exit(1)
   } else {
-    console.log(`[xeira][bundle] Bundled ${cyan(outputOptionsList[0].file)} ${green('successfully!')}`)
+    log_always('bundle', `Bundled ${cyan(outputOptionsList[0].file)} ${green('successfully!')}`)
   }
 }
 

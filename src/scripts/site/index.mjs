@@ -6,19 +6,12 @@
  */
 'use strict'
 
-import {siteHelp} from '../help/actions.mjs'
-
 import arredemo from 'arredemo/cli'
 
-(async () => {
-  
-  const pkgPath= process.env.PWD
-  await arredemo(pkgPath)
-  
-})().catch((error) => {
-  const pkgPath= process.env.PWD
-  process.exitCode = 1
-  siteHelp(pkgPath, error)
-})
+async function xeiraSite (xeiraConfig) {
 
+  await arredemo(xeiraConfig.pkgPath)
 
+}
+
+export default xeiraSite

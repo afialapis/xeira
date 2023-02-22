@@ -3,6 +3,7 @@ import fs from 'fs'
 import {red, green, cyan} from '../../../../utils/colors.mjs'
 import { readJsonFile } from '../../../../utils/json.mjs'
 import { fileURLToPath } from 'url'
+import { log_info } from '../../../../utils/log.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -26,17 +27,17 @@ const _copyFileReplacingContent = (sourcePath, destPath, replaceValues) => {
   fs.writeFileSync(destPath, buffer, {encoding: 'utf-8'})
 }
 
-async function initDemoFolderForNollup(pkgPath, xeiraConfig, force) {
-  const pkgJson = await readJsonFile(path.join(pkgPath ,'package.json'))
+async function initDemoFolderForNollup(xeiraConfig, force) {
+  const pkgJson = await readJsonFile(path.join(xeiraConfig.pkgPath ,'package.json'))
   const pkgName= pkgJson.name
   const replaceValues= {
     'APPNAME': pkgName
   }
   
-  console.log(`[xeira][demo] Initing demo...`)
+  log_info(xeiraConfig, 'demo', 'Initing demo...')
   
   const sourceFolder= path.join(__dirname, 'tmpl')
-  const destFolder = path.join(pkgPath, 'demo')
+  const destFolder = path.join(xeiraConfig.pkgPath, 'demo')
 
   for (const [name, ftype] of DEMO_INIT_ACTIONS) {
     const sourcePath= path.join(sourceFolder, name)
@@ -52,7 +53,8 @@ async function initDemoFolderForNollup(pkgPath, xeiraConfig, force) {
     }
 
     if (fs.existsSync(destPath)) {
-      console.log(`[xeira][demo] Cannot init ${cyan(name)}: it already exists...`)
+      log_info(xeiraConfig, 'demo', `Cannot init ${cyan(name)}: it already exists...`)
+
     } else {    
       if (ftype=='f') {
         _copyFileReplacingContent(sourcePath, destPath, replaceValues)
@@ -61,9 +63,10 @@ async function initDemoFolderForNollup(pkgPath, xeiraConfig, force) {
       }
       
       if (fs.existsSync(destPath)) {
-        console.log(`[xeira][demo] Init ${cyan(name)} ${green('done!')}`)
+        log_info(xeiraConfig, 'demo', `Init ${cyan(name)} ${green('done!')}`)
+
       } else {
-        console.log(`[xeira][demo] Init ${cyan(name)} ${red('error :(')}`)
+        log_info(xeiraConfig, 'demo', `Init ${cyan(name)} ${red('error :(')}`)
       }
     }
   }

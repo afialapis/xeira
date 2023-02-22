@@ -1,5 +1,6 @@
 import {watch} from 'rollup'
 import {cyan, green} from '../../../../utils/colors.mjs'
+import { log_always } from '../../../../utils/log.mjs';
 
 const rollupWatch = (options) => {
 
@@ -40,7 +41,7 @@ const rollupWatch = (options) => {
     if (event.result) {
       event.result.close();
     } else if (event.code=='END') {
-      console.log(`[xeira][watch] Rebundled ${cyan(options.output[0].file)} ${green('successfully!')}`)
+      log_always('demo', `[watch] Rebundled ${cyan(options.output[0].file)} ${green('successfully!')}`)
     }
   });
   

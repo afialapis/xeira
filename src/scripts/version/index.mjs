@@ -1,47 +1,75 @@
-/**
- * Copyright (c) 2022-present, afialapis.com
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-'use strict'
+import path from 'path'
+import { readdirSync } from 'fs'
+import {pkgJsonRead, pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 
-import { getXeiraConfigObj } from '../../config/xeira.mjs'
-import { versioning } from './versioning.mjs'
-import { versionHelp } from '../help/actions.mjs'
-
-
-
-(async () => {
-  const pkgPath= process.env.PWD
-
-  // get args
-  const args = process.argv.slice(2)
-
-  let versionType= '', filterPattern= ''
-  if (args.length>=1) {
-    versionType = args[0] || ''
-
-    if (args.length>1) {
-      if (args[1]=='-filter') {
-        filterPattern= args[2]
-      } else {
-        throw Error('Invalid filtering parameters')
-      }
-    }
-
-  } else {
-    throw Error('Invalid number of parameters')
+function _updateVersionValue(version, versionNumber, versionType) {
+  if (versionNumber && versionNumber.indexOf('.')>0) {
+    return versionNumber
   }
 
-  // get xeira config
-  const xeiraConfig = await getXeiraConfigObj(pkgPath)
+  if (versionType && versionType.indexOf('.')>0) {
+    return versionType
+  }
 
-  // do the versioning
-  await versioning(pkgPath, xeiraConfig, versionType, filterPattern)
+  let major= 0, minor= 0, patch= 0
   
-})().catch((error) => {
-  const pkgPath= process.env.PWD
-  process.exitCode = 1
-  versionHelp(pkgPath, error)
-})
+  if (version != undefined) {
+    [major, minor, patch]= version.split('.').map(v => parseInt(v))
+  }
+  
+  const text = versionType || versionNumber 
+
+  if (text=='major') {
+    major+= 1
+  } else if (text=='minor') {
+    minor+= 1
+  } else if (text=='patch') {
+    patch+= 1
+  } else {
+    throw Error(`Invalid version type ${text}`)
+  }
+  
+  const newVersion= `${major}.${minor}.${patch}`
+  return newVersion
+}
+
+function _getMonorepoPackageList(pkgPath, filterPattern) {
+  
+  let pkgs=  readdirSync(path.join(pkgPath, 'packages'), { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(dirent => dirent.name)
+  if (filterPattern) {
+      pkgs= pkgs.filter(dirname => dirname.toLowerCase().indexOf(filterPattern.toLowerCase())>=0)
+  }
+  return pkgs
+}
+
+
+async function xeiraVersion(xeiraConfig, versionType, versionNumber, filterPattern) 
+{
+  let pkgJsonPaths= []
+
+  if (xeiraConfig.isAMonoRepo) {
+    const pkgList= _getMonorepoPackageList(xeiraConfig.pkgPath, filterPattern)
+    pkgJsonPaths= pkgList.map(pkgName => path.join(xeiraConfig.pkgPath, 'packages', pkgName))
+  } else {
+    pkgJsonPaths.push(xeiraConfig.pkgPath)
+  }
+
+  let promises= []
+  for (const pkgJsonPath of pkgJsonPaths) {
+    const pkgJson = await pkgJsonRead(pkgJsonPath)
+    const newVersion= _updateVersionValue(pkgJson.version, versionNumber, versionType)
+    if (pkgJson.version != newVersion) {
+      const changes= {
+        version: newVersion
+      }
+      const promise= pkgJsonUpdate (pkgJsonPath, changes, true)
+      promises.push(promise)
+    }
+  }
+  
+  await Promise.all(promises)
+}
+
+export default xeiraVersion

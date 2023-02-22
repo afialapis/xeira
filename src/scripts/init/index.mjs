@@ -8,64 +8,64 @@
 
 import path from 'path'
 import prompts from 'prompts'
-import {initHelp} from '../help/actions.mjs'
+import {log_info} from '../../utils/log.mjs'
 import {saveObjectToJsonWithConfirm} from '../../utils/io.mjs'
-import {pkgJsonRead, pkgJsonUpdate} from '../../utils/pkgJson.mjs'
-import {getXeiraDefaultConfig, getXeiraConfigObj} from '../../config/xeira.mjs'
+import {pkgJsonUpdate} from '../../utils/pkgJson.mjs'
+import {readJsonFileSync} from '../../utils/json.mjs'
+
+import {makeXeiraConfigObj} from '../../config/xeira.mjs'
 import configQuestions from './questions/index.mjs'
 import {makePkgJsonValues} from './pkgJsonValues.mjs'
+import { blue } from '../../utils/colors.mjs'
 
-/*
- * About monorepos
- *   => If true, then the other options are package-level.
- *   => How to handle that?
- */
+async function xeiraInit(xeiraConfig, flyOptions, force) {
+  const xeiraConfigName = path.join(xeiraConfig.pkgPath, 'xeira.json')
 
-async function xeiraInit(pkgPath, injectValues) {
-  // Inject values if any
-  if ((injectValues!=undefined) && (injectValues.length>0) ) {
-    const parsedValues= injectValues.map(v => 
-      v=='true'
-      ? true
-      : v=='false'
-        ? false
-        : v)
-    prompts.inject(parsedValues)
-  }
-
+  // xeiraConfig comes as a merged config from
+  //  -- default values
+  //  -- values in pkgPath/xeira.json (if any)
+  //  -- values passed as args (if any)
+  
+  // Lets check what values are already saved on xeira.json
+  const savedConfig= readJsonFileSync(xeiraConfigName, true)
+  const savedOptions= Object.keys(savedConfig)
+  
+  // We will ask just for the options which
+  // -- are yet not saved 
+  // -- were not passed by argument
+  const askForQuestions = force
+    ? configQuestions
+    : configQuestions
+    .filter(q => savedOptions.indexOf(q.name)<0)
+    .filter(q => flyOptions.indexOf(q.name)<0)
+  
   // Prompt questions
-  const configAnswers = await prompts(configQuestions)
+  let configAnswers = {}
+  if (askForQuestions.length>0) {
+    configAnswers = await prompts(askForQuestions)
+  } else {
+    log_info(xeiraConfig, 'init', 'All options are already set up!')
+  }
 
   // Prepare xeira config data
   const xeiraConfigData = {
-    ...await getXeiraDefaultConfig(),
+    ...xeiraConfig.config,
     ...configAnswers
   }
 
-  // Save xeira config data
-  const xeiraConfigName = path.join(pkgPath, 'xeira.json')
-  await saveObjectToJsonWithConfirm(xeiraConfigName, xeiraConfigData, true)
+  // Save xeira.json
+  if (askForQuestions.length>0) {
+    await saveObjectToJsonWithConfirm(xeiraConfigName, xeiraConfigData, true)
+  }
+
+  log_info(xeiraConfig, 'init', `Keeping ${blue('package.json')} is updated`)
 
   // Prepare xeira config object
-  const xeiraConfig = await getXeiraConfigObj(xeiraConfigData)
+  const defXeiraConfig = await makeXeiraConfigObj(xeiraConfigData, xeiraConfig.pkgPath, xeiraConfig.pkgName)
 
   // Update package.json
-  const pkgJson = await pkgJsonRead(pkgPath)
-  const pkgJsonValues= makePkgJsonValues(xeiraConfig, pkgJson.name)
-  await pkgJsonUpdate (pkgPath, pkgJsonValues)
+  const pkgJsonValues= makePkgJsonValues(defXeiraConfig)
+  await pkgJsonUpdate (xeiraConfig.pkgPath, pkgJsonValues)
 }
 
-
-(async () => {
-  const pkgPath= process.env.PWD
-
-  const injectValues = process.argv.slice(2)
-
-  await xeiraInit(pkgPath, injectValues)
-
-})().catch((error) => {
-  const pkgPath= process.env.PWD
-
-  process.exitCode = 1
-  initHelp(pkgPath, error)
-})
+export default xeiraInit

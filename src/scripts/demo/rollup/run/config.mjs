@@ -11,25 +11,32 @@ import livereload from 'rollup-plugin-livereload'
 
 import {cyan} from '../../../../utils/colors.mjs'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
+import { log_always } from '../../../../utils/log.mjs'
+import { getBabelConfig } from '../../../../config/babel.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = (pkgPath, pkgName, input, output, contentBase, port) => {
+const makeSimpleConfig = async (xeiraConfig, name, input, output, contentBase, port) => {
+
+  const customBabelConfig= {
+    exclude: 'node_modules/**',
+    /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
+    babelHelpers: 'bundled'
+  }
+
+  const mergedBabelConfig= await getBabelConfig(xeiraConfig, input, customBabelConfig)
+
   const inputOptions= {
     input: input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(pkgPath),
+      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
       json(),
       replace({
         preventAssignment: true,
         'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      babel({
-        exclude: 'node_modules/**',
-        /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-        babelHelpers: 'bundled'
-      }),
+      babel(mergedBabelConfig),
       //externals(),
       nodeResolve(),
       commonjs(),
@@ -48,7 +55,7 @@ const makeSimpleConfig = (pkgPath, pkgName, input, output, contentBase, port) =>
           const host = address.address === '::' ? 'localhost' : address.address
           // by using a bound function, we can access options as `this`
           const protocol = this.https ? 'https' : 'http'
-          console.log(`[xeira][demo] Server listening at ${cyan(`${protocol}://${host}:${address.port}/`)}`)
+          log_always('demo', `Server listening at ${cyan(`${protocol}://${host}:${address.port}/`)}`)
         }        
       }),
       livereload({
@@ -63,7 +70,7 @@ const makeSimpleConfig = (pkgPath, pkgName, input, output, contentBase, port) =>
   const outputOptions= {
     file: output,
     format: 'iife', // umd, iife because of nollup
-    name: pkgName
+    name: name
   }
 
   return [inputOptions, outputOptions]

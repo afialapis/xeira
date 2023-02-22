@@ -1,0 +1,22 @@
+{
+  "name": "t-h-site",
+  "type": "module",
+  "scripts": {
+    "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run x-reset && npm i",
+    "x-site": "npx xeira site",
+    "x-compare": "node node_modules/xeira/src/utils-dev/diff.mjs arredemo arredemo-expected",
+    "x-run": "npm run --silent x-site && npm run --silent x-compare"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "xeira": "file:../../../"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}

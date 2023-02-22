@@ -8,15 +8,15 @@ import { rollupWatch } from './watch.mjs'
 
 
 // eslint-disable-next-line no-unused-vars
-async function demoWithRollup(pkgPath, xeiraConfig) {
+async function demoWithRollup(xeiraConfig) {
   
-  const pkgJson = await readJsonFile(path.join(pkgPath ,'package.json'))
-  const pkgName = getJSValidPkgName(pkgJson.name)
+  const pkgJson = await readJsonFile(path.join(xeiraConfig.pkgPath ,'package.json'))
+  const name = getJSValidPkgName(pkgJson.name)
   const input = demoDefaults.input
   const output = demoDefaults.output
   //const contentBase = path.join(pkgPath, demoDefaults.contentBase)
   const port = demoDefaults.port
-  const [inputOptions, outputOptions]= makeSimpleConfig(pkgPath, pkgName, input, output, demoDefaults.contentBase, port)
+  const [inputOptions, outputOptions]= await makeSimpleConfig(xeiraConfig, name, input, output, demoDefaults.contentBase, port)
 
   await rollupBuild(inputOptions, [outputOptions])
   rollupWatch({

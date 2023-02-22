@@ -2,6 +2,7 @@ import {diffLines} from 'diff'
 import fs from 'fs'
 import path from 'path'
 import {red, green, gray, cyan} from '../utils/colors.mjs'
+import { log_always, log_error } from '../utils/log.mjs'
 
 function _parseDiff (diff) {
   let ok= true
@@ -78,7 +79,7 @@ function _compareTwoFolders (pkgPath, aFolder, bFolder, debug= false) {
       const [ok, msg]= _compareTwoFiles(path_a, path_b)
 
       if (debug) {
-        console.log(`[xeira][diff] Compared file ${cyan(aRelativeName)}: ${ok ? green('Ok!') : red('ko :(')}`)
+        log_always('diff', `Compared file ${cyan(aRelativeName)}: ${ok ? green('Ok!') : red('ko :(')}`)
       }
       
       if (! ok) {
@@ -105,22 +106,22 @@ function _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug= false)
 
   if (all_ok) {
     //if (debug) {
-      console.log(`[xeira][diff] ${green('All files are ok!')}`)
+      log_always('diff', `${green('All files are ok!')}`)
     //}
     return true
   }
 
   filesOmitted.map(f => 
-    console.log(`[xeira][diff] ${cyan(f)} ${red('is not present in')} ${cyan(distFolder)}`))
+    log_always('diff', `${cyan(f)} ${red('is not present in')} ${cyan(distFolder)}`))
 
     filesUnwanted.map(f => 
-    console.log(`[xeira][diff] ${cyan(f)} ${red('is present in')} ${cyan(distFolder)} ${red('but it should not')}`))
+    log_always('diff', `${cyan(f)} ${red('is present in')} ${cyan(distFolder)} ${red('but it should not')}`))
   
   Object.entries(filesWithDiff).map(([f, msg]) => {
-    console.log(`[xeira][diff]`)
-    console.log(`[xeira][diff] Differences:`)
-    console.log(`[xeira][diff]`)
-    console.log(`[xeira][diff] ${cyan(f)}:`)
+    log_always('diff', ` `)
+    log_always('diff', `Differences:`)
+    log_always('diff', ` `)
+    log_always('diff', `${cyan(f)}:`)
     console.log(msg)
   })
 
@@ -138,14 +139,14 @@ const debug = args[2] || false
 const distPath = path.join(pkgPath, distFolder)
 if (! fs.existsSync(distPath)) {
   let err= `Folder ${distPath} does not exist`
-  console.error(err)
+  log_error('diff', err)
   throw new Error(err)
 }
 
 const truthPath = path.join(pkgPath, truthFolder)
 if (! fs.existsSync(truthPath)) {
   let err= `Folder ${truthPath} does not exist`
-  console.error(err)
+  log_error('diff', err)
   throw new Error(err)
 }
 

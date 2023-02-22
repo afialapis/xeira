@@ -10,5 +10,6 @@ reset_and_prepare_pkg() {
 for TEST_PATH in tests/packages/*
 do
   TEST=$(basename "$TEST_PATH")
+  echo "Preparing $TEST"
   reset_and_prepare_pkg $TEST
 done

@@ -9,46 +9,50 @@ import terser from '@rollup/plugin-terser'
 
 import {rollupBanner} from './banner.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
+import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = 'production'
 
 const minifyExtension = pathToFile => pathToFile.replace(/\.mjs$/, '.min.mjs');
 
-function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, output) {
+async function rollupModulesForEsm(xeiraConfig, pkgJsonPath, pkgJson, input, output) {
+  const customBabelConfig= {
+    exclude: 'node_modules/**',
+    /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
+    
+    // TODO
+    //  xeiraConfig.isAnApp()
+    //  ? 'runtime' https://github.com/rollup/plugins/tree/master/packages/babel#injected-helpers
+    //  : bundled
+    
+    babelHelpers: 'bundled',
 
+    presets: [
+      [ "@babel/preset-modules",
+        {
+          // Don't spoof `.name` for Arrow Functions, which breaks when minified anyway.
+          loose: true,
+        },
+      ],
+      ... xeiraConfig.usesReact
+        ? [ "@babel/preset-react",
+            {
+              // Compile JSX Spread to Object.assign(), which is reliable in ESM browsers.
+              //useBuiltIns: true,
+            },
+          ]
+        : [],
+    ]
+  }
+
+  const mergedBabelConfig = await getBabelConfig(xeiraConfig, input, customBabelConfig)
+  
   const inputOptions= {
     input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(pkgPath),
+      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
       json(),
-      babel({
-        exclude: 'node_modules/**',
-        /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-        
-        // TODO
-        //  xeiraConfig.isAnApp()
-        //  ? 'runtime' https://github.com/rollup/plugins/tree/master/packages/babel#injected-helpers
-        //  : bundled
-        
-        babelHelpers: 'bundled',
-
-        presets: [
-          [ "@babel/preset-modules",
-            {
-              // Don't spoof `.name` for Arrow Functions, which breaks when minified anyway.
-              loose: true,
-            },
-          ],
-          ... xeiraConfig.usesReact
-            ? [ "@babel/preset-react",
-                {
-                  // Compile JSX Spread to Object.assign(), which is reliable in ESM browsers.
-                  //useBuiltIns: true,
-                },
-              ]
-            : [],
-        ]
-      }),      
+      babel(mergedBabelConfig),      
       replace({
         preventAssignment: true,
         'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
@@ -58,7 +62,7 @@ function rollupModulesForEsm(xeiraConfig, pkgPath, pkgJsonPath, pkgJson, input, 
         packagePath: pkgJsonPath
       }),
       nodeResolve({
-        rootDir: pkgPath,
+        rootDir: xeiraConfig.pkgPath,
         exportConditions: ['node'],
       }),
       commonjs({
