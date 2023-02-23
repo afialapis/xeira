@@ -35,11 +35,11 @@ async function rollupModulesForEsm(xeiraConfig, pkgJsonPath, pkgJson, input, out
         },
       ],
       ... xeiraConfig.usesReact
-        ? [ "@babel/preset-react",
-            {
-              // Compile JSX Spread to Object.assign(), which is reliable in ESM browsers.
-              //useBuiltIns: true,
-            },
+        ? [ "@babel/preset-react"
+            //{
+            //  // Compile JSX Spread to Object.assign(), which is reliable in ESM browsers.
+            //  //useBuiltIns: true,
+            //},
           ]
         : [],
     ]

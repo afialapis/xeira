@@ -15,5 +15,19 @@
   "dependencies": {
     "xeira": "file:../../../"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "main": "lib_custom/index.cjs",
+  "exports": {
+    "import": "dist/t-a-init.mjs",
+    "default": "lib_custom/index.cjs",
+    "require": "dist/t-a-init.cjs"
+  },
+  "module": "dist/t-a-init.mjs",
+  "cjs": "dist/t-a-init.cjs",
+  "browser": "dist/t-a-init.iife.js",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  }
 }
