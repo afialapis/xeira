@@ -11,7 +11,7 @@ import { noTranspile } from './notranspile.mjs'
 import { minimifyWithUglify } from './uglify.mjs'
 
 
-async function xeiraTranspile(xeiraConfig, sourceFolder) {
+async function xeiraTranspile(xeiraConfig, sourceFolder= undefined) {
   // minifier callback
   const minimifyCallback = async (code) => {
     if (xeiraConfig.minifyWithUglify) {
@@ -22,9 +22,9 @@ async function xeiraTranspile(xeiraConfig, sourceFolder) {
   }
   
   if (xeiraConfig.transpileWithBabel) {
-    await transpileWithBabel(xeiraConfig, sourceFolder, minimifyCallback)
+    await transpileWithBabel(xeiraConfig, minimifyCallback, sourceFolder)
   } else {
-    await noTranspile(xeiraConfig, sourceFolder, minimifyCallback)
+    await noTranspile(xeiraConfig, minimifyCallback, sourceFolder)
   }
 }
 

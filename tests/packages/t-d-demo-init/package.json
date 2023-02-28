@@ -4,11 +4,11 @@
   "scripts": {
     "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
     "x-prepare": "npm run x-reset && npm i",
-    "x-init-nollup": "npx xeira demo init force --demo_demoer=nollup",
+    "x-init-nollup": "npx xeira demo --init --force --demo_demoer=nollup",
     "x-compare-nollup": "node node_modules/xeira/src/utils-dev/diff.mjs demo demo-expected-nollup",
     "x-run-nollup": "npm run --silent x-init-nollup && npm run --silent x-compare-nollup",
 
-    "x-init-rollup": "npx xeira demo init force --demo_demoer=rollup",
+    "x-init-rollup": "npx xeira demo --init --force --demo_demoer=rollup",
     "x-compare-rollup": "node node_modules/xeira/src/utils-dev/diff.mjs demo demo-expected-rollup",
     "x-run-rollup": "npm run --silent x-init-rollup && npm run --silent x-compare-rollup",
     

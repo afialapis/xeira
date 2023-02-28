@@ -170,7 +170,7 @@ ${ctitle('EXAMPLES')}
 const checker = (argv) => {
   let err= undefined
   Object.keys(argv).map((k) => {
-    if (['help', 'h', 'folder','f', 'linter', 'verbose'].indexOf(k)<0) {
+    if (['help', 'h', 'files','f', 'test_folder', 'verbose'].indexOf(k)<0) {
       err= `Invalid option ${k}`
       return
     }

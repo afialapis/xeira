@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
-    "x-demo-init": "npx xeira demo init force",
+    "x-demo-init": "npx xeira demo --init --force",
     "x-prepare": "npm run x-reset && npm i && npm run --silent x-demo-init",
     "x-demo": "npx xeira demo",
     "x-run": "echo \"npm run --silent x-demo\""
