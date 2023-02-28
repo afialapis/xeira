@@ -1,6 +1,6 @@
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj } from '../../src/config/xeira.mjs'
-import xeiraLint from '../../src/scripts/lint/index.mjs'
+import {cyan_italic} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj } from '../../../src/config/xeira.mjs'
+import xeiraLint from '../../../src/scripts/lint/index.mjs'
 
 const command = 'lint [folder] [verbose]'
 

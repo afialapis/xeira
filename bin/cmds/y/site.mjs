@@ -1,16 +1,15 @@
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj } from '../../src/config/xeira.mjs'
-import xeiraVersion from '../../src/scripts/version/index.mjs'
+import {gray_light} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj } from '../../../src/config/xeira.mjs'
+import xeiraSite from '../../../src/scripts/site/index.mjs'
 
-
-const command = 'version [type] [number] [filter] [verbose]'
-const describe = `${cyan_italic('Version handling')}`
+const command = 'site [verbose]'
+const describe = `${gray_light('Build an static site for your docs (and demo)')}`
 
 const builder = function (yargs) {
   const pkgPath= process.env.PWD
   const xeiraConfig = readXeiraConfigObj(pkgPath)
 
-  return yargs 
+  return yargs
     .option('verbose', {
       alias: 'b',
       default: xeiraConfig.beVerbose(),
@@ -19,15 +18,12 @@ const builder = function (yargs) {
 }
 
 
-
-
-
 const handler = async function (argv) {
   const pkgPath= process.env.PWD
   // get xeira config
   const xeiraConfig = await readXeiraConfigObj(pkgPath, argv)
 
-  await xeiraVersion(xeiraConfig, argv.type, argv.number, argv.filter)
+  await xeiraSite(xeiraConfig)
 }
 
 export {command, describe, builder, handler}

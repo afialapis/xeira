@@ -27,6 +27,24 @@ preferred bundler). It's also very opinionated, using pretty standard configurat
 
 # API
 
+`xeira` usage is always like:
+
+```
+  npx xeira <command> [options] [config]
+```
+
+`xeira` commands will provide some particular `[options]` depending on each case. 
+
+`[config]`: you can also pass any value from [`xeira`'s config](#configuration) as parameter,
+taking priority over `xeira.json` file (if any).
+
+In case of doubts, `--help` is always there for you:
+
+```
+  npx xeira --help
+  npx xeira <command> --help
+```
+
 
 ## init
 
@@ -34,7 +52,7 @@ This one-shot command will guide you in the creation of `xeira`'s
 config file: `xeira.json`.
 
 ```
-  npx xeira init
+  npx xeira init [force] [options]
 ```
 
 
@@ -92,6 +110,11 @@ config file: `xeira.json`.
 ```
   npx xeira help
 ```
+
+# Configuration
+
+## `xeira.json` options
+
 
 
 # Others

@@ -1,8 +1,10 @@
 import path from 'path'
 import {stat} from 'fs/promises'
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj } from '../../src/config/xeira.mjs'
-import xeiraTest from '../../src/scripts/test/index.mjs'
+import {ctitle, ccmd, coption_name, coption_value, cexample, cfilename} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj } from '../../../src/config/xeira.mjs'
+import xeiraTest from '../../../src/scripts/test/index.mjs'
+
+
 // import {loadOptions} from '../../node_modules/mocha/lib/cli/options.js'
 
 // const _MOCHA_NON_BOOLEAN_ARGS= [
@@ -73,7 +75,9 @@ import xeiraTest from '../../src/scripts/test/index.mjs'
 async function _parseMochaTestPath(argv, xeiraConfig) {
   let testPaths= []
 
-  const tFiles= argv.files.split(',') || []
+  let tFiles= argv.files || argv.f || ''
+  tFiles= tFiles.split(',') || []
+
   for (const tFile of tFiles) {
     const fullTestPath= path.join(xeiraConfig.pkgPath, tFile)
     const stats= await stat(fullTestPath)
@@ -88,9 +92,8 @@ async function _parseMochaTestPath(argv, xeiraConfig) {
   }
 
   if (! testPaths.length) {
-    const fFolder = argv.test_folder || xeiraConfig.testFolder
     tFiles.push(
-      `${path.join(xeiraConfig.pkgPath, fFolder)}/**/*.{ts,js,mjs,cjs,jsx,es6}`
+      `${path.join(xeiraConfig.pkgPath, xeiraConfig.testFolder)}/**/*.{ts,js,mjs,cjs,jsx,es6}`
     )
   }
   
@@ -109,29 +112,71 @@ async function _parseMochaExtraParams(_argv, _xeiraConfig) {
 
 
 
-const command = 'test [files..] [test_folder] [mocha_params...] [verbose]'
-const describe = `${cyan_italic('Test your code')}`
+const help = `
+${ctitle('SYNPSIS')}
 
-const builder = function (yargs) {
-  const pkgPath= process.env.PWD
-  const xeiraConfig = readXeiraConfigObj(pkgPath)
+  ${ccmd('xeira')} ${ccmd('test')} [${coption_name('--files')}] [${coption_value('config')}] [${coption_value('mocha_params')}]
 
-  return yargs
-    .option('files', {
-      default: xeiraConfig.testFolder
-    })   
-    .option('test_folder', {
-      alias: 'folder',
-      default: xeiraConfig.testFolder
-    })   
-    .option('verbose', {
-      alias: 'b',
-      default: xeiraConfig.beVerbose(),
-      boolean: true
-    })
+${ctitle('DESCRIPTION')}
+
+  Run you runit tests!
+
+${ctitle('OPTIONS')}
+
+  ${coption_name('--help')}, ${coption_name('--h')}
+    Show this help
+
+  ${coption_name('--files')}, ${coption_name('--f')}
+    Entry point for your tests. If several, you may specify a comma-separated list of files.
+    Usage of patterns is also allowed.
+
+  ${coption_value('config')} ${ctitle('values')}    
+
+    You can specify ${ccmd('xeira')}'s config values as a fly parameter,
+    so it takes preference over the saved value on ${cfilename('xeira.json')}.
+
+  ${coption_name('--test_folder')}
+    In case you have not specified any [${coption_name('--files')}], ${ccmd('xeira')}
+    will search for Javascript files on this folder. Default is ${coption_value('./test')}.
+    Searched extensions are ${cfilename('.ts')}, ${cfilename('.js')}, ${cfilename('.mjs')}, 
+    ${cfilename('.cjs')}, ${cfilename('.jsx')}, ${cfilename('.es6')}.
+
+  ${coption_name('--verbose')}      
+    Do you want ${ccmd('xeira')} to show extra amount of log info?
+    Default is ${coption_value('false')}.
+
+  ${coption_value('mocha_params')} ${ctitle('values')}    
+
+    You can specify any param to be passed directly to Mocha.
+
+    Check info here: https://mochajs.org/#command-line-usage.
+
+
+${ctitle('EXAMPLES')}
+
+  ${cexample('xeira test --f=./tests/units/unit_one.js')}
+    Run the ${cfilename('tests/units/unit_one.js')} test
+
+  ${cexample('xeira test --f=./tests/units/*.{ts,js}')}
+    Run every ${cfilename('.ts')} or ${cfilename('.js')} test in ${cfilename('./tests/units')}
+    
+  ${cexample('xeira test --f=./tests/units/unit_one.js,./tests/units/unit_two.js')}
+    Run the ${cfilename('tests/units/unit_one.js')} and ${cfilename('tests/units/unit_two.js')} tests
+  
+  ${cexample('xeira test --test-folder=./other_tests_folder')}
+    Run every Javascript file in ${cfilename('./other_tests_folder')}
+`
+
+const checker = (argv) => {
+  let err= undefined
+  Object.keys(argv).map((k) => {
+    if (['help', 'h', 'folder','f', 'linter', 'verbose'].indexOf(k)<0) {
+      err= `Invalid option ${k}`
+      return
+    }
+  })
+  return err  
 }
-
-
 
 const handler = async function (argv) {
   const pkgPath= process.env.PWD
@@ -146,4 +191,7 @@ const handler = async function (argv) {
   await xeiraTest(xeiraConfig, extraParams, testPathStr)
 }
 
-export {command, describe, builder, handler}
+
+
+export {help, checker, handler}
+

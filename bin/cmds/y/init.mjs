@@ -1,6 +1,6 @@
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj, getConfigKeysFromArgs } from '../../src/config/xeira.mjs'
-import xeiraInit from '../../src/scripts/init/index.mjs'
+import {cyan_italic} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj, getConfigKeysFromArgs } from '../../../src/config/xeira.mjs'
+import xeiraInit from '../../../src/scripts/init/index.mjs'
 
 const command = 'init [force] [options]'
 const describe = `${cyan_italic('It will guide you to create xeira.json, the xeira\'s configuration file')}`
@@ -25,4 +25,3 @@ const handler = async function (argv) {
 }
 
 export {command, describe, builder, handler}
-

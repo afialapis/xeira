@@ -1,9 +1,9 @@
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj } from '../../src/config/xeira.mjs'
-import xeiraBundle from '../../src/scripts/bundle/index.mjs'
+import {gray_light} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj } from '../../../src/config/xeira.mjs'
+import xeiraBundle from '../../../src/scripts/bundle/index.mjs'
 
 const command = 'bundle [source_index] [bundle_folder] [verbose]'
-const describe = `${cyan_italic('Bundle your code')}`
+const describe = `${gray_light('Bundle your code')}`
 
 const builder = function (yargs) {
   const pkgPath= process.env.PWD

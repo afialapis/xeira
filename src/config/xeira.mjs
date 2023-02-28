@@ -20,39 +20,56 @@ async function getXeiraDefaultConfig() {
   return config.default
 }
 
-function _getConfigValuesFromArgs(argv) {
-  const valid_keys= Object.keys(defConfig)
+function _getConfigValuesFromArgs(argv, aliases) {
+  function _parseValue (v) {
+    return v==='true'
+    ? true
+    : v==='false'
+    ? false
+    : ((v=='null') || (v=='undefined') || (v=='none') || (v=='') || (v==undefined))
+    ? undefined
+    : v   
+  }
   let config= {}
+
+  const valid_keys= Object.keys(defConfig)
   valid_keys.map(k => {
     if (k in argv) {
-      config[k]= 
-        argv[k]==='true'
-        ? true
-        : argv[k]==='false'
-        ? false
-        : argv[k]==undefined
-        ? undefined
-        : argv[k]
+      config[k]= _parseValue(argv[k])
     }
   })
+
+  if (aliases) {
+    const valid_alias= Object.keys(defConfig)
+    valid_alias.map((fld) => {
+      const alias = aliases[fld]
+      if (alias in argv) {
+        const v= argv[alias]
+        config[alias]= _parseValue (v)      
+      }
+    })
+
+  }
+
+
   return config
 }
 
-function getConfigKeysFromArgs(argv) {
+function getConfigKeysFromArgs(argv, aliases) {
   return Object.keys(
-    _getConfigValuesFromArgs(argv)
+    _getConfigValuesFromArgs(argv, aliases)
   )
 }
 
 
-function readXeiraConfigObj(pkgPath, argv) {
+function readXeiraConfigObj(pkgPath, argv, aliases) {
   const pkgConfig= readJsonFileSync(`${pkgPath}/xeira.json`, true)
   const pkgJson= readJsonFileSync(`${pkgPath}/package.json`)
 
   const config= {
     ...defConfig,
     ...pkgConfig,
-    ..._getConfigValuesFromArgs(argv || {})
+    ..._getConfigValuesFromArgs(argv || {}, aliases)
   }
 
   const xeiraObj= new XeiraConfigObj(config, pkgPath, pkgJson.name)

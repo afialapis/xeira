@@ -1,9 +1,9 @@
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj } from '../../src/config/xeira.mjs'
-import xeiraTranspile from '../../src/scripts/transpile/index.mjs'
+import {gray_light} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj } from '../../../src/config/xeira.mjs'
+import xeiraTranspile from '../../../src/scripts/transpile/index.mjs'
 
 const command = 'transpile [source_folder] [transpile_folder] [verbose]'
-const describe = `${cyan_italic('Transpile your code')}`
+const describe = `${gray_light('Transpile your code')}`
 
 const builder = function (yargs) {
   const pkgPath= process.env.PWD

@@ -5,8 +5,9 @@ import {getBabelConfig} from '../../config/babel.mjs'
 import { log_info } from '../../utils/log.mjs'
 import { blue, blue_light } from '../../utils/colors.mjs'
 
-async function transpileWithBabel(xeiraConfig, minimifyCallback, forceExtension= 'cjs') {
-  log_info(xeiraConfig, 'transpile', `Transpiling folder ${blue(xeiraConfig.sourceFolder)} to ${blue(xeiraConfig.transpileFolder)} (forcing files to be ${blue(forceExtension)})`)
+async function transpileWithBabel(xeiraConfig, minimifyCallback, sourceFolder= undefined, forceExtension= 'cjs') {
+  const theSourceFolder = sourceFolder || xeiraConfig.sourceFolder
+  log_info(xeiraConfig, 'transpile', `Transpiling folder ${blue(theSourceFolder)} to ${blue(xeiraConfig.transpileFolder)} (forcing files to be ${blue(forceExtension)})`)
 
   // apply some particular mod on babel config
   const customBabelConfig= {
@@ -21,7 +22,7 @@ async function transpileWithBabel(xeiraConfig, minimifyCallback, forceExtension=
   }
   
   
-  await transpileDirectory(xeiraConfig.pkgPath, xeiraConfig.sourceFolder, xeiraConfig.transpileFolder, forceExtension, async (filepath, destpath) => {
+  await transpileDirectory(xeiraConfig.pkgPath, theSourceFolder, xeiraConfig.transpileFolder, forceExtension, async (filepath, destpath) => {
     // Log clean filenames
     const cleanFrom= filepath.replace(xeiraConfig.pkgPath, '')
     const cleanTo= destpath.replace(xeiraConfig.pkgPath, '')

@@ -1,9 +1,9 @@
-import {cyan_italic} from '../../src/utils/colors.mjs'
-import { readXeiraConfigObj } from '../../src/config/xeira.mjs'
-import xeiraDemo from '../../src/scripts/demo/index.mjs'
+import {gray_light} from '../../../src/utils/colors.mjs'
+import { readXeiraConfigObj } from '../../../src/config/xeira.mjs'
+import xeiraDemo from '../../../src/scripts/demo/index.mjs'
 
 const command = 'demo [init] [force] [demo_mode] [demo_demoer] [verbose]'
-const describe = `${cyan_italic('Bundle, serve and watch your package\'s demo')}`
+const describe = `${gray_light('Bundle, serve and watch your package\'s demo')}`
 
 const builder = function (yargs) {
   const pkgPath= process.env.PWD
