@@ -52,64 +52,58 @@ This one-shot command will guide you in the creation of `xeira`'s
 config file: `xeira.json`.
 
 ```
-  npx xeira init [force] [options]
+  npx xeira init [--force] [config]
 ```
 
 
 ## lint
 
 ```
-  npx xeira lint [folder (default= ./src) ]
+  npx xeira lint [--folder=./src] [config]
 ```
 
 
 ## transpile
 
 ```
-  npx xeira transpile [source_folder (default= ./src) dest_folder (default= ./lib)]
+  npx xeira transpile [--source_folder=./src] [--transpile_folder= ./lib] [config]
 ```
 
 
 ## bundle
 
 ```
-  npx xeira bundle [source_index (default= ./src/index.js) dest_folder (default= ./dist)]
+  npx xeira bundle [--source_index=./src/index.js] [--dest_folder=./dist] [config]
 ```
 
 
 ## test
 
 ```
-  npx xeira test [folder (default= ./test) ]
+  npx xeira test [--files] [--test_folder=./test] [config]
 ```
 
 
 ## demo
 
 ```
-  npx xeira demo [init [force]]
+  npx xeira demo [--init [--force]] [config]
 ```
 
 
 ## version
 
 ```
-  npx xeira version patch|minor|major|0.1.2 [-filter <pattern>]
+  npx xeira version [--type=patch|minor|major] [--number] [--filter] [config]
 ```
 
 
 ## static site
 
 ```
-  npx xeira site
+  npx xeira site [config]
 ```
 
-
-## help
-
-```
-  npx xeira help
-```
 
 # Configuration
 
