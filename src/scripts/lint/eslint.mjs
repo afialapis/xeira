@@ -6,8 +6,8 @@ import {getEslintConfig, getEslintIgnorePath} from '../../config/eslint.mjs'
 // import { pkgJsonRead } from '../../utils/pkgJson.mjs'
 
  
-async function lintPrepareOptions(xeiraConfig) {
-  const baseConfig = await getEslintConfig(xeiraConfig)
+async function lintPrepareOptions(context) {
+  const baseConfig = await getEslintConfig(context)
   const overrideConfig = {}
 
   // TODO
@@ -34,9 +34,9 @@ async function lintPrepareOptions(xeiraConfig) {
 
 }
 
-async function lintWithEslint(xeiraConfig, sourcePath) {
+async function lintWithEslint(context, sourcePath) {
 
-  const [baseConfig, overrideConfig] = await lintPrepareOptions(xeiraConfig)
+  const [baseConfig, overrideConfig] = await lintPrepareOptions(context)
   
   const ignorePath = getEslintIgnorePath();
   
@@ -51,7 +51,7 @@ async function lintWithEslint(xeiraConfig, sourcePath) {
   // call eslint's node api
   const eslint = new ESLint(options);
 
-  const results = await eslint.lintFiles([path.join(xeiraConfig.pkgPath, sourcePath)]);
+  const results = await eslint.lintFiles([path.join(context.pkgPath, sourcePath)]);
 
   const formatter = await eslint.loadFormatter("stylish");
   const resultText = formatter.format(results);

@@ -1,22 +1,19 @@
 import path from 'path'
-const addSuffix = (s, suf) => s.replace(/\.js$/, `.${suf}.js`).replace(/\.mjs$/, `.${suf}.mjs`).replace(/\.cjs$/, `.${suf}.cjs`);
+
+const addSuffix = (s, suf) => 
+  s
+  .replace(/\.js$/, `.${suf}.js`)
+  .replace(/\.mjs$/, `.${suf}.mjs`)
+  .replace(/\.cjs$/, `.${suf}.cjs`)
 
 
 const NODE_MAIN = 'umd' // 'cjs'
 
-export class XeiraConfigObj {
-  constructor(config, pkgPath, pkgName) {
+export class XeiraContextConfig {
+  constructor(config, pkgName) {
     this.config= config
-    this.pkgPath= pkgPath
     this.pkgName= pkgName
   }
-
-  // _convEmptyValue(v) {
-  //   if ((v==null) || (v=='null') || (v=='none')) {
-  //     return undefined
-  //   }
-  //   return v || undefined
-  // }  
 
   get isAnApp() {
     return this.config.product == 'app'
@@ -88,10 +85,6 @@ export class XeiraConfigObj {
 
   get usesReact() {
     return this.config.react !== false
-  }
-
-  get isAMonoRepo() {
-    return this.config.monorepo !== false
   }
 
   getCjsOutput() {

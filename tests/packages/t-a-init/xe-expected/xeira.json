@@ -3,7 +3,6 @@
   "target": "both",
   "source_index": "./src/index.js",
   "react": true,
-  "monorepo": false,
   "linter": "eslint",
   "transpile_folder": "./lib_custom",
   "transpiler": "babel",

@@ -8,9 +8,9 @@
 
 import  { rollupBundle } from './rollup/index.mjs'
 
-async function xeiraBundle(xeiraConfig) {
-  if (xeiraConfig.bundleWithRollup) {
-    await rollupBundle(xeiraConfig)
+async function xeiraBundle(context) {
+  if (context.bundleWithRollup) {
+    await rollupBundle(context)
   } else {
     console.warn('[xeira] bundle: bundler not specified or not implement yet')
   }

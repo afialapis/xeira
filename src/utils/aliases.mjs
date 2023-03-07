@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import {readJsonFileSync} from './json.mjs'
 import { resolvePath } from 'babel-plugin-module-resolver'
 import alias_plugin from '@rollup/plugin-alias';
-import {red} from '../utils/colors.mjs'
+import {cerror} from '../utils/colors.mjs'
 
 /*
 const _parseExport = (o) => {
@@ -69,13 +69,13 @@ function _aliasesRead (pkgPath) {
       aliases[alias]= path.join(pkgPath, baseUrl, rpath)
 
       if (alias.indexOf('*')>=0) {
-        console.error(`[xeira] Aliases error: ${red("don't use wildcards on aliases, it may not work here")}.`)
+        console.error(`[xeira] Aliases error: ${cerror("don't use wildcards on aliases, it may not work here")}.`)
       }
     })
     return aliases
   } catch(e) {
     console.error(`[xeira] Error searching aliases:`)
-    console.error(red(e))
+    console.error(cerror(e))
   }
   return undefined
 }
@@ -89,18 +89,18 @@ function hasAliases(pkgPath) {
   return true
 }
 
-function getBabelPluginForResolvingAliases (xeiraConfig) { 
-  const aliases = _aliasesRead(xeiraConfig.pkgPath)
+function getBabelPluginForResolvingAliases (context) { 
+  const aliases = _aliasesRead(context.pkgPath)
   if (!aliases) {
     return undefined
   }
 
   const aliasNames= Object.keys(aliases)
 
-  // console.log(`Adding aliases. Root ${path.join(xeiraConfig.pkgPath, path.dirname(xeiraConfig.sourceIndex))}. Aliases ${JSON.stringify(aliases)}`)
+  // console.log(`Adding aliases. Root ${path.join(context.pkgPath, path.dirname(context.sourceIndex))}. Aliases ${JSON.stringify(aliases)}`)
   const plugin=
     ['babel-plugin-module-resolver', {
-      "root": [path.join(xeiraConfig.pkgPath, path.dirname(xeiraConfig.sourceIndex))],
+      "root": [path.join(context.pkgPath, path.dirname(context.sourceIndex))],
       "alias": aliases,
       resolvePath: (sourcePath, currentFile, opts) => {
         /**

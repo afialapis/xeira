@@ -70,7 +70,7 @@ Current demoers work with some limitations:
 Added param `forceExtension= 'cjs'` on `transpileWithBabel`.
 This will make every `/lib` content to be in CommonCjs, and so compatible
 with `packageJson.main` and `packageJson.imports.default`.
-`xeiraConfigObj.getMainFile` acts accordingly.
+`contextObj.getMainFile` acts accordingly.
 BUT is poor.
 
 

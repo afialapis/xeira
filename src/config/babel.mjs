@@ -3,21 +3,15 @@ import babelMerge from 'babel-merge'
 import { loadPartialConfig } from "@babel/core"
 import { getBabelPluginForResolvingAliases } from '../utils/aliases.mjs'
 
-function _getBabelConfigName (xeiraConfig, esm= false) { 
-  return `babel${xeiraConfig.usesReact ? '.react' : ''}.${esm ? 'mjs' : 'cjs'}`
+function _getBabelConfigName (context, esm= false) { 
+  return `babel${context.usesReact ? '.react' : ''}.${esm ? 'mjs' : 'cjs'}`
 }
 
-function getBabelConfigPath (xeiraConfig, esm= false) { 
-  const name = _getBabelConfigName(xeiraConfig, esm)
-  return `./node_modules/xeira/configs/${name}`
-}
-
-
-async function getBabelDefaultConfig (xeiraConfig) { 
-  const configModule = await import(path.join('../../configs', _getBabelConfigName(xeiraConfig, /*esm=*/ true)))
+async function _getBabelDefaultConfig (context) { 
+  const configModule = await import(path.join('../../configs', _getBabelConfigName(context, /*esm=*/ true)))
   let config= configModule.default
 
-  const plugin = getBabelPluginForResolvingAliases(xeiraConfig)
+  const plugin = getBabelPluginForResolvingAliases(context)
   if (plugin) {
     config= babelMerge(config, {plugins: [plugin]})
   }
@@ -26,8 +20,8 @@ async function getBabelDefaultConfig (xeiraConfig) {
 }
 
 
-async function getBabelConfig (xeiraConfig, filename, custom) { 
-  let babelDefConfig = await getBabelDefaultConfig(xeiraConfig)  
+async function getBabelConfig (context, filename, custom) { 
+  let babelDefConfig = await _getBabelDefaultConfig(context)  
   const partialConfig= loadPartialConfig({filename})
   let mergedConfig= babelMerge(babelDefConfig, partialConfig)
   if (custom) {
@@ -38,7 +32,6 @@ async function getBabelConfig (xeiraConfig, filename, custom) {
 
 
 export {
-  getBabelConfig,
-  getBabelConfigPath
+  getBabelConfig
 }
 

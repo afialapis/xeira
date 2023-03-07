@@ -3,17 +3,17 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-function _getEslintConfigName (xeiraConfig, esm= false) { 
-  return `eslint${xeiraConfig.usesReact ? '.react' : ''}.${esm ? 'mjs' : 'cjs'}`
+function _getEslintConfigName (context, esm= false) { 
+  return `eslint${context.usesReact ? '.react' : ''}.${esm ? 'mjs' : 'cjs'}`
 }
 
-function getEslintConfigPath (xeiraConfig, esm= false) { 
-  const name = _getEslintConfigName(xeiraConfig, esm)
+function getEslintConfigPath (context, esm= false) { 
+  const name = _getEslintConfigName(context, esm)
   return `./node_modules/xeira/configs/${name}`
 }
 
-async function getEslintConfig (xeiraConfig) { 
-  const config = await import(path.join('../../configs', _getEslintConfigName(xeiraConfig, /*esm=*/ true)))
+async function getEslintConfig (context) { 
+  const config = await import(path.join('../../configs', _getEslintConfigName(context, /*esm=*/ true)))
   return config.default
 }
 

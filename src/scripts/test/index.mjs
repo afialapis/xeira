@@ -9,10 +9,10 @@
 import { testWithMocha } from './mocha/index.mjs'
 //import { testWithMochaAPI } from './mocha_api/index.mjs'
 
-async function xeiraTest(xeiraConfig, extraParams, testPathStr) {
+async function xeiraTest(context, extraParams, testPathStr) {
 
-  await testWithMocha(xeiraConfig, extraParams, testPathStr)
-  //await testWithMochaAPI(xeiraConfig, extraParams, testPathStr)
+  await testWithMocha(context, extraParams, testPathStr)
+  //await testWithMochaAPI(context, extraParams, testPathStr)
 
 }
 

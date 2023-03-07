@@ -15,13 +15,13 @@ const NODE_ENV = 'production'
 
 const minifyExtension = pathToFile => pathToFile.replace(/\.mjs$/, '.min.mjs');
 
-async function rollupModulesForEsm(xeiraConfig, pkgJsonPath, pkgJson, input, output) {
+async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, output) {
   const customBabelConfig= {
     exclude: 'node_modules/**',
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
     
     // TODO
-    //  xeiraConfig.isAnApp()
+    //  context.isAnApp()
     //  ? 'runtime' https://github.com/rollup/plugins/tree/master/packages/babel#injected-helpers
     //  : bundled
     
@@ -34,7 +34,7 @@ async function rollupModulesForEsm(xeiraConfig, pkgJsonPath, pkgJson, input, out
           loose: true,
         },
       ],
-      ... xeiraConfig.usesReact
+      ... context.usesReact
         ? [ "@babel/preset-react"
             //{
             //  // Compile JSX Spread to Object.assign(), which is reliable in ESM browsers.
@@ -45,12 +45,12 @@ async function rollupModulesForEsm(xeiraConfig, pkgJsonPath, pkgJson, input, out
     ]
   }
 
-  const mergedBabelConfig = await getBabelConfig(xeiraConfig, input, customBabelConfig)
+  const mergedBabelConfig = await getBabelConfig(context, input, customBabelConfig)
   
   const inputOptions= {
     input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       babel(mergedBabelConfig),      
       replace({
@@ -62,7 +62,7 @@ async function rollupModulesForEsm(xeiraConfig, pkgJsonPath, pkgJson, input, out
         packagePath: pkgJsonPath
       }),
       nodeResolve({
-        rootDir: xeiraConfig.pkgPath,
+        rootDir: context.pkgPath,
         exportConditions: ['node'],
       }),
       commonjs({

@@ -1,5 +1,5 @@
 import { rollup } from 'rollup'
-import {red, green, cyan} from '../../../utils/colors.mjs'
+import {cerror, cok, cfilename} from '../../../utils/colors.mjs'
 import { log_always, log_error } from '../../../utils/log.mjs';
 
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
@@ -53,7 +53,7 @@ async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   }
 }
 
-async function rollupBuild(inputOptions, outputOptionsList) {
+async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
   let bundle;
   let buildFailed = false;
 
@@ -68,18 +68,21 @@ async function rollupBuild(inputOptions, outputOptionsList) {
   } catch (error) {
     buildFailed = true;
     // do some error reporting
-    console.error(red(error));
+    console.error(cerror(error));
   }
   if (bundle) {
     // closes the bundle
     await bundle.close();
   }
 
+  const niceFileName= outputOptionsList[0].file.replace(pkgPath, '.')
+
   if (buildFailed) {
-    log_error('bundle', `Error when bundling ${outputOptionsList[0].file}`)
+    log_error('bundle', `Error when bundling ${cfilename(niceFileName)}`)
     process.exit(1)
   } else {
-    log_always('bundle', `Bundled ${cyan(outputOptionsList[0].file)} ${green('successfully!')}`)
+    
+    log_always('bundle', `Bundled ${cfilename(niceFileName)} ${cok('successfully!')}`)
   }
 }
 

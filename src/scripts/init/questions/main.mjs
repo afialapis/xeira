@@ -45,12 +45,5 @@ export default [
     name: 'react',
     message: 'Are you going to work with React?',
     initial: false
-  },
-
-  {
-    type: 'confirm',
-    name: 'monorepo',
-    message: 'Are you starting a monorepo?',
-    initial: false
   }
 ]

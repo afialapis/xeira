@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 'use strict'
-import { blue, cyan } from '../../utils/colors.mjs'
+import { cfilename, ccmd } from '../../utils/colors.mjs'
 import { log_info, log_warn } from '../../utils/log.mjs'
 import {lintWithEslint} from './eslint.mjs'
 
-async function xeiraLint(xeiraConfig, folder) {
+async function xeiraLint(context, folder) {
   
-  if (xeiraConfig.lintWithEslint) {
+  if (context.lintWithEslint) {
     
-    log_info(xeiraConfig, 'lint', `Linting folder ${blue(folder)} with ${cyan('eslint')}`)
+    log_info(context, 'lint', `Linting folder ${cfilename(folder)} with ${ccmd('eslint')}`)
 
-    await lintWithEslint(xeiraConfig, folder )
+    await lintWithEslint(context, folder )
   } else {
     log_warn('lint', 'Nothing to lint: no linter specified in xeira settings')
   }

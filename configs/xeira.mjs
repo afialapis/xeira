@@ -7,10 +7,6 @@ export default {
 
   react: false,
 
-  // This can be previously tried to be guessed (/packages or .pnpm-workspace.yaml),
-  // if not, ask anyway
-  monorepo: false,
-
   // Probably offering alternatives some day
   linter: 'eslint', // undefined
   

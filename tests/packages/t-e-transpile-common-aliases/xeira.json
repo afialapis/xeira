@@ -6,7 +6,6 @@
   "product": "package",
   "target": "both",
   "react": true,
-  "monorepo": false,
   "source_index": "/src/index.cjs",
   "transpile_folder": null,
   "bundle_folder": null,

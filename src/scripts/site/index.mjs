@@ -8,9 +8,9 @@
 
 import arredemo from 'arredemo/cli'
 
-async function xeiraSite (xeiraConfig) {
+async function xeiraSite (context) {
 
-  await arredemo(xeiraConfig.pkgPath)
+  await arredemo(context.pkgPath)
 
 }
 

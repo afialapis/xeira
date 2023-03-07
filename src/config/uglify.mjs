@@ -1,4 +1,4 @@
-async function getUglifyConfig (_xeiraConfig) {
+async function getUglifyConfig (_context) {
   const config = await import('../../configs/uglify.mjs')
   return config.default
 }

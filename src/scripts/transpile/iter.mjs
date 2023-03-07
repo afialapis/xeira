@@ -2,7 +2,7 @@ import path from 'path'
 import {readdir, stat, mkdir, access} from 'fs/promises'
 import { removeTopParent } from '../../utils/io.mjs'
 import { log_error } from '../../utils/log.mjs';
-import { blue } from '../../utils/colors.mjs';
+import { cfilename } from '../../utils/colors.mjs';
 
  
 async function _transpileFile (basePath, filePath, destPath, forceExtension, callback) {
@@ -27,7 +27,7 @@ async function transpileDirectory (basePath, sourcePath, destPath, forceExtensio
   try {
     files = await readdir(path.join(basePath, sourcePath))
   } catch(e) {
-    log_error('transpile', `Folder ${blue(path.join(basePath, sourcePath))} does not exist`)
+    log_error('transpile', `Folder ${cfilename(path.join(basePath, sourcePath))} does not exist`)
     return
   }
 

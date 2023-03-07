@@ -1,34 +1,34 @@
 import {getEslintConfigPath} from '../../config/eslint.mjs'
 
-function makePkgJsonValues(xeiraConfig) {
-  const [_main_file_suffix, main_file] = xeiraConfig.getMainFile() 
+function makePkgJsonValues(context) {
+  const [_main_file_suffix, main_file] = context.getMainFile() 
 
   let pkgJsonValues= {
     main: main_file,
     exports: {
-      import: xeiraConfig.getEsmOutput(),
+      import: context.getEsmOutput(),
       default: main_file
     },
-    module: xeiraConfig.getEsmOutput(),
+    module: context.getEsmOutput(),
     // type: 'module'
   }
 
-  if (xeiraConfig.isTargetingNode) {
-    pkgJsonValues.exports['require']= xeiraConfig.getCjsOutput()
-    pkgJsonValues['cjs']= xeiraConfig.getCjsOutput()
-    // if (xeiraConfig.isTargetingNodeOnly) {
+  if (context.isTargetingNode) {
+    pkgJsonValues.exports['require']= context.getCjsOutput()
+    pkgJsonValues['cjs']= context.getCjsOutput()
+    // if (context.isTargetingNodeOnly) {
     //   pkgJsonValues['type']= 'commonjs'
     // }
   }
 
-  if (xeiraConfig.isTargetingBrowser) {
-    const iife= xeiraConfig.getIifeOutput()
-    const umd= xeiraConfig.getUmdOutput()
+  if (context.isTargetingBrowser) {
+    const iife= context.getIifeOutput()
+    const umd= context.getUmdOutput()
     pkgJsonValues.browser= iife || umd
   }
   
-  if (xeiraConfig.lintWithEslint) {
-    const eslintConfigPath = getEslintConfigPath(xeiraConfig)
+  if (context.lintWithEslint) {
+    const eslintConfigPath = getEslintConfigPath(context)
     pkgJsonValues['eslintConfig']= {"extends": [eslintConfigPath]}
   }
 

@@ -9,14 +9,14 @@ import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
-import {cyan} from '../../../../utils/colors.mjs'
+import {cfilename} from '../../../../utils/colors.mjs'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
 import { log_always } from '../../../../utils/log.mjs'
 import { getBabelConfig } from '../../../../config/babel.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = async (xeiraConfig, name, input, output, contentBase, port) => {
+const makeSimpleConfig = async (context, name, input, output, contentBase, port) => {
 
   const customBabelConfig= {
     exclude: 'node_modules/**',
@@ -24,12 +24,12 @@ const makeSimpleConfig = async (xeiraConfig, name, input, output, contentBase, p
     babelHelpers: 'bundled'
   }
 
-  const mergedBabelConfig= await getBabelConfig(xeiraConfig, input, customBabelConfig)
+  const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)
 
   const inputOptions= {
     input: input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       replace({
         preventAssignment: true,
@@ -55,7 +55,7 @@ const makeSimpleConfig = async (xeiraConfig, name, input, output, contentBase, p
           const host = address.address === '::' ? 'localhost' : address.address
           // by using a bound function, we can access options as `this`
           const protocol = this.https ? 'https' : 'http'
-          log_always('demo', `Server listening at ${cyan(`${protocol}://${host}:${address.port}/`)}`)
+          log_always('demo', `Server listening at ${cfilename(`${protocol}://${host}:${address.port}/`)}`)
         }        
       }),
       livereload({

@@ -73,7 +73,7 @@ We want something like:
 
 ```js
   babelHelpers: 
-    xeiraConfig.isAnApp()
+    context.isAnApp()
     ? 'bundled'
     : 'runtime
 ```

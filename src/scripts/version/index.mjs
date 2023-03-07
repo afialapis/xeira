@@ -1,5 +1,3 @@
-import path from 'path'
-import { readdirSync } from 'fs'
 import {pkgJsonRead, pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 
 function _updateVersionValue(version, versionNumber, versionType) {
@@ -33,43 +31,16 @@ function _updateVersionValue(version, versionNumber, versionType) {
   return newVersion
 }
 
-function _getMonorepoPackageList(pkgPath, filterPattern) {
-  
-  let pkgs=  readdirSync(path.join(pkgPath, 'packages'), { withFileTypes: true })
-      .filter(dirent => dirent.isDirectory())
-      .map(dirent => dirent.name)
-  if (filterPattern) {
-      pkgs= pkgs.filter(dirname => dirname.toLowerCase().indexOf(filterPattern.toLowerCase())>=0)
-  }
-  return pkgs
-}
-
-
-async function xeiraVersion(xeiraConfig, versionType, versionNumber, filterPattern) 
+async function xeiraVersion(context, versionType, versionNumber) 
 {
-  let pkgJsonPaths= []
-
-  if (xeiraConfig.isAMonoRepo) {
-    const pkgList= _getMonorepoPackageList(xeiraConfig.pkgPath, filterPattern)
-    pkgJsonPaths= pkgList.map(pkgName => path.join(xeiraConfig.pkgPath, 'packages', pkgName))
-  } else {
-    pkgJsonPaths.push(xeiraConfig.pkgPath)
-  }
-
-  let promises= []
-  for (const pkgJsonPath of pkgJsonPaths) {
-    const pkgJson = await pkgJsonRead(pkgJsonPath)
-    const newVersion= _updateVersionValue(pkgJson.version, versionNumber, versionType)
-    if (pkgJson.version != newVersion) {
-      const changes= {
-        version: newVersion
-      }
-      const promise= pkgJsonUpdate (pkgJsonPath, changes, true)
-      promises.push(promise)
+  const pkgJson = await pkgJsonRead(context.pkgPath)
+  const newVersion= _updateVersionValue(pkgJson.version, versionNumber, versionType)
+  if (pkgJson.version != newVersion) {
+    const changes= {
+      version: newVersion
     }
+    await pkgJsonUpdate (context.pkgPath, changes, true)
   }
-  
-  await Promise.all(promises)
 }
 
 export default xeiraVersion

@@ -10,14 +10,14 @@ import { getBabelConfig } from '../../../../config/babel.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = async (xeiraConfig, name, input, output) => {
+const makeSimpleConfig = async (context, name, input, output) => {
   const customBabelConfig= {
     exclude: 'node_modules/**',
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
     babelHelpers: 'bundled'
   }
 
-  const mergedBabelConfig= await getBabelConfig(xeiraConfig, input, customBabelConfig)
+  const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)
 
   return {
     input: input,
@@ -27,7 +27,7 @@ const makeSimpleConfig = async (xeiraConfig, name, input, output) => {
       name: name
     },
     plugins: [
-      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       replace({
         preventAssignment: true,

@@ -8,11 +8,11 @@ import { getBabelPluginForResolvingAliases, hasAliases } from '../../../utils/al
 import { unlink } from 'fs'
 
 
-function _makeBabelTempFile(xeiraConfig) {
+function _makeBabelTempFile(context) {
   const source= path.join(__dirname, 'babel.mjs.tmpl')
-  const dest= path.join(xeiraConfig.pkgPath, '.test.babel.mjs')
+  const dest= path.join(context.pkgPath, '.test.babel.mjs')
 
-  const alias_plugin= getBabelPluginForResolvingAliases (xeiraConfig)
+  const alias_plugin= getBabelPluginForResolvingAliases (context)
   let plugins= []
   if (alias_plugin) {
     plugins= [alias_plugin]
@@ -25,11 +25,11 @@ function _makeBabelTempFile(xeiraConfig) {
 }
 
 
-async function testWithMocha(xeiraConfig, extraParams, testPathStr) {
-  const withAliases= hasAliases(xeiraConfig.pkgPath)
+async function testWithMocha(context, extraParams, testPathStr) {
+  const withAliases= hasAliases(context.pkgPath)
   
   const babelRegPath= withAliases
-    ? _makeBabelTempFile(xeiraConfig)
+    ? _makeBabelTempFile(context)
     : path.join(__dirname, 'babel.mjs')
   
   const helpersDir = path.join(__dirname, 'helpers')
@@ -51,11 +51,11 @@ async function testWithMocha(xeiraConfig, extraParams, testPathStr) {
     `--require ${babelRegPath}`,
     //`--loader=testdouble`,
     //// `--extension js,cjs,mjs,jsx`,
-    xeiraConfig.isTargetingBrowser ? `--require ${helperDOMPath}` : '',
+    context.isTargetingBrowser ? `--require ${helperDOMPath}` : '',
     '--require ignore-styles',
     ...extraParams || [],
     helperChaiPath,
-    xeiraConfig.usesReact ? helperReactPath : '',
+    context.usesReact ? helperReactPath : '',
     //`$(find ${fullTestPath} -name '*.js' ! -path '**/_*.js')`
     //`${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`
     testPathStr
@@ -68,7 +68,7 @@ async function testWithMocha(xeiraConfig, extraParams, testPathStr) {
   execSync(
     command, 
     {
-      cwd: xeiraConfig.pkgPath,
+      cwd: context.pkgPath,
       stdio: [0, 1, 2]
     });
   

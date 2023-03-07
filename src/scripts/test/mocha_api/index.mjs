@@ -5,7 +5,7 @@ import { transformFileSync } from "@babel/core"
 import {getBabelConfig} from '../../../config/babel.mjs'
 
 
-async function testWithMochaAPI(xeiraConfig, extraParams, testPathStr) {
+async function testWithMochaAPI(context, extraParams, testPathStr) {
 
   const customBabelConfig= {
     presets: [
@@ -23,7 +23,7 @@ async function testWithMochaAPI(xeiraConfig, extraParams, testPathStr) {
   });
 
   // Use non-default Mocha test directory.
-  const testDir = path.join(xeiraConfig.pkgPath, xeiraConfig.testFolder) // testPathStr)
+  const testDir = path.join(context.pkgPath, context.testFolder) // testPathStr)
 
   // Search test .mjs files
   const testFiles = fs.readdirSync(testDir, {encoding: 'utf-8'})
@@ -38,7 +38,7 @@ async function testWithMochaAPI(xeiraConfig, extraParams, testPathStr) {
   
     const mjs= path.join(testDir, file)
     
-    const babelConfig = await getBabelConfig(xeiraConfig, mjs, customBabelConfig)
+    const babelConfig = await getBabelConfig(context, mjs, customBabelConfig)
 
     const cjs= mjs.replace(path.extname(file), '_temp.cjs')
 

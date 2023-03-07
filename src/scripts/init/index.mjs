@@ -12,22 +12,21 @@ import {log_info} from '../../utils/log.mjs'
 import {saveObjectToJsonWithConfirm} from '../../utils/io.mjs'
 import {pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 import {readJsonFileSync} from '../../utils/json.mjs'
-
-import {makeXeiraConfigObj} from '../../config/xeira.mjs'
 import configQuestions from './questions/index.mjs'
 import {makePkgJsonValues} from './pkgJsonValues.mjs'
-import { blue } from '../../utils/colors.mjs'
+import { cfilename } from '../../utils/colors.mjs'
+import { makeXeiraContext } from '../../context/index.mjs'
 
-async function xeiraInit(xeiraConfig, flyOptions, force) {
-  const xeiraConfigName = path.join(xeiraConfig.pkgPath, 'xeira.json')
+async function xeiraInit(context, flyOptions, force) {
+  const xeiraConfigPath = path.join(context.pkgPath, 'xeira.json')
 
-  // xeiraConfig comes as a merged config from
+  // context comes as a merged config from
   //  -- default values
   //  -- values in pkgPath/xeira.json (if any)
   //  -- values passed as args (if any)
   
   // Lets check what values are already saved on xeira.json
-  const savedConfig= readJsonFileSync(xeiraConfigName, true)
+  const savedConfig= readJsonFileSync(xeiraConfigPath, true)
   const savedOptions= Object.keys(savedConfig)
   
   // We will ask just for the options which
@@ -44,28 +43,28 @@ async function xeiraInit(xeiraConfig, flyOptions, force) {
   if (askForQuestions.length>0) {
     configAnswers = await prompts(askForQuestions)
   } else {
-    log_info(xeiraConfig, 'init', 'All options are already set up!')
+    log_info(context, 'init', 'All options are already set up!')
   }
 
   // Prepare xeira config data
-  const xeiraConfigData = {
-    ...xeiraConfig.config,
+  const contextData = {
+    ...context.config,
     ...configAnswers
   }
 
   // Save xeira.json
   if (askForQuestions.length>0) {
-    await saveObjectToJsonWithConfirm(xeiraConfigName, xeiraConfigData, true)
+    await saveObjectToJsonWithConfirm(xeiraConfigPath, contextData, true)
   }
 
-  log_info(xeiraConfig, 'init', `Keeping ${blue('package.json')} is updated`)
+  log_info(context, 'init', `Keeping ${cfilename('package.json')} is updated`)
 
   // Prepare xeira config object
-  const defXeiraConfig = await makeXeiraConfigObj(xeiraConfigData, xeiraConfig.pkgPath, xeiraConfig.pkgName)
+  const defXeiraContext = makeXeiraContext(contextData, context.pkgPath, context.pkgName)
 
   // Update package.json
-  const pkgJsonValues= makePkgJsonValues(defXeiraConfig)
-  await pkgJsonUpdate (xeiraConfig.pkgPath, pkgJsonValues)
+  const pkgJsonValues= makePkgJsonValues(defXeiraContext)
+  await pkgJsonUpdate (context.pkgPath, pkgJsonValues)
 }
 
 export default xeiraInit

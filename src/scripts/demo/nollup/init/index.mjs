@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import {red, green, cyan} from '../../../../utils/colors.mjs'
+import {cok, cerror, cfilename} from '../../../../utils/colors.mjs'
 import { readJsonFile } from '../../../../utils/json.mjs'
 import { fileURLToPath } from 'url'
 import { log_info } from '../../../../utils/log.mjs'
@@ -27,17 +27,17 @@ const _copyFileReplacingContent = (sourcePath, destPath, replaceValues) => {
   fs.writeFileSync(destPath, buffer, {encoding: 'utf-8'})
 }
 
-async function initDemoFolderForNollup(xeiraConfig, force) {
-  const pkgJson = await readJsonFile(path.join(xeiraConfig.pkgPath ,'package.json'))
+async function initDemoFolderForNollup(context, force) {
+  const pkgJson = await readJsonFile(path.join(context.pkgPath ,'package.json'))
   const pkgName= pkgJson.name
   const replaceValues= {
     'APPNAME': pkgName
   }
   
-  log_info(xeiraConfig, 'demo', 'Initing demo...')
+  log_info(context, 'demo', 'Initing demo...')
   
   const sourceFolder= path.join(__dirname, 'tmpl')
-  const destFolder = path.join(xeiraConfig.pkgPath, 'demo')
+  const destFolder = path.join(context.pkgPath, 'demo')
 
   for (const [name, ftype] of DEMO_INIT_ACTIONS) {
     const sourcePath= path.join(sourceFolder, name)
@@ -53,7 +53,7 @@ async function initDemoFolderForNollup(xeiraConfig, force) {
     }
 
     if (fs.existsSync(destPath)) {
-      log_info(xeiraConfig, 'demo', `Cannot init ${cyan(name)}: it already exists...`)
+      log_info(context, 'demo', `Cannot init ${cfilename(name)}: it already exists...`)
 
     } else {    
       if (ftype=='f') {
@@ -63,10 +63,10 @@ async function initDemoFolderForNollup(xeiraConfig, force) {
       }
       
       if (fs.existsSync(destPath)) {
-        log_info(xeiraConfig, 'demo', `Init ${cyan(name)} ${green('done!')}`)
+        log_info(context, 'demo', `Init ${cfilename(name)} ${cok('done!')}`)
 
       } else {
-        log_info(xeiraConfig, 'demo', `Init ${cyan(name)} ${red('error :(')}`)
+        log_info(context, 'demo', `Init ${cfilename(name)} ${cerror('error :(')}`)
       }
     }
   }

@@ -9,13 +9,13 @@ import {rollupBanner} from './banner.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
-async function rollupModulesForCjs(xeiraConfig, pkgJsonPath, pkgJson, input, output) {
+async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, output) {
   const customBabelConfig= {
     exclude: /node_modules/,
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
     
     // TODO
-    //  xeiraConfig.isAnApp()
+    //  context.isAnApp()
     //  ? 'runtime' https://github.com/rollup/plugins/tree/master/packages/babel#injected-helpers
     //  : bundled
     
@@ -26,25 +26,25 @@ async function rollupModulesForCjs(xeiraConfig, pkgJsonPath, pkgJson, input, out
         bugfixes: true,
         loose: true
       }],
-      ... xeiraConfig.usesReact
+      ... context.usesReact
         ? ['@babel/preset-react']
         : []
     ]
   }
 
-  const mergedBabelConfig= await getBabelConfig(xeiraConfig, input, customBabelConfig)
+  const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)
 
   const inputOptions= {
     input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(xeiraConfig.pkgPath),
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       babel(mergedBabelConfig),
       externals({
         packagePath: pkgJsonPath
       }),
       nodeResolve({
-        rootDir: xeiraConfig.pkgPath,
+        rootDir: context.pkgPath,
         exportConditions: ['node'],
       }),
       commonjs({
