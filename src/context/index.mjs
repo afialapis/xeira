@@ -41,7 +41,7 @@ function getXeiraContexts(folder, argv, aliases) {
   return contexts
 }
 
-async function makeXeiraContext(config, pkgPath, pkgName) {
+function makeXeiraContext(config, pkgPath, pkgName) {
   const xeiraContext = new XeiraContext(config, pkgPath, pkgName)
   return xeiraContext 
 }

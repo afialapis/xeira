@@ -1,4 +1,4 @@
-import {ctitle, ccmd, cxeira, coption_name, coption_value, cfilename} from '../../../src/utils/colors.mjs'
+import { /*ctitle, ccmd,*/ cxeira, coption_name, coption_value, cfilename} from '../../../src/utils/colors.mjs'
 
 
 export function configText (options, customSubTitle) {
@@ -26,10 +26,6 @@ export function configText (options, customSubTitle) {
       `${tab1}${coption_name('--source_index')}\n`+
       `${tab2}Path to your main index file.\n`+
       `${tab2}Default value is ${cfilename('./src/index.js')}.`,
-    react:
-      `${tab1}${coption_name('--react')}\n`+
-      `${tab2}Is React going to be a dependency?\n`+
-      `${tab2}Default is ${coption_value('false')}.`,
     linter:
       `${tab1}${coption_name('--linter')}\n`+
       `${tab2}Which linter do you wanna use?\n`+

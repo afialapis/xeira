@@ -37,13 +37,5 @@ export default [
       { title: 'index.js', value: 'index.js'},
     ],
     initial: 0
-  },  
-
-  // react
-  {
-    type: 'confirm',
-    name: 'react',
-    message: 'Are you going to work with React?',
-    initial: false
   }
 ]

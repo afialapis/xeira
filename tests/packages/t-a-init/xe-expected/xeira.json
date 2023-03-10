@@ -2,7 +2,6 @@
   "product": "package",
   "target": "both",
   "source_index": "./src/index.js",
-  "react": true,
   "linter": "eslint",
   "transpile_folder": "./lib_custom",
   "transpiler": "babel",

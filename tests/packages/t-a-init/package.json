@@ -6,7 +6,7 @@
     "x-prepare": "npm run --silent x-reset && npm i",
     "x-init-manual": "npx xeira init",
     "x-init-fly-prepare": "npm run --silent clean-init",
-    "x-init-fly": "npx xeira init --product=package --target=both --source_index=./src/index.js --react=true --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true",
+    "x-init-fly": "npx xeira init --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true",
     "x-init-fly-after": "mkdir xe && cp xeira.json ./xe/xeira.json && cp package.json ./xe/package.json",
     "x-init": "npm run --silent x-init-fly-prepare && npm run --silent x-init-fly  && npm run --silent x-init-after",
     "x-compare": "node ../../../src/utils-dev/diff.mjs xe xe-expected",
@@ -18,13 +18,13 @@
   "version": "0.0.1",
   "main": "lib_custom/index.cjs",
   "exports": {
-    "import": "dist/t-a-init.mjs",
+    "import": "dist/undefined.mjs",
     "default": "lib_custom/index.cjs",
-    "require": "dist/t-a-init.cjs"
+    "require": "dist/undefined.cjs"
   },
-  "module": "dist/t-a-init.mjs",
-  "cjs": "dist/t-a-init.cjs",
-  "browser": "dist/t-a-init.iife.js",
+  "module": "dist/undefined.mjs",
+  "cjs": "dist/undefined.cjs",
+  "browser": "dist/undefined.iife.js",
   "eslintConfig": {
     "extends": [
       "./node_modules/xeira/configs/eslint.react.cjs"

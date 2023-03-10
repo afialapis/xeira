@@ -6,7 +6,7 @@ import xeiraInit from '../../src/scripts/init/index.mjs'
 
 const aliases= {force: 'f'}
 const configOptions= ['product', 'target', 'source_index',
-  'react', 'linter', 'transpile_folder', 'transpiler', 'minifier', 
+  'linter', 'transpile_folder', 'transpiler', 'minifier', 
   'bundle_folder', 'bundler', 'test_folder', 'demo_mode', 'demo_demoer', 'verbose']
 
 const help = `
@@ -35,7 +35,7 @@ ${ctitle('EXAMPLES')}
   ${cexample('xeira init --force')}
     Will ask you on prompt about every config value
 
-  ${cexample('xeira init --product=package --target=both --source_index=./src/index.js --react=true --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true')}  
+  ${cexample('xeira init --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true')}  
     Set the whole ${cfilename('xeira.json')} from a single command
 `
 

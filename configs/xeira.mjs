@@ -5,8 +5,6 @@ export default {
 
   source_index: './src/index.js', // 'index.js',
 
-  react: false,
-
   // Probably offering alternatives some day
   linter: 'eslint', // undefined
   

@@ -5,7 +5,6 @@
   "bundler": "rollup",
   "product": "package",
   "target": "both",
-  "react": false,
   "source_index": "/src/index.cjs",
   "transpile_folder": null,
   "bundle_folder": "/dist",

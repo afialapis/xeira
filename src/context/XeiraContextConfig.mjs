@@ -83,10 +83,6 @@ export class XeiraContextConfig {
     return this.config.test_folder || 'tests'
   }
 
-  get usesReact() {
-    return this.config.react !== false
-  }
-
   getCjsOutput() {
     if (this.isTargetingNode) {
       return path.join(this.bundleFolder, `${this.pkgName}.cjs`)
