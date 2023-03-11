@@ -80,15 +80,17 @@ async function _parseMochaTestPath(argv, context) {
 
   for (const tFile of tFiles) {
     const fullTestPath= path.join(context.pkgPath, tFile)
-    const stats= await stat(fullTestPath)
-    if (stats.isFile()) {
+    let asDir= false
+    try {
+      const stats= await stat(fullTestPath)
+      if (stats.isDirectory()) {
+        testPaths.push(`${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`)
+        asDir= true
+      } 
+    } catch(_) {}
+    if (!asDir) {
       testPaths.push(fullTestPath)
-    } else if (stats.isDirectory()) {
-      testPaths.push(`${fullTestPath}/**/*.{ts,js,mjs,cjs,jsx,es6}`)
-    } else {
-      // we assume it is a pattern string already
-      testPaths.push(fullTestPath)
-    }    
+    }  
   }
 
   if (! testPaths.length) {
