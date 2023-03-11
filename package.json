@@ -47,7 +47,7 @@
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-terser": "^0.4.0",
-    "arredemo": "^0.0.9",
+    "arredemo": "^0.0.10",
     "babel-merge": "^3.0.0",
     "babel-plugin-module-extension": "^0.1.3",
     "babel-plugin-module-resolver": "^4.1.0",
