@@ -57,10 +57,24 @@ async function xeiraInit(context, flyOptions, force) {
     await saveObjectToJsonWithConfirm(xeiraConfigPath, contextData, true)
   }
 
+  // Ask about updating package.json values
+  const questions= [{
+    type: 'confirm',
+    name: 'pkgjson_update',
+    message: `xeira could update some values inside your package.json (main, imports, exports). Would you like to do it?`,
+    initial: true      
+  }]
+
+  const answers = await prompts(questions)
+
+  if (answers.pkgjson_update !== true) {
+    return
+  }
+
   log_info(context, 'init', `Keeping ${cfilename('package.json')} is updated`)
 
   // Prepare xeira config object
-  const defXeiraContext = makeXeiraContext(contextData, context.pkgPath, context.pkgName)
+  const defXeiraContext = makeXeiraContext(contextData, context.pkgPath)
 
   // Update package.json
   const pkgJsonValues= makePkgJsonValues(defXeiraContext)
