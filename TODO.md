@@ -93,34 +93,4 @@ What about bundling CSS
 
   - Use injected CSS on <head> (default behavior, inside bundled .js)
 
-# Init phase
-
-## add nice scripts entries?
-
-Like:
-
-```
-  "bundle": "npx xeira bundle",
-```
-
-`npm run bundle` is equally shorter as `npx xeira bundle`, but maybe easier to remember, more standard.
-
-
-
-
-# TO EXTEND
-
-## some command helper to change xeira configs?
-
-Like:
-
-```
-npx xeira config
-```
-
-And then prompts do some helpful actions
-
-## Docs?
-
-Or leave it for docaine?
 
