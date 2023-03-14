@@ -30,7 +30,7 @@ ${ctitle('EXAMPLES')}
   ${cexample('xeira bundle')}
     Bundles your code from ${cfilename('./src/index.js')} to ${cfilename('./dist')} folder.
 
-  ${cexample('xeira transpile --source_index=./src/index.mjs --to=./custom_dist')}
+  ${cexample('xeira bundle --source_index=./src/index.mjs --to=./custom_dist')}
     Bundles your code from the ESM entry ${cfilename('./src/index.mjs')} to ${cfilename('./custom_dist')} folder.
 `
 

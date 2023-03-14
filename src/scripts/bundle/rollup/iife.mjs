@@ -28,6 +28,10 @@ function toTitleCase(str) {
 }
 
 const makeGlobals = (pkgJson) => {
+  if (! pkgJson.dependencies) {
+    return {}
+  }
+  
   const pkgs= Object.keys(pkgJson.dependencies)
   const globals= {}
   pkgs.map((n) => {
