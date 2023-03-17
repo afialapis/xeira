@@ -14,10 +14,6 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tFBundleEsmReact = {}, global.react, global.trangallada));
 })(this, (function (exports, React, trangallada) { 'use strict';
 
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-  var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
-
   function fooit(obj) {
     obj.foo = 'bar';
     return obj;
@@ -39,14 +35,12 @@
     return total;
   };
   var MoneyDiv = function MoneyDiv() {
-    return /*#__PURE__*/React__default["default"].createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       id: "money-div"
     }, getMoney());
   };
 
   exports.MoneyDiv = MoneyDiv;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 //# sourceMappingURL=t-f-bundle-esm-react.umd.js.map

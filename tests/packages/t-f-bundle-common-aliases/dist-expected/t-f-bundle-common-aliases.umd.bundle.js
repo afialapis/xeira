@@ -17,9 +17,16 @@
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 	function getAugmentedNamespace(n) {
+	  if (n.__esModule) return n;
 	  var f = n.default;
 		if (typeof f == "function") {
-			var a = function () {
+			var a = function a () {
+				if (this instanceof a) {
+					var args = [null];
+					args.push.apply(args, arguments);
+					var Ctor = Function.bind.apply(f, args);
+					return new Ctor();
+				}
 				return f.apply(this, arguments);
 			};
 			a.prototype = f.prototype;
@@ -1353,7 +1360,11 @@
 
 	var isArguments_1 = isArguments$2;
 
-	var isBuffer$4 = {exports: {}};
+	var isBufferExports = {};
+	var isBuffer$4 = {
+	  get exports(){ return isBufferExports; },
+	  set exports(v){ isBufferExports = v; },
+	};
 
 	/**
 	 * This method returns `false`.
@@ -1414,7 +1425,7 @@
 		var isBuffer = nativeIsBuffer || stubFalse;
 
 		module.exports = isBuffer;
-	} (isBuffer$4, isBuffer$4.exports));
+	} (isBuffer$4, isBufferExports));
 
 	/** Used as references for various `Number` constants. */
 
@@ -1557,7 +1568,11 @@
 
 	var _baseUnary = baseUnary$6;
 
-	var _nodeUtil = {exports: {}};
+	var _nodeUtilExports = {};
+	var _nodeUtil = {
+	  get exports(){ return _nodeUtilExports; },
+	  set exports(v){ _nodeUtilExports = v; },
+	};
 
 	(function (module, exports) {
 		var freeGlobal = _freeGlobal;
@@ -1590,11 +1605,11 @@
 		}());
 
 		module.exports = nodeUtil;
-	} (_nodeUtil, _nodeUtil.exports));
+	} (_nodeUtil, _nodeUtilExports));
 
 	var baseIsTypedArray = _baseIsTypedArray,
 	    baseUnary$5 = _baseUnary,
-	    nodeUtil$5 = _nodeUtil.exports;
+	    nodeUtil$5 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsTypedArray = nodeUtil$5 && nodeUtil$5.isTypedArray;
@@ -1623,7 +1638,7 @@
 	var baseTimes = _baseTimes,
 	    isArguments$1 = isArguments_1,
 	    isArray$6 = isArray_1,
-	    isBuffer$3 = isBuffer$4.exports,
+	    isBuffer$3 = isBufferExports,
 	    isIndex = _isIndex,
 	    isTypedArray$2 = isTypedArray_1;
 
@@ -1942,7 +1957,11 @@
 
 	var _baseAssignIn = baseAssignIn$1;
 
-	var _cloneBuffer = {exports: {}};
+	var _cloneBufferExports = {};
+	var _cloneBuffer = {
+	  get exports(){ return _cloneBufferExports; },
+	  set exports(v){ _cloneBufferExports = v; },
+	};
 
 	(function (module, exports) {
 		var root = _root;
@@ -1980,7 +1999,7 @@
 		}
 
 		module.exports = cloneBuffer;
-	} (_cloneBuffer, _cloneBuffer.exports));
+	} (_cloneBuffer, _cloneBufferExports));
 
 	/**
 	 * Copies the values of `source` to `array`.
@@ -2596,7 +2615,7 @@
 
 	var baseIsMap = _baseIsMap,
 	    baseUnary$4 = _baseUnary,
-	    nodeUtil$4 = _nodeUtil.exports;
+	    nodeUtil$4 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsMap = nodeUtil$4 && nodeUtil$4.isMap;
@@ -2643,7 +2662,7 @@
 
 	var baseIsSet = _baseIsSet,
 	    baseUnary$3 = _baseUnary,
-	    nodeUtil$3 = _nodeUtil.exports;
+	    nodeUtil$3 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsSet = nodeUtil$3 && nodeUtil$3.isSet;
@@ -2674,7 +2693,7 @@
 	    assignValue = _assignValue,
 	    baseAssign = _baseAssign,
 	    baseAssignIn = _baseAssignIn,
-	    cloneBuffer = _cloneBuffer.exports,
+	    cloneBuffer = _cloneBufferExports,
 	    copyArray$1 = _copyArray,
 	    copySymbols = _copySymbols,
 	    copySymbolsIn = _copySymbolsIn,
@@ -2685,7 +2704,7 @@
 	    initCloneByTag = _initCloneByTag,
 	    initCloneObject = _initCloneObject,
 	    isArray$4 = isArray_1,
-	    isBuffer$2 = isBuffer$4.exports,
+	    isBuffer$2 = isBufferExports,
 	    isMap = isMap_1,
 	    isObject$2 = isObject_1,
 	    isSet = isSet_1,
@@ -3303,7 +3322,7 @@
 
 	var baseIsArrayBuffer = _baseIsArrayBuffer,
 	    baseUnary$2 = _baseUnary,
-	    nodeUtil$2 = _nodeUtil.exports;
+	    nodeUtil$2 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsArrayBuffer = nodeUtil$2 && nodeUtil$2.isArrayBuffer;
@@ -3414,7 +3433,7 @@
 
 	var baseIsDate = _baseIsDate,
 	    baseUnary$1 = _baseUnary,
-	    nodeUtil$1 = _nodeUtil.exports;
+	    nodeUtil$1 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsDate = nodeUtil$1 && nodeUtil$1.isDate;
@@ -3534,7 +3553,7 @@
 	    isArguments = isArguments_1,
 	    isArray$3 = isArray_1,
 	    isArrayLike$1 = isArrayLike_1,
-	    isBuffer$1 = isBuffer$4.exports,
+	    isBuffer$1 = isBufferExports,
 	    isPrototype = _isPrototype,
 	    isTypedArray$1 = isTypedArray_1;
 
@@ -4047,7 +4066,7 @@
 	    equalObjects = _equalObjects,
 	    getTag$2 = _getTag,
 	    isArray$2 = isArray_1,
-	    isBuffer = isBuffer$4.exports,
+	    isBuffer = isBufferExports,
 	    isTypedArray = isTypedArray_1;
 
 	/** Used to compose bitmasks for value comparisons. */
@@ -4809,7 +4828,7 @@
 
 	var baseIsRegExp = _baseIsRegExp,
 	    baseUnary = _baseUnary,
-	    nodeUtil = _nodeUtil.exports;
+	    nodeUtil = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsRegExp = nodeUtil && nodeUtil.isRegExp;
@@ -5540,7 +5559,7 @@
 	  'isArrayLike': isArrayLike_1,
 	  'isArrayLikeObject': isArrayLikeObject_1,
 	  'isBoolean': isBoolean_1,
-	  'isBuffer': isBuffer$4.exports,
+	  'isBuffer': isBufferExports,
 	  'isDate': isDate_1,
 	  'isElement': isElement_1,
 	  'isEmpty': isEmpty_1,
@@ -5587,9 +5606,9 @@
 
 	var lodash_lang = lang;
 
-	function _interopDefaultLegacy$1 (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-	var lodash_lang__default = /*#__PURE__*/_interopDefaultLegacy$1(lodash_lang);
+	var lodash_lang__default = /*#__PURE__*/_interopDefaultLegacy(lodash_lang);
 
 	var {
 	  toNumber
@@ -5777,7 +5796,7 @@
 	  getMoney: getMoney
 	};
 
-	exports["default"] = src;
+	exports.default = src;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

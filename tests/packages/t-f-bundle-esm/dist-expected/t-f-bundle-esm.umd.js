@@ -37,7 +37,5 @@
 
   exports.getMoney = getMoney;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
-
 }));
 //# sourceMappingURL=t-f-bundle-esm.umd.js.map

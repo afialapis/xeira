@@ -10,8 +10,6 @@
  */
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var trangallada = require('trangallada');
 
 function fooit(obj) {

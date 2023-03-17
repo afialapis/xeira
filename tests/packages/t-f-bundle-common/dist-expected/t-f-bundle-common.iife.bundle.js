@@ -1329,7 +1329,11 @@ var tFBundleCommon = (function (exports) {
 
 	var isArguments_1 = isArguments$2;
 
-	var isBuffer$4 = {exports: {}};
+	var isBufferExports = {};
+	var isBuffer$4 = {
+	  get exports(){ return isBufferExports; },
+	  set exports(v){ isBufferExports = v; },
+	};
 
 	/**
 	 * This method returns `false`.
@@ -1390,7 +1394,7 @@ var tFBundleCommon = (function (exports) {
 		var isBuffer = nativeIsBuffer || stubFalse;
 
 		module.exports = isBuffer;
-	} (isBuffer$4, isBuffer$4.exports));
+	} (isBuffer$4, isBufferExports));
 
 	/** Used as references for various `Number` constants. */
 
@@ -1533,7 +1537,11 @@ var tFBundleCommon = (function (exports) {
 
 	var _baseUnary = baseUnary$6;
 
-	var _nodeUtil = {exports: {}};
+	var _nodeUtilExports = {};
+	var _nodeUtil = {
+	  get exports(){ return _nodeUtilExports; },
+	  set exports(v){ _nodeUtilExports = v; },
+	};
 
 	(function (module, exports) {
 		var freeGlobal = _freeGlobal;
@@ -1566,11 +1574,11 @@ var tFBundleCommon = (function (exports) {
 		}());
 
 		module.exports = nodeUtil;
-	} (_nodeUtil, _nodeUtil.exports));
+	} (_nodeUtil, _nodeUtilExports));
 
 	var baseIsTypedArray = _baseIsTypedArray,
 	    baseUnary$5 = _baseUnary,
-	    nodeUtil$5 = _nodeUtil.exports;
+	    nodeUtil$5 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsTypedArray = nodeUtil$5 && nodeUtil$5.isTypedArray;
@@ -1599,7 +1607,7 @@ var tFBundleCommon = (function (exports) {
 	var baseTimes = _baseTimes,
 	    isArguments$1 = isArguments_1,
 	    isArray$6 = isArray_1,
-	    isBuffer$3 = isBuffer$4.exports,
+	    isBuffer$3 = isBufferExports,
 	    isIndex = _isIndex,
 	    isTypedArray$2 = isTypedArray_1;
 
@@ -1918,7 +1926,11 @@ var tFBundleCommon = (function (exports) {
 
 	var _baseAssignIn = baseAssignIn$1;
 
-	var _cloneBuffer = {exports: {}};
+	var _cloneBufferExports = {};
+	var _cloneBuffer = {
+	  get exports(){ return _cloneBufferExports; },
+	  set exports(v){ _cloneBufferExports = v; },
+	};
 
 	(function (module, exports) {
 		var root = _root;
@@ -1956,7 +1968,7 @@ var tFBundleCommon = (function (exports) {
 		}
 
 		module.exports = cloneBuffer;
-	} (_cloneBuffer, _cloneBuffer.exports));
+	} (_cloneBuffer, _cloneBufferExports));
 
 	/**
 	 * Copies the values of `source` to `array`.
@@ -2572,7 +2584,7 @@ var tFBundleCommon = (function (exports) {
 
 	var baseIsMap = _baseIsMap,
 	    baseUnary$4 = _baseUnary,
-	    nodeUtil$4 = _nodeUtil.exports;
+	    nodeUtil$4 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsMap = nodeUtil$4 && nodeUtil$4.isMap;
@@ -2619,7 +2631,7 @@ var tFBundleCommon = (function (exports) {
 
 	var baseIsSet = _baseIsSet,
 	    baseUnary$3 = _baseUnary,
-	    nodeUtil$3 = _nodeUtil.exports;
+	    nodeUtil$3 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsSet = nodeUtil$3 && nodeUtil$3.isSet;
@@ -2650,7 +2662,7 @@ var tFBundleCommon = (function (exports) {
 	    assignValue = _assignValue,
 	    baseAssign = _baseAssign,
 	    baseAssignIn = _baseAssignIn,
-	    cloneBuffer = _cloneBuffer.exports,
+	    cloneBuffer = _cloneBufferExports,
 	    copyArray$1 = _copyArray,
 	    copySymbols = _copySymbols,
 	    copySymbolsIn = _copySymbolsIn,
@@ -2661,7 +2673,7 @@ var tFBundleCommon = (function (exports) {
 	    initCloneByTag = _initCloneByTag,
 	    initCloneObject = _initCloneObject,
 	    isArray$4 = isArray_1,
-	    isBuffer$2 = isBuffer$4.exports,
+	    isBuffer$2 = isBufferExports,
 	    isMap = isMap_1,
 	    isObject$2 = isObject_1,
 	    isSet = isSet_1,
@@ -3279,7 +3291,7 @@ var tFBundleCommon = (function (exports) {
 
 	var baseIsArrayBuffer = _baseIsArrayBuffer,
 	    baseUnary$2 = _baseUnary,
-	    nodeUtil$2 = _nodeUtil.exports;
+	    nodeUtil$2 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsArrayBuffer = nodeUtil$2 && nodeUtil$2.isArrayBuffer;
@@ -3390,7 +3402,7 @@ var tFBundleCommon = (function (exports) {
 
 	var baseIsDate = _baseIsDate,
 	    baseUnary$1 = _baseUnary,
-	    nodeUtil$1 = _nodeUtil.exports;
+	    nodeUtil$1 = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsDate = nodeUtil$1 && nodeUtil$1.isDate;
@@ -3510,7 +3522,7 @@ var tFBundleCommon = (function (exports) {
 	    isArguments = isArguments_1,
 	    isArray$3 = isArray_1,
 	    isArrayLike$1 = isArrayLike_1,
-	    isBuffer$1 = isBuffer$4.exports,
+	    isBuffer$1 = isBufferExports,
 	    isPrototype = _isPrototype,
 	    isTypedArray$1 = isTypedArray_1;
 
@@ -4023,7 +4035,7 @@ var tFBundleCommon = (function (exports) {
 	    equalObjects = _equalObjects,
 	    getTag$2 = _getTag,
 	    isArray$2 = isArray_1,
-	    isBuffer = isBuffer$4.exports,
+	    isBuffer = isBufferExports,
 	    isTypedArray = isTypedArray_1;
 
 	/** Used to compose bitmasks for value comparisons. */
@@ -4785,7 +4797,7 @@ var tFBundleCommon = (function (exports) {
 
 	var baseIsRegExp = _baseIsRegExp,
 	    baseUnary = _baseUnary,
-	    nodeUtil = _nodeUtil.exports;
+	    nodeUtil = _nodeUtilExports;
 
 	/* Node.js helper references. */
 	var nodeIsRegExp = nodeUtil && nodeUtil.isRegExp;
@@ -5516,7 +5528,7 @@ var tFBundleCommon = (function (exports) {
 	  'isArrayLike': isArrayLike_1,
 	  'isArrayLikeObject': isArrayLikeObject_1,
 	  'isBoolean': isBoolean_1,
-	  'isBuffer': isBuffer$4.exports,
+	  'isBuffer': isBufferExports,
 	  'isDate': isDate_1,
 	  'isElement': isElement_1,
 	  'isEmpty': isEmpty_1,
@@ -5563,9 +5575,9 @@ var tFBundleCommon = (function (exports) {
 
 	var lodash_lang = lang;
 
-	function _interopDefaultLegacy$1 (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-	var lodash_lang__default = /*#__PURE__*/_interopDefaultLegacy$1(lodash_lang);
+	var lodash_lang__default = /*#__PURE__*/_interopDefaultLegacy(lodash_lang);
 
 	var {
 	  toNumber
@@ -5739,7 +5751,7 @@ var tFBundleCommon = (function (exports) {
 	  getMoney: getMoney
 	};
 
-	exports["default"] = src;
+	exports.default = src;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

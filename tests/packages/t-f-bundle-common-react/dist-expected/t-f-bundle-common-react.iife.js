@@ -11,8 +11,7 @@
 var tFBundleCommonReact = (function (exports, react, trangallada) {
 	'use strict';
 
-	function _interopNamespace(e) {
-		if (e && e.__esModule) return e;
+	function _interopNamespaceDefault(e) {
 		var n = Object.create(null);
 		if (e) {
 			Object.keys(e).forEach(function (k) {
@@ -25,17 +24,24 @@ var tFBundleCommonReact = (function (exports, react, trangallada) {
 				}
 			});
 		}
-		n["default"] = e;
+		n.default = e;
 		return Object.freeze(n);
 	}
 
-	var react__namespace = /*#__PURE__*/_interopNamespace(react);
-	var trangallada__namespace = /*#__PURE__*/_interopNamespace(trangallada);
+	var react__namespace = /*#__PURE__*/_interopNamespaceDefault(react);
+	var trangallada__namespace = /*#__PURE__*/_interopNamespaceDefault(trangallada);
 
 	function getAugmentedNamespace(n) {
+	  if (n.__esModule) return n;
 	  var f = n.default;
 		if (typeof f == "function") {
-			var a = function () {
+			var a = function a () {
+				if (this instanceof a) {
+					var args = [null];
+					args.push.apply(args, arguments);
+					var Ctor = Function.bind.apply(f, args);
+					return new Ctor();
+				}
 				return f.apply(this, arguments);
 			};
 			a.prototype = f.prototype;
@@ -98,7 +104,7 @@ var tFBundleCommonReact = (function (exports, react, trangallada) {
 	  MoneyDiv: MoneyDiv
 	};
 
-	exports["default"] = src;
+	exports.default = src;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

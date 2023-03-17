@@ -10,14 +10,8 @@
  */
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var React = require('react');
 var trangallada = require('trangallada');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 function fooit(obj) {
   obj.foo = 'bar';
@@ -40,7 +34,7 @@ var getMoney = function getMoney() {
   return total;
 };
 var MoneyDiv = function MoneyDiv() {
-  return /*#__PURE__*/React__default["default"].createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     id: "money-div"
   }, getMoney());
 };
