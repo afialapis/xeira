@@ -4,7 +4,7 @@ import { getConfigFromArgv } from '../../src/context/utils.mjs'
 import xeiraInit from '../../src/scripts/init/index.mjs'
 
 
-const aliases= {force: 'f'}
+const aliases= {force: 'f', pkgjson: 'pj'}
 const configOptions= ['product', 'target', 'source_index',
   'linter', 'transpile_folder', 'transpiler', 'minifier', 
   'bundle_folder', 'bundler', 'test_folder', 'demo_mode', 'demo_demoer', 'verbose']
@@ -12,7 +12,7 @@ const configOptions= ['product', 'target', 'source_index',
 const help = `
 ${ctitle('SYNPSIS')}
 
-  ${cxeira('xeira')} ${ccmd('init')} [${coption_name('--force')}] [${coption_value('config')}] [${coption_name('--filter')}]
+  ${cxeira('xeira')} ${ccmd('init')} [${coption_name('--force')}] [${coption_name('--pkgjson')}] [${coption_value('config')}] [${coption_name('--filter')}]
 
 ${ctitle('DESCRIPTION')}
 
@@ -23,6 +23,11 @@ ${ctitle('OPTIONS')}
   ${coption_name('--force')}, ${coption_name('--f')}
     Force ${cxeira('xeira')} to prompt you and ask you for config values even if they are already present
     on ${cfilename('xeira.json')}. Values will be overwritten there.   
+
+  ${coption_name('--pkgjson')}, ${coption_name('--pj')}
+    ${ccmd('init')} actions include to update some fields on your ${cfilename('package.json')} .
+    By default, ${cxeira('xeira')} ask you for cofirmation before doing so.
+    If you specify ${coption_value('pkgjson')}, ${cxeira('xeira')} proceeds without asking.       
 
   ${helpText}   
 
@@ -43,7 +48,7 @@ const handler = async function (context, argv) {
   const flyOptions= getConfigFromArgv(argv)
   const flyKeys= Object.keys(flyOptions)
 
-  await xeiraInit(context, flyKeys, argv?.force || argv?.f)
+  await xeiraInit(context, flyKeys, argv?.force || argv?.f, argv?.pkgjson)
 }
 
 export {aliases, configOptions, help, handler}

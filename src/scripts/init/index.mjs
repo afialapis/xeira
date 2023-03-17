@@ -17,7 +17,7 @@ import {makePkgJsonValues} from './pkgJsonValues.mjs'
 import { cfilename } from '../../utils/colors.mjs'
 import { makeXeiraContext } from '../../context/index.mjs'
 
-async function xeiraInit(context, flyOptions, force) {
+async function xeiraInit(context, flyOptions, force, pkgjson) {
   const xeiraConfigPath = path.join(context.pkgPath, 'xeira.json')
 
   // context comes as a merged config from
@@ -30,13 +30,16 @@ async function xeiraInit(context, flyOptions, force) {
   const savedOptions= Object.keys(savedConfig)
   
   // We will ask just for the options which
-  // -- are yet not saved 
-  // -- were not passed by argument
-  const askForQuestions = force
-    ? configQuestions
-    : configQuestions
-    .filter(q => savedOptions.indexOf(q.name)<0)
+  //  are not passed as argument.
+  // We also omit the already saved ones, unless
+  //  force is true (we re-answer the saved question in that case)
+  let askForQuestions = configQuestions
     .filter(q => flyOptions.indexOf(q.name)<0)
+  
+  if (! force) {
+    askForQuestions = askForQuestions
+      .filter(q => savedOptions.indexOf(q.name)<0)
+  }
   
   // Prompt questions
   let configAnswers = {}
@@ -58,20 +61,22 @@ async function xeiraInit(context, flyOptions, force) {
   }
 
   // Ask about updating package.json values
-  const questions= [{
-    type: 'confirm',
-    name: 'pkgjson_update',
-    message: `xeira could update some values inside your package.json (main, imports, exports). Would you like to do it?`,
-    initial: true      
-  }]
+  if (! pkgjson) {
+    const questions= [{
+      type: 'confirm',
+      name: 'pkgjson_update',
+      message: `xeira could update some values inside your package.json (main, imports, exports). Would you like to do it?`,
+      initial: true      
+    }]
 
-  const answers = await prompts(questions)
+    const answers = await prompts(questions)
 
-  if (answers.pkgjson_update !== true) {
-    return
+    if (answers.pkgjson_update !== true) {
+      return
+    }
   }
 
-  log_info(context, 'init', `Keeping ${cfilename('package.json')} is updated`)
+  log_info(context, 'init', `Updating ${cfilename('package.json')}`)
 
   // Prepare xeira config object
   const defXeiraContext = makeXeiraContext(contextData, context.pkgPath)
