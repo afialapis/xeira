@@ -4,7 +4,8 @@ import {configText, monoText, helpText} from './util/index.mjs'
 
 const aliases= {bundle_folder: 'to'}
 
-const configOptions= ['source_index', 'bundle_folder', 'bundler', 'verbose']
+const configOptions= ['product', 'target', 
+  'source_index', 'bundle_folder', 'bundler', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}
