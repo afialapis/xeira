@@ -8,7 +8,6 @@ import scss from 'rollup-plugin-postcss'
 import terser from '@rollup/plugin-terser'
 
 import {rollupBanner} from './commons/banner.mjs'
-import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { toTitleCase, makeGlobals } from '../../../utils/names.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
@@ -77,7 +76,8 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
 
   const outputs= [
     {
-      ...getDynamicImportOptions (context, output),
+      file: output,
+      inlineDynamicImports: true,
       format: 'umd',
       exports: 'named',
       banner: rollupBanner(pkgJson),
@@ -86,7 +86,8 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
       globals: makeGlobals(pkgJson) 
     },
     {
-      ...getDynamicImportOptions (context, outputMin),
+      file: outputMin,
+      inlineDynamicImports: true,
       format: 'umd',
       exports: 'named',
       banner: rollupBanner(pkgJson),

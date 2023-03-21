@@ -18,14 +18,14 @@ export class XeiraContextFiles extends XeiraContextConfig {
   
   _getChunkFolder(name, minified= false) {
     if (this.inlineDynamicImports) {
-      throw Error(`Trying to get a chunk folder for ${name}, but inlineDynamicImports is true`)
+      return undefined
     }
     return minified
       ? `${name}.min`
       : name
   }
 
-  _getOutputFile(name, ext, minified= false, suffix= undefined) {
+  _getOutputFile(ext, chunkFolder= undefined, minified= false, suffix= undefined) {
     const smin = minified ? `.min` : ''
     const ssuf = suffix ? `.${suffix}` : ''
     let pre_ext= '', the_ext= ''
@@ -38,8 +38,7 @@ export class XeiraContextFiles extends XeiraContextConfig {
 
     const theFile = `${this.pkgName}${spre_ext}${ssuf}${smin}.${the_ext}`
     
-    if (! this.inlineDynamicImports) {
-      const chunkFolder = this._getChunkFolder(name, minified)
+    if (chunkFolder) {
       return path.join(this.bundleFolder, chunkFolder, 'index.js')
     }
     return path.join(this.bundleFolder, theFile)
@@ -64,31 +63,34 @@ export class XeiraContextFiles extends XeiraContextConfig {
   */
 
   getCjsOutput(minified= false) {
-    return this._getOutputFile('cjs', 'cjs', minified)
+    const chunkFolder = this._getChunkFolder('cjs', minified)
+    return this._getOutputFile('cjs', chunkFolder, minified)
   }
 
   getEsmOutput(minified= false) {
-    return this._getOutputFile('mjs', 'mjs', minified)
+    const chunkFolder = this._getChunkFolder('mjs', minified)
+    return this._getOutputFile('mjs', chunkFolder, minified)
   }
 
   getEsmNodeOutput(minified= false) {
-    return this._getOutputFile('mjs', 'mjs', minified, 'node')
+    const chunkFolder = this._getChunkFolder('mjs_node', minified)
+    return this._getOutputFile('mjs', chunkFolder, minified, 'node')
   }
 
   getUmdOutput(minified= false, suffix= undefined) {
-    return this._getOutputFile('umd', 'umd.js', minified, suffix)
+    return this._getOutputFile('umd.js', undefined,  minified, suffix)
   }  
 
   getUmdFullBundleOutput(minified= false) {
-    return this._getOutputFile('umd_bundle', 'umd.js', minified, 'bundle')
+    return this.getUmdOutput(minified, 'bundle')
   }  
 
-  getIifeOutput(minified= false) {
-    return this._getOutputFile('iife', 'iife.js', minified)
+  getIifeOutput(minified= false, suffix= undefined) {
+    return this._getOutputFile('iife.js', undefined, minified, suffix)
   }  
 
   getIifeFullBundleOutput(minified= false) {
-    return this._getOutputFile('iife', 'iife.js', minified, 'bundle')
+    return this.getIifeOutput(minified, 'bundle')
   } 
 
   getMainFile() {

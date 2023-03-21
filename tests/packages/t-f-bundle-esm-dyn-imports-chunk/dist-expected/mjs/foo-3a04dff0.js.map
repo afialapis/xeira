@@ -1,0 +1,1 @@
+{"version":3,"file":"foo-3a04dff0.js","sources":["../../src/foo.mjs"],"sourcesContent":["function fooit(obj) {\n  obj.foo= 'bar'\n  return obj\n}\n\nexport {\n  fooit\n}"],"names":["fooit","obj","foo"],"mappings":";;;;;;;;;;AAAA,SAASA,KAAKA,CAACC,GAAG,EAAE;EAClBA,GAAG,CAACC,GAAG,GAAE,KAAK,CAAA;AACd,EAAA,OAAOD,GAAG,CAAA;AACZ;;;;"}

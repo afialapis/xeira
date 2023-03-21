@@ -176,7 +176,9 @@ Destination folder for bundle files. Default is `./dist`.
 Sets the `rollup`'s [`inlineDynamicImports`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) option. `true` by default.
 
 If `false`, each bundle will consist on several files (`xeira` will create subdirectories, 
-like `./dist/cjs`, `./dist/iife`...).
+like `./dist/cjs`, `./dist/mjs`...).
+
+`umd` and `iife` bundles cannot be split. So, if your `target` is `browser`, this option will be ignored.
 
 ## `bundler`
 

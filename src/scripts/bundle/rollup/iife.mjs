@@ -8,7 +8,6 @@ import scss from 'rollup-plugin-postcss'
 import terser from '@rollup/plugin-terser'
 
 import {rollupBanner} from './commons/banner.mjs'
-import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { toTitleCase, makeGlobals } from '../../../utils/names.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
@@ -79,7 +78,8 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
 
   const outputs= [
     {
-      ...getDynamicImportOptions (context, output),
+      file: output,
+      inlineDynamicImports: true,
       format: 'iife',
       exports: 'named',
       banner: rollupBanner(pkgJson),
@@ -88,7 +88,8 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
       globals: makeGlobals(pkgJson)
     },
     {
-      ...getDynamicImportOptions (context, outputMin),
+      file: outputMin,
+      inlineDynamicImports: true,
       format: 'iife',
       exports: 'named',
       banner: rollupBanner(pkgJson),
