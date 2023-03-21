@@ -28,8 +28,15 @@ export class XeiraContextFiles extends XeiraContextConfig {
   _getOutputFile(name, ext, minified= false, suffix= undefined) {
     const smin = minified ? `.min` : ''
     const ssuf = suffix ? `.${suffix}` : ''
+    let pre_ext= '', the_ext= ''
+    if (ext.indexOf('.')>0) {
+      [pre_ext, the_ext]= ext.split('.')
+    } else {
+      the_ext= ext
+    }
+    const spre_ext = pre_ext ? `.${pre_ext}` : ''
 
-    const theFile = `${this.pkgName}${smin}${ssuf}.${ext}`
+    const theFile = `${this.pkgName}${spre_ext}${ssuf}${smin}.${the_ext}`
     
     if (! this.inlineDynamicImports) {
       const chunkFolder = this._getChunkFolder(name, minified)
