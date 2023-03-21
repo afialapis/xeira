@@ -78,7 +78,8 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, output)
       format: 'es',
       exports: 'named',
       banner: rollupBanner(pkgJson),
-      sourcemap: true
+      sourcemap: true,
+      inlineDynamicImports: true
     },
     {
       file: minifyExtension(output),
@@ -87,7 +88,8 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, output)
       banner: rollupBanner(pkgJson),
       plugins: [
         terser({ ecma: 8, safari10: true })
-      ]
+      ],
+      inlineDynamicImports: true
     }    
   ]
 

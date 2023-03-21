@@ -59,7 +59,8 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, output)
       file: output,
       format: 'cjs',
       exports: 'named',
-      banner: rollupBanner(pkgJson)
+      banner: rollupBanner(pkgJson),
+      inlineDynamicImports: true
     }
   ]
 

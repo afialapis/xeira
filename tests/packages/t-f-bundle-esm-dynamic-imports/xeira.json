@@ -1,0 +1,13 @@
+{
+  "linter": "eslint",
+  "transpiler": "babel",
+  "minifier": "uglify",
+  "bundler": "rollup",
+  "product": "package",
+  "target": "both",
+  "source_index": "/src/index.mjs",
+  "transpile_folder": null,
+  "bundle_folder": "/dist",
+  "test_folder": null,
+  "verbose": true
+}

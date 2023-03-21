@@ -101,7 +101,8 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, output,
       banner: rollupBanner(pkgJson),
       sourcemap: true,
       name: toTitleCase(pkgJson.name),
-      globals: makeGlobals(pkgJson)      
+      globals: makeGlobals(pkgJson),
+      inlineDynamicImports: true      
     },
     {
       file: minifyExtension(output),
@@ -112,7 +113,8 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, output,
         terser({ ecma: 8, safari10: true })
       ],
       name: toTitleCase(pkgJson.name),
-      globals: makeGlobals(pkgJson)   
+      globals: makeGlobals(pkgJson),
+      inlineDynamicImports: true
     }    
   ]
 

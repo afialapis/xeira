@@ -66,7 +66,8 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, out
       file: output,
       format: 'esm',
       exports: 'named',
-      banner: rollupBanner(pkgJson)
+      banner: rollupBanner(pkgJson),
+      inlineDynamicImports: true
     }
   ]
 
