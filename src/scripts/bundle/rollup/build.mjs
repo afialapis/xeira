@@ -66,7 +66,15 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
   let niceFileName = ''
 
   try {
-    niceFileName= outputOptionsList[0].file.replace(pkgPath, '.')
+    try {
+      niceFileName= outputOptionsList[0].file.replace(pkgPath, '.')
+    } catch(_) {
+      try {
+        niceFileName= outputOptionsList[0].dir.replace(pkgPath, '.')
+      } catch(_) {
+        niceFileName= JSON.stringify(outputOptionsList[0])
+      }      
+    }
 
     // create a bundle
     const bundle = await rollup(inputOptions)
@@ -76,6 +84,7 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
     buildFailed = true;
     // do some error reporting
     console.error(cerror(error));
+    console.trace()
   }
   if (bundle) {
     // closes the bundle

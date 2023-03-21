@@ -66,7 +66,7 @@ export class XeiraContextConfig {
     return this.config.bundle_folder || 'dist'
   }
 
-  get inlineDymamicImports() {
+  get inlineDynamicImports() {
     return ! (this.config.bundle_inline_dynamic_imports != true)
   }
 

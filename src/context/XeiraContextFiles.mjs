@@ -17,8 +17,8 @@ export class XeiraContextFiles extends XeiraContextConfig {
   }
   
   _getChunkFolder(name, minified= false) {
-    if (this.inlineDymamicImports) {
-      throw Error(`Trying to get a chunk folder for ${name}, but inlineDymamicImports is true`)
+    if (this.inlineDynamicImports) {
+      throw Error(`Trying to get a chunk folder for ${name}, but inlineDynamicImports is true`)
     }
     return minified
       ? `${name}.min`
@@ -31,7 +31,7 @@ export class XeiraContextFiles extends XeiraContextConfig {
 
     const theFile = `${this.pkgName}${smin}${ssuf}.${ext}`
     
-    if (! this.inlineDymamicImports) {
+    if (! this.inlineDynamicImports) {
       const chunkFolder = this._getChunkFolder(name, minified)
       return path.join(this.bundleFolder, chunkFolder, 'index.js')
     }
