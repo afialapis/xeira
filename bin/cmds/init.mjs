@@ -7,7 +7,7 @@ import xeiraInit from '../../src/scripts/init/index.mjs'
 const aliases= {force: 'f', pkgjson: 'pj'}
 const configOptions= ['product', 'target', 'source_index',
   'linter', 'transpile_folder', 'transpiler', 'minifier', 
-  'bundle_folder', 'bundler', 'test_folder', 'demo_mode', 'demo_demoer', 'verbose']
+  'bundle_folder', 'bundle_inline_dynamic_imports', 'bundler', 'test_folder', 'demo_mode', 'demo_demoer', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}

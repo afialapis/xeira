@@ -8,6 +8,7 @@
   "source_index": "/src/index.mjs",
   "transpile_folder": null,
   "bundle_folder": null,
+  "bundle_inline_dynamic_imports": true,
   "test_folder": "./test",
   "verbose": true
 }

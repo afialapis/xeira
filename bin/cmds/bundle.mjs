@@ -2,10 +2,10 @@ import {ctitle, ccmd, cxeira, coption_value, cexample, cfilename, coption_name} 
 import xeiraBundle from '../../src/scripts/bundle/index.mjs'
 import {configText, monoText, helpText} from './util/index.mjs'
 
-const aliases= {bundle_folder: 'to'}
+const aliases= {bundle_folder: 'to', bundle_inline_dynamic_imports: 'dyn_inline'}
 
 const configOptions= ['product', 'target', 
-  'source_index', 'bundle_folder', 'bundler', 'verbose']
+  'source_index', 'bundle_folder', 'bundle_inline_dynamic_imports', 'bundler', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}

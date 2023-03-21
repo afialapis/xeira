@@ -14,6 +14,16 @@ export default [
   },  
 
   {
+    type: 'select',
+    name: 'bundle_inline_dynamic_imports',
+    message: 'inline dynamic imports?',
+    choices: [
+      { title: 'yes', value: true },
+      { title: 'no', value: false},
+    ],
+    initial: 0
+  },  
+  {
     type: prev => {
       if ((prev == 3) || (prev == 'none') ) {
         return null

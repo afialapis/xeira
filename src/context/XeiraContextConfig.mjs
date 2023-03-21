@@ -75,6 +75,10 @@ export class XeiraContextConfig {
     return this.config.bundle_folder || 'dist'
   }
 
+  get inlineDymamicImports() {
+    return ! (this.config.bundle_inline_dynamic_imports != true)
+  }
+
   get bundleWithRollup() {
     return this.config.bundler == 'rollup'
   }

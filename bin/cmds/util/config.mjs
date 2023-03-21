@@ -46,6 +46,10 @@ export function configText (options, customSubTitle) {
       `${tab1}${coption_name('--bundle_folder')}\n`+
       `${tab2}Which folder will be your bundled files placed in?\n`+
       `${tab2}Default value is ${coption_value('./dist')}. If ${coption_value('none')}, no bundling will be made.`,
+    bundle_inline_dynamic_imports:
+      `${tab1}${coption_name('--bundle_inline_dynamic_imports')}\n`+
+      `${tab2}Inline dynamic imports?\n`+
+      `${tab2}Default value is ${coption_value('true')}. If ${coption_value('false')}, generated bundle will consist on more than one file.`,
     bundler:
       `${tab1}${coption_name('--bundler')}\n`+
       `${tab2}Which bundler do you wanna use?\n`+

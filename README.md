@@ -171,6 +171,13 @@ If you wanna disable it for transpiling, just specify `null`.
 
 Destination folder for bundle files. Default is `./dist`.
 
+## `bundle_inline_dynamic_imports`
+
+Sets the `rollup`'s [`inlineDynamicImports`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) option. `true` by default.
+
+If `false`, each bundle will consist on several files (`xeira` will create subdirectories, 
+like `./dist/cjs`, `./dist/iife`...).
+
 ## `bundler`
 
 Tool in charge of source code bundling. Default is `rollup`.
