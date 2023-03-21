@@ -1,5 +1,5 @@
 /**
- * t-f-bundle-esm-dynamic-imports v0.0.1
+ * t-f-bundle-esm-dyn-imports-inline v0.0.1
  *
  * Copyright (c) -no-author-
  *

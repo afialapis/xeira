@@ -1,36 +1,13 @@
-//import path from 'path'
 import { rollup } from 'rollup'
 import {cerror, cok, cfilename} from '../../../utils/colors.mjs'
 import { log_always, log_error } from '../../../utils/log.mjs';
-
-// function _hasDynamicImports(pkgPath, bundle, inputOptions) {
-//   const importedModules = bundle.watchFiles // Array.from(bundle.graph.modulesById.keys())
-//   const dynImports = importedModules
-//                      .filter(m => m.indexOf('BabelHelper')<0)
-//                      .filter(m => m!=inputOptions.input)
-//                      .filter(m => m.indexOf(pkgPath)>=0)
-//   if (dynImports.length>0) {
-//     console.log(dynImports)
-//   }
-//   return dynImports.length>0
-// }
-// 
-// function _patchForDynamicImports(outputOptionsList) {
-//   for (let output of outputOptionsList) {
-//     const odir = path.dirname(output.file)
-//     output.dir= path.join(odir, 'cjs')
-//     delete output.file
-//   }
-// }
 
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   for (const outputOptions of outputOptionsList) {
     
     const { _output } = await bundle.write(outputOptions);
 
-    
     /*
-
     // generate output specific code in-memory
     // you can call this function multiple times on the same bundle object
     // replace bundle.generate with bundle.write to directly write to disk    
@@ -94,20 +71,6 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
     // create a bundle
     const bundle = await rollup(inputOptions)
 
-
-    //    // Check if dynamic imports are present
-    //    if (_hasDynamicImports(pkgPath, bundle, inputOptions)) {
-    //      //const niceDirName = path.dirname(niceFileName)
-    //      //log_always('bundle', `Dynamic imports detected. Switching bundle output, from ${cok('file')} ${cfilename(niceFileName)} to its ${cok('dir')} ${cfilename(niceDirName)}`)
-    //      // _patchForDynamicImports(outputOptionsList)
-    //
-    //      log_always('bundle', `Dynamic imports detected. They will be inlined, changing execution order. Check: https://rollupjs.org/configuration-options/#output-inlinedynamicimports.`)
-    //      outputOptionsList.map(o => o.inlineDynamicImports = true)
-    //    }
-
-    // an array of file names this bundle depends on
-    //console.log(bundle.watchFiles);
-
     await _rollupGenerateOutputs(bundle, outputOptionsList);
   } catch (error) {
     buildFailed = true;
@@ -118,8 +81,6 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
     // closes the bundle
     await bundle.close();
   }
-
-  
 
   if (buildFailed) {
     log_error('bundle', `Error when bundling ${cfilename(niceFileName)}`)

@@ -6,13 +6,14 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
 
-import {rollupBanner} from './banner.mjs'
+import {rollupBanner} from './commons/banner.mjs'
+import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = 'production'
 
-async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, output) {
+async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
   const customBabelConfig= {
     exclude: /node_modules/,
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -61,13 +62,14 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, out
     ]
   }
 
+  const output = context.pkgp(context.getEsmNodeOutput())
+
   const outputs= [
     {
-      file: output,
+      ...getDynamicImportOptions (context, output),
       format: 'esm',
       exports: 'named',
-      banner: rollupBanner(pkgJson),
-      inlineDynamicImports: true
+      banner: rollupBanner(pkgJson)
     }
   ]
 

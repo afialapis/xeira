@@ -1,5 +1,5 @@
 /**
- * t-f-bundle-esm-dynamic-imports v0.0.1
+ * t-f-bundle-esm-dyn-imports-inline v0.0.1
  *
  * Copyright (c) -no-author-
  *
@@ -84,4 +84,4 @@ var foo = /*#__PURE__*/Object.freeze({
 });
 
 export { getMoney };
-//# sourceMappingURL=t-f-bundle-esm-dynamic-imports.mjs.map
+//# sourceMappingURL=t-f-bundle-esm-dyn-imports-inline.mjs.map

@@ -1,14 +1,5 @@
 import path from 'path'
 
-const addSuffix = (s, suf) => 
-  s
-  .replace(/\.js$/, `.${suf}.js`)
-  .replace(/\.mjs$/, `.${suf}.mjs`)
-  .replace(/\.cjs$/, `.${suf}.cjs`)
-
-
-const NODE_MAIN = 'umd' // 'cjs'
-
 export class XeiraContextConfig {
   constructor(config, pkgName) {
     this.config= config
@@ -85,77 +76,6 @@ export class XeiraContextConfig {
 
   get testFolder() {
     return this.config.test_folder || 'tests'
-  }
-
-  getCjsOutput() {
-    if (this.isTargetingNode) {
-      return path.join(this.bundleFolder, `${this.pkgName}.cjs`)
-    }
-    return undefined
-  }
-
-  getEsmOutput() {
-    return path.join(this.bundleFolder, `${this.pkgName}.mjs`)
-  }
-
-  getEsmNodeOutput() {
-    if (this.isTargetingNode) {
-      return addSuffix(this.getEsmOutput(), 'node')
-    }
-    return undefined
-  }
-
-  getUmdOutput() {
-    if (this.isTargetingBrowser) {
-      return path.join(this.bundleFolder, `${this.pkgName}.umd.js`)
-    }
-    return undefined
-  }  
-
-  getUmdFullBundleOutput() {
-    const umd= this.getUmdOutput()
-    if (umd) {
-      return addSuffix(umd, 'bundle')
-    }
-    return undefined
-  }  
-
-  getIifeOutput() {
-    if (this.isTargetingBrowser) {
-      return path.join(this.bundleFolder, `${this.pkgName}.iife.js`)
-
-    }
-    return undefined
-  }  
-
-  getIifeFullBundleOutput() {
-    const iife= this.getIifeOutput()
-    if (iife) {
-      return addSuffix(iife, 'bundle')
-    }
-    return undefined
-  }    
-
-  getMainFileForNodeSuffix() {
-    return NODE_MAIN
-  }
-
-  getMainFileForNode() {
-    const suffix = this.getMainFileForNodeSuffix()
-    const output = suffix=='cjs'
-      ? this.getCjsOutput()
-      : addSuffix(this.getUmdOutput(), 'main')
-    return [suffix, output]
-  }
-
-  getMainFile() {
-    if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
-      return [undefined, path.join(this.transpileFolder, 'index.cjs')]
-    }
-    if (this.isTargetingNode) {
-      return this.getMainFileForNode()
-    }
-    return ['umd', addSuffix(this.getUmdOutput(), 'main')]
   }
 
   getDemoMode() {

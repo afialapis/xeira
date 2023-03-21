@@ -1,10 +1,8 @@
-import { XeiraContextConfig } from "./XeiraContextConfig.mjs"
+import { XeiraContextFiles } from "./XeiraContextFiles.mjs"
 
-export class XeiraContext extends XeiraContextConfig {
+export class XeiraContext extends XeiraContextFiles {
   constructor(config, pkgPath, pkgJson) {
-    super(config, pkgJson.name)
-    this.pkgPath= pkgPath
-    this.pkgJson= pkgJson
+    super(config, pkgPath, pkgJson)
   }
 
   get usesReact() {

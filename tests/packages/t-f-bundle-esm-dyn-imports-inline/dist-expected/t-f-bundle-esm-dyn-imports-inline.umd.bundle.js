@@ -1,5 +1,5 @@
 /**
- * t-f-bundle-esm-dynamic-imports v0.0.1
+ * t-f-bundle-esm-dyn-imports-inline v0.0.1
  *
  * Copyright (c) -no-author-
  *
@@ -8,8 +8,11 @@
  *
  * @license MIT
  */
-var tFBundleEsmDynamicImports = (function (exports) {
-  'use strict';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tFBundleEsmDynImportsInline = {}));
+})(this, (function (exports) { 'use strict';
 
   function _regeneratorRuntime() {
     _regeneratorRuntime = function () {
@@ -5979,7 +5982,5 @@ var tFBundleEsmDynamicImports = (function (exports) {
 
   exports.getMoney = getMoney;
 
-  return exports;
-
-})({});
-//# sourceMappingURL=t-f-bundle-esm-dynamic-imports.iife.bundle.js.map
+}));
+//# sourceMappingURL=t-f-bundle-esm-dyn-imports-inline.umd.bundle.js.map

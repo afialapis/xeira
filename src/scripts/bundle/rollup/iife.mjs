@@ -7,40 +7,16 @@ import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
 import terser from '@rollup/plugin-terser'
 
-import {rollupBanner} from './banner.mjs'
+import {rollupBanner} from './commons/banner.mjs'
+import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
+import { toTitleCase, makeGlobals } from '../../../utils/names.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = 'production'
 
-const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
 
-function toTitleCase(str) {
-  let s= str.replace(
-    /\w*/g,
-    function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    }
-  )
-  s= s.charAt(0).toLowerCase() + s.substr(1);
-  s= s.replace(/-/g,'')
-  return s
-}
-
-const makeGlobals = (pkgJson) => {
-  if (! pkgJson.dependencies) {
-    return {}
-  }
-  
-  const pkgs= Object.keys(pkgJson.dependencies)
-  const globals= {}
-  pkgs.map((n) => {
-    globals[n]= toTitleCase(n)
-  })
-  return globals
-}
-
-async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, output, bundleDeps= false) {
+async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundleDeps= false) {
 
   const customBabelConfig= {
     exclude: /node_modules/,
@@ -93,19 +69,26 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, output
     ]
   }
 
+  const output = context.pkgp(
+    bundleDeps ?  context.getIifeFullBundleOutput(false) : context.getIifeOutput(false)
+  )
+  const outputMin = context.pkgp(
+    bundleDeps ?  context.getIifeFullBundleOutput(true) : context.getIifeOutput(true)
+  )
+  
+
   const outputs= [
     {
-      file: output,
+      ...getDynamicImportOptions (context, output),
       format: 'iife',
       exports: 'named',
       banner: rollupBanner(pkgJson),
       sourcemap: true,
       name: toTitleCase(pkgJson.name),
-      globals: makeGlobals(pkgJson)    ,
-      inlineDynamicImports: true  
+      globals: makeGlobals(pkgJson)
     },
     {
-      file: minifyExtension(output),
+      ...getDynamicImportOptions (context, outputMin),
       format: 'iife',
       exports: 'named',
       banner: rollupBanner(pkgJson),
@@ -113,8 +96,7 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, output
         terser({ ecma: 8, safari10: true })
       ],
       name: toTitleCase(pkgJson.name),
-      globals: makeGlobals(pkgJson) ,
-      inlineDynamicImports: true  
+      globals: makeGlobals(pkgJson)
     }    
   ]
 

@@ -17,51 +17,40 @@ async function rollupBundle(context) {
 
   const input = pkgp(context.sourceIndex)
 
-  const cjs_output = pkgp(context.getCjsOutput(pkgJson.name))
-  const esm_output = pkgp(context.getEsmOutput(pkgJson.name))
-  const esm_node_output = pkgp(context.getEsmNodeOutput(pkgJson.name))
-  const umd_output = pkgp(context.getUmdOutput(pkgJson.name))
-  const umd_bundle_output = pkgp(context.getUmdFullBundleOutput(pkgJson.name))
-  const iife_output = pkgp(context.getIifeOutput(pkgJson.name))
-  const iife_bundle_output = pkgp(context.getIifeFullBundleOutput(pkgJson.name))
 
-  const [main_file_suffix, main_file] = context.getMainFile(pkgJson.name) 
-
-  if (cjs_output) {
-    const [inputOptions, outputs] = await rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, cjs_output)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
-  }
-
-  if (esm_output) {
-    const [inputOptions, outputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, esm_output)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
-  }
-
-  if (esm_node_output) {
-    const [inputOptions, outputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, esm_node_output)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
+  // CJS - If Node
+  if (context.isTargetingNode) {
+    const [csjInputOptions, cjsOutputs] = await rollupModulesForCjs(context, pkgJsonPath, pkgJson, input)
+    await rollupBuild(context.pkgPath, csjInputOptions, cjsOutputs)
   }
   
-  if (umd_output) {
-    const [inputOptions, outputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, umd_output, false)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
+  // ESM - Always
+  const [esmInputOptions, esmOutputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input)
+  await rollupBuild(context.pkgPath, esmInputOptions, esmOutputs)
+
+  // ESM node special
+  if (context.isTargetingNode) {
+    const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input)
+    await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
   }
 
-  if (umd_bundle_output) {
-    const [inputOptions, outputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, umd_bundle_output, true)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
+  // UMD and IIFE - If Browser
+  if (context.isTargetingBrowser) {
+    const [umdInputOptions, umdOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, false)
+    await rollupBuild(context.pkgPath, umdInputOptions, umdOutputs)
+    
+    const [umdbInputOptions, umdbOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, true)
+    await rollupBuild(context.pkgPath, umdbInputOptions, umdbOutputs)
+    
+    const [iifeInputOptions, iifeOutputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, false)
+    await rollupBuild(context.pkgPath, iifeInputOptions, iifeOutputs)
+    
+    const [iifebInputOptions, iifebOutputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, true)
+    await rollupBuild(context.pkgPath, iifebInputOptions, iifebOutputs)
   }  
-
-  if (iife_output) {
-    const [inputOptions, outputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, iife_output, false)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
-  }
-
-  if (iife_bundle_output) {
-    const [inputOptions, outputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, iife_bundle_output, true)
-    await rollupBuild(context.pkgPath, inputOptions, outputs)
-  }  
-
+  
+  // Main file
+  const [main_file_suffix, main_file] = context.getMainFile(pkgJson.name) 
   if (main_file_suffix) {
     await makeMainFile (pkgJson.name, main_file_suffix, pkgp(main_file))
   }

@@ -7,15 +7,16 @@ import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
 import terser from '@rollup/plugin-terser'
 
-import {rollupBanner} from './banner.mjs'
+import {rollupBanner} from './commons/banner.mjs'
+import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = 'production'
 
-const minifyExtension = pathToFile => pathToFile.replace(/\.mjs$/, '.min.mjs');
 
-async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, output) {
+
+async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
   const customBabelConfig= {
     exclude: 'node_modules/**',
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -72,24 +73,25 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, output)
     ]
   }
 
+  const output = context.pkgp(context.getEsmOutput(false))
+  const outputMin = context.pkgp(context.getEsmOutput(true))
+
   const outputs= [
     {
-      file: output,
+      ...getDynamicImportOptions (context, output),
       format: 'es',
       exports: 'named',
       banner: rollupBanner(pkgJson),
-      sourcemap: true,
-      inlineDynamicImports: true
+      sourcemap: true
     },
     {
-      file: minifyExtension(output),
+      ...getDynamicImportOptions (context, outputMin),
       format: 'es',
       exports: 'named',
       banner: rollupBanner(pkgJson),
       plugins: [
         terser({ ecma: 8, safari10: true })
-      ],
-      inlineDynamicImports: true
+      ]
     }    
   ]
 
