@@ -17,7 +17,7 @@ import {makePkgJsonValues} from './pkgJsonValues.mjs'
 import { cfilename } from '../../utils/colors.mjs'
 import { makeXeiraContext } from '../../context/index.mjs'
 
-async function xeiraInit(context, flyOptions, force, pkgjson) {
+async function xeiraInit(context, flyOptions, force, pkgjson, forceSave) {
   const xeiraConfigPath = path.join(context.pkgPath, 'xeira.json')
 
   // context comes as a merged config from
@@ -56,7 +56,7 @@ async function xeiraInit(context, flyOptions, force, pkgjson) {
   }
 
   // Save xeira.json
-  if (askForQuestions.length>0) {
+  if (forceSave || (askForQuestions.length>0)) {
     await saveObjectToJsonWithConfirm(xeiraConfigPath, contextData, true)
   }
 

@@ -3,11 +3,17 @@ import { XeiraContextConfig } from "./XeiraContextConfig.mjs"
 
 const NODE_MAIN = 'umd' // 'cjs'
 
+const _relative = (s) => `.${path.sep}${s}`
+
 export class XeiraContextFiles extends XeiraContextConfig {
   constructor(config, pkgPath, pkgJson) {
-    super(config, pkgJson.name)
+    super(config)
     this.pkgPath= pkgPath
     this.pkgJson= pkgJson
+  }
+
+  get pkgName () {
+    return this.pkgJson.name
   }
 
   pkgp(p) {
@@ -38,10 +44,11 @@ export class XeiraContextFiles extends XeiraContextConfig {
 
     const theFile = `${this.pkgName}${spre_ext}${ssuf}${smin}.${the_ext}`
     
+    // Force to be relative to current folder
     if (chunkFolder) {
-      return path.join(this.bundleFolder, chunkFolder, 'index.js')
+      return _relative(path.join(this.bundleFolder, chunkFolder, 'index.js'))
     }
-    return path.join(this.bundleFolder, theFile)
+    return _relative(path.join(this.bundleFolder, theFile))
   }
 
   /*
@@ -95,7 +102,7 @@ export class XeiraContextFiles extends XeiraContextConfig {
 
   getMainFile() {
     if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
-      return [undefined, path.join(this.transpileFolder, 'index.cjs')]
+      return [undefined, _relative(path.join(this.transpileFolder, 'index.cjs'))]
     }
     if (NODE_MAIN=='cjs') {
       return ['cjs', this.getCjsOutput(false)]

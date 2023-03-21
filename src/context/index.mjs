@@ -43,7 +43,7 @@ function getXeiraContexts(folder, argv, aliases) {
 
 function makeXeiraContext(config, pkgPath) {
   const pkgJson=  readJsonFileSync(`${pkgPath}/package.json`)
-  const xeiraContext = new XeiraContext(config, pkgPath, pkgJson.name)
+  const xeiraContext = new XeiraContext(config, pkgPath, pkgJson)
   return xeiraContext 
 }
 

@@ -1,9 +1,8 @@
 import path from 'path'
 
 export class XeiraContextConfig {
-  constructor(config, pkgName) {
+  constructor(config) {
     this.config= config
-    this.pkgName= pkgName
   }
 
   get isAnApp() {
