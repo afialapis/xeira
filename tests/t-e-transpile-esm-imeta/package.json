@@ -1,0 +1,21 @@
+{
+  "name": "t-e-transpile-esm-imeta",
+  "type": "module",
+  "scripts": {
+    "clean-lib": "rm -fr lib/*",
+    "x-reset": "npm run --silent clean-lib && rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run x-reset && npm i",
+    "x-compare": "node ../../src/utils-dev/diff.mjs lib lib-expected",
+    "transpile": "npm run --silent clean-lib && npx xeira transpile",
+    "x-run": "npm run --silent transpile && npm run --silent x-compare"
+  },
+  "dependencies": {
+    "xeira": "file:../../"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}

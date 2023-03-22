@@ -14,8 +14,8 @@ async function transpileWithBabel(context, minimifyCallback, sourceFolder= undef
     sourceType: 'unambiguous',
     //babelConfig.presets.filter(p => p[0]=='@babel/preset-env')[0][1].modules= 'commonjs'
     plugins: [
-      "babel-plugin-transform-import-meta",
       "@babel/plugin-transform-modules-commonjs",
+      "babel-plugin-transform-import-meta",
       ['module-extension', {
         mjs: 'cjs',
       }]    

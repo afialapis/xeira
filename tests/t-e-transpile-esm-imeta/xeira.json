@@ -1,0 +1,14 @@
+{
+  "linter": null,
+  "transpiler": "babel",
+  "minifier": null,
+  "bundler": null,
+  "product": "package",
+  "target": "both",
+  "source_index": "/src/index.mjs",
+  "transpile_folder": null,
+  "bundle_folder": null,
+  "bundle_inline_dynamic_imports": true,
+  "test_folder": null,
+  "verbose": true
+}
