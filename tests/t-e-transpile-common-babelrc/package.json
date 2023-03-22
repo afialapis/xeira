@@ -1,0 +1,28 @@
+{
+  "name": "t-e-transpile-common-babelrc",
+  "type": "commonjs",
+  "scripts": {
+    "clean-lib": "rm -fr lib/*",
+    "x-reset": "npm run --silent clean-lib && rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run x-reset && npm i",
+    "x-compare": "node ../../src/utils-dev/diff.mjs lib lib-expected",
+    "transpile": "npm run --silent clean-lib && npx xeira transpile",
+    "x-run": "npm run --silent transpile && npm run --silent x-compare"
+  },
+  "dependencies": {
+    "babel-plugin-meaningful-logs": "^2.0.1",
+    "babel-plugin-transform-react-class-to-function": "^1.2.2",
+    "babel-plugin-transform-react-inline-elements": "^6.22.0",
+    "prop-types": "^15.8.1",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1",
+    "trangallada": "^0.0.3",
+    "xeira": "file:../../"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.react.cjs"
+    ]
+  },
+  "version": "0.0.1"
+}
