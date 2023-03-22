@@ -14,7 +14,8 @@ process.on('unhandledRejection', err => {
   throw err
 })
 
-
+import path from 'path'
+import { fileURLToPath } from 'url'
 import yargsParser from 'yargs-parser'
 import assert from 'node:assert/strict';
 import {ctitle, ccmd, cxeira, coption_name, cexample, cerror, cfilename} from '../src/utils/colors.mjs'
@@ -23,6 +24,11 @@ import { getXeiraContexts } from '../src/context/index.mjs';
 
 import { log_info /*, log_warn*/ } from '../src/utils/log.mjs'
 import { buildChecker } from './cmds/util/index.mjs'
+import { readJsonFileSync } from '../src/utils/json.mjs';
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 
 const help= `
 ${ctitle('SYNPSIS')}
@@ -59,7 +65,7 @@ const command_names= ['init', 'lint', 'test', 'demo', 'transpile', 'bundle', 've
 async function xeira() {
   const cwd = process.env.PWD
   const argv= yargsParser(process.argv.slice(2))
-  
+
   try {
     const command_name = argv['_'][0]
     assert.notEqual(command_names.indexOf(command_name), -1)
@@ -68,34 +74,34 @@ async function xeira() {
 
     const exec= commands[command_name]
 
-    try {
-      const checker= buildChecker(exec.aliases, exec.configOptions)
-      const err= checker(argv)
-      if (err) {
+    const checker= buildChecker(exec.aliases, exec.configOptions)
+    const err= checker(argv)
+    if (err) {
+      console.log(exec.help)
+      console.log(cerror(err))
+    } else {
+      const opts= Object.keys(argv)
+      if ((opts.indexOf('h')>=0) || (opts.indexOf('help')>=0)) {
         console.log(exec.help)
-        console.log(cerror(err))
       } else {
-        const opts= Object.keys(argv)
-        if ((opts.indexOf('h')>=0) || (opts.indexOf('help')>=0)) {
-          console.log(exec.help)
-        } else {
-          const contexts= getXeiraContexts(cwd, argv, exec?.aliases || {})
-          for (const context of contexts) {
-            if (contexts.length>1) {
-              log_info(context, command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
-            }
-            await exec.handler(context, argv)
+        const contexts= getXeiraContexts(cwd, argv, exec?.aliases || {})
+        for (const context of contexts) {
+          if (contexts.length>1) {
+            log_info(context, command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
           }
+          await exec.handler(context, argv)
         }
       }
-
-    } catch(e) {
-      console.log(exec.help)
-      console.log(cerror(e))
     }
 
   } catch(e) {
-    console.error(e)
+    if (argv.version || argv.v) {
+      const xeJson= readJsonFileSync(path.join(__dirname, '..', 'package.json'))
+      console.log(`${xeJson.name}: ${xeJson.version}`)    
+      return
+    }
+    //console.log(exec.help)
+    //console.log(cerror(e))
     console.log(help)
   }
 }
