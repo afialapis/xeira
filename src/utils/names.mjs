@@ -28,13 +28,17 @@ function toTitleCase(str) {
 }
 
 const makeGlobals = (pkgJson) => {
-  if (! pkgJson.dependencies) {
+  const deps = {
+    ...pkgJson?.dependencies || {},
+    ...pkgJson?.peerDependencies || {},
+  }
+  const depNames= Object.keys(deps)
+  if (depNames.length < 1) {
     return {}
   }
-  
-  const pkgs= Object.keys(pkgJson.dependencies)
+
   const globals= {}
-  pkgs.map((n) => {
+  depNames.map((n) => {
     globals[n]= toTitleCase(n)
   })
   return globals
