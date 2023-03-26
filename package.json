@@ -5,6 +5,7 @@
   "type": "module",
   "bin": "bin/xeira.mjs",
   "exports": {
+    ".": "./src/index.mjs",
     "./configs": "./configs",
     "./utils-dev": "./src/utils-dev"
   },
