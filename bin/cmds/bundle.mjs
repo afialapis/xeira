@@ -35,8 +35,4 @@ ${ctitle('EXAMPLES')}
     Bundles your code from the ESM entry ${cfilename('./src/index.mjs')} to ${cfilename('./custom_dist')} folder.
 `
 
-const handler = async function (context, argv) {
-  await xeiraBundle(context)
-}
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraBundle as handler}

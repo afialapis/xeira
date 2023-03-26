@@ -2,7 +2,8 @@ import {readJsonFileSync} from '../utils/json.mjs'
 import defConfig from '../../configs/xeira.mjs'
 import {getFilterPatternFromArgv,
   getContextFolders,
-  getConfigFromArgv } from './utils.mjs'
+  getConfigFromArgv,
+  getFlyOptionsFromArgv } from './utils.mjs'
 import { XeiraContext } from './XeiraContext.mjs'
 
 
@@ -33,7 +34,9 @@ function getXeiraContexts(folder, argv, aliases) {
       ...getConfigFromArgv(argv || {}, aliases)
     }
 
-    const context= new XeiraContext(mergedConfig, contextFolder, pkgJson)
+    const options = getFlyOptionsFromArgv(argv, aliases)
+
+    const context= new XeiraContext(mergedConfig, contextFolder, pkgJson, options)
     contexts.push(context)
 
   })
@@ -43,7 +46,7 @@ function getXeiraContexts(folder, argv, aliases) {
 
 function makeXeiraContext(config, pkgPath) {
   const pkgJson=  readJsonFileSync(`${pkgPath}/package.json`)
-  const xeiraContext = new XeiraContext(config, pkgPath, pkgJson)
+  const xeiraContext = new XeiraContext(config, pkgPath, pkgJson, {})
   return xeiraContext 
 }
 

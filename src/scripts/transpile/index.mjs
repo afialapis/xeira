@@ -11,7 +11,9 @@ import { noTranspile } from './notranspile.mjs'
 import { minimifyWithUglify } from './uglify.mjs'
 
 
-async function xeiraTranspile(context, sourceFolder= undefined) {
+async function xeiraTranspile(context) {
+  const sourceFolder = context?.options?.source_folder
+
   // minifier callback
   const minimifyCallback = async (code) => {
     if (context.minifyWithUglify) {

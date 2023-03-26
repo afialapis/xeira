@@ -39,11 +39,5 @@ ${ctitle('EXAMPLES')}
     Minifies your ${cfilename('./src')} code to ${cfilename('./lib')}. 
 `
 
-const handler = async function (context, argv) {
-  const sourceFolder = argv?.source_folder || argv?.from
-
-  await xeiraTranspile(context, sourceFolder)
-}
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraTranspile as handler}
 

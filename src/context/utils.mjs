@@ -20,10 +20,9 @@ function getFilterPatternFromArgv(argv, aliases) {
 
 function _compare(str, rule) {
   // https://stackoverflow.com/a/32402438
-  // eslint-disable no-useless-escape
 
   // for this solution to work on any string, no matter what characters it has
-  const escapeRegex = (str) => str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"); 
+  const escapeRegex = (str) => str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"); // eslint-disable-line
 
   // "."  => Find a single character, except newline or line terminator
   // ".*" => Matches any string that contains zero or more characters
@@ -68,36 +67,57 @@ function getContextFolders(folder, filterPattern= undefined) {
   return folders
 }
 
+function _parseArgvValue (v) {
+  return v==='true'
+  ? true
+  : v==='false'
+  ? false
+  : ((v=='null') || (v=='undefined') || (v=='none') || (v=='') || (v==undefined))
+  ? undefined
+  : v   
+}
+
 
 function getConfigFromArgv(argv, aliases) {
-  function _parseValue (v) {
-    return v==='true'
-    ? true
-    : v==='false'
-    ? false
-    : ((v=='null') || (v=='undefined') || (v=='none') || (v=='') || (v==undefined))
-    ? undefined
-    : v   
-  }
+
   let config= {}
 
   const valid_keys= Object.keys(defConfig)
   valid_keys.map(k => {
     if (k in argv) {
-      config[k]= _parseValue(argv[k])
+      config[k]= _parseArgvValue(argv[k])
+    }
+    if (aliases) {
+      const alias = aliases[k]
+      if (alias) {
+        if (alias in argv) {
+          config[k]= _parseArgvValue(argv[alias])
+        }
+      }
     }
   })
 
-  if (aliases) {
-    const valid_alias= Object.keys(defConfig)
-    valid_alias.map((fld) => {
-      const alias = aliases[fld]
-      if (alias in argv) {
-        const v= argv[alias]
-        config[alias]= _parseValue (v)      
-      }
-    })
-  }
+  return config
+}
+
+function getFlyOptionsFromArgv(argv, aliases) {
+  const valid_keys= Object.keys(defConfig)
+
+  let config= {}
+
+  Object.keys(argv).map(k => {
+    if (! (k in valid_keys)) {
+      let name= k
+      if (aliases) {
+        Object.entries(aliases).map( ([ak,av]) => {
+          if (k==av) {
+            name= ak
+          }
+        })
+      }      
+      config[name] = _parseArgvValue(argv[k])
+    }
+  })
 
   return config
 }
@@ -105,8 +125,11 @@ function getConfigFromArgv(argv, aliases) {
 
 
 
+
+
 export {
   getFilterPatternFromArgv,
   getContextFolders,
-  getConfigFromArgv
+  getConfigFromArgv,
+  getFlyOptionsFromArgv
 }

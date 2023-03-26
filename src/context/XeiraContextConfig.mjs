@@ -5,6 +5,13 @@ export class XeiraContextConfig {
     this.config= config
   }
 
+  mergeConfig (config) {
+    this.config= {
+      ...config || {},
+      ...this.config
+    }
+  }
+
   get isAnApp() {
     return this.config.product == 'app'
   }

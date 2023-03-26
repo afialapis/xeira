@@ -39,13 +39,5 @@ ${ctitle('EXAMPLES')}
     Serves demo web app from ${cfilename('./demo/index.js')}
 `
 
-
-const handler = async function (context, argv) {
-  const init= ((argv.init===true) || (argv.i===true))
-  const force= ((argv.force===true) || (argv.f===true))
-
-  await xeiraDemo(context, init, force)
-}
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraDemo as handler}
 

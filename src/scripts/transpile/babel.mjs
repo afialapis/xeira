@@ -2,7 +2,7 @@ import { writeFile } from 'fs/promises'
 import { transformFileAsync } from "@babel/core"
 import { transpileDirectory } from './iter.mjs'
 import {getBabelConfig} from '../../config/babel.mjs'
-import { log_info } from '../../utils/log.mjs'
+import { log_info, log_always } from '../../utils/log.mjs'
 import { cfilename } from '../../utils/colors.mjs'
 
 async function transpileWithBabel(context, minimifyCallback, sourceFolder= undefined, forceExtension= 'cjs') {
@@ -27,7 +27,7 @@ async function transpileWithBabel(context, minimifyCallback, sourceFolder= undef
     // Log clean filenames
     const cleanFrom= filepath.replace(context.pkgPath, '')
     const cleanTo= destpath.replace(context.pkgPath, '')
-    log_info(context, 'transpile', `Transpiling ${cfilename(cleanFrom)} to ${cfilename(cleanTo)}`)
+    log_always(context, 'transpile', `Transpiling ${cfilename(cleanFrom)} to ${cfilename(cleanTo)}`)
     
     // Merge all involved babel configs
     const mergedConfig= await getBabelConfig(context, filepath, customBabelConfig)

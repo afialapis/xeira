@@ -17,7 +17,13 @@ import {makePkgJsonValues} from './pkgJsonValues.mjs'
 import { cfilename } from '../../utils/colors.mjs'
 import { makeXeiraContext } from '../../context/index.mjs'
 
-async function xeiraInit(context, flyOptions, force, pkgjson, forceSave) {
+async function xeiraInit(context) {
+  const flyOptions = context.options || {}
+  const flyKeys= Object.keys(flyOptions)
+  const force = flyOptions?.force
+  const pkgjson = flyOptions?.pkgjson
+  const forceSave = flyOptions?.save
+
   const xeiraConfigPath = path.join(context.pkgPath, 'xeira.json')
 
   // context comes as a merged config from
@@ -34,7 +40,7 @@ async function xeiraInit(context, flyOptions, force, pkgjson, forceSave) {
   // We also omit the already saved ones, unless
   //  force is true (we re-answer the saved question in that case)
   let askForQuestions = configQuestions
-    .filter(q => flyOptions.indexOf(q.name)<0)
+    .filter(q => flyKeys.indexOf(q.name)<0)
   
   if (! force) {
     askForQuestions = askForQuestions

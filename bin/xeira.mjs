@@ -89,7 +89,7 @@ async function xeira() {
           if (contexts.length>1) {
             log_info(context, command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
           }
-          await exec.handler(context, argv)
+          await exec.handler(context)
         }
       }
     }

@@ -29,9 +29,5 @@ ${ctitle('EXAMPLES')}
     Build site at ${cfilename('./arredemo')}.
 `
 
-const handler = async function (context, argv) {
-  await xeiraSite(context)
-}
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraSite as handler}
 

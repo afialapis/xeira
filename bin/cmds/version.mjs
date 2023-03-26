@@ -40,15 +40,6 @@ ${ctitle('EXAMPLES')}
     Update your ${cfilename('./package.json')} version to ${coption_value('3.3.3')}.
 `
 
-
-
-const handler = async function (context, argv) {
-  const vType = argv.type || argv.t
-  const vNumber = argv.number || argv.n
-
-  await xeiraVersion(context, vType, vNumber)
-}
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraVersion as handler}
 
 

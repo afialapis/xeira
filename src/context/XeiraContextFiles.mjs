@@ -6,10 +6,11 @@ const NODE_MAIN = 'umd' // 'cjs'
 const _relative = (s) => `.${path.sep}${s}`
 
 export class XeiraContextFiles extends XeiraContextConfig {
-  constructor(config, pkgPath, pkgJson) {
+  constructor(config, pkgPath, pkgJson, options) {
     super(config)
     this.pkgPath= pkgPath
     this.pkgJson= pkgJson
+    this.options= options
   }
 
   get pkgName () {

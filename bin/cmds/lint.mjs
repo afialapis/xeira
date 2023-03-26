@@ -31,11 +31,6 @@ ${ctitle('EXAMPLES')}
     Lint the ${cfilename('./src')} folder
 `
 
-const handler = async function (context, argv) {
-  await xeiraLint(context, argv?.folder || argv?.f || '.')
-}
-
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraLint as handler}
 
 

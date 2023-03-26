@@ -1,6 +1,9 @@
 import {pkgJsonRead, pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 
-function _updateVersionValue(version, versionNumber, versionType) {
+function _updateVersionValue(version) {
+  const versionType = context?.options?.type
+  const versionNumber = context?.options?.number
+
   if (versionNumber && versionNumber.indexOf('.')>0) {
     return versionNumber
   }

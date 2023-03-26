@@ -12,7 +12,10 @@ import { demoWithRollup } from './rollup/run/index.mjs'
 import { initDemoFolderForRollup } from './rollup/init/index.mjs'
 import { log_error } from '../../utils/log.mjs'
 
-async function xeiraDemo(context, init, force)  {
+async function xeiraDemo(context)  {
+  const init= context?.options?.init===true
+  const force= context?.options?.force===true
+
   if (! context.hasDemo()) {
     const msg= 'Error: Trying to run demo but xeira is not aware of it. Try running "npx xeira demo init [force]"'
     log_error('demo', msg)

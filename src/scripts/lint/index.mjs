@@ -9,7 +9,9 @@ import { cfilename, ccmd } from '../../utils/colors.mjs'
 import { log_info, log_warn } from '../../utils/log.mjs'
 import {lintWithEslint} from './eslint.mjs'
 
-async function xeiraLint(context, folder) {
+async function xeiraLint(context) {
+
+  const folder = context?.options?.folder || '.'
   
   if (context.lintWithEslint) {
     

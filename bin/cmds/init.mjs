@@ -1,6 +1,5 @@
 import {ctitle, ccmd, cxeira, coption_name, coption_value, cexample, cfilename} from '../../src/utils/colors.mjs'
 import {configText, monoText, helpText} from './util/index.mjs'
-import { getConfigFromArgv } from '../../src/context/utils.mjs'
 import xeiraInit from '../../src/scripts/init/index.mjs'
 
 
@@ -53,12 +52,5 @@ ${ctitle('EXAMPLES')}
     Set the whole ${cfilename('xeira.json')} from a single command
 `
 
-const handler = async function (context, argv) {
-  const flyOptions= getConfigFromArgv(argv)
-  const flyKeys= Object.keys(flyOptions)
-
-  await xeiraInit(context, flyKeys, argv?.force || argv?.f, argv?.pkgjson, argv?.save)
-}
-
-export {aliases, configOptions, help, handler}
+export {aliases, configOptions, help, xeiraInit as handler}
 
