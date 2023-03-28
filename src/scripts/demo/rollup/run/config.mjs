@@ -11,7 +11,6 @@ import livereload from 'rollup-plugin-livereload'
 
 import {cfilename} from '../../../../utils/colors.mjs'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
-import { log_always } from '../../../../utils/log.mjs'
 import { getBabelConfig } from '../../../../config/babel.mjs'
 
 const NODE_ENV = 'development'
@@ -55,7 +54,7 @@ const makeSimpleConfig = async (context, name, input, output, contentBase, port)
           const host = address.address === '::' ? 'localhost' : address.address
           // by using a bound function, we can access options as `this`
           const protocol = this.https ? 'https' : 'http'
-          log_always('demo', `Server listening at ${cfilename(`${protocol}://${host}:${address.port}/`)}`)
+          context.log_always('demo', `Server listening at ${cfilename(`${protocol}://${host}:${address.port}/`)}`)
         }        
       }),
       livereload({

@@ -1,6 +1,6 @@
 import { rollup } from 'rollup'
 import {cerror, cok, cfilename} from '../../../utils/colors.mjs'
-import { log_always, log_error } from '../../../utils/log.mjs';
+import { log_info, log_error } from '../../../utils/log.mjs';
 
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   for (const outputOptions of outputOptionsList) {
@@ -96,7 +96,7 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
     process.exit(1)
   } else {
     
-    log_always('bundle', `Bundled ${cfilename(niceFileName)} ${cok('successfully!')}`)
+    log_info('bundle', `Bundled ${cfilename(niceFileName)} ${cok('successfully!')}`)
   }
 }
 

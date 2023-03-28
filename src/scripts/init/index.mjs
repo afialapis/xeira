@@ -8,7 +8,6 @@
 
 import path from 'path'
 import prompts from 'prompts'
-import {log_info} from '../../utils/log.mjs'
 import {saveObjectToJsonWithConfirm} from '../../utils/io.mjs'
 import {pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 import {readJsonFileSync} from '../../utils/json.mjs'
@@ -52,7 +51,7 @@ async function xeiraInit(context) {
   if (askForQuestions.length>0) {
     configAnswers = await prompts(askForQuestions)
   } else {
-    log_info(context, 'init', 'All options are already set up!')
+    context.log_info('init', 'All options are already set up!')
   }
 
   // Prepare xeira config data
@@ -82,7 +81,7 @@ async function xeiraInit(context) {
     }
   }
 
-  log_info(context, 'init', `Updating ${cfilename('package.json')}`)
+  context.log_info('init', `Updating ${cfilename('package.json')}`)
 
   // Prepare xeira config object
   const defXeiraContext = makeXeiraContext(contextData, context.pkgPath)

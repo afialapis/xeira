@@ -1,8 +1,7 @@
 import {pkgJsonRead, pkgJsonUpdate} from '../../utils/pkgJson.mjs'
 
-function _updateVersionValue(version) {
-  const versionType = context?.options?.type
-  const versionNumber = context?.options?.number
+function _updateVersionValue(version, versionNumber, versionType) {
+
 
   if (versionNumber && versionNumber.indexOf('.')>0) {
     return versionNumber
@@ -34,8 +33,11 @@ function _updateVersionValue(version) {
   return newVersion
 }
 
-async function xeiraVersion(context, versionType, versionNumber) 
+async function xeiraVersion(context) 
 {
+  const versionType = context?.options?.type
+  const versionNumber = context?.options?.number
+
   const pkgJson = await pkgJsonRead(context.pkgPath)
   const newVersion= _updateVersionValue(pkgJson.version, versionNumber, versionType)
   if (pkgJson.version != newVersion) {

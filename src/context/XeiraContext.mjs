@@ -1,4 +1,5 @@
 import { XeiraContextFiles } from "./XeiraContextFiles.mjs"
+import * as _log from '../utils/log.mjs'
 
 export class XeiraContext extends XeiraContextFiles {
   constructor(config, pkgPath, pkgJson, options) {
@@ -21,4 +22,30 @@ export class XeiraContext extends XeiraContextFiles {
     
     return false
   }
+
+  log_info(cmd, s) {
+    if (this.beVerbose()) {
+      _log.log_info(cmd, s)
+    }
+  }
+  
+  log_warn(cmd, s) {
+    _log.log_warn(cmd, s)
+  }
+  
+  log_error(cmd, s) {
+    _log.log_error(cmd, s)
+  }
+  
+  log_always(cmd, s) {
+    _log.log_info(cmd, s)
+  }
 }
+
+
+
+
+
+
+
+

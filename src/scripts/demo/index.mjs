@@ -10,7 +10,6 @@ import { demoWithNollup } from './nollup/run/index.mjs'
 import { initDemoFolderForNollup } from './nollup/init/index.mjs'
 import { demoWithRollup } from './rollup/run/index.mjs'
 import { initDemoFolderForRollup } from './rollup/init/index.mjs'
-import { log_error } from '../../utils/log.mjs'
 
 async function xeiraDemo(context)  {
   const init= context?.options?.init===true
@@ -18,7 +17,7 @@ async function xeiraDemo(context)  {
 
   if (! context.hasDemo()) {
     const msg= 'Error: Trying to run demo but xeira is not aware of it. Try running "npx xeira demo init [force]"'
-    log_error('demo', msg)
+    context.log_error('demo', msg)
     throw new Error(msg)
   }
  

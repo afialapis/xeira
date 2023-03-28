@@ -1,6 +1,6 @@
 import {watch} from 'rollup'
 import {cfilename, cok} from '../../../../utils/colors.mjs'
-import { log_always } from '../../../../utils/log.mjs';
+import { log_info } from '../../../../utils/log.mjs'
 
 const rollupWatch = (options) => {
 
@@ -41,7 +41,7 @@ const rollupWatch = (options) => {
     if (event.result) {
       event.result.close();
     } else if (event.code=='END') {
-      log_always('demo', `[watch] Rebundled ${cfilename(options.output[0].file)} ${cok('successfully!')}`)
+      log_info('demo', `[watch] Rebundled ${cfilename(options.output[0].file)} ${cok('successfully!')}`)
     }
   });
   

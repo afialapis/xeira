@@ -1,6 +1,5 @@
 import { getXeiraContexts } from "./context/index.mjs"
 import { cfilename } from "./utils/colors.mjs"
-import { log_info } from "./utils/log.mjs"
 import commands from '../bin/cmds/index.mjs'
 
 function _makeCommandWrapper (command_name) {
@@ -15,7 +14,7 @@ function _makeCommandWrapper (command_name) {
 
     for (const context of contexts) {
       if (contexts.length>1) {
-        log_info(context, command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
+        context.log_info(command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
       }
       await handler(context)
     }

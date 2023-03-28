@@ -3,7 +3,6 @@ import fs from 'fs'
 import {cok, cerror, cfilename} from '../../../../utils/colors.mjs'
 import { readJsonFile } from '../../../../utils/json.mjs'
 import { fileURLToPath } from 'url'
-import { log_info } from '../../../../utils/log.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -34,7 +33,7 @@ async function initDemoFolderForRollup(context, force) {
     'APPNAME': pkgName
   }
   
-  log_info(context, 'demo', `Initing demo...`)
+  context.log_info('demo', `Initing demo...`)
   
   const sourceFolder= path.join(__dirname, 'tmpl')
   const destFolder = path.join(context.pkgPath, 'demo')
@@ -53,7 +52,7 @@ async function initDemoFolderForRollup(context, force) {
     }
 
     if (fs.existsSync(destPath)) {
-      log_info(context, 'demo', `Cannot init ${cfilename(name)}: it already exists...`)
+      context.log_info('demo', `Cannot init ${cfilename(name)}: it already exists...`)
     } else {    
       if (ftype=='f') {
         _copyFileReplacingContent(sourcePath, destPath, replaceValues)
@@ -62,9 +61,9 @@ async function initDemoFolderForRollup(context, force) {
       }
       
       if (fs.existsSync(destPath)) {
-        log_info(context, 'demo', `Init ${cfilename(name)} ${cok('done!')}`)
+        context.log_info('demo', `Init ${cfilename(name)} ${cok('done!')}`)
       } else {
-        log_info(context, 'demo', `Init ${cfilename(name)} ${cerror('error :(')}`)
+        context.log_info('demo', `Init ${cfilename(name)} ${cerror('error :(')}`)
       }
     }
   }

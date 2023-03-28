@@ -2,7 +2,7 @@ import {diffLines} from 'diff'
 import fs from 'fs'
 import path from 'path'
 import {cerror, cok, cwarn, cfilename} from '../utils/colors.mjs'
-import { log_always, log_error } from '../utils/log.mjs'
+import { log_info, log_error } from '../utils/log.mjs'
 
 function _parseDiff (diff) {
   let ok= true
@@ -79,7 +79,7 @@ function _compareTwoFolders (pkgPath, aFolder, bFolder, debug= false) {
       const [ok, msg]= _compareTwoFiles(path_a, path_b)
 
       if (debug) {
-        log_always('diff', `Compared file ${cfilename(aRelativeName)}: ${ok ? cok('Ok!') : cerror('ko :(')}`)
+        log_info('diff', `Compared file ${cfilename(aRelativeName)}: ${ok ? cok('Ok!') : cerror('ko :(')}`)
       }
       
       if (! ok) {
@@ -106,22 +106,22 @@ function _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug= false)
 
   if (all_ok) {
     //if (debug) {
-      log_always('diff', `${cok('All files are ok!')}`)
+      log_info('diff', `${cok('All files are ok!')}`)
     //}
     return true
   }
 
   filesOmitted.map(f => 
-    log_always('diff', `${cfilename(f)} ${cerror('is not present in')} ${cfilename(distFolder)}`))
+    log_info('diff', `${cfilename(f)} ${cerror('is not present in')} ${cfilename(distFolder)}`))
 
     filesUnwanted.map(f => 
-    log_always('diff', `${cfilename(f)} ${cerror('is present in')} ${cfilename(distFolder)} ${cerror('but it should not')}`))
+    log_info('diff', `${cfilename(f)} ${cerror('is present in')} ${cfilename(distFolder)} ${cerror('but it should not')}`))
   
   Object.entries(filesWithDiff).map(([f, msg]) => {
-    log_always('diff', ` `)
-    log_always('diff', `Differences:`)
-    log_always('diff', ` `)
-    log_always('diff', `${cfilename(f)}:`)
+    log_info('diff', ` `)
+    log_info('diff', `Differences:`)
+    log_info('diff', ` `)
+    log_info('diff', `${cfilename(f)}:`)
     console.log(msg)
   })
 

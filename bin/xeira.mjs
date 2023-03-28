@@ -17,14 +17,12 @@ process.on('unhandledRejection', err => {
 import path from 'path'
 import { fileURLToPath } from 'url'
 import yargsParser from 'yargs-parser'
-import assert from 'node:assert/strict';
+import assert from 'node:assert/strict'
 import {ctitle, ccmd, cxeira, coption_name, cexample, cerror, cfilename} from '../src/utils/colors.mjs'
 import commands from './cmds/index.mjs'
-import { getXeiraContexts } from '../src/context/index.mjs';
-
-import { log_info /*, log_warn*/ } from '../src/utils/log.mjs'
+import { getXeiraContexts } from '../src/context/index.mjs'
 import { buildChecker } from './cmds/util/index.mjs'
-import { readJsonFileSync } from '../src/utils/json.mjs';
+import { readJsonFileSync } from '../src/utils/json.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -87,7 +85,7 @@ async function xeira() {
         const contexts= getXeiraContexts(cwd, argv, exec?.aliases || {})
         for (const context of contexts) {
           if (contexts.length>1) {
-            log_info(context, command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
+            context.log_info(command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
           }
           await exec.handler(context)
         }

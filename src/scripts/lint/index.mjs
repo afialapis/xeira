@@ -6,7 +6,6 @@
  */
 'use strict'
 import { cfilename, ccmd } from '../../utils/colors.mjs'
-import { log_info, log_warn } from '../../utils/log.mjs'
 import {lintWithEslint} from './eslint.mjs'
 
 async function xeiraLint(context) {
@@ -15,11 +14,11 @@ async function xeiraLint(context) {
   
   if (context.lintWithEslint) {
     
-    log_info(context, 'lint', `Linting folder ${cfilename(folder)} with ${ccmd('eslint')}`)
+    context.log_info('lint', `Linting folder ${cfilename(folder)} with ${ccmd('eslint')}`)
 
     await lintWithEslint(context, folder )
   } else {
-    log_warn('lint', 'Nothing to lint: no linter specified in xeira settings')
+    context.log_warn('lint', 'Nothing to lint: no linter specified in xeira settings')
   }
 
 }

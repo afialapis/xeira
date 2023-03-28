@@ -2,12 +2,11 @@ import { writeFile } from 'fs/promises'
 import { transformFileAsync } from "@babel/core"
 import { transpileDirectory } from './iter.mjs'
 import {getBabelConfig} from '../../config/babel.mjs'
-import { log_info, log_always } from '../../utils/log.mjs'
 import { cfilename } from '../../utils/colors.mjs'
 
 async function transpileWithBabel(context, minimifyCallback, sourceFolder= undefined, forceExtension= 'cjs') {
   const theSourceFolder = sourceFolder || context.sourceFolder
-  log_info(context, 'transpile', `Transpiling folder ${cfilename(theSourceFolder)} to ${cfilename(context.transpileFolder)} (forcing files to be ${cfilename(forceExtension)})`)
+  context.log_info('transpile', `Transpiling folder ${cfilename(theSourceFolder)} to ${cfilename(context.transpileFolder)} (forcing files to be ${cfilename(forceExtension)})`)
 
   // apply some particular mod on babel config
   const customBabelConfig= {
@@ -27,7 +26,7 @@ async function transpileWithBabel(context, minimifyCallback, sourceFolder= undef
     // Log clean filenames
     const cleanFrom= filepath.replace(context.pkgPath, '')
     const cleanTo= destpath.replace(context.pkgPath, '')
-    log_always(context, 'transpile', `Transpiling ${cfilename(cleanFrom)} to ${cfilename(cleanTo)}`)
+    context.log_always('transpile', `Transpiling ${cfilename(cleanFrom)} to ${cfilename(cleanTo)}`)
     
     // Merge all involved babel configs
     const mergedConfig= await getBabelConfig(context, filepath, customBabelConfig)

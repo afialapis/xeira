@@ -2,7 +2,7 @@ import path from 'path'
 import {readdir, stat, mkdir, access} from 'fs/promises'
 import { removeTopParent } from '../../utils/io.mjs'
 import { log_error } from '../../utils/log.mjs';
-import { cfilename } from '../../utils/colors.mjs';
+import { cfilename } from '../../utils/colors.mjs'
 
  
 async function _transpileFile (basePath, filePath, destPath, forceExtension, callback) {
