@@ -2,8 +2,8 @@
 import { execSync } from "child_process"
 import {xeiraVersion} from 'xeira'
 
-// const cmd_reset = 'rm -fr node_modules package-lock.json'
-// const cmd_prepare = 'npm i'
+const cmd_reset = 'rm -fr node_modules package-lock.json'
+const cmd_prepare = 'npm i'
 const cmd_clean_version = 'cp -f package.json.original package.json'
 const cmd_compare = (folder) => `cp package.json v-temp && node node_modules/xeira/src/utils-dev/diff.mjs v-temp ${folder}`
 
@@ -12,13 +12,17 @@ async function _run(cmd) {
   return res
 }
 
+
+async function prepareVersion() {
+  await _run(cmd_reset)
+  await _run(cmd_prepare)
+}
+
 async function runVersion() {
-  // await _run(cmd_reset)
-  // await _run(cmd_prepare)
   await _run(cmd_clean_version)
   
   // Patch
-  await xeiraVersion({type: 'path'})
+  await xeiraVersion({type: 'patch'})
   await _run(cmd_compare('v-patch'))
   
   // Minor
@@ -34,4 +38,13 @@ async function runVersion() {
   await _run(cmd_compare('v-number'))
 }
 
-runVersion()
+let prepare= false
+try {
+  prepare= process.argv.slice(2).indexOf('--prepare')>=0
+} catch(_) {}
+
+if (prepare) {
+  prepareVersion()
+} else {
+  runVersion()
+}
