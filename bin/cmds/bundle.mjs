@@ -5,13 +5,13 @@ import {configText, monoText, helpText} from './util/index.mjs'
 const aliases= {bundle_folder: 'to', bundle_name: 'name', bundle_inline_dynamic_imports: 'dyn_inline'}
 
 const configOptions= ['product', 'target', 
-  'source_index', 'bundle_folder', 'bundle_inline_dynamic_imports', 
+  'source_index', 'bundle_folder', 'bundle_name', 'bundle_inline_dynamic_imports', 
   'bundler', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}
 
-  ${cxeira('xeira')} ${ccmd('bundle')} [${coption_name('--bundle_name')}] [${coption_value('config')}] [${coption_name('--filter')}]
+  ${cxeira('xeira')} ${ccmd('bundle')} [${coption_value('config')}] [${coption_name('--filter')}]
 
 ${ctitle('DESCRIPTION')}
 
@@ -20,10 +20,6 @@ ${ctitle('DESCRIPTION')}
   on the ${cfilename('xeira.json')} configuration.
 
 ${ctitle('OPTIONS')}
-
-  ${coption_name('--bundle_name')}, ${coption_name('--name')}
-    Base name for the built bundles.
-    By default, it is the ${coption_value('package.json name')} field.
 
   ${helpText}
   

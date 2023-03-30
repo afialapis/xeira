@@ -46,6 +46,10 @@ export function configText (options, customSubTitle) {
       `${tab1}${coption_name('--bundle_folder')}\n`+
       `${tab2}Which folder will be your bundled files placed in?\n`+
       `${tab2}Default value is ${coption_value('./dist')}. If ${coption_value('none')}, no bundling will be made.`,
+    bundle_name:
+      `${tab1}${coption_name('--bundle_name')}\n`+
+      `${tab2}Base name for the built bundles.\n`+
+      `${tab2}Default value is ${coption_value('package.json name')} field.`,
     bundle_inline_dynamic_imports:
       `${tab1}${coption_name('--bundle_inline_dynamic_imports')}\n`+
       `${tab2}Inline dynamic imports?\n`+

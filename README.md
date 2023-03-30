@@ -83,7 +83,7 @@ This command will also update some values of your `package.json` file (just... t
 ## bundle
 
 ```
-  npx xeira bundle [--name] [config] [--filter]
+  npx xeira bundle [config] [--filter]
 ```
 
 
@@ -170,6 +170,11 @@ If you wanna disable it for transpiling, just specify `null`.
 ## `bundle_folder`
 
 Destination folder for bundle files. Default is `./dist`.
+
+## `bundle_name`
+
+Base name for the built bundles.
+Default value is `package.json`'s `name` field.
 
 ## `bundle_inline_dynamic_imports`
 

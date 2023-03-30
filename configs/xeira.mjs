@@ -13,6 +13,7 @@ export default {
   minifier: 'uglify', // undefined
 
   bundle_folder: './dist', // './build', './lib'
+  bundle_name: undefined, // package.json.name by default
   bundle_inline_dynamic_imports: true, // true / false
   bundler: 'rollup', // 'webpack', 'esbuild'
 

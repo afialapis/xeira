@@ -1,10 +1,13 @@
 import path from 'path'
 
 export class XeiraContextConfig {
-  constructor(config) {
+  constructor(config, pkgJson) {
     this.config= config
+    this.pkgJson= pkgJson
   }
-
+  get pkgName () {
+    return this.pkgJson.name
+  }
   mergeConfig (config) {
     this.config= {
       ...config || {},
@@ -70,6 +73,10 @@ export class XeiraContextConfig {
 
   get bundleFolder() {
     return this.config.bundle_folder || 'dist'
+  }
+
+  get bundleName() {
+    return this.config.bundle_name || this.pkgName
   }
 
   get inlineDynamicImports() {
