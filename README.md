@@ -83,7 +83,7 @@ This command will also update some values of your `package.json` file (just... t
 ## bundle
 
 ```
-  npx xeira bundle [config] [--filter]
+  npx xeira bundle [--name] [config] [--filter]
 ```
 
 

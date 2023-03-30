@@ -8,11 +8,8 @@
  *
  * @license MIT
  */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tFBundleCommon = {}));
-})(this, (function (exports) { 'use strict';
+var tFBundleCommon = (function (exports) {
+	'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -5758,5 +5755,7 @@
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
-//# sourceMappingURL=t-f-bundle-common.umd.bundle.js.map
+	return exports;
+
+})({});
+//# sourceMappingURL=custom-name.iife.bundle.js.map

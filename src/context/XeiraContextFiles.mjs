@@ -17,6 +17,10 @@ export class XeiraContextFiles extends XeiraContextConfig {
     return this.pkgJson.name
   }
 
+  get outputBaseName() {
+    return this.options?.bundle_name || this.pkgName
+  }
+
   pkgp(p) {
     return p!=undefined 
       ? path.join(this.pkgPath, p) 
@@ -43,7 +47,7 @@ export class XeiraContextFiles extends XeiraContextConfig {
     }
     const spre_ext = pre_ext ? `.${pre_ext}` : ''
 
-    const theFile = `${this.pkgName}${spre_ext}${ssuf}${smin}.${the_ext}`
+    const theFile = `${this.outputBaseName}${spre_ext}${ssuf}${smin}.${the_ext}`
     
     // Force to be relative to current folder
     if (chunkFolder) {

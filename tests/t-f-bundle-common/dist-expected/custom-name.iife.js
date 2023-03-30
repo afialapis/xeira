@@ -8,11 +8,8 @@
  *
  * @license MIT
  */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('trangallada')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'trangallada'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.tFBundleCommon = {}, global.trangallada));
-})(this, (function (exports, trangallada) { 'use strict';
+var tFBundleCommon = (function (exports, trangallada) {
+	'use strict';
 
 	function _interopNamespaceDefault(e) {
 		var n = Object.create(null);
@@ -98,5 +95,7 @@
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
-//# sourceMappingURL=t-f-bundle-common.umd.js.map
+	return exports;
+
+})({}, trangallada);
+//# sourceMappingURL=custom-name.iife.js.map
