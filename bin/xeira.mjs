@@ -98,9 +98,10 @@ async function xeira() {
       console.log(`${xeJson.name}: ${xeJson.version}`)    
       return
     }
-    //console.log(exec.help)
-    //console.log(cerror(e))
     console.log(help)
+    console.log('')
+    //console.log(exec.help)
+    console.log(cerror(e))
   }
 }
 
