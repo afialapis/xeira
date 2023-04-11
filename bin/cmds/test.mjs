@@ -4,13 +4,16 @@ import xeiraTest from '../../src/scripts/test/index.mjs'
 
 
 
-const aliases= {'files': 'f'}
+const aliases= {
+  'files': 'f', 
+  'timeout': 't'
+}
 const configOptions= ['test_folder', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}
 
-  ${cxeira('xeira')} ${ccmd('test')} [${coption_name('--files')}] [${coption_value('config')}] [${coption_value('mocha_params')}]
+  ${cxeira('xeira')} ${ccmd('test')} [${coption_name('--files')}] [${coption_value('config')}]
 
 ${ctitle('DESCRIPTION')}
 
@@ -22,15 +25,12 @@ ${ctitle('OPTIONS')}
     Entry point for your tests. If several, you may specify a comma-separated list of files.
     Usage of patterns is also allowed.
 
+  ${coption_name('--timeout')}, ${coption_name('--t')}
+    Specify test timeout threshold (in milliseconds). Default is 2000.
+
   ${helpText}   
 
   ${configText(configOptions)}
-
-  ${coption_value('mocha_params')} ${ctitle('values')}    
-
-    You can specify any param to be passed directly to Mocha.
-
-    Check info here: https://mochajs.org/#command-line-usage.
 
   ${monoText}
 
@@ -50,6 +50,7 @@ ${ctitle('EXAMPLES')}
     Run every Javascript file in ${cfilename('./other_tests_folder')}
 `
 
+const noCheck= true
 
-export {aliases, configOptions, help, xeiraTest as handler}
+export {aliases, configOptions, help, xeiraTest as handler, noCheck}
 

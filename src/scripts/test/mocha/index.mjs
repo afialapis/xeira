@@ -6,6 +6,7 @@ import {execSync} from 'child_process'
 import { renderJsTmpl } from '../../../utils/io.mjs'
 import { getBabelPluginForResolvingAliases, hasAliases } from '../../../utils/aliases.mjs'
 import { unlink } from 'fs'
+import { cfilename } from '../../../utils/colors.mjs'
 
 
 function _makeBabelTempFile(context) {
@@ -62,8 +63,7 @@ async function testWithMocha(context, extraParams, testPathStr) {
   ]
 
   const command= `${mocha} ${params.join(' ')}`
-
-  // console.log(command)
+  context.log_info('test', `Running ${cfilename(command)}`)
 
   execSync(
     command, 

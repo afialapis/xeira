@@ -102,6 +102,9 @@ async function parseMochaTestPath(context) {
 
 async function parseMochaExtraParams(context) {
   let extraParams= []
+  if (context?.options?.timeout != undefined) {
+    extraParams.push(`--timeout ${context?.options?.timeout}`)
+  }
   return extraParams
 }
 

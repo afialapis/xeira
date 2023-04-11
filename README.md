@@ -90,12 +90,8 @@ This command will also update some values of your `package.json` file (just... t
 ## test
 
 ```
-  npx xeira test [--files] [config] [--filter] [mocha_params]
+  npx xeira test [--files] [--timeout] [config] [--filter]
 ```
-
-As `[mocha_params]`, you can specify any param to be passed directly to Mocha.
-
-[Check info here](https://mochajs.org/#command-line-usage).
 
 
 ## demo
