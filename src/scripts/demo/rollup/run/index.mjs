@@ -15,7 +15,7 @@ async function demoWithRollup(context) {
   const input = demoDefaults.input
   const output = demoDefaults.output
   //const contentBase = path.join(pkgPath, demoDefaults.contentBase)
-  const port = demoDefaults.port
+  const port = context?.options?.port || demoDefaults.port
   const [inputOptions, outputOptions]= await makeSimpleConfig(context, name, input, output, demoDefaults.contentBase, port)
 
   await rollupBuild(context.pkgPath, inputOptions, [outputOptions])

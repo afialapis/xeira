@@ -2,13 +2,13 @@ import {ctitle, ccmd, cxeira, coption_name, coption_value, cexample, cfilename} 
 import xeiraDemo from '../../src/scripts/demo/index.mjs'
 import {configText, monoText, helpText} from './util/index.mjs'
 
-const aliases= {init: 'i', force: 'f'}
+const aliases= {init: 'i', force: 'f', port: 'p'}
 const configOptions= ['demo_mode', 'demo_demoer', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}
 
-  ${cxeira('xeira')} ${ccmd('demo')} [${coption_name('--init')} [${coption_name('--force')}]] [${coption_value('config')}] [${coption_name('--filter')}]
+  ${cxeira('xeira')} ${ccmd('demo')} [${coption_name('--init')} [${coption_name('--force')}]] [${coption_name('--port')}] [${coption_value('config')}] [${coption_name('--filter')}]
 
 ${ctitle('DESCRIPTION')}
 
@@ -23,6 +23,9 @@ ${ctitle('OPTIONS')}
   ${coption_name('--force')}, ${coption_name('--f')}
     If in Init Mode, and some file or folder already exist, with ${coption_name('--force')}
     you allow ${cxeira('xeira')} to overwrite it.
+
+  ${coption_name('--port')}, ${coption_name('--p')}
+    Port where to serve the demo app.
 
   ${helpText}   
 

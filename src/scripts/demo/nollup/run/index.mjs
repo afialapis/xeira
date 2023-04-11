@@ -12,11 +12,12 @@ async function demoWithNollup(context) {
   const pkgJson = await readJsonFile(path.join(context.pkgPath ,'package.json'))
   const name = getJSValidPkgName(pkgJson.name)
   let config= await makeSimpleConfig(context, name, demoDefaults.input, demoDefaults.output)
+  const port = context?.options?.port || demoDefaults.port
 
-  context.log_always('demo', `Serving demo at ${cfilename(`localhost:${demoDefaults.port}`)}`)
+  context.log_always('demo', `Serving demo at ${cfilename(`localhost:${port}`)}`)
 
   NollupDevServer({
-    port: demoDefaults.port,
+    port: port,
     hot: demoDefaults.hot,
     config,
     contentBase: path.join(context.pkgPath, demoDefaults.contentBase),

@@ -97,7 +97,7 @@ This command will also update some values of your `package.json` file (just... t
 ## demo
 
 ```
-  npx xeira demo [--init [--force]] [config] [--filter]
+  npx xeira demo [--init [--force]] [--port] [config] [--filter]
 ```
 
 
