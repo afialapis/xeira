@@ -5,7 +5,9 @@ import path from 'path'
 import prompts from 'prompts'
 
 function __objectToJson(config) {
-  return JSON.stringify(config, null, 2) + os.EOL
+  return JSON.stringify(config, 
+    (k, v) => v === undefined ? null : v, 
+    2) + os.EOL
 }
 
 function _objectToJs(config) {

@@ -15,5 +15,19 @@
   "dependencies": {
     "xeira": "file:../../"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "main": "./lib_custom/index.cjs",
+  "exports": {
+    "import": "./dist/mjs/index.js",
+    "default": "./lib_custom/index.cjs",
+    "require": "./dist/cjs/index.js"
+  },
+  "module": "./dist/mjs/index.js",
+  "cjs": "./dist/cjs/index.js",
+  "browser": "./dist/t-a-init-dyn-imports-chunk.iife.js",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.cjs"
+    ]
+  }
 }
