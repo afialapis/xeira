@@ -15,9 +15,12 @@ async function transpileWithBabel(context, minimifyCallback, sourceFolder= undef
     plugins: [
       "@babel/plugin-transform-modules-commonjs",
       "babel-plugin-transform-import-meta",
-      ['module-extension', {
-        mjs: 'cjs',
-      }]    
+      //['module-extension', {
+      //  mjs: 'cjs',
+      //}]
+      ['replace-import-extension', {
+        "extMapping": { ".mjs": ".cjs" }
+      }]           
     ]
   }
   
@@ -31,10 +34,18 @@ async function transpileWithBabel(context, minimifyCallback, sourceFolder= undef
     // Merge all involved babel configs
     const mergedConfig= await getBabelConfig(context, filepath, customBabelConfig)
 
-    let { code } = await transformFileAsync(filepath, mergedConfig)
-    code = await minimifyCallback(code)
-    //code = code.replace(/\.mjs/g, '.'+forceExtension)
-    return await writeFile(destpath, code)
+    try {
+
+      let { code } = await transformFileAsync(filepath, mergedConfig)
+      code = await minimifyCallback(code)
+      //code = code.replace(/\.mjs/g, '.'+forceExtension)
+      return await writeFile(destpath, code)
+    } catch(e) {
+      context.log_error('transpile', `Error transpiling ${cleanFrom} to ${cleanTo}`)
+      context.log_error('transpile', `Babel config is: ${JSON.stringify(mergedConfig)}`)
+      context.log_error('transpile', `Error trace:`)
+      console.error(e)      
+    }
   })
 }
 
