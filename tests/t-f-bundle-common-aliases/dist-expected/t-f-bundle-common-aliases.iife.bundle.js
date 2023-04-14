@@ -13,6 +13,10 @@ var tFBundleCommonAliases = (function (exports) {
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+	function getDefaultExportFromCjs (x) {
+		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+	}
+
 	function getAugmentedNamespace(n) {
 	  if (n.__esModule) return n;
 	  var f = n.default;
@@ -1357,11 +1361,7 @@ var tFBundleCommonAliases = (function (exports) {
 
 	var isArguments_1 = isArguments$2;
 
-	var isBufferExports = {};
-	var isBuffer$4 = {
-	  get exports(){ return isBufferExports; },
-	  set exports(v){ isBufferExports = v; },
-	};
+	var isBuffer$4 = {exports: {}};
 
 	/**
 	 * This method returns `false`.
@@ -1382,6 +1382,8 @@ var tFBundleCommonAliases = (function (exports) {
 	}
 
 	var stubFalse_1 = stubFalse$1;
+
+	isBuffer$4.exports;
 
 	(function (module, exports) {
 		var root = _root,
@@ -1421,8 +1423,10 @@ var tFBundleCommonAliases = (function (exports) {
 		 */
 		var isBuffer = nativeIsBuffer || stubFalse;
 
-		module.exports = isBuffer;
-	} (isBuffer$4, isBufferExports));
+		module.exports = isBuffer; 
+	} (isBuffer$4, isBuffer$4.exports));
+
+	var isBufferExports = isBuffer$4.exports;
 
 	/** Used as references for various `Number` constants. */
 
@@ -1565,11 +1569,9 @@ var tFBundleCommonAliases = (function (exports) {
 
 	var _baseUnary = baseUnary$6;
 
-	var _nodeUtilExports = {};
-	var _nodeUtil = {
-	  get exports(){ return _nodeUtilExports; },
-	  set exports(v){ _nodeUtilExports = v; },
-	};
+	var _nodeUtil = {exports: {}};
+
+	_nodeUtil.exports;
 
 	(function (module, exports) {
 		var freeGlobal = _freeGlobal;
@@ -1601,8 +1603,10 @@ var tFBundleCommonAliases = (function (exports) {
 		  } catch (e) {}
 		}());
 
-		module.exports = nodeUtil;
-	} (_nodeUtil, _nodeUtilExports));
+		module.exports = nodeUtil; 
+	} (_nodeUtil, _nodeUtil.exports));
+
+	var _nodeUtilExports = _nodeUtil.exports;
 
 	var baseIsTypedArray = _baseIsTypedArray,
 	    baseUnary$5 = _baseUnary,
@@ -1954,11 +1958,9 @@ var tFBundleCommonAliases = (function (exports) {
 
 	var _baseAssignIn = baseAssignIn$1;
 
-	var _cloneBufferExports = {};
-	var _cloneBuffer = {
-	  get exports(){ return _cloneBufferExports; },
-	  set exports(v){ _cloneBufferExports = v; },
-	};
+	var _cloneBuffer = {exports: {}};
+
+	_cloneBuffer.exports;
 
 	(function (module, exports) {
 		var root = _root;
@@ -1995,8 +1997,10 @@ var tFBundleCommonAliases = (function (exports) {
 		  return result;
 		}
 
-		module.exports = cloneBuffer;
-	} (_cloneBuffer, _cloneBufferExports));
+		module.exports = cloneBuffer; 
+	} (_cloneBuffer, _cloneBuffer.exports));
+
+	var _cloneBufferExports = _cloneBuffer.exports;
 
 	/**
 	 * Copies the values of `source` to `array`.
@@ -5793,7 +5797,9 @@ var tFBundleCommonAliases = (function (exports) {
 	  getMoney: getMoney
 	};
 
-	exports.default = src;
+	var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+
+	exports.default = index;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

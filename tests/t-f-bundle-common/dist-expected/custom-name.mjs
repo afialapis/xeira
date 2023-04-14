@@ -10,6 +10,10 @@
  */
 import * as trangallada from 'trangallada';
 
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
 function getAugmentedNamespace(n) {
   if (n.__esModule) return n;
   var f = n.default;
@@ -73,5 +77,7 @@ var src = {
   getMoney
 };
 
-export { src as default };
+var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+
+export { index as default };
 //# sourceMappingURL=custom-name.mjs.map

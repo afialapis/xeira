@@ -17,11 +17,7 @@ var tFBundleEsmReact = (function (exports) {
 		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 	}
 
-	var reactExports = {};
-	var react = {
-	  get exports(){ return reactExports; },
-	  set exports(v){ reactExports = v; },
-	};
+	var react = {exports: {}};
 
 	var react_production_min = {};
 
@@ -52,13 +48,11 @@ var tFBundleEsmReact = (function (exports) {
 	react_production_min.useInsertionEffect=function(a,b){return U.current.useInsertionEffect(a,b)};react_production_min.useLayoutEffect=function(a,b){return U.current.useLayoutEffect(a,b)};react_production_min.useMemo=function(a,b){return U.current.useMemo(a,b)};react_production_min.useReducer=function(a,b,e){return U.current.useReducer(a,b,e)};react_production_min.useRef=function(a){return U.current.useRef(a)};react_production_min.useState=function(a){return U.current.useState(a)};react_production_min.useSyncExternalStore=function(a,b,e){return U.current.useSyncExternalStore(a,b,e)};
 	react_production_min.useTransition=function(){return U.current.useTransition()};react_production_min.version="18.2.0";
 
-	(function (module) {
+	{
+	  react.exports = react_production_min;
+	}
 
-		{
-		  module.exports = react_production_min;
-		}
-	} (react));
-
+	var reactExports = react.exports;
 	var React = /*@__PURE__*/getDefaultExportFromCjs(reactExports);
 
 	/**
@@ -1375,11 +1369,7 @@ var tFBundleEsmReact = (function (exports) {
 
 	var isArguments_1 = isArguments$2;
 
-	var isBufferExports = {};
-	var isBuffer$4 = {
-	  get exports(){ return isBufferExports; },
-	  set exports(v){ isBufferExports = v; },
-	};
+	var isBuffer$4 = {exports: {}};
 
 	/**
 	 * This method returns `false`.
@@ -1400,6 +1390,8 @@ var tFBundleEsmReact = (function (exports) {
 	}
 
 	var stubFalse_1 = stubFalse$1;
+
+	isBuffer$4.exports;
 
 	(function (module, exports) {
 		var root = _root,
@@ -1439,8 +1431,10 @@ var tFBundleEsmReact = (function (exports) {
 		 */
 		var isBuffer = nativeIsBuffer || stubFalse;
 
-		module.exports = isBuffer;
-	} (isBuffer$4, isBufferExports));
+		module.exports = isBuffer; 
+	} (isBuffer$4, isBuffer$4.exports));
+
+	var isBufferExports = isBuffer$4.exports;
 
 	/** Used as references for various `Number` constants. */
 
@@ -1583,11 +1577,9 @@ var tFBundleEsmReact = (function (exports) {
 
 	var _baseUnary = baseUnary$6;
 
-	var _nodeUtilExports = {};
-	var _nodeUtil = {
-	  get exports(){ return _nodeUtilExports; },
-	  set exports(v){ _nodeUtilExports = v; },
-	};
+	var _nodeUtil = {exports: {}};
+
+	_nodeUtil.exports;
 
 	(function (module, exports) {
 		var freeGlobal = _freeGlobal;
@@ -1619,8 +1611,10 @@ var tFBundleEsmReact = (function (exports) {
 		  } catch (e) {}
 		}());
 
-		module.exports = nodeUtil;
-	} (_nodeUtil, _nodeUtilExports));
+		module.exports = nodeUtil; 
+	} (_nodeUtil, _nodeUtil.exports));
+
+	var _nodeUtilExports = _nodeUtil.exports;
 
 	var baseIsTypedArray = _baseIsTypedArray,
 	    baseUnary$5 = _baseUnary,
@@ -1972,11 +1966,9 @@ var tFBundleEsmReact = (function (exports) {
 
 	var _baseAssignIn = baseAssignIn$1;
 
-	var _cloneBufferExports = {};
-	var _cloneBuffer = {
-	  get exports(){ return _cloneBufferExports; },
-	  set exports(v){ _cloneBufferExports = v; },
-	};
+	var _cloneBuffer = {exports: {}};
+
+	_cloneBuffer.exports;
 
 	(function (module, exports) {
 		var root = _root;
@@ -2013,8 +2005,10 @@ var tFBundleEsmReact = (function (exports) {
 		  return result;
 		}
 
-		module.exports = cloneBuffer;
-	} (_cloneBuffer, _cloneBufferExports));
+		module.exports = cloneBuffer; 
+	} (_cloneBuffer, _cloneBuffer.exports));
+
+	var _cloneBufferExports = _cloneBuffer.exports;
 
 	/**
 	 * Copies the values of `source` to `array`.
@@ -5617,9 +5611,11 @@ var tFBundleEsmReact = (function (exports) {
 	  'toString': toString_1
 	};
 
+	var lodash_lang = /*@__PURE__*/getDefaultExportFromCjs(lang);
+
 	var {
 	  toNumber
-	} = lang;
+	} = lodash_lang;
 	function collTotalBy(arr, field) {
 	  var f = parseFloat(0);
 	  arr.map(d => {

@@ -35,6 +35,10 @@ function _interopNamespaceDefault(e) {
 var react__namespace = /*#__PURE__*/_interopNamespaceDefault(react);
 var trangallada__namespace = /*#__PURE__*/_interopNamespaceDefault(trangallada);
 
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
 function getAugmentedNamespace(n) {
   if (n.__esModule) return n;
   var f = n.default;
@@ -108,4 +112,6 @@ var src = {
   MoneyDiv: MoneyDiv
 };
 
-exports.default = src;
+var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+
+exports.default = index;

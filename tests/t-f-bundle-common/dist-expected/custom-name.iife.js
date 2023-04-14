@@ -30,6 +30,10 @@ var tFBundleCommon = (function (exports, trangallada) {
 
 	var trangallada__namespace = /*#__PURE__*/_interopNamespaceDefault(trangallada);
 
+	function getDefaultExportFromCjs (x) {
+		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+	}
+
 	function getAugmentedNamespace(n) {
 	  if (n.__esModule) return n;
 	  var f = n.default;
@@ -91,7 +95,9 @@ var tFBundleCommon = (function (exports, trangallada) {
 	  getMoney: getMoney
 	};
 
-	exports.default = src;
+	var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+
+	exports.default = index;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
