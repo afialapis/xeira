@@ -55,12 +55,12 @@ function _aliasesRead (pkgPath) {
 
     const jsonFile = path.join(pkgPath, 'jsconfig.json')
     if (! existsSync(jsonFile)) {
-      return undefined
+      return [undefined, undefined]
     }
     const jsConf = readJsonFileSync(jsonFile)
     const rpaths = jsConf?.compilerOptions?.paths
     if (rpaths==undefined) {
-      return undefined
+      return [undefined, undefined]
     }
     const baseUrl= jsConf?.compilerOptions?.baseUrl || '.'
     let aliases= {}
@@ -72,17 +72,17 @@ function _aliasesRead (pkgPath) {
         console.error(`[xeira] Aliases error: ${cerror("don't use wildcards on aliases, it may not work here")}.`)
       }
     })
-    return aliases
+    return [baseUrl, aliases]
   } catch(e) {
     console.error(`[xeira] Error searching aliases:`)
     console.error(cerror(e))
   }
-  return undefined
+  return [undefined, undefined]
 }
 
 
 function hasAliases(pkgPath) {
-  const aliases = _aliasesRead(pkgPath)
+  const [_baseUrl, aliases] = _aliasesRead(pkgPath)
   if (!aliases) {
     return false
   }
@@ -90,17 +90,19 @@ function hasAliases(pkgPath) {
 }
 
 function getBabelPluginForResolvingAliases (context) { 
-  const aliases = _aliasesRead(context.pkgPath)
+  const [baseUrl, aliases] = _aliasesRead(context.pkgPath)
   if (!aliases) {
     return undefined
   }
 
   const aliasNames= Object.keys(aliases)
+  const rootFolder= path.join(context.pkgPath, baseUrl)
 
-  // console.log(`Adding aliases. Root ${path.join(context.pkgPath, path.dirname(context.sourceIndex))}. Aliases ${JSON.stringify(aliases)}`)
+  context.log_info('[aliases]', `Adding aliases. Root ${baseUrl}. Aliases ${JSON.stringify(aliases)}`)
+  
   const plugin=
     ['babel-plugin-module-resolver', {
-      "root": [path.join(context.pkgPath, path.dirname(context.sourceIndex))],
+      "root": [rootFolder],
       "alias": aliases,
       resolvePath: (sourcePath, currentFile, opts) => {
         /**
