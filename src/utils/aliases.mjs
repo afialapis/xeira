@@ -95,7 +95,7 @@ function getBabelPluginForResolvingAliases (context) {
     return undefined
   }
 
-  const aliasNames= Object.keys(aliases)
+  //const aliasNames= Object.keys(aliases)
   const rootFolder= path.join(context.pkgPath, baseUrl)
 
   context.log_info('[aliases]', `Adding aliases. Root ${baseUrl}. Aliases ${JSON.stringify(aliases)}`)
@@ -104,26 +104,26 @@ function getBabelPluginForResolvingAliases (context) {
     ['babel-plugin-module-resolver', {
       "root": [rootFolder],
       "alias": aliases,
-      resolvePath: (sourcePath, currentFile, opts) => {
-        /**
-         * The `opts` argument is the options object that is passed through the Babel config.
-         * opts = {
-         *   extensions: [".js"],
-         *   resolvePath: ...,
-         * }
-         */
-        let rPath= resolvePath(sourcePath, currentFile, opts)
-
-        // relativize paths
-        for (const alias of aliasNames) {
-          if (sourcePath.indexOf(alias)==0) {
-            rPath= rPath.replace(opts.root, '.')
-          }
-        }
-        
-        // console.log(`resolving ${sourcePath} ${currentFile} ${JSON.stringify(opts) }==> ${rPath}`)
-        return rPath
-      }
+      //      resolvePath: (sourcePath, currentFile, opts) => {
+      //        /**
+      //         * The `opts` argument is the options object that is passed through the Babel config.
+      //         * opts = {
+      //         *   extensions: [".js"],
+      //         *   resolvePath: ...,
+      //         * }
+      //         */
+      //        let rPath= resolvePath(sourcePath, currentFile, opts)
+      //
+      //        // relativize paths
+      //        for (const alias of aliasNames) {
+      //          if (sourcePath.indexOf(alias)==0) {
+      //            rPath= rPath.replace(opts.root, '.')
+      //          }
+      //        }
+      //        
+      //        // console.log(`resolving ${sourcePath} ${currentFile} ${JSON.stringify(opts) }==> ${rPath}`)
+      //        return rPath
+      //      }
 
     }]
   
@@ -150,6 +150,8 @@ function getRollupPluginForResolvingAliases (pkgPath) {
   const plugin= alias_plugin({
     entries
   })
+
+  //context.log_info('[aliases]', `Aliases for rollup: ${JSON.stringify(entries)}`)
 
   return [plugin]
 }
