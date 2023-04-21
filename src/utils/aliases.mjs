@@ -99,7 +99,7 @@ function getBabelPluginForResolvingAliases (context) {
   const rootFolder= path.join(context.pkgPath, baseUrl)
 
   context.log_info('[aliases]', `Adding aliases. Root ${baseUrl}. Aliases ${JSON.stringify(aliases)}`)
-  
+
   const plugin=
     ['babel-plugin-module-resolver', {
       "root": [rootFolder],
@@ -132,7 +132,7 @@ function getBabelPluginForResolvingAliases (context) {
 
 
 function getRollupPluginForResolvingAliases (pkgPath) { 
-  const aliases = _aliasesRead(pkgPath)
+  const [_baseUrl, aliases] = _aliasesRead(pkgPath)
   if (!aliases) {
     return []
   }

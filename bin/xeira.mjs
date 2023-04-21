@@ -35,7 +35,7 @@ ${ctitle('SYNPSIS')}
 
 ${ctitle('DESCRIPTION')}
 
-  Lint, test, demo, transpile, bundle, sember, static site... 
+  Lint, test, demo, transpile, bundle, versioning, static site... 
   all tools you need, from a single command.
 
 ${ctitle('OPTIONS')}
