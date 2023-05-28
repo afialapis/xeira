@@ -11,17 +11,21 @@ configure({ adapter: new Adapter() });
 let container;
 
 before(function(){
-  container = document.createElement("div")
-  container.id = "react"
-  // Append container to the body is needed to avoid the error: 
-  //   Error: The target 'rdp-form-control-1' could not be identified in the dom, 
-  //     tip: check spelling at tests.bundle.js:82798:13
-  // See: https://github.com/reactstrap/reactstrap/issues/773    
-  document.body.appendChild(container)
+  if (typeof document == 'object') {
+    container = document.createElement("div")
+    container.id = "react"
+    // Append container to the body is needed to avoid the error: 
+    //   Error: The target 'rdp-form-control-1' could not be identified in the dom, 
+    //     tip: check spelling at tests.bundle.js:82798:13
+    // See: https://github.com/reactstrap/reactstrap/issues/773    
+    document.body.appendChild(container)
+  }
 })
 
-after(function(){
-  document.body.removeChild(container)
+after(function() {
+  if (typeof document == 'object') {
+    document.body.removeChild(container)
+  }
 }) 
 
 const mount_wrap = (component) => {

@@ -1,3 +1,31 @@
+# TO DO
+
+## `transpile` command
+
+Ensure "resolve"-like plugins are working. Ensure that `transpile_folder` having a different folder arch than source folder is working.
+
+Example:
+
+```js
+import X  from 'some/diff/level/folder/X.mjs' // source
+import X  from 'some/diff/level/folder/X.cjs' // wrong
+import X  from 'right/level/folder/X.cjs' // ok
+```
+
+## `run` command
+
+- use @babel/register when needed (if `type: commonjs` and/or if using `React`)
+- if `--watch`, use `nodemon`
+
+## `bundle` command
+
+- `output.globals` as a parameter
+
+- bundle just `CSS` (`formiga-reactstrap`)
+  Maybe if `--from`  is `.css` or `.scss`.
+  We would need just to: `npx sass [from] [to]` or use it programmatically: https://sass-lang.com/documentation/js-api/
+ 
+
 # TO SOLVE
 
 ## tests
@@ -34,8 +62,6 @@ Error [ERR_REQUIRE_ESM]:
 ```
 
 It is solved if /src uses .cjs extension
-
-
 
 
 ### Para que funcione MOCHA:
