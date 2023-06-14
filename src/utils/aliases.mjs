@@ -1,7 +1,7 @@
 import path from 'path'
 import { existsSync } from 'node:fs';
 import {readJsonFileSync} from './json.mjs'
-import { resolvePath } from 'babel-plugin-module-resolver'
+// import { resolvePath } from 'babel-plugin-module-resolver'
 import alias_plugin from '@rollup/plugin-alias';
 import {cerror} from '../utils/colors.mjs'
 
@@ -50,7 +50,7 @@ async function _aliasesRead (pkgPath) {
 }
 */
 
-function _aliasesRead (pkgPath) {
+function _aliasesRead (pkgPath, resolvePaths= false) {
   try {
 
     const jsonFile = path.join(pkgPath, 'jsconfig.json')
@@ -66,7 +66,9 @@ function _aliasesRead (pkgPath) {
     let aliases= {}
     Object.keys(rpaths).map(alias => {
       const rpath= rpaths[alias][0]
-      aliases[alias]= path.join(pkgPath, baseUrl, rpath)
+      aliases[alias]= resolvePaths
+        ? path.join(pkgPath, baseUrl, rpath)
+        : rpath
 
       if (alias.indexOf('*')>=0) {
         console.error(`[xeira] Aliases error: ${cerror("don't use wildcards on aliases, it may not work here")}.`)
@@ -90,7 +92,7 @@ function hasAliases(pkgPath) {
 }
 
 function getBabelPluginForResolvingAliases (context) { 
-  const [baseUrl, aliases] = _aliasesRead(context.pkgPath)
+  const [baseUrl, aliases] = _aliasesRead(context.pkgPath, false)
   if (!aliases) {
     return undefined
   }
@@ -98,7 +100,7 @@ function getBabelPluginForResolvingAliases (context) {
   //const aliasNames= Object.keys(aliases)
   const rootFolder= path.join(context.pkgPath, baseUrl)
 
-  context.log_info('[aliases]', `Adding aliases. Root ${baseUrl}. Aliases ${JSON.stringify(aliases)}`)
+  context.log_info('[aliases]', `Adding aliases. Root [${baseUrl}]. Aliases ${JSON.stringify(aliases)}`)
 
   const plugin=
     ['babel-plugin-module-resolver', {
@@ -132,7 +134,7 @@ function getBabelPluginForResolvingAliases (context) {
 
 
 function getRollupPluginForResolvingAliases (pkgPath) { 
-  const [_baseUrl, aliases] = _aliasesRead(pkgPath)
+  const [_baseUrl, aliases] = _aliasesRead(pkgPath, true)
   if (!aliases) {
     return []
   }

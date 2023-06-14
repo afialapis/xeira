@@ -6,7 +6,7 @@ import { log_info, log_error } from '../utils/log.mjs'
 
 function _parseDiff (diff) {
   let ok= true
-  let msg= ''
+  let msgs= []
 
   diff.map(part => {
     const color = 
@@ -18,11 +18,17 @@ function _parseDiff (diff) {
 
     if (part.added || part.removed) {
       ok= false
-      msg+= color(part.value)
+      let msg = ''
+      if (part.value.length>100) {
+        msg= color(part.value.substr(0,97) + '...')
+      } else {
+        msg= color(part.value)
+      }
+      msgs.push(msg)
     }
   })
 
-  return [ok, msg]
+  return [ok, msgs]
 }
 
 function _getFolderFiles (dir, files = []) {
@@ -52,8 +58,8 @@ function _compareTwoFiles (a, b) {
   const buff_b = fs.readFileSync(b, {encoding: 'utf-8'})
   
   const diff = diffLines(buff_a, buff_b);
-  const [ok, msg]= _parseDiff(diff)
-  return [ok, msg]
+  const [ok, msgs]= _parseDiff(diff)
+  return [ok, msgs]
 }
 
 function _compareTwoFolders (pkgPath, aFolder, bFolder, debug= false) {
@@ -76,14 +82,14 @@ function _compareTwoFolders (pkgPath, aFolder, bFolder, debug= false) {
       const path_a= path.join(a, aRelativeName)
       const path_b= path.join(b, aRelativeName)
 
-      const [ok, msg]= _compareTwoFiles(path_a, path_b)
+      const [ok, msgs]= _compareTwoFiles(path_a, path_b)
 
       if (debug) {
         log_info('diff', `Compared file ${cfilename(aRelativeName)}: ${ok ? cok('Ok!') : cerror('ko :(')}`)
       }
       
       if (! ok) {
-        filesWithDiff[aRelativeName]= msg
+        filesWithDiff[aRelativeName]= msgs
       } else {
         filesOk.push(aRelativeName)
       }
@@ -117,12 +123,12 @@ function _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug= false)
     filesUnwanted.map(f => 
     log_info('diff', `${cfilename(f)} ${cerror('is present in')} ${cfilename(distFolder)} ${cerror('but it should not')}`))
   
-  Object.entries(filesWithDiff).map(([f, msg]) => {
+  Object.entries(filesWithDiff).map(([f, msgs]) => {
     log_info('diff', ` `)
     log_info('diff', `Differences:`)
     log_info('diff', ` `)
     log_info('diff', `${cfilename(f)}:`)
-    console.log(msg)
+    msgs.map(msg => console.log(msg))
   })
 
   return false

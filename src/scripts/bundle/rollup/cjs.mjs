@@ -31,7 +31,12 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
       ... context.usesReact
         ? ['@babel/preset-react']
         : []
+    ],
+    
+    plugins: [
+      "babel-plugin-transform-import-meta"
     ]
+
   }
 
   const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)

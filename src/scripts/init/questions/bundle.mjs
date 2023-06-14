@@ -23,6 +23,18 @@ export default [
     ],
     initial: 0
   },  
+
+  {
+    type: 'select',
+    name: 'bundle_node_polyfill',
+    message: 'polyfill Node modules?',
+    choices: [
+      { title: 'yes', value: true },
+      { title: 'no', value: false},
+    ],
+    initial: 1
+  },   
+
   {
     type: prev => {
       if ((prev == 3) || (prev == 'none') ) {

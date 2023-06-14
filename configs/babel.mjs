@@ -3,6 +3,6 @@ export default {
     ["@babel/preset-env", {"targets": {"esmodules": true}}]
   ],
   plugins: [
-    "babel-plugin-transform-import-meta"
+    // "babel-plugin-transform-import-meta"
   ]
 }

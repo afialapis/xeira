@@ -3,6 +3,7 @@ import {babel} from '@rollup/plugin-babel'
 import {externals} from 'rollup-plugin-node-externals'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
+import polyfillNode from 'rollup-plugin-polyfill-node'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
 import terser from '@rollup/plugin-terser'
@@ -40,6 +41,10 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
 
   const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)
 
+  const polyfill = context.polyfillNode
+    ? [polyfillNode()]
+    : []
+
   const inputOptions= {
     input,
     plugins: [
@@ -60,6 +65,7 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
         rootDir: context.pkgPath,
         exportConditions: ['node'],
       }),
+      ...polyfill,
       commonjs({
         esmExternals: true
       }),

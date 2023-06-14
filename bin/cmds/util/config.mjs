@@ -54,6 +54,10 @@ export function configText (options, customSubTitle) {
       `${tab1}${coption_name('--bundle_inline_dynamic_imports')}\n`+
       `${tab2}Inline dynamic imports?\n`+
       `${tab2}Default value is ${coption_value('true')}. If ${coption_value('false')}, generated bundle will consist on more than one file.`,
+    bundle_node_polyfill:
+      `${tab1}${coption_name('--bundle_node_polyfill')}\n`+
+      `${tab2}Polyfill Node modules?\n`+
+      `${tab2}Default value is ${coption_value('false')}. If ${coption_value('true')}, your bundle will be polyfilled with Node builtin modules.`,
     bundler:
       `${tab1}${coption_name('--bundler')}\n`+
       `${tab2}Which bundler do you wanna use?\n`+

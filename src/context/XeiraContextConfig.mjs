@@ -83,6 +83,10 @@ export class XeiraContextConfig {
     return ! (this.config.bundle_inline_dynamic_imports != true)
   }
 
+  get polyfillNode() {
+    return this.config.bundle_node_polyfill === true
+  }
+
   get bundleWithRollup() {
     return this.config.bundler == 'rollup'
   }

@@ -2,10 +2,16 @@ import {ctitle, ccmd, cxeira, coption_value, cexample, cfilename, coption_name} 
 import xeiraBundle from '../../src/scripts/bundle/index.mjs'
 import {configText, monoText, helpText} from './util/index.mjs'
 
-const aliases= {bundle_folder: 'to', bundle_name: 'name', bundle_inline_dynamic_imports: 'dyn_inline'}
+const aliases= {
+  bundle_folder: 'to', 
+  bundle_name: 'name', 
+  bundle_inline_dynamic_imports: 'dyn_inline',
+  bundle_node_polyfill: 'polyfill'
+}
 
 const configOptions= ['product', 'target', 
-  'source_index', 'bundle_folder', 'bundle_name', 'bundle_inline_dynamic_imports', 
+  'source_index', 'bundle_folder', 'bundle_name', 
+  'bundle_inline_dynamic_imports', 'bundle_node_polyfill',
   'bundler', 'verbose']
 
 const help = `

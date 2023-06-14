@@ -174,12 +174,26 @@ Default value is `package.json`'s `name` field.
 
 ## `bundle_inline_dynamic_imports`
 
-Sets the `rollup`'s [`inlineDynamicImports`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) option. `true` by default.
+Sets the `rollup`'s [`inlineDynamicImports`](https://github.com/FredKSchott/rollup-plugin-polyfill-node) option. `true` by default.
 
 If `false`, each bundle will consist on several files (`xeira` will create subdirectories, 
 like `./dist/cjs`, `./dist/mjs`...).
 
 `umd` and `iife` bundles cannot be split. So, if your `target` is `browser`, this option will be ignored.
+
+## `bundle_node_polyfill`
+
+If `true`, [`Polyfills Node builtin modules`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) for your `rollup` bundle. It applies just to `umd` and `iife` bundles.
+
+It is `false` by default.
+
+If `xeira`'s output shows a warning like this:
+
+```
+Creating a browser bundle that depends on Node.js built-in modules ("node:<module>")...
+```
+
+Consider setting this option as `true` or, if possible, try to remove your dependencies on `Node`s modules.
 
 ## `bundler`
 
