@@ -48,6 +48,31 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
   const inputOptions= {
     input,
     plugins: [
+      replace({
+        preventAssignment: true,
+        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      babel(mergedBabelConfig), 
+      commonjs({
+        esmExternals: true
+      }),      
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
+      json(),
+      ...polyfill,
+      externals({
+        packagePath: pkgJsonPath,
+        deps: !bundleDeps,
+        peerDeps: !bundleDeps
+      }),
+      nodeResolve({
+        rootDir: context.pkgPath,
+        exportConditions: ['node'],
+      }),
+
+      scss()
+      
+      /*
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       babel(mergedBabelConfig),      
@@ -61,15 +86,16 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
         'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
+      ...polyfill,
       nodeResolve({
         rootDir: context.pkgPath,
         exportConditions: ['node'],
       }),
-      ...polyfill,
       commonjs({
         esmExternals: true
       }),
       scss()
+      */
     ]
   }
 

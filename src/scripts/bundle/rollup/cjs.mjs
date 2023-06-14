@@ -44,6 +44,23 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
   const inputOptions= {
     input,
     plugins: [
+      babel(mergedBabelConfig), 
+      commonjs({
+        esmExternals: true
+      }),      
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
+      json(),
+      externals({
+        packagePath: pkgJsonPath
+      }),
+      nodeResolve({
+        rootDir: context.pkgPath,
+        exportConditions: ['node'],
+      }),
+
+      scss()      
+
+      /*
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       babel(mergedBabelConfig),
@@ -58,6 +75,7 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
         esmExternals: true
       }),
       scss()
+      */
     ]
   }
 

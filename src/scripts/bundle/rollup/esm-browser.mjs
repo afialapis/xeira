@@ -3,6 +3,7 @@ import {babel} from '@rollup/plugin-babel'
 import replace from '@rollup/plugin-replace'
 import {externals} from 'rollup-plugin-node-externals'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
+import polyfillNode from 'rollup-plugin-polyfill-node'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
 import terser from '@rollup/plugin-terser'
@@ -47,10 +48,38 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
   }
 
   const mergedBabelConfig = await getBabelConfig(context, input, customBabelConfig)
+
+  const polyfill = context.polyfillNode
+    ? [polyfillNode()]
+    : []
+
   
   const inputOptions= {
     input,
     plugins: [
+      replace({
+        preventAssignment: true,
+        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      babel(mergedBabelConfig), 
+      commonjs({
+        esmExternals: true
+      }),      
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
+      json(),
+      ...polyfill,
+      externals({
+        packagePath: pkgJsonPath
+      }),
+      nodeResolve({
+        rootDir: context.pkgPath,
+        exportConditions: ['node'],
+      }),
+
+      scss()
+      
+      /*
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       babel(mergedBabelConfig),      
@@ -69,7 +98,7 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
       commonjs({
         esmExternals: true
       }),
-      scss()
+      scss()*/
     ]
   }
 

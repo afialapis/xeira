@@ -40,6 +40,28 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
   const inputOptions= {
     input,
     plugins: [
+      replace({
+        preventAssignment: true,
+        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      babel(mergedBabelConfig), 
+      commonjs({
+        esmExternals: true
+      }),      
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
+      json(),
+      externals({
+        packagePath: pkgJsonPath
+      }),
+      nodeResolve({
+        rootDir: context.pkgPath,
+        exportConditions: ['node'],
+      }),
+
+      scss()
+
+      /*
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       babel(mergedBabelConfig),
@@ -59,6 +81,7 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
         esmExternals: true
       }),
       scss()
+      */
     ]
   }
 

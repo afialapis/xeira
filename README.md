@@ -183,7 +183,7 @@ like `./dist/cjs`, `./dist/mjs`...).
 
 ## `bundle_node_polyfill`
 
-If `true`, [`Polyfills Node builtin modules`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) for your `rollup` bundle. It applies just to `umd` and `iife` bundles.
+If `true`, [`Polyfills Node builtin modules`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) for your `rollup` bundle. It applies just to `esm`, `umd` and `iife` bundles.
 
 It is `false` by default.
 
