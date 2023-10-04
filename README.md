@@ -76,14 +76,14 @@ This command will also update some values of your `package.json` file (just... t
 ## transpile
 
 ```
-  npx xeira transpile [--source_folder=./src] [config] [--filter]
+  npx xeira transpile [--source_folder=./src] [config] [--filter] [--watch]
 ```
 
 
 ## bundle
 
 ```
-  npx xeira bundle [config] [--filter]
+  npx xeira bundle [config] [--filter] [--watch]
 ```
 
 
@@ -244,8 +244,8 @@ will filter all the `./custom_folder/react-*` folders.
 
 You may have find yourself having to duplicate your aliases configuration:
 
-- first on bundler files
-- then on your editor's config 
+- first on bundler files (`.babelrc` or similar)
+- then on your editor's config  (`jsconfig.json` or similar)
 
 With `xeira`, just do it once. Define your aliases just for your editor. 
 In your root folder, file `jsconfig.json`:
