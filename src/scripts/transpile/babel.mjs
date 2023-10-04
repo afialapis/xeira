@@ -1,8 +1,15 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { writeFile } from 'fs/promises'
 import { transformFileAsync } from "@babel/core"
+//import babelPluginReplaceImportExtension from 'babel-plugin-replace-import-extension.mjs'
 import { transpileDirectory } from './iter.mjs'
 import {getBabelConfig} from '../../config/babel.mjs'
 import { cfilename } from '../../utils/colors.mjs'
+
+
+const __my_filename = fileURLToPath(import.meta.url)
+const __my_dirname = path.dirname(__my_filename)
 
 async function transpileWithBabel(context, minimifyCallback, forceExtension= 'cjs') {
   const theSourceFolder = context.getSourceFolder()
@@ -18,9 +25,13 @@ async function transpileWithBabel(context, minimifyCallback, forceExtension= 'cj
       //['module-extension', {
       //  mjs: 'cjs',
       //}]
-      ['replace-import-extension', {
+      //['replace-import-extension', {
+      //  "extMapping": { ".mjs": ".cjs" }
+      //}]           
+      
+      [path.join(__my_dirname, 'babel-plugin-replace-import-extension.mjs'), {
         "extMapping": { ".mjs": ".cjs" }
-      }]           
+      }]                 
     ]
   }
   
