@@ -1,5 +1,10 @@
 # TO DO
 
+## `aliases`
+
+ Check also `package.json`'s field `exports`!
+
+
 ## `transpile` command
 
 Ensure "resolve"-like plugins are working. Ensure that `transpile_folder` having a different folder arch than source folder is working.
@@ -14,12 +19,16 @@ import X  from 'right/level/folder/X.cjs' // ok
 
 ## `run` command
 
-- use @babel/register when needed (if `type: commonjs` and/or if using `React`)
+- use `@babel/register` when needed (if `type: commonjs` and/or if using `React`)
 - if `--watch`, use `nodemon`
+- notice `@babel/register` does not work for ESM
 
 ## `bundle` command
 
 - `output.globals` as a parameter
+
+- cases where we want to build a webapp (target only .iife, use watch)
+  (VERY similar to /demo)
 
 - bundle just `CSS` (`formiga-reactstrap`)
   Maybe if `--from`  is `.css` or `.scss`.

@@ -7,9 +7,8 @@ const _relative = (s) => `.${path.sep}${s}`
 
 export class XeiraContextFiles extends XeiraContextConfig {
   constructor(config, pkgPath, pkgJson, options) {
-    super(config, pkgJson)
+    super(config, pkgJson, options)
     this.pkgPath= pkgPath
-    this.options= options
   }
   
   pkgp(p) {

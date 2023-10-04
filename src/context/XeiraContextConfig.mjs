@@ -1,9 +1,10 @@
 import path from 'path'
 
 export class XeiraContextConfig {
-  constructor(config, pkgJson) {
+  constructor(config, pkgJson, options) {
     this.config= config
     this.pkgJson= pkgJson
+    this.options= options
   }
   get pkgName () {
     return this.pkgJson.name
@@ -47,8 +48,8 @@ export class XeiraContextConfig {
     return this.config.source_index
   }
 
-  get sourceFolder() {
-    return path.dirname(this.sourceIndex)
+  getSourceFolder() {
+    return this.options?.source_folder || path.dirname(this.sourceIndex)
   }  
 
   get lintWithEslint() {

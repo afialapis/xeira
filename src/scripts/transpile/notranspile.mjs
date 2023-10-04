@@ -2,8 +2,8 @@ import {transpileDirectory} from './iter.mjs'
 import {readFile, writeFile} from 'fs/promises'
 import { cfilename } from '../../utils/colors.mjs'
 
-async function noTranspile(context, minimifyCallback, sourceFolder= undefined) {
-  const theSourceFolder = sourceFolder || context.sourceFolder
+async function noTranspile(context, minimifyCallback) {
+  const theSourceFolder = context.getSourceFolder()
 
   context.log_info('transpile', `No-Transpiling folder ${cfilename(theSourceFolder)} to ${cfilename(context.transpileFolder)}`)
 

@@ -17,7 +17,7 @@ const configOptions= ['product', 'target',
 const help = `
 ${ctitle('SYNPSIS')}
 
-  ${cxeira('xeira')} ${ccmd('bundle')} [${coption_value('config')}] [${coption_name('--filter')}]
+  ${cxeira('xeira')} ${ccmd('bundle')} [${coption_value('config')}] [${coption_name('--filter')}] [${coption_name('--watch')}]
 
 ${ctitle('DESCRIPTION')}
 
@@ -32,6 +32,9 @@ ${ctitle('OPTIONS')}
   ${configText(configOptions)}
   
   ${monoText}
+
+  ${coption_name('--watch')}
+    If passed, bundle will re-run in case some source code changes. 
 
 ${ctitle('EXAMPLES')}
 

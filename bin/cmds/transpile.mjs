@@ -8,7 +8,7 @@ const configOptions= ['source_index', 'transpile_folder', 'transpiler', 'minifie
 const help = `
 ${ctitle('SYNPSIS')}
 
-  ${cxeira('xeira')} ${ccmd('transpile')} [${coption_name('--source_folder')}] [${coption_value('config')}] [${coption_name('--filter')}]
+  ${cxeira('xeira')} ${ccmd('transpile')} [${coption_name('--source_folder')}] [${coption_value('config')}] [${coption_name('--filter')}] [${coption_name('--watch')}]
 
 ${ctitle('DESCRIPTION')}
 
@@ -19,13 +19,16 @@ ${ctitle('OPTIONS')}
   ${coption_name('--source_folder')}, ${coption_name('--from')}
     Folder where your code to be transpiled is in.
     By default, it is the folder where the ${coption_value('config')}'s field
-    ${coption_name('--source_index')} is in (${cfilename('./src')}).
+    ${coption_name('--source_index')} is in (${cfilename('./src')}).   
 
   ${helpText}   
 
   ${configText(configOptions)}
 
   ${monoText}  
+
+  ${coption_name('--watch')}
+    If passed, transpile will re-run in case some source code changes. 
 
 ${ctitle('EXAMPLES')}
 

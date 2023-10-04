@@ -4,8 +4,8 @@ import { transpileDirectory } from './iter.mjs'
 import {getBabelConfig} from '../../config/babel.mjs'
 import { cfilename } from '../../utils/colors.mjs'
 
-async function transpileWithBabel(context, minimifyCallback, sourceFolder= undefined, forceExtension= 'cjs') {
-  const theSourceFolder = sourceFolder || context.sourceFolder
+async function transpileWithBabel(context, minimifyCallback, forceExtension= 'cjs') {
+  const theSourceFolder = context.getSourceFolder()
   context.log_info('transpile', `Transpiling folder ${cfilename(theSourceFolder)} to ${cfilename(context.transpileFolder)} (forcing files to be ${cfilename(forceExtension)})`)
 
   // apply some particular mod on babel config
