@@ -13,9 +13,7 @@ import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
-const NODE_ENV = 'production'
-
-
+const NODE_ENV = process.env?.NODE_ENV || 'production'
 
 async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
   const customBabelConfig= {
@@ -78,52 +76,34 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
       }),
 
       scss()
-      
-      /*
-      ...getRollupPluginForResolvingAliases(context.pkgPath),
-      json(),
-      babel(mergedBabelConfig),      
-      replace({
-        preventAssignment: true,
-        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      externals({
-        packagePath: pkgJsonPath
-      }),
-      nodeResolve({
-        rootDir: context.pkgPath,
-        exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
-      }),
-      scss()*/
     ]
   }
 
-  const output = context.pkgp(context.getEsmOutput(false))
-  const outputMin = context.pkgp(context.getEsmOutput(true))
+  const outputFile = context.pkgp(context.getEsmOutput(false))
+  const outputFileMin = context.pkgp(context.getEsmOutput(true))
 
-  const outputs= [
-    {
-      ...getDynamicImportOptions (context, output),
-      format: 'es',
-      exports: 'named',
-      banner: rollupBanner(pkgJson),
-      sourcemap: true
-    },
-    {
-      ...getDynamicImportOptions (context, outputMin),
-      format: 'es',
-      exports: 'named',
-      banner: rollupBanner(pkgJson),
-      plugins: [
-        terser({ ecma: 8, safari10: true })
-      ]
-    }    
-  ]
+  const outputDef= {
+    ...getDynamicImportOptions (context, outputFile),
+    format: 'es',
+    exports: 'named',
+    banner: rollupBanner(pkgJson),
+    sourcemap: true
+  }
+  const outputDefMin = {
+    ...getDynamicImportOptions (context, outputFileMin),
+    format: 'es',
+    exports: 'named',
+    banner: rollupBanner(pkgJson),
+    plugins: [
+      terser({ ecma: 8, safari10: true })
+    ]
+  }
 
+  const outputs= 
+    NODE_ENV === 'production'
+    ? [outputDef, outputDefMin]
+    : [outputDef]
+  
   return[inputOptions, outputs]
 }
 

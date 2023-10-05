@@ -11,7 +11,7 @@ import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
-const NODE_ENV = 'production'
+const NODE_ENV = process.env?.NODE_ENV || 'production'
 
 async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
   const customBabelConfig= {
@@ -60,36 +60,14 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
       }),
 
       scss()
-
-      /*
-      ...getRollupPluginForResolvingAliases(context.pkgPath),
-      json(),
-      babel(mergedBabelConfig),
-      externals({
-        packagePath: pkgJsonPath
-      }),
-      replace({
-        preventAssignment: true,
-        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      nodeResolve({
-        rootDir: context.pkgPath,
-        exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
-      }),
-      scss()
-      */
     ]
   }
 
-  const output = context.pkgp(context.getEsmNodeOutput())
+  const outputFile = context.pkgp(context.getEsmNodeOutput())
 
   const outputs= [
     {
-      ...getDynamicImportOptions (context, output),
+      ...getDynamicImportOptions (context, outputFile),
       format: 'esm',
       exports: 'named',
       banner: rollupBanner(pkgJson)

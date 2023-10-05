@@ -80,6 +80,17 @@ export class XeiraContextConfig {
     return this.config.bundle_name || this.pkgName
   }
 
+  get bundleExtension() {
+    return this.config.bundle_extension
+  }
+
+  bundleThis(extension) {
+    if (this.bundleExtension) {
+      return this.bundleExtension==extension
+    }
+    return true
+  }
+
   get inlineDynamicImports() {
     return ! (this.config.bundle_inline_dynamic_imports != true)
   }

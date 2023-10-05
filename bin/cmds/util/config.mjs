@@ -50,6 +50,10 @@ export function configText (options, customSubTitle) {
       `${tab1}${coption_name('--bundle_name')}\n`+
       `${tab2}Base name for the built bundles.\n`+
       `${tab2}Default value is ${coption_value('package.json name')} field.`,
+    bundle_extension:
+      `${tab1}${coption_name('--bundle_extension')}\n`+
+      `${tab2}Specify a single bundle ormat to build.\n`+
+      `${tab2}Values can be: ${coption_value('cjs')}, ${coption_value('esm')}, ${coption_value('umd')}, ${coption_value('iife')}.`,     
     bundle_inline_dynamic_imports:
       `${tab1}${coption_name('--bundle_inline_dynamic_imports')}\n`+
       `${tab2}Inline dynamic imports?\n`+

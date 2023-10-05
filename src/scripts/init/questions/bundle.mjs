@@ -14,6 +14,28 @@ export default [
   },  
 
   {
+    type: 'text',
+    name: 'bundle_name',
+    message: 'bundle name?',
+  },   
+  
+  {
+    type: 'text',
+    name: 'bundle_extension',
+    message: 'bundle extension?',
+    choices: [
+      { title: 'none', value: undefined, disabled: true},
+      { title: 'cjs',  value: 'cjs' },
+      { title: 'esm',  value: 'esm' },
+      { title: 'umd',  value: 'umd' },
+      { title: 'iife', value: 'iife' },
+      
+    ],
+    initial: 0    
+  },    
+  
+
+  {
     type: 'select',
     name: 'bundle_inline_dynamic_imports',
     message: 'inline dynamic imports?',

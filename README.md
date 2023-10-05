@@ -28,7 +28,7 @@ preferred bundler). It's also very opinionated, using pretty standard configurat
   npm i -D xeira
 ```
 
-# API
+# Commands
 
 `xeira` usage is always like:
 
@@ -72,13 +72,11 @@ This command will also update some values of your `package.json` file (just... t
   npx xeira lint [--folder=./] [config] [--filter]
 ```
 
-
 ## transpile
 
 ```
   npx xeira transpile [--source_folder=./src] [config] [--filter] [--watch]
 ```
-
 
 ## bundle
 
@@ -86,13 +84,11 @@ This command will also update some values of your `package.json` file (just... t
   npx xeira bundle [config] [--filter] [--watch]
 ```
 
-
 ## test
 
 ```
   npx xeira test [--files] [--timeout] [config] [--filter]
 ```
-
 
 ## demo
 
@@ -100,20 +96,17 @@ This command will also update some values of your `package.json` file (just... t
   npx xeira demo [--init [--force]] [--port] [config] [--filter]
 ```
 
-
 ## version
 
 ```
   npx xeira version [--type | --number] [config] [--filter]
 ```
 
-
 ## static site
 
 ```
   npx xeira site [config] [--filter]
 ```
-
 
 # Configuration
 
@@ -171,6 +164,12 @@ Destination folder for bundle files. Default is `./dist`.
 
 Base name for the built bundles.
 Default value is `package.json`'s `name` field.
+
+## `bundle_extension`
+
+`xeira` will bundle output files based on `target` prop.
+But if you want to bundle a single output format, you may pass `bundle_extension`.
+Possible values are: `cjs`, `esm`, `umd`, or `iife`.
 
 ## `bundle_inline_dynamic_imports`
 
@@ -236,6 +235,40 @@ If you want to search on another folder, just specify it with a relative path. S
 ```
 
 will filter all the `./custom_folder/react-*` folders.
+
+# API
+
+`xeira`'s commands are also available as JS calls.
+
+
+```js
+
+import {
+  xeiraInit,
+  xeiraLint,
+  xeiraTest,
+  xeiraDemo,
+  xeiraTranspile,
+  xeiraBundle,
+  xeiraVersion,
+  xeiraSite
+} from 'xeira'
+
+
+await xeiraInit(options)
+await xeiraLint(options)
+await xeiraTest(options)
+await xeiraDemo(options)
+await xeiraTranspile(options, callback)
+await xeiraBundle(options, callback)
+await xeiraVersion(options)
+await xeiraSite(options)
+```
+
+`options` parameters are the same as for the commands.
+
+`callback` param is useful if you call `transpile` or `bundle` in `watch` mode. It must be an `async`function,
+and will be called accordingly.
 
 
 # Others

@@ -6,11 +6,12 @@ const aliases= {
   bundle_folder: 'to', 
   bundle_name: 'name', 
   bundle_inline_dynamic_imports: 'dyn_inline',
-  bundle_node_polyfill: 'polyfill'
+  bundle_node_polyfill: 'polyfill',
+  bundle_extension: 'extension'
 }
 
 const configOptions= ['product', 'target', 
-  'source_index', 'bundle_folder', 'bundle_name', 
+  'source_index', 'bundle_folder', 'bundle_name', 'bundle_extension', 
   'bundle_inline_dynamic_imports', 'bundle_node_polyfill',
   'bundler', 'verbose']
 

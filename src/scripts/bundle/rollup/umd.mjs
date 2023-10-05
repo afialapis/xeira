@@ -13,8 +13,7 @@ import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { toTitleCase, makeGlobals } from '../../../utils/names.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
-const NODE_ENV = 'production'
-
+const NODE_ENV = process.env?.NODE_ENV || 'production'
 
 async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleDeps= false) {
   const customBabelConfig= {
@@ -71,65 +70,43 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
       }),
 
       scss()
-      
-      /*
-      ...getRollupPluginForResolvingAliases(context.pkgPath),
-      json(),
-      babel(mergedBabelConfig),      
-      externals({
-        packagePath: pkgJsonPath,
-        deps: !bundleDeps,
-        peerDeps: !bundleDeps
-      }),
-      replace({
-        preventAssignment: true,
-        'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      ...polyfill,
-      nodeResolve({
-        rootDir: context.pkgPath,
-        exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
-      }),
-      scss()
-      */
     ]
   }
 
-  const output = context.pkgp(
+  const outputFile = context.pkgp(
     bundleDeps ?  context.getUmdFullBundleOutput(false) : context.getUmdOutput(false)
   )
-  const outputMin = context.pkgp(
+  const outputFileMin = context.pkgp(
     bundleDeps ?  context.getUmdFullBundleOutput(true) : context.getUmdOutput(true)
   )
 
-  const outputs= [
-    {
-      file: output,
-      inlineDynamicImports: true,
-      format: 'umd',
-      exports: 'named',
-      banner: rollupBanner(pkgJson),
-      sourcemap: true,
-      name: toTitleCase(pkgJson.name),
-      globals: makeGlobals(pkgJson) 
-    },
-    {
-      file: outputMin,
-      inlineDynamicImports: true,
-      format: 'umd',
-      exports: 'named',
-      banner: rollupBanner(pkgJson),
-      plugins: [
-        terser({ ecma: 8, safari10: true })
-      ],
-      name: toTitleCase(pkgJson.name),
-      globals: makeGlobals(pkgJson)
-    }    
-  ]
+  const outputDef = {
+    file: outputFile,
+    inlineDynamicImports: true,
+    format: 'umd',
+    exports: 'named',
+    banner: rollupBanner(pkgJson),
+    sourcemap: true,
+    name: toTitleCase(pkgJson.name),
+    globals: makeGlobals(pkgJson) 
+  }
+  const outputDefMin = {
+    file: outputFileMin,
+    inlineDynamicImports: true,
+    format: 'umd',
+    exports: 'named',
+    banner: rollupBanner(pkgJson),
+    plugins: [
+      terser({ ecma: 8, safari10: true })
+    ],
+    name: toTitleCase(pkgJson.name),
+    globals: makeGlobals(pkgJson)
+  }
+
+  const outputs= 
+    NODE_ENV === 'production'
+    ? [outputDef, outputDefMin]
+    : [outputDef] 
 
   return[inputOptions, outputs]
 }

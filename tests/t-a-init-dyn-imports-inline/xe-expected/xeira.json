@@ -8,6 +8,7 @@
   "minifier": "uglify",
   "bundle_folder": "./dist",
   "bundle_name": null,
+  "bundle_extension": null,
   "bundle_inline_dynamic_imports": true,
   "bundle_node_polyfill": false,
   "bundler": "rollup",

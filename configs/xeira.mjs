@@ -14,6 +14,7 @@ export default {
 
   bundle_folder: './dist', // './build', './lib'
   bundle_name: undefined, // package.json.name by default
+  bundle_extension: undefined, 
   bundle_inline_dynamic_imports: true, // true / false
   bundle_node_polyfill: false, // true / false
   bundler: 'rollup', // 'webpack', 'esbuild'

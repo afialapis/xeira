@@ -9,6 +9,7 @@
   "transpile_folder": null,
   "bundle_folder": "/dist",
   "bundle_name": null,
+  "bundle_extension": null,
   "bundle_inline_dynamic_imports": true,
   "test_folder": null,
   "verbose": true

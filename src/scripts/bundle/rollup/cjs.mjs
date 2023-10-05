@@ -58,24 +58,7 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
         exportConditions: ['node'],
       }),
 
-      scss()      
-
-      /*
-      ...getRollupPluginForResolvingAliases(context.pkgPath),
-      json(),
-      babel(mergedBabelConfig),
-      externals({
-        packagePath: pkgJsonPath
-      }),
-      nodeResolve({
-        rootDir: context.pkgPath,
-        exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
-      }),
       scss()
-      */
     ]
   }
 
