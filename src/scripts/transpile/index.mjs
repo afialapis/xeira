@@ -12,7 +12,7 @@ import { noTranspile } from './notranspile.mjs'
 import { minimifyWithUglify } from './uglify.mjs'
 
 
-async function xeiraTranspile(context) {
+async function xeiraTranspile(context, callback) {
   const sourceFolder = context?.options?.source_folder || context.getSourceFolder()
   const watch = context?.options?.watch
 
@@ -31,6 +31,7 @@ async function xeiraTranspile(context) {
     } else {
       await noTranspile(context, _minimifyCallback)
     }
+    if (callback) await callback()
   }
   
   await _transpileCallback()

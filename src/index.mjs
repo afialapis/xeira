@@ -3,7 +3,7 @@ import { cfilename } from "./utils/colors.mjs"
 import commands from '../bin/cmds/index.mjs'
 
 function _makeCommandWrapper (command_name) {
-  async function __runCommand(options) {
+  async function __runCommand(options, callback) {
     const cwd = process.env.PWD
 
     const command = commands[command_name]
@@ -16,7 +16,7 @@ function _makeCommandWrapper (command_name) {
       if (contexts.length>1) {
         context.log_info(command_name, `Running on folder ${cfilename(context.pkgPath.replace(cwd, '.'))}`)
       }
-      await handler(context)
+      await handler(context, callback)
     }
   }
   return __runCommand

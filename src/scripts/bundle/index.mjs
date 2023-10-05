@@ -9,9 +9,10 @@
 import chokidar from 'chokidar'
 import  { rollupBundle } from './rollup/index.mjs'
 
-async function xeiraBundle(context) {
+async function xeiraBundle(context, callback) {
   if (context.bundleWithRollup) {
     await rollupBundle(context)
+    if (callback) await callback()
 
     const watch = context?.options?.watch
 
@@ -24,7 +25,9 @@ async function xeiraBundle(context) {
           context.log_always('bundle', `Bundling in watch mode (${Object.keys(watcher.getWatched())})`)
           
           watcher.on('all', () => {  
-            rollupBundle(context)
+            rollupBundle(context).then(() => {
+              if (callback) callback()
+            })
           })
         })
       } catch(error) {
