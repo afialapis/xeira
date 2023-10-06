@@ -24,5 +24,5 @@ export default {
   demo_mode: 'auto',
   demo_demoer: 'rollup',
 
-  verbose: true
+  verbose: false
 }

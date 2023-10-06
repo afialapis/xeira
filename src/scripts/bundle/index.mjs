@@ -22,7 +22,12 @@ async function xeiraBundle(context, callback) {
       })
       try {
         watcher.on('ready', () => {
-          context.log_always('bundle', `Bundling in watch mode (${Object.keys(watcher.getWatched())})`)
+          let watched = Object.keys(watcher.getWatched())
+          try {
+            watched = watched[0]
+          } catch(_) {}
+
+          context.log_always('bundle', `Bundling in watch mode (${watched})`)
           
           watcher.on('all', () => {  
             rollupBundle(context).then(() => {
