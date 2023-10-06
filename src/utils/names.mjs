@@ -27,6 +27,31 @@ function toTitleCase(str) {
   return s
 }
 
+
+const GLOBALS_DEFAULT = {
+  'react-dom/client': 'ReactDOMClient',
+  'react-dom/server': 'ReactDOMServer',
+
+  'farrapa/colors': 'FarrapaColors',
+  'farrapa/numbers': 'FarrapaNumbers',
+  'farrapa/commons': 'FarrapaCommons',
+  'farrapa/checkers': 'FarrapaCheckers',
+  'farrapa/collections': 'FarrapaCollections',
+  'farrapa/encoding': 'FarrapaEncoding',
+  'farrapa/iter': 'FarrapaIter',
+  'farrapa/memoize': 'FarrapaMemoize',
+  'farrapa/objects': 'FarrapaObjects',
+  'farrapa/pretty-console': 'FarrapaPrettyConsole',
+  'farrapa/promises': 'FarrapaPromises',
+  'farrapa/strings': 'FarrapaStrings',
+  'farrapa/url': 'FarrapaURL',
+
+  'miolo/server': 'MioloServer',
+  'miolo/cli': 'MioloCli',
+  'miolo/cli-react': 'MioloCliReact',
+
+}
+
 const makeGlobals = (pkgJson) => {
   const deps = {
     ...pkgJson?.dependencies || {},
@@ -37,7 +62,9 @@ const makeGlobals = (pkgJson) => {
     return {}
   }
 
-  const globals= {}
+  const globals= {
+    ...GLOBALS_DEFAULT
+  }
   depNames.map((n) => {
     globals[n]= toTitleCase(n)
   })
@@ -52,3 +79,11 @@ const addSuffix = (s, suf) =>
 
 
 export {getJSValidPkgName, minifyJsExtension, minifyMjsExtension, toTitleCase, makeGlobals}
+
+
+
+
+
+
+
+
