@@ -58,7 +58,9 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
         exportConditions: ['node'],
       }),
 
-      scss()
+      scss({
+        extract: true
+      })
     ]
   }
 

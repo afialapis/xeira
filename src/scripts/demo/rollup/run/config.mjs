@@ -39,7 +39,9 @@ const makeSimpleConfig = async (context, name, input, output, contentBase, port)
       //externals(),
       nodeResolve(),
       commonjs(),
-      scss(),
+      scss({
+        extract: true
+      }),
       serve({
         contentBase: contentBase,
         host: 'localhost',

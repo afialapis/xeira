@@ -59,7 +59,9 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
         exportConditions: ['node'],
       }),
 
-      scss()
+      scss({
+        extract: true
+      })
     ]
   }
 

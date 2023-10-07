@@ -70,7 +70,9 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
         exportConditions: ['node'],
       }),
 
-      scss()
+      scss({
+        extract: true
+      })
     ]
   }
 

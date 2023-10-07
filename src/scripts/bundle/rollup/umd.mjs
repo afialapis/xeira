@@ -69,7 +69,9 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
         exportConditions: ['node'],
       }),
 
-      scss()
+      scss({
+        extract: true
+      })
     ]
   }
 

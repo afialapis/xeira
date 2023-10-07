@@ -38,7 +38,9 @@ const makeSimpleConfig = async (context, name, input, output) => {
       externals(),
       nodeResolve(),
       commonjs(),
-      scss()
+      scss({
+        extract: true
+      })
     ]
   }
 }
