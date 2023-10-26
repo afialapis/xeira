@@ -202,6 +202,11 @@ Tool in charge of source code bundling. Default is `rollup`.
 
 Folder where your test files are at. Default is `./test`.
 
+## `dev_server`
+
+Tool in charge of bundling, serving and watching your dev app. Possible values 
+are `rollup` (default) or `nollup`.
+
 ## `demo_mode`
 
 Mode for `demo --init` command. Default is `auto`.

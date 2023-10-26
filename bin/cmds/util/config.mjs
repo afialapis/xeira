@@ -70,6 +70,10 @@ export function configText (options, customSubTitle) {
       `${tab1}${coption_name('--test_folder')}\n`+
       `${tab2}Which folder are you test files placed in?\n`+
       `${tab2}Default value is ${coption_value('./test')}. If ${coption_value('none')}, no testing will be made.`,
+    dev_server:
+      `${tab1}${coption_name('--dev_server')}\n`+
+      `${tab2}Which bundler/server do you wanna use for your dev app?\n`+
+      `${tab2}Values can be: ${coption_value('rollup')} (default), ${coption_value('nollup')}, ${coption_value('none')}.`,      
     demo_mode:
       `${tab1}${coption_name('--demo_mode')}\n`+
       `${tab2}Values can be: ${coption_value('auto')} (default), ${coption_value('none')}.`,

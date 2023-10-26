@@ -35,14 +35,14 @@ ${ctitle('SYNPSIS')}
 
 ${ctitle('DESCRIPTION')}
 
-  Lint, test, demo, transpile, bundle, versioning, static site... 
+  Lint, test, demo, dev serve, transpile, bundle, versioning, static site... 
   all tools you need, from a single command.
 
 ${ctitle('OPTIONS')}
 
   ${ctitle('<command>')}
 
-    One of ${ccmd('init')}, ${ccmd('lint')}, ${ccmd('test')}, ${ccmd('demo')}, ${ccmd('transpile')}, ${ccmd('bundle')}, ${ccmd('version')} or ${ccmd('site')}.
+    One of ${ccmd('init')}, ${ccmd('lint')}, ${ccmd('test')}, ${ccmd('demo')}, ${ccmd('dev')}, ${ccmd('transpile')}, ${ccmd('bundle')}, ${ccmd('version')} or ${ccmd('site')}.
 
   ${ctitle('[options]')}
 
@@ -58,7 +58,7 @@ ${ctitle('OPTIONS')}
         ${cexample('xeira xeira init --help')}
 `
 
-const command_names= ['init', 'lint', 'test', 'demo', 'transpile', 'bundle', 'version', 'site']
+const command_names= ['init', 'lint', 'test', 'demo', 'dev', 'transpile', 'bundle', 'version', 'site']
 
 async function xeira() {
   const cwd = process.env.PWD

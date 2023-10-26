@@ -20,7 +20,9 @@ export default {
   bundler: 'rollup', // 'webpack', 'esbuild'
 
   test_folder: './test', // './tests'
-
+  
+  dev_server: 'rollup',
+  
   demo_mode: 'auto',
   demo_demoer: 'rollup',
 

@@ -107,6 +107,10 @@ export class XeiraContextConfig {
     return this.config.test_folder || 'tests'
   }
 
+  getDevServer() {
+    return this.config?.dev_server || 'rollup'
+  }
+
   getDemoMode() {
     return this.config?.demo_mode || 'auto'
   }

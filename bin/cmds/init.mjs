@@ -8,7 +8,7 @@ const configOptions= ['product', 'target', 'source_index',
   'linter', 'transpile_folder', 'transpiler', 'minifier', 
   'bundle_folder', 'bundle_name', 'bundle_extension',
   'bundle_inline_dynamic_imports', 'bundle_node_polyfill', 
-  'bundler', 'test_folder', 'demo_mode', 'demo_demoer', 'verbose']
+  'bundler', 'test_folder', 'dev_server', 'demo_mode', 'demo_demoer', 'verbose']
 
 const help = `
 ${ctitle('SYNPSIS')}
@@ -36,7 +36,7 @@ ${ctitle('OPTIONS')}
     Passing ${coption_value('save')}, you force ${cxeira('xeira')} to save the configuration file
     even if no question was prompted. This can be used to create a ${cfilename('xeira.json')} from one
     command, for example:
-    ${cexample('xeira init --save --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true')}  
+    ${cexample('xeira init --save --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --dev_server=rollup --demo_mode=auto --demo_demoer=rollup --verbose=true')}  
 
 
   ${helpText}   
@@ -50,7 +50,7 @@ ${ctitle('EXAMPLES')}
   ${cexample('xeira init --force')}
     Will ask you on prompt about every config value
 
-  ${cexample('xeira init --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --demo_mode=auto --demo_demoer=rollup --verbose=true')}  
+  ${cexample('xeira init --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundler=rollup --test_folder=./test_custom --dev_server=rollup --demo_mode=auto --demo_demoer=rollup --verbose=true')}  
     Set the whole ${cfilename('xeira.json')} from a single command
 `
 

@@ -12,6 +12,7 @@
   "bundle_inline_dynamic_imports": true,
   "bundler": null,
   "test_folder": null,
+  "dev_server": "rollup",
   "demo_mode": "auto",
   "demo_demoer": "rollup",
   "verbose": true

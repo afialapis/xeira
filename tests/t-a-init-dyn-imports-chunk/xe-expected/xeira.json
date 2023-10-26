@@ -13,6 +13,7 @@
   "bundle_node_polyfill": false,
   "bundler": "rollup",
   "test_folder": "./test_custom",
+  "dev_server": "rollup",
   "demo_mode": "auto",
   "demo_demoer": "rollup",
   "verbose": true

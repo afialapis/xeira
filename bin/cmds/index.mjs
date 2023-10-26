@@ -1,6 +1,7 @@
 import * as init from './init.mjs'
 import * as lint from './lint.mjs'
 import * as test from './test.mjs'
+import * as dev from './dev.mjs'
 import * as demo from './demo.mjs'
 import * as transpile from './transpile.mjs'
 import * as bundle from './bundle.mjs'
@@ -11,6 +12,7 @@ export default {
   init,
   lint,
   test,
+  dev,
   demo,
   transpile,
   bundle,
