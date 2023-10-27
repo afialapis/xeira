@@ -4,7 +4,7 @@
   "scripts": {
     "x-reset": "rm -fr node_modules && rm -fr package-lock.json && rm -fr build",
     "x-prepare": "npm run x-reset && npm i && mkdir build && cp src/index.html build/",
-    "x-dev": "npx xeira dev --verbose=false",
+    "x-dev": "npx xeira dev --verbose=true --host=localhost --port=8888",
     "x-run": "echo \"npm run --silent x-dev\""
   },
   "dependencies": {

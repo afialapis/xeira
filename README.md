@@ -89,6 +89,11 @@ This command will also update some values of your `package.json` file (just... t
 ```
   npx xeira test [--files] [--timeout] [config] [--filter]
 ```
+## dev
+
+```
+  npx xeira dev [--host] [--port] [config] [--filter]
+```
 
 ## demo
 

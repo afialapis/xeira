@@ -13,20 +13,27 @@ async function devWithNollup(context) {
   const name = getJSValidPkgName(pkgJson.name)
   
   const input = context.sourceIndex
-  const contentBase = path.join(context.pkgPath, 'build') //context.getSourceFolder()
+  const output = devDefaults.output
+  const contentBase = path.join(context.pkgPath, path.dirname(output)) //context.getSourceFolder()
+  const host = context?.options?.host || devDefaults.host
   const port = context?.options?.port || devDefaults.port
 
-  let config= await makeSimpleConfig(context, name, input, devDefaults.output)
+  let config= await makeSimpleConfig(context, name, input, output)
 
-  context.log_always('dev', `Serving dev at ${cfilename(`localhost:${port}`)}`)
+  context.log_always('dev', `Serving dev at ${cfilename(`${host}:${port}`)}`)
 
   NollupDevServer({
+    host: host,
     port: port,
     hot: devDefaults.hot,
     config,
     contentBase: path.join(context.pkgPath, contentBase),
     //publicPath: path.basename(config.output.file),
-    verbose: true
+    verbose: context.beVerbose(),  
+    historyApiFallback: devDefaults.historyApiFallback,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
   })
 
 }
