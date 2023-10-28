@@ -19,7 +19,7 @@ import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = 'development'
 
-const makeSimpleConfig = async (context, devDefaults) => {
+const makeSimpleConfig = async (context, devDefaults, callback) => {
 
 
   const pkgJson = await readJsonFile(path.join(context.pkgPath ,'package.json'))
@@ -72,6 +72,10 @@ const makeSimpleConfig = async (context, devDefaults) => {
           // by using a bound function, we can access options as `this`
           const protocol = this.https ? 'https' : 'http'
           context.log_always('dev', `Server listening at ${cfilename(`${protocol}://${ahost}:${address.port}/`)}`)
+
+          if (callback) {
+            callback(server)
+          }
         }        
       }),
       livereload({
