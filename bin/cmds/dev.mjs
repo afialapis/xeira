@@ -2,8 +2,8 @@ import {ctitle, ccmd, cxeira, coption_name, coption_value, cexample, cfilename} 
 import xeiraDev from '../../src/scripts/dev/index.mjs'
 import {configText, monoText, helpText} from './util/index.mjs'
 
-const aliases= {host: 'h', port: 'p'}
-const configOptions= ['source_index', 'dev_server', 'verbose']
+const aliases= {host: 'h', port: 'p', bundle_node_polyfill: 'polyfill'}
+const configOptions= ['source_index', 'dev_server', 'verbose', 'bundle_node_polyfill',]
 
 const help = `
 ${ctitle('SYNPSIS')}

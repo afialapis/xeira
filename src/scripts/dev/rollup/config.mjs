@@ -6,6 +6,7 @@ import {babel} from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
+import polyfillNode from 'rollup-plugin-polyfill-node'
 import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
@@ -39,6 +40,10 @@ const makeSimpleConfig = async (context, devDefaults, callback) => {
 
   const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)
 
+  const polyfill = context.polyfillNode
+    ? [polyfillNode()]
+    : []
+
   const inputOptions= {
     input: input,
     plugins: [
@@ -50,9 +55,15 @@ const makeSimpleConfig = async (context, devDefaults, callback) => {
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       babel(mergedBabelConfig),
+      ...polyfill,
       //externals(),
-      nodeResolve(),
-      commonjs(),
+      nodeResolve({
+        rootDir: context.pkgPath,
+        exportConditions: ['node'],
+      }),
+      commonjs({
+        esmExternals: true
+      }),
       scss({
         extract: true
       }),
