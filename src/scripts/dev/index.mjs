@@ -9,16 +9,16 @@
 import { devWithNollup } from './nollup/index.mjs'
 import { devWithRollup } from './rollup/index.mjs'
 
-async function xeiraDev(context)  {
+async function xeiraDev(context, callback)  {
 
  
   const devserver= context.getDevServer()
 
 
   if (devserver=='nollup') {
-    await devWithNollup(context)
+    await devWithNollup(context, callback)
   } else {
-    await devWithRollup(context)
+    await devWithRollup(context, callback)
   }
  
 }

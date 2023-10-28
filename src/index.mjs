@@ -25,6 +25,7 @@ function _makeCommandWrapper (command_name) {
 const xeiraInit = _makeCommandWrapper('init')
 const xeiraLint = _makeCommandWrapper('lint')
 const xeiraTest = _makeCommandWrapper('test')
+const xeiraDev = _makeCommandWrapper('dev')
 const xeiraDemo = _makeCommandWrapper('demo')
 const xeiraTranspile = _makeCommandWrapper('transpile')
 const xeiraBundle = _makeCommandWrapper('bundle')
@@ -35,6 +36,7 @@ export {
   xeiraInit,
   xeiraLint,
   xeiraTest,
+  xeiraDev,
   xeiraDemo,
   xeiraTranspile,
   xeiraBundle,

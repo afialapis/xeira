@@ -7,7 +7,7 @@ import { getJSValidPkgName } from '../../../utils/names.mjs'
 import {cfilename} from '../../../utils/colors.mjs'
 
 // eslint-disable-next-line no-unused-vars
-async function devWithNollup(context) {
+async function devWithNollup(context, callback) {
   
   const pkgJson = await readJsonFile(path.join(context.pkgPath ,'package.json'))
   const name = getJSValidPkgName(pkgJson.name)
@@ -34,6 +34,11 @@ async function devWithNollup(context) {
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
+    after: (server) => {
+      if (callback) {
+        callback(server)
+      }
+    }
   })
 
 }

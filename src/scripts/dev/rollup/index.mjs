@@ -5,9 +5,9 @@ import { rollupWatch } from './watch.mjs'
 
 
 // eslint-disable-next-line no-unused-vars
-async function devWithRollup(context) {
+async function devWithRollup(context, callback) {
 
-  const [inputOptions, outputOptions]= await makeSimpleConfig(context, devDefaults)
+  const [inputOptions, outputOptions]= await makeSimpleConfig(context, devDefaults, callback)
 
   await rollupBuild(context.pkgPath, inputOptions, [outputOptions])
   rollupWatch({
