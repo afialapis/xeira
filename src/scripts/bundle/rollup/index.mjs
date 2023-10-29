@@ -16,7 +16,13 @@ async function rollupBundle(context) {
   const pkgJson = await readJsonFile(pkgJsonPath)
 
   const input = pkgp(context.sourceIndex)
-
+  
+  const NODE_ENV = process.env?.NODE_ENV || 'production'
+  const bundleMin = (context.bundleAll() && NODE_ENV === 'production') 
+    ? 2
+    : context.bundleThis('min')
+      ? 1
+      : 0
 
   // CJS - If Node
   if (context.isTargetingNode) {
@@ -27,14 +33,14 @@ async function rollupBundle(context) {
   }
   
   // ESM - Always
-  if (context.bundleThis('esm')) {
-    const [esmInputOptions, esmOutputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input)
+  if (context.bundleThis('mjs')) {
+    const [esmInputOptions, esmOutputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleMin)
     await rollupBuild(context.pkgPath, esmInputOptions, esmOutputs)
   }
 
   // ESM node special
   if (context.isTargetingNode) {
-    if (context.bundleThis('esm')) {
+    if (context.bundleThis('mjs')) {
       const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input)
       await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
     }
@@ -42,20 +48,31 @@ async function rollupBundle(context) {
 
   // UMD and IIFE - If Browser
   if (context.isTargetingBrowser) {
+    const bundleNormal = context.bundleAll() || !context.bundleThis('bundle')
+    const bundleDeps = context.bundleAll() || context.bundleThis('bundle')
+
     if (context.bundleThis('umd')) {
-      const [umdInputOptions, umdOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, false)
-      await rollupBuild(context.pkgPath, umdInputOptions, umdOutputs)
+      if (bundleNormal) {
+        const [umdInputOptions, umdOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, false, bundleMin)
+        await rollupBuild(context.pkgPath, umdInputOptions, umdOutputs)
+      }
       
-      const [umdbInputOptions, umdbOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, true)
-      await rollupBuild(context.pkgPath, umdbInputOptions, umdbOutputs)
+      if (bundleDeps) {
+        const [umdbInputOptions, umdbOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, true, bundleMin)
+        await rollupBuild(context.pkgPath, umdbInputOptions, umdbOutputs)
+      }
     }
 
     if (context.bundleThis('iife')) {
-      const [iifeInputOptions, iifeOutputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, false)
-      await rollupBuild(context.pkgPath, iifeInputOptions, iifeOutputs)
+      if (bundleNormal) {
+        const [iifeInputOptions, iifeOutputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, false, bundleMin)
+        await rollupBuild(context.pkgPath, iifeInputOptions, iifeOutputs)
+      }
       
-      const [iifebInputOptions, iifebOutputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, true)
-      await rollupBuild(context.pkgPath, iifebInputOptions, iifebOutputs)
+      if (bundleDeps) {
+        const [iifebInputOptions, iifebOutputs] = await rollupModulesForIife(context, pkgJsonPath, pkgJson, input, true, bundleMin)
+        await rollupBuild(context.pkgPath, iifebInputOptions, iifebOutputs)
+      }
     }
   }  
   

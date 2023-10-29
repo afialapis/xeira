@@ -35,7 +35,17 @@ const makeSimpleConfig = async (context, devDefaults, callback) => {
   const customBabelConfig= {
     exclude: 'node_modules/**',
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-    babelHelpers: 'bundled'
+    babelHelpers: 'bundled',
+
+    presets: [
+      ["@babel/preset-env", { 
+        bugfixes: true,
+        loose: true 
+      }],
+      ... context.usesReact
+        ? ['@babel/preset-react']
+        : []
+    ]
   }
 
   const mergedBabelConfig= await getBabelConfig(context, input, customBabelConfig)
@@ -47,22 +57,26 @@ const makeSimpleConfig = async (context, devDefaults, callback) => {
   const inputOptions= {
     input: input,
     plugins: [
-      ...getRollupPluginForResolvingAliases(context.pkgPath),
-      json(),
       replace({
         preventAssignment: true,
         'global.process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       babel(mergedBabelConfig),
+      commonjs({
+        esmExternals: true
+      }),
+      ...getRollupPluginForResolvingAliases(context.pkgPath),
+      json(),
       ...polyfill,
-      //externals(),
+      //externals({
+      //  packagePath: pkgJsonPath,
+      //  deps: !bundleDeps,
+      //  peerDeps: !bundleDeps
+      //}),
       nodeResolve({
         rootDir: context.pkgPath,
         exportConditions: ['node'],
-      }),
-      commonjs({
-        esmExternals: true
       }),
       scss({
         extract: true

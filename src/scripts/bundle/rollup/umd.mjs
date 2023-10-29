@@ -15,7 +15,7 @@ import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = process.env?.NODE_ENV || 'production'
 
-async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleDeps= false) {
+async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleDeps= false, bundleMin= 2) {
   const customBabelConfig= {
     exclude: /node_modules/,
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -106,9 +106,12 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
   }
 
   const outputs= 
-    NODE_ENV === 'production'
+    bundleMin == 2
     ? [outputDef, outputDefMin]
-    : [outputDef] 
+    : bundleMin == 1
+      ? [outputDefMin]
+      : [outputDef]
+    
 
   return[inputOptions, outputs]
 }

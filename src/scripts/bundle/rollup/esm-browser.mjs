@@ -15,7 +15,7 @@ import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = process.env?.NODE_ENV || 'production'
 
-async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
+async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleMin= 2) {
   const customBabelConfig= {
     exclude: 'node_modules/**',
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -102,8 +102,10 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input) {
   }
 
   const outputs= 
-    NODE_ENV === 'production'
-    ? [outputDef, outputDefMin]
+  bundleMin == 2
+  ? [outputDef, outputDefMin]
+  : bundleMin == 1
+    ? [outputDefMin]
     : [outputDef]
   
   return[inputOptions, outputs]

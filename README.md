@@ -174,7 +174,7 @@ Default value is `package.json`'s `name` field.
 
 `xeira` will bundle output files based on `target` prop.
 But if you want to bundle a single output format, you may pass `bundle_extension`.
-Possible values are: `cjs`, `esm`, `umd`, or `iife`.
+Possible values are: `cjs`, `mjs`, `mjs.min`, `umd`, `umd.min`, `umd.bundle`, `umd.bundle.min`, `iife`, `iife.min`, `iife.bundle`, `iife.bundle.min`.
 
 ## `bundle_inline_dynamic_imports`
 

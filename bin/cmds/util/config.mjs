@@ -53,7 +53,7 @@ export function configText (options, customSubTitle) {
     bundle_extension:
       `${tab1}${coption_name('--bundle_extension')}\n`+
       `${tab2}Specify a single bundle ormat to build.\n`+
-      `${tab2}Values can be: ${coption_value('cjs')}, ${coption_value('esm')}, ${coption_value('umd')}, ${coption_value('iife')}.`,     
+      `${tab2}Values can be: ${coption_value('cjs')}, ${coption_value('mjs[.min]')}, ${coption_value('umd[.bundle][.min]')}, ${coption_value('iife[.bundle][.min]')}.`,
     bundle_inline_dynamic_imports:
       `${tab1}${coption_name('--bundle_inline_dynamic_imports')}\n`+
       `${tab2}Inline dynamic imports?\n`+

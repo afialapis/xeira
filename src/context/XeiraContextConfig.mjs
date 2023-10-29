@@ -84,9 +84,13 @@ export class XeiraContextConfig {
     return this.config.bundle_extension
   }
 
+  bundleAll() {
+    return !this.bundleExtension
+  }
+
   bundleThis(extension) {
     if (this.bundleExtension) {
-      return this.bundleExtension==extension
+      return this.bundleExtension.indexOf(extension) >= 0
     }
     return true
   }

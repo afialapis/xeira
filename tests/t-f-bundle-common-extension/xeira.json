@@ -9,7 +9,7 @@
   "transpile_folder": null,
   "bundle_folder": "/dist",
   "bundle_name": "custom-name",
-  "bundle_extension": "iife",
+  "bundle_extension": "iife.bundle",
   "bundle_inline_dynamic_imports": true,
   "test_folder": null,
   "verbose": true

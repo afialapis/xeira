@@ -96,7 +96,7 @@ export class XeiraContextFiles extends XeiraContextConfig {
   } 
 
   getMainFile() {
-    if (this.transpileFolder != undefined /*&& this.isTargetingNode*/) {
+    if (this.transpileFolder != undefined) {
       return [undefined, _relative(path.join(this.transpileFolder, 'index.cjs'))]
     }
     if (NODE_MAIN=='cjs') {

@@ -26,9 +26,11 @@ export default [
     choices: [
       { title: 'none', value: undefined, disabled: true},
       { title: 'cjs',  value: 'cjs' },
-      { title: 'esm',  value: 'esm' },
+      { title: 'mjs',  value: 'mjs' },
       { title: 'umd',  value: 'umd' },
+      { title: 'umd.bundle',  value: 'umd.bundle' },
       { title: 'iife', value: 'iife' },
+      { title: 'iife.bundle', value: 'iife.bundle' },
       
     ],
     initial: 0    
