@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.3.22",
+  "version": "0.3.23",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -48,7 +48,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.0",
-    "arredemo": "^0.0.15",
+    "arredemo": "^0.0.16",
     "babel-merge": "^3.0.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-plugin-replace-import-extension": "^1.1.3",
@@ -79,7 +79,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^2.0.2",
     "testdouble": "^3.17.0",
-    "tinguir": "^0.0.3",
+    "tinguir": "^0.0.4",
     "uglify-js": "^3.17.4",
     "yargs-parser": "^21.1.1"
   },
