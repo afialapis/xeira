@@ -1,4 +1,4 @@
-![xeira logo](https://xeira.afialapis.com/logo.png)
+![xeira logo](https://www.afialapis.com/os/xeira/logo.png)
 
 [![NPM Version](https://badge.fury.io/js/xeira.svg)](https://www.npmjs.com/package/xeira)
 [![NPM Downloads](https://img.shields.io/npm/dm/xeira.svg?style=flat)](https://www.npmjs.com/package/xeira)
