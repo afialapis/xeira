@@ -2,8 +2,9 @@
   "theme": "default",
   "favicon": "logo/t-h-site.ico",
   "logo": "logo/t-h-site.png",
+  "url": "https://www.afialapis.com/os/xeira",
   "company": "Afialapis",
-  "url": "xeira.afialapis.com",
+  "company_url": "https://www.afialapis.com",
   "doc_versions": null,
   "md": {
     "strip_details_tag": true,

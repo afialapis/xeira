@@ -23,6 +23,13 @@ import X  from 'right/level/folder/X.cjs' // ok
 - if `--watch`, use `nodemon`
 - notice `@babel/register` does not work for ESM
 
+- maybe copy `run.[dev|prod].cjs` / `server/index.js` from other projects
+
+## `dev` + `run`?
+
+- `dev.rollup`: `onListening` method
+- `dev.nollup` ' after'?
+
 ## `bundle` command
 
 - `output.globals` as a parameter
