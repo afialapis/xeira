@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/afialapis/xeira/issues"
   },
-  "homepage": "https://github.com/afialapis/xeira#readme",
+  "homepage": "https://www.afialapis.com/os/xeira",
   "dependencies": {
     "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.2",
