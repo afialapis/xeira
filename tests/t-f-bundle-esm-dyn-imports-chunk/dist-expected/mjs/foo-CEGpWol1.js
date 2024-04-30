@@ -14,4 +14,4 @@ function fooit(obj) {
 }
 
 export { fooit };
-//# sourceMappingURL=foo-3a04dff0.js.map
+//# sourceMappingURL=foo-CEGpWol1.js.map
