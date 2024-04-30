@@ -1,6 +1,6 @@
 import json from '@rollup/plugin-json'
 import {babel} from '@rollup/plugin-babel'
-import {externals} from 'rollup-plugin-node-externals'
+import externals from 'rollup-plugin-node-externals'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'

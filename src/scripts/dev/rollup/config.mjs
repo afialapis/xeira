@@ -1,6 +1,6 @@
 
 import path from 'path'
-//import {externals} from 'rollup-plugin-node-externals'
+//import externals from 'rollup-plugin-node-externals'
 import json from '@rollup/plugin-json'
 import {babel} from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
