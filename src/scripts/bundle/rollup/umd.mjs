@@ -70,7 +70,8 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
       }),
 
       scss({
-        extract: true
+        extract: true,
+        //minimize: true
       })
     ]
   }
@@ -90,7 +91,12 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
     banner: rollupBanner(pkgJson),
     sourcemap: true,
     name: toTitleCase(pkgJson.name),
-    globals: makeGlobals(pkgJson) 
+    globals: makeGlobals(pkgJson),
+    //plugins: [
+    //  scss({
+    //    extract: true
+    //  })      
+    //]
   }
   const outputDefMin = {
     file: outputFileMin,
@@ -99,6 +105,10 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
     exports: 'named',
     banner: rollupBanner(pkgJson),
     plugins: [
+      //scss({
+      //  extract: true,
+      //  minimize: true
+      //}),
       terser({ ecma: 8, safari10: true })
     ],
     name: toTitleCase(pkgJson.name),

@@ -3,6 +3,8 @@ import {collTotalBy} from 'trangallada'
 import {fooit} from './foo.mjs'
 
 import './style.css'
+import './bootstrap.min.css'
+import './font-awesome.min.css'
 
 const collections= [
   fooit({
