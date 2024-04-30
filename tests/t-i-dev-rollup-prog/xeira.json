@@ -1,0 +1,20 @@
+{
+  "product": "package",
+  "target": "both",
+  "source_index": "./src/index.js",
+  "linter": "eslint",
+  "transpile_folder": null,
+  "transpiler": "babel",
+  "minifier": "uglify",
+  "bundle_folder": null,
+  "bundle_name": null,
+  "bundle_extension": null,
+  "bundle_inline_dynamic_imports": true,
+  "bundler": null,
+  "test_folder": null,
+  "dev_server": "rollup",
+  "demo_mode": "auto",
+  "demo_demoer": "rollup",
+  "verbose": true
+}
+
