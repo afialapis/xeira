@@ -12,9 +12,16 @@ function copyProps(src, target) {
 
 global.window = window;
 global.document = window.document;
-global.navigator = {
-  userAgent: 'node.js',
+
+if (! global.navigator) {
+  // global.navigator is already present in Node>=21
+  global.navigator = {
+    userAgent: 'node.js',
+  }
 }
+
+
+
 
 window.requestAnimationFrame = function (callback) {
   return setTimeout(callback, 0);

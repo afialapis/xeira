@@ -103,7 +103,7 @@ function _compareTwoFolders (pkgPath, aFolder, bFolder, debug= false) {
 
 
 function _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug= false)
- {
+{
   
 
   const [_filesOk, filesWithDiff, filesOmitted, filesUnwanted]= _compareTwoFolders(pkgPath, truthFolder, distFolder, debug)
@@ -158,4 +158,4 @@ if (! fs.existsSync(truthPath)) {
 
 const ok= _compareTwoBuilds (pkgPath, distFolder, truthFolder, debug)
 
-process.exit(parseInt(ok))
+process.exit(ok===true ? 1 : 0)
