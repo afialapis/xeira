@@ -1,3 +1,11 @@
+/*
+  Thanks to autoprefixer plugin,
+  xeira should add vendor prefixes for hits
+*/
+::placeholder {
+  color: gray;
+}
+
 .main-red {
   background-color: red;
 }

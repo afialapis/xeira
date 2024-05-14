@@ -4,6 +4,7 @@ import externals from 'rollup-plugin-node-externals'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
 
 import {rollupBanner} from './commons/banner.mjs'
 import {getDynamicImportOptions} from './commons/dynImports.mjs'
@@ -59,7 +60,10 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
       }),
 
       scss({
-        extract: true
+        extract: true,
+        plugins: [
+          autoprefixer()
+        ]
       })
     ]
   }

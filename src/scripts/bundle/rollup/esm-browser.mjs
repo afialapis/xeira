@@ -6,6 +6,7 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import polyfillNode from 'rollup-plugin-polyfill-node'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
 import terser from '@rollup/plugin-terser'
 
 import {rollupBanner} from './commons/banner.mjs'
@@ -76,7 +77,10 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleM
       }),
 
       scss({
-        extract: true
+        extract: true,
+        plugins: [
+          autoprefixer()
+        ]
       })
     ]
   }

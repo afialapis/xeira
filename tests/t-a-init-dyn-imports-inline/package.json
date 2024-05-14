@@ -15,19 +15,5 @@
   "dependencies": {
     "xeira": "file:../../"
   },
-  "version": "0.0.1",
-  "main": "./lib_custom/index.cjs",
-  "exports": {
-    "import": "./dist/t-a-init-dyn-imports-inline.mjs",
-    "default": "./lib_custom/index.cjs",
-    "require": "./dist/t-a-init-dyn-imports-inline.cjs"
-  },
-  "module": "./dist/t-a-init-dyn-imports-inline.mjs",
-  "cjs": "./dist/t-a-init-dyn-imports-inline.cjs",
-  "browser": "./dist/t-a-init-dyn-imports-inline.iife.js",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/xeira/configs/eslint.cjs"
-    ]
-  }
+  "version": "0.0.1"
 }

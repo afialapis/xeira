@@ -6,6 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
@@ -40,7 +41,10 @@ const makeSimpleConfig = async (context, name, input, output, contentBase, port)
       nodeResolve(),
       commonjs(),
       scss({
-        extract: true
+        extract: true,
+        plugins: [
+          autoprefixer()
+        ]
       }),
       serve({
         contentBase: contentBase,

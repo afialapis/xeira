@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -49,6 +49,7 @@
     "@rollup/plugin-replace": "^5.0.5",
     "@rollup/plugin-terser": "^0.4.4",
     "arredemo": "^0.0.18",
+    "autoprefixer": "^10.4.19",
     "babel-merge": "^3.0.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-replace-import-extension": "^1.1.4",
