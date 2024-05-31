@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -75,7 +75,7 @@
     "prompts": "^2.4.2",
     "rollup": "^4.17.2",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-node-externals": "^7.1.2",
+    "rollup-plugin-node-externals": "^6.1.2",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^2.0.2",
