@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -50,6 +50,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "16.0.1",
+    "@testing-library/user-event": "^14.6.1",
     "arredemo": "^1.0.1",
     "autoprefixer": "^10.4.20",
     "babel-merge": "^3.0.0",

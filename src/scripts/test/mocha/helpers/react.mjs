@@ -2,7 +2,8 @@
 // import pkg, { render } from 'enzyme';
 // const { /*configure,*/ mount, shallow } = pkg;
 
-import {render, cleanup, configure} from '@testing-library/react'
+import {render, screen, cleanup, configure, fireEvent} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 //import Adapter from 'enzyme-adapter-react-16';
 //import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -47,7 +48,9 @@ import {render, cleanup, configure} from '@testing-library/react'
 // global.shallow = shallow // shallow_wrap
 
 global.render = render
+global.screen = screen
 global.cleanup = cleanup
 global.configure = configure
-
+global.fireEvent = fireEvent
+global.userEvent = userEvent
 

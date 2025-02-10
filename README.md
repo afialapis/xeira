@@ -312,6 +312,11 @@ And `xeira` will use them both for transpiling and bundling.
 
 # Changelog
 
+## 1.0.0-beta.2
+
+Extended testing capabilities.
+
+
 ## 1.0.0-beta.1
 
 Upgraded dependencies.
