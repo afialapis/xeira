@@ -12,6 +12,31 @@
 
 var trangallada = require('trangallada');
 
+function asyncGeneratorStep(n, t, e, r, o, a, c) {
+  try {
+    var i = n[a](c),
+      u = i.value;
+  } catch (n) {
+    return void e(n);
+  }
+  i.done ? t(u) : Promise.resolve(u).then(r, o);
+}
+function _asyncToGenerator(n) {
+  return function () {
+    var t = this,
+      e = arguments;
+    return new Promise(function (r, o) {
+      var a = n.apply(t, e);
+      function _next(n) {
+        asyncGeneratorStep(a, r, o, _next, _throw, "next", n);
+      }
+      function _throw(n) {
+        asyncGeneratorStep(a, r, o, _next, _throw, "throw", n);
+      }
+      _next(void 0);
+    });
+  };
+}
 function _regeneratorRuntime() {
   _regeneratorRuntime = function () {
     return e;
@@ -30,9 +55,9 @@ function _regeneratorRuntime() {
   function define(t, e, r) {
     return Object.defineProperty(t, e, {
       value: r,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
+      enumerable: true,
+      configurable: true,
+      writable: true
     }), t[e];
   }
   try {
@@ -125,7 +150,7 @@ function _regeneratorRuntime() {
         if ("throw" === i) throw a;
         return {
           value: t,
-          done: !0
+          done: true
         };
       }
       for (n.method = i, n.arg = a;;) {
@@ -176,7 +201,7 @@ function _regeneratorRuntime() {
   function Context(t) {
     this.tryEntries = [{
       tryLoc: "root"
-    }], t.forEach(pushTryEntry, this), this.reset(!0);
+    }], t.forEach(pushTryEntry, this), this.reset(true);
   }
   function values(e) {
     if (e || "" === e) {
@@ -186,8 +211,8 @@ function _regeneratorRuntime() {
       if (!isNaN(e.length)) {
         var o = -1,
           i = function next() {
-            for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next;
-            return next.value = t, next.done = !0, next;
+            for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = false, next;
+            return next.value = t, next.done = true, next;
           };
         return i.next = i;
       }
@@ -196,10 +221,10 @@ function _regeneratorRuntime() {
   }
   return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", {
     value: GeneratorFunctionPrototype,
-    configurable: !0
+    configurable: true
   }), o(GeneratorFunctionPrototype, "constructor", {
     value: GeneratorFunction,
-    configurable: !0
+    configurable: true
   }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) {
     var e = "function" == typeof t && t.constructor;
     return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name));
@@ -228,17 +253,17 @@ function _regeneratorRuntime() {
     return r.reverse(), function next() {
       for (; r.length;) {
         var t = r.pop();
-        if (t in e) return next.value = t, next.done = !1, next;
+        if (t in e) return next.value = t, next.done = false, next;
       }
-      return next.done = !0, next;
+      return next.done = true, next;
     };
   }, e.values = values, Context.prototype = {
     constructor: Context,
     reset: function (e) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t);
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = false, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t);
     },
     stop: function () {
-      this.done = !0;
+      this.done = true;
       var t = this.tryEntries[0].completion;
       if ("throw" === t.type) throw t.arg;
       return this.rval;
@@ -257,10 +282,10 @@ function _regeneratorRuntime() {
           var c = n.call(i, "catchLoc"),
             u = n.call(i, "finallyLoc");
           if (c && u) {
-            if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+            if (this.prev < i.catchLoc) return handle(i.catchLoc, true);
             if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
           } else if (c) {
-            if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+            if (this.prev < i.catchLoc) return handle(i.catchLoc, true);
           } else {
             if (!u) throw Error("try statement without catch or finally");
             if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
@@ -313,39 +338,9 @@ function _regeneratorRuntime() {
     }
   }, e;
 }
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-      args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-      _next(undefined);
-    });
-  };
-}
 
 var makeCollections = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var _yield$import, fooit;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -377,7 +372,7 @@ var makeCollections = /*#__PURE__*/function () {
   };
 }();
 var getMoney = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var collections, total;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {

@@ -50,6 +50,7 @@ async function testWithMocha(context, extraParams, testPathStr) {
     '--bail',
     //'--require @babel/register',
     `--require ${babelRegPath}`,
+    
     //`--loader=testdouble`,
     //// `--extension js,cjs,mjs,jsx`,
     context.isTargetingBrowser ? `--require ${helperDOMPath}` : '',

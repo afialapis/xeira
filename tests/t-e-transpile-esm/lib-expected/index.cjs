@@ -7,7 +7,7 @@ exports.MoneyDiv = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _trangallada = require("trangallada");
 var _foo = require("./foo.cjs");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var collections = [(0, _foo.fooit)({
   'id': 1,
   'name': 'Max Power',
@@ -25,7 +25,7 @@ var getMoney = () => {
 };
 var MoneyDiv = () => {
   return /*#__PURE__*/_react.default.createElement("div", {
-    id: "money-div"
+    "data-testid": "money-div"
   }, getMoney());
 };
 exports.MoneyDiv = MoneyDiv;

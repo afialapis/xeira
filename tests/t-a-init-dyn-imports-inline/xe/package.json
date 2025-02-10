@@ -1,0 +1,33 @@
+{
+  "name": "t-a-init-dyn-imports-inline",
+  "scripts": {
+    "clean-init": "rm -fr xe && rm -fr xeira.json && cp -f package.json.original package.json",
+    "x-reset": "npm run --silent clean-init && rm -fr node_modules && rm -fr package-lock.json",
+    "x-prepare": "npm run --silent x-reset && npm i",
+    "x-init-manual": "npx xeira init",
+    "x-init-fly-prepare": "npm run --silent clean-init",
+    "x-init-fly": "npx xeira init --pkgjson --save --product=package --target=both --source_index=./src/index.js --linter=eslint --transpile_folder=./lib_custom --transpiler=babel --minifier=uglify --bundle_folder=./dist --bundle_name=none --bundle_extension=none --bundle_inline_dynamic_imports=true --bundle_node_polyfill=false --bundler=rollup --test_folder=./test_custom --dev_server=rollup --demo_mode=auto --demo_demoer=rollup --verbose=true",
+    "x-init-fly-after": "mkdir xe && cp package.json ./xe/package.json && cp xeira.json ./xe/xeira.json",
+    "x-init": "npm run --silent x-init-fly-prepare && npm run --silent x-init-fly  && npm run --silent x-init-fly-after",
+    "x-compare": "node ../../src/utils-dev/diff.mjs xe xe-expected",
+    "x-run": "npm run --silent x-init && npm run --silent x-compare"
+  },
+  "dependencies": {
+    "xeira": "file:../../"
+  },
+  "version": "0.0.1",
+  "main": "./lib_custom/index.cjs",
+  "exports": {
+    "import": "./dist/t-a-init-dyn-imports-inline.mjs",
+    "default": "./lib_custom/index.cjs",
+    "require": "./dist/t-a-init-dyn-imports-inline.cjs"
+  },
+  "module": "./dist/t-a-init-dyn-imports-inline.mjs",
+  "cjs": "./dist/t-a-init-dyn-imports-inline.cjs",
+  "browser": "./dist/t-a-init-dyn-imports-inline.iife.js",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/xeira/configs/eslint.cjs"
+    ]
+  }
+}

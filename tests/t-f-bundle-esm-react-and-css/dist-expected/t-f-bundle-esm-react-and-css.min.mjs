@@ -8,4 +8,4 @@
  *
  * @license MIT
  */
-import e from"react";import{collTotalBy as a}from"trangallada";function r(e){return e.foo="bar",e}var m=[r({id:1,name:"Max Power",age:37,money:99.99}),r({id:2,name:"Min Weak",age:25,money:33.33})],n=()=>e.createElement("div",{id:"money-div",className:"main-red"},a(m,"money"));export{n as MoneyDiv};
+import e from"react";import{collTotalBy as a}from"trangallada";function r(e){return e.foo="bar",e}var m=[r({id:1,name:"Max Power",age:37,money:99.99}),r({id:2,name:"Min Weak",age:25,money:33.33})],n=()=>e.createElement("div",{"data-testid":"money-div",className:"main-red"},a(m,"money"));export{n as MoneyDiv};

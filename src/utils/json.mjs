@@ -8,7 +8,7 @@ async function readJsonFile(jsonPath) {
     const obj = JSON.parse(data)
     return obj
   } catch (err){
-    log_error('readJsonFile', err)
+    log_error(`readJsonFile${jsonPath}`, err)
     return {}
   }
 }
@@ -20,7 +20,7 @@ function readJsonFileSync(jsonPath, silent= false) {
     return obj
   } catch (err){
     if (!silent) {
-      log_error('readJsonFileSync', err)
+      log_error(`readJsonFileSync${jsonPath}`, err)
     }
     return {}
   }

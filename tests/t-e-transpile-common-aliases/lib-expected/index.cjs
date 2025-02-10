@@ -25,7 +25,7 @@ var getMoney = () => {
 };
 var MoneyDiv = () => {
   return /*#__PURE__*/React.createElement("div", {
-    id: "money-div"
+    "data-testid": "money-div"
   }, getMoney());
 };
 module.exports = {

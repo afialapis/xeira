@@ -102,7 +102,7 @@ var getMoney = function getMoney() {
 };
 var MoneyDiv = function MoneyDiv() {
   return /*#__PURE__*/React.createElement("div", {
-    id: "money-div"
+    "data-testid": "money-div"
   }, getMoney());
 };
 var src = {

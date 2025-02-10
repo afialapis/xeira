@@ -308,3 +308,12 @@ In your root folder, file `jsconfig.json`:
 
 And `xeira` will use them both for transpiling and bundling.
 
+
+
+# Changelog
+
+## 1.0.0-beta.1
+
+Upgraded dependencies.
+Removed Enzyme, now using React Testing Library.
+React version (on tests) is now ^18.3.1.

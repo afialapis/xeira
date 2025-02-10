@@ -29,7 +29,7 @@ const getMoney = () => {
 
 const MoneyDiv = () => {
   return (
-    <div id="money-div" className="main-red">
+    <div data-testid="money-div" className="main-red">
       {getMoney()}
     </div>
   )

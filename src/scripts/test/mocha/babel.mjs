@@ -10,7 +10,6 @@ async function babelRegister() {
   // const babelConfig = await getBabelConfig(context);
 
   const register = await import("@babel/register/experimental-worker.js")
-
   register.default({ 
 
     // Array of ignore conditions, either a regex or a function. (Optional)
@@ -56,3 +55,4 @@ async function babelRegister() {
 }
 
 babelRegister()
+

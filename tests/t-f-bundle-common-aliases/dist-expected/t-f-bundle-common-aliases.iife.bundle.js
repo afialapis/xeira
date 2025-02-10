@@ -4326,7 +4326,7 @@ var tFBundleCommonAliases = (function (exports) {
 	var toNumber$1 = toNumber_1;
 
 	/** Used as references for various `Number` constants. */
-	var INFINITY$1 = 1 / 0,
+	var INFINITY = 1 / 0,
 	    MAX_INTEGER = 1.7976931348623157e+308;
 
 	/**
@@ -4357,7 +4357,7 @@ var tFBundleCommonAliases = (function (exports) {
 	    return value === 0 ? value : 0;
 	  }
 	  value = toNumber$1(value);
-	  if (value === INFINITY$1 || value === -INFINITY$1) {
+	  if (value === INFINITY || value === -Infinity) {
 	    var sign = (value < 0 ? -1 : 1);
 	    return sign * MAX_INTEGER;
 	  }
@@ -4885,7 +4885,7 @@ var tFBundleCommonAliases = (function (exports) {
 	 * // => false
 	 */
 	function isSafeInteger(value) {
-	  return isInteger(value) && value >= -MAX_SAFE_INTEGER$1 && value <= MAX_SAFE_INTEGER$1;
+	  return isInteger(value) && value >= -9007199254740991 && value <= MAX_SAFE_INTEGER$1;
 	}
 
 	var isSafeInteger_1 = isSafeInteger;
@@ -5468,7 +5468,7 @@ var tFBundleCommonAliases = (function (exports) {
 	 */
 	function toSafeInteger(value) {
 	  return value
-	    ? baseClamp(toInteger(value), -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER)
+	    ? baseClamp(toInteger(value), -9007199254740991, MAX_SAFE_INTEGER)
 	    : (value === 0 ? value : 0);
 	}
 
@@ -5478,9 +5478,6 @@ var tFBundleCommonAliases = (function (exports) {
 	    arrayMap = _arrayMap,
 	    isArray = isArray_1,
 	    isSymbol = isSymbol_1;
-
-	/** Used as references for various `Number` constants. */
-	var INFINITY = 1 / 0;
 
 	/** Used to convert symbols to primitives and strings. */
 	var symbolProto = Symbol ? Symbol.prototype : undefined,
@@ -5507,7 +5504,7 @@ var tFBundleCommonAliases = (function (exports) {
 	    return symbolToString ? symbolToString.call(value) : '';
 	  }
 	  var result = (value + '');
-	  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+	  return (result == '0' && (1 / value) == -Infinity) ? '-0' : result;
 	}
 
 	var _baseToString = baseToString$1;

@@ -25,7 +25,7 @@ const getMoney = () => {
 
 const MoneyDiv = () => {
   return (
-    <div id="money-div">
+    <div data-testid="money-div">
       {getMoney()}
     </div>
   )

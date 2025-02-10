@@ -11,7 +11,7 @@ class MoneyDiv extends React.Component {
     const { collections } = this.props;
 
     return ( 
-      <div id="money-div">
+      <div data-testid="money-div">
         {getMoney(collections)}
       </div>
     )
