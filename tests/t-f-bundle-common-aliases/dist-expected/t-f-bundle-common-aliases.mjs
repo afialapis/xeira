@@ -41,55 +41,72 @@ function getAugmentedNamespace(n) {
 
 var require$$0 = /*@__PURE__*/getAugmentedNamespace(trangallada);
 
-function fooit$1(obj) {
-  obj.foo = 'bar';
-  return obj;
-}
-var foo = {
-  fooit: fooit$1
-};
+var foo;
+var hasRequiredFoo;
 
-function barit$1(obj) {
+function requireFoo () {
+	if (hasRequiredFoo) return foo;
+	hasRequiredFoo = 1;
+	function fooit(obj) {
+	  obj.foo = 'bar';
+	  return obj;
+	}
+	foo = {
+	  fooit
+	};
+	return foo;
+}
+
+function barit(obj) {
   obj.bar = 'foo';
   return obj;
 }
 
 var bar = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	barit: barit$1
+	barit: barit
 });
 
 var require$$2 = /*@__PURE__*/getAugmentedNamespace(bar);
 
-var {
-  collTotalBy
-} = require$$0;
-var {
-  fooit
-} = foo;
-var {
-  barit
-} = require$$2;
-var collections = [fooit({
-  'id': 1,
-  'name': 'Max Power',
-  'age': 37,
-  'money': 99.99
-}), barit({
-  'id': 2,
-  'name': 'Min Weak',
-  'age': 25,
-  'money': 33.33
-})];
-var getMoney = () => {
-  var total = collTotalBy(collections, 'money');
-  return total;
-};
-var src = {
-  getMoney
-};
+var src;
+var hasRequiredSrc;
 
-var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+function requireSrc () {
+	if (hasRequiredSrc) return src;
+	hasRequiredSrc = 1;
+	var {
+	  collTotalBy
+	} = require$$0;
+	var {
+	  fooit
+	} = requireFoo();
+	var {
+	  barit
+	} = require$$2;
+	var collections = [fooit({
+	  'id': 1,
+	  'name': 'Max Power',
+	  'age': 37,
+	  'money': 99.99
+	}), barit({
+	  'id': 2,
+	  'name': 'Min Weak',
+	  'age': 25,
+	  'money': 33.33
+	})];
+	var getMoney = () => {
+	  var total = collTotalBy(collections, 'money');
+	  return total;
+	};
+	src = {
+	  getMoney
+	};
+	return src;
+}
+
+var srcExports = requireSrc();
+var index = /*@__PURE__*/getDefaultExportFromCjs(srcExports);
 
 export { index as default };
 //# sourceMappingURL=t-f-bundle-common-aliases.mjs.map

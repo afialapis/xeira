@@ -1,7 +1,4 @@
-import chai from 'chai'
-// import chaiAsPromised from 'chai-as-promised'
-// import * as td from 'testdouble'
-// 
-// chai.use(chaiAsPromised)
+import {expect} from 'chai'
 
-global.expect= chai.expect
+
+global.expect= expect

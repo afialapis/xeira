@@ -44,47 +44,56 @@ var require$$0 = /*@__PURE__*/getAugmentedNamespace(react);
 
 var require$$1 = /*@__PURE__*/getAugmentedNamespace(trangallada);
 
-function fooit$1(obj) {
+function fooit(obj) {
   obj.foo = 'bar';
   return obj;
 }
 
 var foo = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	fooit: fooit$1
+	fooit: fooit
 });
 
 var require$$2 = /*@__PURE__*/getAugmentedNamespace(foo);
 
-var React = require$$0;
-var _require = require$$1,
-  collTotalBy = _require.collTotalBy;
-var _require2 = require$$2,
-  fooit = _require2.fooit;
-var collections = [fooit({
-  'id': 1,
-  'name': 'Max Power',
-  'age': 37,
-  'money': 99.99
-}), fooit({
-  'id': 2,
-  'name': 'Min Weak',
-  'age': 25,
-  'money': 33.33
-})];
-var getMoney = function getMoney() {
-  var total = collTotalBy(collections, 'money');
-  return total;
-};
-var MoneyDiv = function MoneyDiv() {
-  return /*#__PURE__*/React.createElement("div", {
-    "data-testid": "money-div"
-  }, getMoney());
-};
-var src = {
-  MoneyDiv: MoneyDiv
-};
+var src;
+var hasRequiredSrc;
 
-var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+function requireSrc () {
+	if (hasRequiredSrc) return src;
+	hasRequiredSrc = 1;
+	var React = require$$0;
+	var _require = require$$1,
+	  collTotalBy = _require.collTotalBy;
+	var _require2 = require$$2,
+	  fooit = _require2.fooit;
+	var collections = [fooit({
+	  'id': 1,
+	  'name': 'Max Power',
+	  'age': 37,
+	  'money': 99.99
+	}), fooit({
+	  'id': 2,
+	  'name': 'Min Weak',
+	  'age': 25,
+	  'money': 33.33
+	})];
+	var getMoney = function getMoney() {
+	  var total = collTotalBy(collections, 'money');
+	  return total;
+	};
+	var MoneyDiv = function MoneyDiv() {
+	  return /*#__PURE__*/React.createElement("div", {
+	    "data-testid": "money-div"
+	  }, getMoney());
+	};
+	src = {
+	  MoneyDiv: MoneyDiv
+	};
+	return src;
+}
+
+var srcExports = requireSrc();
+var index = /*@__PURE__*/getDefaultExportFromCjs(srcExports);
 
 export { index as default };

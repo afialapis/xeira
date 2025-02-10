@@ -64,38 +64,55 @@
 
 	var require$$0 = /*@__PURE__*/getAugmentedNamespace(trangallada__namespace);
 
-	function fooit$1(obj) {
-	  obj.foo = 'bar';
-	  return obj;
+	var foo;
+	var hasRequiredFoo;
+
+	function requireFoo () {
+		if (hasRequiredFoo) return foo;
+		hasRequiredFoo = 1;
+		function fooit(obj) {
+		  obj.foo = 'bar';
+		  return obj;
+		}
+		foo = {
+		  fooit: fooit
+		};
+		return foo;
 	}
-	var foo = {
-	  fooit: fooit$1
-	};
 
-	var _require = require$$0,
-	  collTotalBy = _require.collTotalBy;
-	var _require2 = foo,
-	  fooit = _require2.fooit;
-	var collections = [fooit({
-	  'id': 1,
-	  'name': 'Max Power',
-	  'age': 37,
-	  'money': 99.99
-	}), fooit({
-	  'id': 2,
-	  'name': 'Min Weak',
-	  'age': 25,
-	  'money': 33.33
-	})];
-	var getMoney = function getMoney() {
-	  var total = collTotalBy(collections, 'money');
-	  return total;
-	};
-	var src = {
-	  getMoney: getMoney
-	};
+	var src;
+	var hasRequiredSrc;
 
-	var index = /*@__PURE__*/getDefaultExportFromCjs(src);
+	function requireSrc () {
+		if (hasRequiredSrc) return src;
+		hasRequiredSrc = 1;
+		var _require = require$$0,
+		  collTotalBy = _require.collTotalBy;
+		var _require2 = requireFoo(),
+		  fooit = _require2.fooit;
+		var collections = [fooit({
+		  'id': 1,
+		  'name': 'Max Power',
+		  'age': 37,
+		  'money': 99.99
+		}), fooit({
+		  'id': 2,
+		  'name': 'Min Weak',
+		  'age': 25,
+		  'money': 33.33
+		})];
+		var getMoney = function getMoney() {
+		  var total = collTotalBy(collections, 'money');
+		  return total;
+		};
+		src = {
+		  getMoney: getMoney
+		};
+		return src;
+	}
+
+	var srcExports = requireSrc();
+	var index = /*@__PURE__*/getDefaultExportFromCjs(srcExports);
 
 	exports.default = index;
 
