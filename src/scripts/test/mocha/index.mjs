@@ -53,7 +53,11 @@ async function testWithMocha(context, extraParams, testPathStr) {
     
     //`--loader=testdouble`,
     //// `--extension js,cjs,mjs,jsx`,
-    context.isTargetingBrowser ? `--require ${helperDOMPath}` : '',
+    
+    // RTL seems to always expect JSDOM
+    // context.isTargetingBrowser ? `--require ${helperDOMPath}` : '',    
+    `--require ${helperDOMPath}`,
+
     '--require ignore-styles',
     ...extraParams || [],
     helperChaiPath,
