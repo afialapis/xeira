@@ -38,7 +38,6 @@ It supports [working with monorepos](#working-with-monorepos).
 Future versions will try to add more tools (so, for example, letting you to pick your
 preferred bundler). It's also very opinionated, using pretty standard configurations.
 
-
 ## Install
 
 ```
@@ -81,7 +80,6 @@ This one-shot command will guide you in the creation of `xeira`'s
 If `--force=true`, you will be asked about values even if they already exist on your `xeira.json`.
 
 This command will also update some values of your `package.json` file (just... trust `xeira`!).
-
 
 ### lint
 
@@ -329,11 +327,17 @@ And `xeira` will use them both for transpiling and bundling.
 
 ## Changelog
 
+
+
+### 1.0.1
+
+· Improved banner on built files' top
+
 ### 1.0.0
 
 #### Features
 
-· `React` ^18.3.1. as peer dependency to avoid collissions on tests
+· `React` _^18.3.1_. as peer dependency to avoid collissions on tests
 
 #### `scss` build
 

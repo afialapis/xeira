@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -24,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/afialapis/xeira.git"
+    "url": "https://github.com/afialapis/xeira.git"
   },
   "author": "donato@afialapis.com",
   "license": "MIT",

@@ -1,6 +1,8 @@
 /**
  * t-f-bundle-esm-dyn-imports-chunk v0.0.1
  *
+ * 
+ *
  * Copyright (c) -no-author-
  *
  * This source code is licensed under the MIT license found in the
@@ -8,9 +10,4 @@
  *
  * @license MIT
  */
-function fooit(obj) {
-  obj.foo = 'bar';
-  return obj;
-}
-
-export { fooit };
+function o(o){return o.foo="bar",o}export{o as fooit};

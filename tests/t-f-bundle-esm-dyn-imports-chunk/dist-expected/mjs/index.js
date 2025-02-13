@@ -1,6 +1,8 @@
 /**
  * t-f-bundle-esm-dyn-imports-chunk v0.0.1
  *
+ * 
+ *
  * Copyright (c) -no-author-
  *
  * This source code is licensed under the MIT license found in the
@@ -40,7 +42,7 @@ var makeCollections = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* () {
     var {
       fooit
-    } = yield import('./foo-CEGpWol1.js');
+    } = yield import('./foo-6TPiwmnz.js');
     return [fooit({
       'id': 1,
       'name': 'Max Power',

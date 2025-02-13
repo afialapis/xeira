@@ -1,6 +1,8 @@
 /**
  * t-f-bundle-esm-dyn-imports-chunk v0.0.1
  *
+ * 
+ *
  * Copyright (c) -no-author-
  *
  * This source code is licensed under the MIT license found in the
@@ -346,7 +348,7 @@ var makeCollections = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return Promise.resolve().then(function () { return require('./foo-CjNhftwZ.js'); });
+          return Promise.resolve().then(function () { return require('./foo-D8BB1Ht2.js'); });
         case 2:
           _yield$import = _context.sent;
           fooit = _yield$import.fooit;
