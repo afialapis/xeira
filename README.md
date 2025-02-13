@@ -334,7 +334,11 @@ And `xeira` will use them both for transpiling and bundling.
 
 ## Changelog
 
-### 1.0.0-beta.4
+### 1.0.0
+
+#### Features
+
+· `React` ^18.3.1. as peer dependency to avoid collissions on tests
 
 #### `scss` build
 
