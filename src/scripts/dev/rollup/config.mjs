@@ -83,7 +83,12 @@ const makeSimpleConfig = async (context, devDefaults, callback) => {
         extract: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        },        
       }),
       serve({
         contentBase: contentBase,

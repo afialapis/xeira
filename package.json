@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -49,9 +49,9 @@
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/react": "16.0.1",
+    "@testing-library/react": "16.2.0",
     "@testing-library/user-event": "^14.6.1",
-    "arredemo": "^1.0.1",
+    "arredemo": "^1.0.2",
     "autoprefixer": "^10.4.20",
     "babel-merge": "^3.0.0",
     "babel-plugin-module-resolver": "^5.0.2",
@@ -71,7 +71,7 @@
     "mocha": "^11.1.0",
     "node-sass": "^9.0.0",
     "nollup": "^0.21.0",
-    "postcss": "^8.5.1",
+    "postcss": "^8.5.2",
     "prompts": "^2.4.2",
     "rollup": "^4.34.6",
     "rollup-plugin-livereload": "^2.0.5",
@@ -79,9 +79,13 @@
     "rollup-plugin-polyfill-node": "^0.13.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^3.0.0",
-    "tinguir": "^0.0.4",
+    "tinguir": "^0.0.7",
     "uglify-js": "^3.19.3",
     "yargs-parser": "^21.1.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "overrides": {
     "css-select": {

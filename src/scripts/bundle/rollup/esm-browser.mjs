@@ -80,7 +80,12 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleM
         extract: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        },        
       })
     ]
   }

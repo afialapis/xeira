@@ -44,7 +44,12 @@ const makeSimpleConfig = async (context, name, input, output, contentBase, port)
         extract: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        }        
       }),
       serve({
         contentBase: contentBase,

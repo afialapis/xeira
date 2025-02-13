@@ -75,7 +75,12 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
         //minimize: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        }        
       })
     ]
   }

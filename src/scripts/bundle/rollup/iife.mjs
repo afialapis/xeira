@@ -75,7 +75,12 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
         extract: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        }        
       })
     ]
   }

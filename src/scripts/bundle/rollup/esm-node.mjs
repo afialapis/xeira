@@ -64,7 +64,12 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
         extract: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        }        
       })
     ]
   }

@@ -43,7 +43,12 @@ const makeSimpleConfig = async (context, name, input, output) => {
         extract: true,
         plugins: [
           autoprefixer()
-        ]
+        ],
+        use: {
+          sass: {
+            silenceDeprecations: ['legacy-js-api'],
+          }
+        }        
       })
     ]
   }

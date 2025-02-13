@@ -1,7 +1,29 @@
-![xeira logo](https://www.afialapis.com/os/xeira/logo.png)
-
+# xeira
 [![NPM Version](https://badge.fury.io/js/xeira.svg)](https://www.npmjs.com/package/xeira)
 [![NPM Downloads](https://img.shields.io/npm/dm/xeira.svg?style=flat)](https://www.npmjs.com/package/xeira)
+
+
+![xeira logo](https://www.afialapis.com/os/xeira/logo.png)
+
+
+
+---
+
+> **[xeira](https://academia.gal/dicionario/-/termo/xeira)**
+
+
+> **2** Cantidade de traballo que se fai durante unha xornada ou dunha soa vez, ou serie de cousas feitas sen interrupción.
+
+> _Agora descansamos e pola tarde dámoslle outra xeira._
+
+> _Entre os catro fixemos unha boa xeira._
+
+---
+
+
+
+
+## Intro
 
 > One web-dev-stack command to rule them all
 
@@ -22,13 +44,13 @@ Future versions will try to add more tools (so, for example, letting you to pick
 preferred bundler). It's also very opinionated, using pretty standard configurations.
 
 
-# Install
+## Install
 
 ```
   npm i -D xeira
 ```
 
-# Commands
+## Commands
 
 `xeira` usage is always like:
 
@@ -43,7 +65,7 @@ taking priority over `xeira.json` file (if any).
 
 `--filter`: [working with monorepos?](#working-with-monorepos)
 
-## help
+### help
 
 In case of doubts, `--help` is always there for you:
 
@@ -52,7 +74,7 @@ In case of doubts, `--help` is always there for you:
   npx xeira <command> --help
 ```
 
-## init
+### init
 
 This one-shot command will guide you in the creation of `xeira`'s 
 [config file (`xeira.json`)](#configuration).
@@ -66,54 +88,54 @@ If `--force=true`, you will be asked about values even if they already exist on 
 This command will also update some values of your `package.json` file (just... trust `xeira`!).
 
 
-## lint
+### lint
 
 ```
   npx xeira lint [--folder=./] [config] [--filter]
 ```
 
-## transpile
+### transpile
 
 ```
   npx xeira transpile [--source_folder=./src] [config] [--filter] [--watch]
 ```
 
-## bundle
+### bundle
 
 ```
   npx xeira bundle [config] [--filter] [--watch]
 ```
 
-## test
+### test
 
 ```
   npx xeira test [--files] [--timeout] [config] [--filter]
 ```
-## dev
+### dev
 
 ```
   npx xeira dev [--host] [--port] [config] [--filter]
 ```
 
-## demo
+### demo
 
 ```
   npx xeira demo [--init [--force]] [--port] [config] [--filter]
 ```
 
-## version
+### version
 
 ```
   npx xeira version [--type | --number] [config] [--filter]
 ```
 
-## static site
+### static site
 
 ```
   npx xeira site [config] [--filter]
 ```
 
-# Configuration
+## Configuration
 
 Alongside your `package.json`, in your main folder, `xeira.json` will store your `xeira`' configuration.
 
@@ -131,52 +153,52 @@ Existence of a `xeira.json` may be a good idea, though:
 - more explicit (and transparent) usage of `xeira`
 - simpler `npm run` scripts!
 
-## `product`
+### `product`
 
 Can be `package` (default) or `app`. It determines how bundle files are made (and which ones).
 
-## `target`
+### `target`
 
 Can be `node` (default), `browser` or `both`. It determines how bundle files are made (and which ones).
 
-## `source_index`
+### `source_index`
 
 Entry point to your source code. Default value is `./src/index.js`.
 
-## `linter`
+### `linter`
 
 Which tool to use for linting your code. Default is `eslint`. 
 
-## `transpile_folder`
+### `transpile_folder`
 
 Destination folder for your transpiled code. Default is `./lib`.
 
-## `transpiler`
+### `transpiler`
 
 Tool in charge of transpiling. Default is `babel`.
 
-## `minifier`
+### `minifier`
 
 Tool in charge of minifying transpiled code and bundled files. Default is `uglify`.
 
 If you wanna disable it for transpiling, just specify `null`.
 
-## `bundle_folder`
+### `bundle_folder`
 
 Destination folder for bundle files. Default is `./dist`.
 
-## `bundle_name`
+### `bundle_name`
 
 Base name for the built bundles.
 Default value is `package.json`'s `name` field.
 
-## `bundle_extension`
+### `bundle_extension`
 
 `xeira` will bundle output files based on `target` prop.
 But if you want to bundle a single output format, you may pass `bundle_extension`.
 Possible values are: `cjs`, `mjs`, `mjs.min`, `umd`, `umd.min`, `umd.bundle`, `umd.bundle.min`, `iife`, `iife.min`, `iife.bundle`, `iife.bundle.min`.
 
-## `bundle_inline_dynamic_imports`
+### `bundle_inline_dynamic_imports`
 
 Sets the `rollup`'s [`inlineDynamicImports`](https://github.com/FredKSchott/rollup-plugin-polyfill-node) option. `true` by default.
 
@@ -185,7 +207,7 @@ like `./dist/cjs`, `./dist/mjs`...).
 
 `umd` and `iife` bundles cannot be split. So, if your `target` is `browser`, this option will be ignored.
 
-## `bundle_node_polyfill`
+### `bundle_node_polyfill`
 
 If `true`, [`Polyfills Node builtin modules`](https://rollupjs.org/configuration-options/#output-inlinedynamicimports) for your `rollup` bundle. It applies just to `esm`, `umd` and `iife` bundles.
 
@@ -199,34 +221,34 @@ Creating a browser bundle that depends on Node.js built-in modules ("node:<modul
 
 Consider setting this option as `true` or, if possible, try to remove your dependencies on `Node`s modules.
 
-## `bundler`
+### `bundler`
 
 Tool in charge of source code bundling. Default is `rollup`.
 
-## `test_folder`
+### `test_folder`
 
 Folder where your test files are at. Default is `./test`.
 
-## `dev_server`
+### `dev_server`
 
 Tool in charge of bundling, serving and watching your dev app. Possible values 
 are `rollup` (default) or `nollup`.
 
-## `demo_mode`
+### `demo_mode`
 
 Mode for `demo --init` command. Default is `auto`.
 
-## `demo_demoer`
+### `demo_demoer`
 
 Tool in charge of bundling, serving and watching your demo app. Possible values 
 are `rollup` (default) or `nollup`.
 
-## `verbose`
+### `verbose`
 
 If `true`, `xeira` will just print more logs in the console output. Default is `false`. 
 
 
-# Working with monorepos
+## Working with monorepos
 
 When working with monorepos, you may `--filter` folders to apply the command on.
 
@@ -246,7 +268,7 @@ If you want to search on another folder, just specify it with a relative path. S
 
 will filter all the `./custom_folder/react-*` folders.
 
-# API
+## API
 
 `xeira`'s commands are also available as JS calls.
 
@@ -281,9 +303,9 @@ await xeiraSite(options)
 and will be called accordingly.
 
 
-# Others
+## Others
 
-## Define aliases just once
+### Define aliases just once
 
 You may have find yourself having to duplicate your aliases configuration:
 
@@ -310,15 +332,33 @@ And `xeira` will use them both for transpiling and bundling.
 
 
 
-# Changelog
+## Changelog
 
-## 1.0.0-beta.2
+### 1.0.0-beta.4
 
-Extended testing capabilities.
+#### `scss` build
 
+· Removed Dart Sass `legacy-js-api` warnings.
 
-## 1.0.0-beta.1
+### 1.0.0-beta.2
 
-Upgraded dependencies.
-Removed Enzyme, now using React Testing Library.
-React version (on tests) is now ^18.3.1.
+#### Tests
+
+· RTL seems to always expect JSDOM
+
+### 1.0.0-beta.2
+
+#### Tests
+
+· Extended testing capabilities
+
+### 1.0.0-beta.1
+
+#### Features
+
+· Upgraded dependencies.
+
+#### Tests
+
+· Removed `Enzyme`, now using `React Testing Library`.
+· `React` version (on tests) is now _^18.3.1_.
