@@ -37,7 +37,7 @@ var tFBundleCommon = (function (exports, trangallada) {
 	}
 
 	function getAugmentedNamespace(n) {
-	  if (n.__esModule) return n;
+	  if (Object.prototype.hasOwnProperty.call(n, '__esModule')) return n;
 	  var f = n.default;
 		if (typeof f == "function") {
 			var a = function a () {

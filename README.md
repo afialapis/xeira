@@ -22,7 +22,7 @@
 
 > One web-dev-stack command to rule them all
 
-`xeira` aims to group all the Web Dev stack processes you need from a single, zero config command.
+[`xeira`](https://www.afialapis.com/os/xeira) aims to group all the Web Dev stack processes you need from a single, zero config command.
 Under the hoods, it calls well known, community-trusted tools:
 
 - linting trough [ESLint](https://github.com/eslint/eslint)
