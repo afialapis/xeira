@@ -327,7 +327,7 @@ And `xeira` will use them both for transpiling and bundling.
 
 ## Changelog
 
-### 1.1.3
+### 1.1.4
 
 · Allow to bundle also `bundle.mjs` when for _Node_
 

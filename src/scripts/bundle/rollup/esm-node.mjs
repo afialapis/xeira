@@ -14,7 +14,7 @@ import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = process.env?.NODE_ENV || 'production'
 
-async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
+async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, bundleDeps= false) {
   const customBabelConfig= {
     exclude: /node_modules/,
     /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
@@ -53,7 +53,9 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       externals({
-        packagePath: pkgJsonPath
+        packagePath: pkgJsonPath,
+        deps: !bundleDeps,
+        peerDeps: !bundleDeps
       }),
       nodeResolve({
         rootDir: context.pkgPath,
@@ -74,7 +76,9 @@ async function rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input) {
     ]
   }
 
-  const outputFile = context.pkgp(context.getEsmNodeOutput())
+  const outputFile = context.pkgp(
+    bundleDeps ?  context.getEsmNodeFullBundleOutput() : context.getEsmNodeOutput()
+  )
 
   const outputs= [
     {

@@ -77,7 +77,6 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, bundleD
   }
 
   const output = context.pkgp(
-    //context.getCjsOutput()
     bundleDeps ?  context.getCjsFullBundleOutput() : context.getCjsOutput()
   )
   
