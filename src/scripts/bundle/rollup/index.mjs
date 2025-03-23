@@ -23,11 +23,12 @@ async function rollupBundle(context) {
     : context.bundleThis('min')
       ? 1
       : 0
+  
+  const bundleNormal = context.bundleAll() || !context.bundleThis('bundle')
+  const bundleDeps = context.bundleAll() || context.bundleThis('bundle')
 
   // CJS - If Node
   if (context.isTargetingNode) {
-    const bundleNormal = context.bundleAll() || !context.bundleThis('bundle')
-    const bundleDeps = context.bundleAll() || context.bundleThis('bundle')
 
     if (context.bundleThis('cjs')) {
       if (bundleNormal) {
@@ -50,16 +51,19 @@ async function rollupBundle(context) {
   // ESM node special
   if (context.isTargetingNode) {
     if (context.bundleThis('mjs')) {
-      const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input)
-      await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
+      if (bundleNormal) {
+        const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, false)
+        await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
+      }
+      if (bundleDeps) {
+        const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, true)
+        await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
+      }
     }
   }
 
   // UMD and IIFE - If Browser
   if (context.isTargetingBrowser) {
-    const bundleNormal = context.bundleAll() || !context.bundleThis('bundle')
-    const bundleDeps = context.bundleAll() || context.bundleThis('bundle')
-
     if (context.bundleThis('umd')) {
       if (bundleNormal) {
         const [umdInputOptions, umdOutputs] = await rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, false, bundleMin)

@@ -79,10 +79,14 @@ export class XeiraContextFiles extends XeiraContextConfig {
     return this._getOutputFile('mjs', chunkFolder, minified)
   }
 
-  getEsmNodeOutput(minified= false) {
+  getEsmNodeOutput(minified= false, suffix= undefined) {
     const chunkFolder = this._getChunkFolder('mjs_node', minified)
-    return this._getOutputFile('mjs', chunkFolder, minified, 'node')
+    return this._getOutputFile('mjs', chunkFolder, minified, suffix ? `node.${suffix}`: 'node')
   }
+
+  getEsmNodeFullBundleOutput(minified= false) {
+    return this.getEsmNodeOutput(minified, 'bundle')
+  }  
 
   getUmdOutput(minified= false, suffix= undefined) {
     return this._getOutputFile('umd.js', undefined,  minified, suffix)
