@@ -64,10 +64,15 @@ export class XeiraContextFiles extends XeiraContextConfig {
   }  
   */
 
-  getCjsOutput(minified= false) {
+  getCjsOutput(minified= false, suffix= undefined) {
     const chunkFolder = this._getChunkFolder('cjs', minified)
-    return this._getOutputFile('cjs', chunkFolder, minified)
+    return this._getOutputFile('cjs', chunkFolder, minified, suffix)
   }
+
+  getCjsFullBundleOutput(minified= false) {
+    return this.getCjsOutput(minified, 'bundle')
+  }  
+
 
   getEsmOutput(minified= false) {
     const chunkFolder = this._getChunkFolder('mjs', minified)

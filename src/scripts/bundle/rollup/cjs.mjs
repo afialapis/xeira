@@ -11,7 +11,7 @@ import {getDynamicImportOptions} from './commons/dynImports.mjs'
 import { getRollupPluginForResolvingAliases } from '../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../config/babel.mjs'
 
-async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
+async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, bundleDeps= false) {
 
   const customBabelConfig= {
     exclude: /node_modules/,
@@ -52,7 +52,9 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
       externals({
-        packagePath: pkgJsonPath
+        packagePath: pkgJsonPath,
+        deps: !bundleDeps,
+        peerDeps: !bundleDeps
       }),
       nodeResolve({
         rootDir: context.pkgPath,
@@ -73,7 +75,10 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input) {
     ]
   }
 
-  const output = context.pkgp(context.getCjsOutput())
+  const output = context.pkgp(
+    //context.getCjsOutput()
+    bundleDeps ?  context.getCjsFullBundleOutput() : context.getCjsOutput()
+  )
   
   const outputs= [
     {

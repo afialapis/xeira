@@ -26,9 +26,18 @@ async function rollupBundle(context) {
 
   // CJS - If Node
   if (context.isTargetingNode) {
+    const bundleNormal = context.bundleAll() || !context.bundleThis('bundle')
+    const bundleDeps = context.bundleAll() || context.bundleThis('bundle')
+
     if (context.bundleThis('cjs')) {
-      const [csjInputOptions, cjsOutputs] = await rollupModulesForCjs(context, pkgJsonPath, pkgJson, input)
-      await rollupBuild(context.pkgPath, csjInputOptions, cjsOutputs)
+      if (bundleNormal) {
+        const [csjInputOptions, cjsOutputs] = await rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, false)
+        await rollupBuild(context.pkgPath, csjInputOptions, cjsOutputs)
+      }
+      if (bundleDeps) {
+        const [csjInputOptions, cjsOutputs] = await rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, true)
+        await rollupBuild(context.pkgPath, csjInputOptions, cjsOutputs)
+      }
     }
   }
   
