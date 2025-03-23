@@ -327,6 +327,10 @@ And `xeira` will use them both for transpiling and bundling.
 
 ## Changelog
 
+### 1.1.2
+
+· `dynamicRequireTargets=true` when bundling `cjs`
+
 ### 1.1.1
 
 · Allow to bundle also `bundle.cjs` when for _Node_
