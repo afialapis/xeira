@@ -327,6 +327,10 @@ And `xeira` will use them both for transpiling and bundling.
 
 ## Changelog
 
+### 1.1.5
+
+· ESM - Node and/or browser
+
 ### 1.1.4
 
 · Allow to bundle also `bundle.mjs` when for _Node_

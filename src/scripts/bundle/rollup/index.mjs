@@ -42,15 +42,10 @@ async function rollupBundle(context) {
     }
   }
   
-  // ESM - Always
+  // ESM
   if (context.bundleThis('mjs')) {
-    const [esmInputOptions, esmOutputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleMin)
-    await rollupBuild(context.pkgPath, esmInputOptions, esmOutputs)
-  }
-
-  // ESM node special
-  if (context.isTargetingNode) {
-    if (context.bundleThis('mjs')) {
+    // ESM Node
+    if (context.isTargetingNode) {
       if (bundleNormal) {
         const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, false)
         await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
@@ -59,6 +54,10 @@ async function rollupBundle(context) {
         const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, true)
         await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
       }
+    } else if (context.isTargetingBrowser) {
+      // ESM Browser
+      const [esmInputOptions, esmOutputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleMin)
+      await rollupBuild(context.pkgPath, esmInputOptions, esmOutputs)
     }
   }
 
