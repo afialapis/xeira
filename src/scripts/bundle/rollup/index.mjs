@@ -54,7 +54,8 @@ async function rollupBundle(context) {
         const [esmnInputOptions, esmnOutputs] = await rollupModulesForEsmNode(context, pkgJsonPath, pkgJson, input, true)
         await rollupBuild(context.pkgPath, esmnInputOptions, esmnOutputs)
       }
-    } else if (context.isTargetingBrowser) {
+    }
+    if (context.isTargetingBrowser) {
       // ESM Browser
       const [esmInputOptions, esmOutputs] = await rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleMin)
       await rollupBuild(context.pkgPath, esmInputOptions, esmOutputs)

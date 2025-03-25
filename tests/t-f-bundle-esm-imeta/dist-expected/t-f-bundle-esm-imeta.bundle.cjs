@@ -10,8 +10,10 @@
  *
  * @license MIT
  */
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+'use strict';
+
+var path = require('node:path');
+var node_url = require('node:url');
 
 // babel and babel-plugin-transform-import-meta will
 // transform this lines
@@ -22,11 +24,10 @@ import { fileURLToPath } from 'node:url';
 // So using __filename reserved word as variable name, which will produce the error:
 //  TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
 
-var __my_filename = fileURLToPath(import.meta.url);
+var __my_filename = node_url.fileURLToPath(require('url').pathToFileURL(__filename).toString());
 var __my_dirname = path.dirname(__my_filename);
-var getDirname = () => {
+var getDirname = function getDirname() {
   return __my_dirname;
 };
 
-export { getDirname };
-//# sourceMappingURL=t-f-bundle-esm-imeta.mjs.map
+exports.getDirname = getDirname;

@@ -1,5 +1,5 @@
 /**
- * t-f-bundle-esm-dyn-imports-chunk v0.0.1
+ * t-f-bundle-esm-dyn-imports-inline v0.0.1
  *
  * 
  *
@@ -7404,7 +7404,7 @@ var makeCollections = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return import('./foo-6TPiwmnz.js');
+          return Promise.resolve().then(function () { return foo; });
         case 2:
           _yield$import = _context.sent;
           fooit = _yield$import.fooit;
@@ -7451,5 +7451,15 @@ var getMoney = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+function fooit(obj) {
+  obj.foo = 'bar';
+  return obj;
+}
+
+var foo = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  fooit: fooit
+});
 
 export { getMoney };

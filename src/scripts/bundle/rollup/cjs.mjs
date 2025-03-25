@@ -48,7 +48,7 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, bundleD
       babel(mergedBabelConfig), 
       commonjs({
         esmExternals: true,
-        dynamicRequireTargets: true
+        //dynamicRequireTargets: true
       }),      
       ...getRollupPluginForResolvingAliases(context.pkgPath),
       json(),
