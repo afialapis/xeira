@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 function asyncGeneratorStep(n, t, e, r, o, a, c) {
   try {
     var i = n[a](c),
@@ -7404,7 +7405,7 @@ var makeCollections = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return import('./foo-6TPiwmnz.js');
+          return import('./foo-BBRFFLgT.js');
         case 2:
           _yield$import = _context.sent;
           fooit = _yield$import.fooit;

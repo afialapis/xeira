@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 import { collTotalBy } from 'trangallada';
 
 function fooit(obj) {

@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 'use strict';
 
 var path = require('node:path');

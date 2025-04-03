@@ -85,7 +85,6 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList, watch= fals
     // create a bundle
     const bundle = await rollup(inputOptions)
 
-
     if (watch) {
       cache = bundle.cache
     }

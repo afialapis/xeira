@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 'use strict';
 
 function asyncGeneratorStep(n, t, e, r, o, a, c) {
@@ -7406,7 +7407,7 @@ var makeCollections = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return Promise.resolve().then(function () { return require('./foo-D8BB1Ht2.js'); });
+          return Promise.resolve().then(function () { return require('./foo-C0HZSY05.js'); });
         case 2:
           _yield$import = _context.sent;
           fooit = _yield$import.fooit;

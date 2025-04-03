@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 var tFBundleEsmReactAndCss = (function (exports, React, trangallada) {
   'use strict';
 

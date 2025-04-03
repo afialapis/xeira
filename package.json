@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -10,6 +10,7 @@
     "./utils-dev": "./src/utils-dev"
   },
   "scripts": {
+    "postinstall": "patch-package",
     "site-clean": "rm -fr arredemo",
     "site-build": "npm run site-clean && npx arredemo build",
     "reset": "rm -fr package-lock.json && rm -fr node_modules && npm i && ./scripts/reset.sh",

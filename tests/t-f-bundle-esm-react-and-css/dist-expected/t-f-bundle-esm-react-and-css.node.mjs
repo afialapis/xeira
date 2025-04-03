@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 import React from 'react';
 import { collTotalBy } from 'trangallada';
 

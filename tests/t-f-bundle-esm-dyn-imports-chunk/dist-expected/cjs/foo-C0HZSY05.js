@@ -10,10 +10,12 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
+'use strict';
+
 function fooit(obj) {
   obj.foo = 'bar';
   return obj;
 }
 
-export { fooit };
-//# sourceMappingURL=foo-6TPiwmnz.js.map
+exports.fooit = fooit;

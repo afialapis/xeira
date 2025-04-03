@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 import * as react from 'react';
 import * as trangallada from 'trangallada';
 

@@ -10,11 +10,10 @@
  *
  * @license MIT
  */
-'use strict';
-
+/* eslint-disable */ 
 function fooit(obj) {
   obj.foo = 'bar';
   return obj;
 }
 
-exports.fooit = fooit;
+export { fooit };

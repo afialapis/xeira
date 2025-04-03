@@ -83,7 +83,13 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
           }
         }        
       })
-    ]
+    ],
+    onwarn : (warning) => {
+      if (warning.code === 'CIRCULAR_DEPENDENCY')    return;
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return;
+      console.warn(warning.message)
+    }
+
   }
 
   const outputFile = context.pkgp(

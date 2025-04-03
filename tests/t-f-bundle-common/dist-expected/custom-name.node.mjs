@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 import * as trangallada from 'trangallada';
 
 function getDefaultExportFromCjs (x) {

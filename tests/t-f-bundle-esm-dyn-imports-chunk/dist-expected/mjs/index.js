@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 import { collTotalBy } from 'trangallada';
 
 function asyncGeneratorStep(n, t, e, r, o, a, c) {
@@ -42,7 +43,7 @@ var makeCollections = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* () {
     var {
       fooit
-    } = yield import('./foo-6TPiwmnz.js');
+    } = yield import('./foo-BBRFFLgT.js');
     return [fooit({
       'id': 1,
       'name': 'Max Power',

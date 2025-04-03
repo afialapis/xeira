@@ -1,6 +1,13 @@
 
 # Changelog
 
+## 1.1.8
+
+· Ignoring some warning when bundling
+· Patch on `@rollup/plugin-commonjs` for cache using
+  (error on `react-router-dom/server`)
+
+
 ## 1.1.7
 
 · Use cache when in `watch` mode

@@ -10,6 +10,7 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 var tFBundleCommonExtension = (function (exports) {
 	'use strict';
 

@@ -88,7 +88,11 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleM
           }
         },        
       })
-    ]
+    ],
+    onwarn : (warning) => {
+      if (warning.code === 'CIRCULAR_DEPENDENCY')    return;
+      console.warn(warning.message)
+    }
   }
 
   const outputFile = context.pkgp(context.getEsmOutput(false))

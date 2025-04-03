@@ -10,9 +10,11 @@
  *
  * @license MIT
  */
+/* eslint-disable */ 
 function fooit(obj) {
   obj.foo = 'bar';
   return obj;
 }
 
 export { fooit };
+//# sourceMappingURL=foo-BBRFFLgT.js.map
