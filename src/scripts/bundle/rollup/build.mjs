@@ -2,6 +2,8 @@ import { rollup } from 'rollup'
 import {cerror, cok, cfilename} from '../../../utils/colors.mjs'
 import { log_info, log_error } from '../../../utils/log.mjs';
 
+let cache
+
 async function _rollupGenerateOutputs(bundle, outputOptionsList) {
   for (const outputOptions of outputOptionsList) {
     
@@ -60,7 +62,7 @@ async function _rollupGenerateOutputs(bundle, outputOptionsList) {
       
 }
 
-async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
+async function rollupBuild(pkgPath, inputOptions, outputOptionsList, watch= false) {
   let bundle
   let buildFailed = false
   let niceFileName = ''
@@ -76,8 +78,17 @@ async function rollupBuild(pkgPath, inputOptions, outputOptionsList) {
       }      
     }
 
+    if (watch) {
+      inputOptions.cache = cache
+    }
+
     // create a bundle
     const bundle = await rollup(inputOptions)
+
+
+    if (watch) {
+      cache = bundle.cache
+    }
 
     await _rollupGenerateOutputs(bundle, outputOptionsList);
   } catch (error) {

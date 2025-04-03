@@ -8,8 +8,9 @@ import { rollupWatch } from './watch.mjs'
 async function devWithRollup(context, callback) {
 
   const [inputOptions, outputOptions]= await makeSimpleConfig(context, devDefaults, callback)
-
-  await rollupBuild(context.pkgPath, inputOptions, [outputOptions])
+  
+  const watch = true
+  await rollupBuild(context.pkgPath, inputOptions, [outputOptions], watch)
   rollupWatch({
     ...inputOptions,
     output: [outputOptions],

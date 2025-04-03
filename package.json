@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -69,7 +69,6 @@
     "lodash": "^4.17.21",
     "merge-deep": "^3.0.3",
     "mocha": "^11.1.0",
-    "sass": "^1.86.0",
     "nollup": "^0.21.0",
     "postcss": "^8.5.3",
     "prompts": "^2.4.2",
@@ -79,6 +78,7 @@
     "rollup-plugin-polyfill-node": "^0.13.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^3.0.0",
+    "sass": "^1.86.0",
     "tinguir": "^0.0.7",
     "uglify-js": "^3.19.3",
     "yargs-parser": "^21.1.1"
@@ -102,5 +102,9 @@
   },
   "engines": {
     "node": ">=21"
-  }  
+  },
+  "devDependencies": {
+    "@rollup/plugin-swc": "^0.4.0",
+    "@swc/core": "^1.11.13"
+  }
 }

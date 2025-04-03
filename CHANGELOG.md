@@ -1,6 +1,9 @@
 
 # Changelog
 
+## 1.1.7
+
+· Use cache when in `watch` mode
 
 ## 1.1.6
 

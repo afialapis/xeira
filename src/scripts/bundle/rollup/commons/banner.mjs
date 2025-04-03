@@ -10,7 +10,8 @@ function rollupBanner(pkgJson) {
  * LICENSE.md file in the root directory of this source tree.
  *
  * @license ${pkgJson.license || 'MIT'}
- */`;
+ */
+/* eslint-disable */ `;
 }
 
 export {

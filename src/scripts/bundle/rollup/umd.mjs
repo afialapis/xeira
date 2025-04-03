@@ -1,5 +1,6 @@
 import json from '@rollup/plugin-json'
 import {babel} from '@rollup/plugin-babel'
+//import babel from '@rollup/plugin-swc'
 import externals from 'rollup-plugin-node-externals'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
