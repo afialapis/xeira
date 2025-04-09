@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.1.9
+
+· Upgrade deps, including `arredemo` which was forced back to `react``18`.
+
 ## 1.1.8
 
 · Ignoring some warning when bundling
