@@ -4,5 +4,6 @@ export default {
   ],
   plugins: [
     // "babel-plugin-transform-import-meta"
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
   ]
 }
