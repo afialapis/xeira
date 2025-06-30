@@ -5508,7 +5508,7 @@ var tFBundleCommon = (function (exports) {
 		    return value === 0 ? value : 0;
 		  }
 		  value = toNumber(value);
-		  if (value === INFINITY || value === -Infinity) {
+		  if (value === INFINITY || value === -INFINITY) {
 		    var sign = (value < 0 ? -1 : 1);
 		    return sign * MAX_INTEGER;
 		  }
@@ -6164,7 +6164,7 @@ var tFBundleCommon = (function (exports) {
 		 * // => false
 		 */
 		function isSafeInteger(value) {
-		  return isInteger(value) && value >= -9007199254740991 && value <= MAX_SAFE_INTEGER;
+		  return isInteger(value) && value >= -MAX_SAFE_INTEGER && value <= MAX_SAFE_INTEGER;
 		}
 
 		isSafeInteger_1 = isSafeInteger;
@@ -6907,7 +6907,7 @@ var tFBundleCommon = (function (exports) {
 		 */
 		function toSafeInteger(value) {
 		  return value
-		    ? baseClamp(toInteger(value), -9007199254740991, MAX_SAFE_INTEGER)
+		    ? baseClamp(toInteger(value), -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER)
 		    : (value === 0 ? value : 0);
 		}
 

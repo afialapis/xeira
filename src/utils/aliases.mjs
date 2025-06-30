@@ -70,9 +70,12 @@ function _aliasesRead (pkgPath, resolvePaths= false) {
         ? path.join(pkgPath, baseUrl, rpath)
         : rpath
 
-      if (alias.indexOf('*')>=0) {
-        console.error(`[xeira] Aliases error: ${cerror("don't use wildcards on aliases, it may not work here")}.`)
-      }
+      // Seems wildcards in jsconfig.json are not allowed, but necessary
+      //   to make IDE's file jumping work.
+      //
+      // if (alias.indexOf('*')>=0) {
+      //   console.error(`[xeira] Aliases error: ${cerror("don't use wildcards on aliases, it may not work here")}.`)
+      // }
     })
     return [baseUrl, aliases]
   } catch(e) {
