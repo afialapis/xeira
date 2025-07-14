@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -34,12 +34,12 @@
   },
   "homepage": "https://www.afialapis.com/os/xeira",
   "dependencies": {
-    "@babel/cli": "^7.27.2",
-    "@babel/core": "^7.27.7",
-    "@babel/eslint-parser": "^7.27.5",
-    "@babel/plugin-proposal-decorators": "^7.27.1",
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/eslint-parser": "^7.28.0",
+    "@babel/plugin-proposal-decorators": "^7.28.0",
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-env": "^7.28.0",
     "@babel/preset-modules": "^0.1.6",
     "@babel/preset-react": "^7.27.1",
     "@babel/register": "^7.27.1",
@@ -59,7 +59,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-replace-import-extension": "^1.1.5",
     "babel-plugin-transform-import-meta": "^2.3.3",
-    "chai": "^5.2.0",
+    "chai": "^5.2.1",
     "chokidar": "^4.0.3",
     "cross-spawn": "^7.0.6",
     "diff": "^8.0.2",
@@ -74,7 +74,7 @@
     "nollup": "^0.21.0",
     "postcss": "^8.5.6",
     "prompts": "^2.4.2",
-    "rollup": "^4.44.1",
+    "rollup": "^4.45.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-node-externals": "^8.0.1",
     "rollup-plugin-polyfill-node": "^0.13.0",
@@ -107,6 +107,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-swc": "^0.4.0",
-    "@swc/core": "^1.12.7"
+    "@swc/core": "^1.12.14"
   }
 }

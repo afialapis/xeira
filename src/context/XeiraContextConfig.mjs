@@ -90,7 +90,10 @@ export class XeiraContextConfig {
 
   bundleThis(extension) {
     if (this.bundleExtension) {
-      return this.bundleExtension.indexOf(extension) >= 0
+      const exts = this.bundleExtension.split(',')
+      if (exts.length == 0) {
+        return exts.indexOf(extension) >= 0
+      }
     }
     return true
   }

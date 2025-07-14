@@ -1,6 +1,11 @@
 
 # Changelog
 
+## 1.2.1
+
+· bundle_extension can be a comma-separated list
+
+
 ## 1.1.9
 
 · Upgrade deps, including `arredemo` which was forced back to `react``18`.
