@@ -1,6 +1,11 @@
 
 # Changelog
 
+
+## 1.2.3
+
+· `usesReact` also if `miolo` is in deps (hacky patch)
+
 ## 1.2.2
 
 · bundle_extension fix

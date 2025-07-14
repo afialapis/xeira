@@ -18,6 +18,30 @@ export class XeiraContext extends XeiraContextFiles {
         return true
       }
     } catch (_) {}
+
+    try {
+      if ('react' in this.pkgJson.devDependencies) {
+        return true
+      }
+    } catch (_) {}
+
+    try {
+      if ('miolo' in this.pkgJson.dependencies) {
+        return true
+      }
+    } catch (_) {}
+
+    try {
+      if ('miolo' in this.pkgJson.peerDependencies) {
+        return true
+      }
+    } catch (_) {}
+
+    try {
+      if ('miolo' in this.pkgJson.devDependencies) {
+        return true
+      }
+    } catch (_) {}
     
     
     return false
