@@ -1,6 +1,11 @@
 
 # Changelog
 
+## 1.2.2
+
+· bundle_extension fix
+
+
 ## 1.2.1
 
 · bundle_extension can be a comma-separated list

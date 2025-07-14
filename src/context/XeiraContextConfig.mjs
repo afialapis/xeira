@@ -1,4 +1,10 @@
 import path from 'path'
+import {
+  BUNDLE_MODE_NO_BUNDLE,
+  BUNDLE_MODE_NORMAL,
+  BUNDLE_MODE_WITH_DEPS,
+  BUNDLE_MODE_BOTH
+} from './ns.mjs'
 
 export class XeiraContextConfig {
   constructor(config, pkgJson, options) {
@@ -6,9 +12,11 @@ export class XeiraContextConfig {
     this.pkgJson= pkgJson
     this.options= options
   }
+
   get pkgName () {
     return this.pkgJson.name
   }
+
   mergeConfig (config) {
     this.config= {
       ...config || {},
@@ -83,19 +91,75 @@ export class XeiraContextConfig {
   get bundleExtension() {
     return this.config.bundle_extension
   }
-
-  bundleAll() {
-    return !this.bundleExtension
-  }
-
-  bundleThis(extension) {
+  
+  _bundleMode(extension) {
+    // returns an array like
+    //   [
+    //     0/1/2/3, -- Normal bundle: 0 no bundle, 1 bundle, 2 bundle with deps, 3 both normal and with deps
+    //     0/1/2/3, -- Min    bundle: 0 no bundle, 1 bundle, 2 bundle with deps, 3 both normal and with deps
+    //   ]
     if (this.bundleExtension) {
       const exts = this.bundleExtension.split(',')
-      if (exts.length == 0) {
-        return exts.indexOf(extension) >= 0
+      if (exts.length >= 1) {
+        const matching = exts.filter((e) => e.indexOf(extension)>=0)
+        if (matching.length > 0) {
+          const matchingMin = matching.filter((e) => e.indexOf('min')>=0)
+          const bundleMin = matchingMin.length > 0
+          if (bundleMin) {
+            const bundleMinDeps = matchingMin.filter((e) => e.indexOf('bundle')>=0).length > 0
+            return [BUNDLE_MODE_NO_BUNDLE, bundleMinDeps ? BUNDLE_MODE_WITH_DEPS : BUNDLE_MODE_NORMAL] // bundle only .min
+          }
+          
+          const bundleDeps = matching.filter((e) => e.indexOf('bundle')>=0).length > 0
+          return [bundleDeps ? BUNDLE_MODE_WITH_DEPS : BUNDLE_MODE_NORMAL, BUNDLE_MODE_NO_BUNDLE]   // bundle only normal
+        }
       }
+      return [BUNDLE_MODE_NO_BUNDLE, BUNDLE_MODE_NO_BUNDLE] // bundle none
     }
-    return true
+    if (process.env?.NODE_ENV || 'production' === 'production') {
+      return [BUNDLE_MODE_BOTH, BUNDLE_MODE_BOTH] // bundle all
+    }
+    return [BUNDLE_MODE_NORMAL, BUNDLE_MODE_NO_BUNDLE] // bundle normal only in dev
+  }
+
+  bundleIt(extension) {
+    const [bundleNormal, bundleMin] = this._bundleMode(extension)
+    if  (bundleNormal !== BUNDLE_MODE_NO_BUNDLE) {
+      return true
+    }
+    if (bundleMin !== BUNDLE_MODE_NO_BUNDLE) {
+      return true
+    }
+    return false
+  }
+
+  bundleWithDeps(extension) {
+    const [bundleNormal, bundleMin] = this._bundleMode(extension)
+    let out = 0
+    if ([BUNDLE_MODE_WITH_DEPS, BUNDLE_MODE_BOTH].indexOf(bundleNormal) >= 0) {
+      out+= 1
+    }
+    if ([BUNDLE_MODE_WITH_DEPS, BUNDLE_MODE_BOTH].indexOf(bundleMin) >= 0) {
+      out+= 2
+    }
+    return out
+  }  
+
+  bundleWithoutDeps(extension) {
+    const [bundleNormal, bundleMin] = this._bundleMode(extension)
+    let out = 0
+    if ([BUNDLE_MODE_NORMAL, BUNDLE_MODE_BOTH].indexOf(bundleNormal) >= 0) {
+      out+= 1
+    }
+    if ([BUNDLE_MODE_NORMAL, BUNDLE_MODE_BOTH].indexOf(bundleMin) >= 0) {
+      out+= 2
+    }
+    return out
+  }  
+
+
+  bundleSome(extension) {
+    return this.bundleIt(extension, true) || this.bundleIt(extension, false)
   }
 
   get inlineDynamicImports() {

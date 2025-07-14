@@ -17,7 +17,7 @@ import { getBabelConfig } from '../../../config/babel.mjs'
 
 const NODE_ENV = process.env?.NODE_ENV || 'production'
 
-async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundleDeps= false, bundleMin= 2) {
+async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundleDeps= false, bundleMin= 3) {
 
   const customBabelConfig= {
     exclude: /node_modules/,
@@ -124,9 +124,9 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
   }  
   
   const outputs= 
-    bundleMin == 2
+    bundleMin == 3
     ? [outputDef, outputDefMin]
-    : bundleMin == 1
+    : bundleMin == 2
       ? [outputDefMin]
       : [outputDef]
     
