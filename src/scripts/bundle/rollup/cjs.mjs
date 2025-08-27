@@ -6,6 +6,7 @@ import externals from 'rollup-plugin-node-externals'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
+import tailwindcss from '@tailwindcss/postcss'
 import autoprefixer from 'autoprefixer'
 
 import {rollupBanner} from './commons/banner.mjs'
@@ -67,6 +68,7 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, bundleD
       scss({
         extract: true,
         plugins: [
+          tailwindcss(),
           autoprefixer()
         ],
         use: {

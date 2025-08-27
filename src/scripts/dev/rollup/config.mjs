@@ -8,6 +8,7 @@ import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import polyfillNode from 'rollup-plugin-polyfill-node'
 import scss from 'rollup-plugin-postcss'
+import tailwindcss from '@tailwindcss/postcss'
 import autoprefixer from 'autoprefixer'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
@@ -82,6 +83,7 @@ const makeSimpleConfig = async (context, devDefaults, callback) => {
       scss({
         extract: true,
         plugins: [
+          tailwindcss(),
           autoprefixer()
         ],
         use: {

@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import scss from 'rollup-plugin-postcss'
+import tailwindcss from '@tailwindcss/postcss'
 import autoprefixer from 'autoprefixer'
 import { getRollupPluginForResolvingAliases } from  '../../../../utils/aliases.mjs'
 import { getBabelConfig } from '../../../../config/babel.mjs'
@@ -42,6 +43,7 @@ const makeSimpleConfig = async (context, name, input, output) => {
       scss({
         extract: true,
         plugins: [
+          tailwindcss(),
           autoprefixer()
         ],
         use: {

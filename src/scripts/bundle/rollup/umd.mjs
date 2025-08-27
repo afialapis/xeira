@@ -7,6 +7,7 @@ import {nodeResolve} from '@rollup/plugin-node-resolve'
 import polyfillNode from 'rollup-plugin-polyfill-node'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-postcss'
+import tailwindcss from '@tailwindcss/postcss'
 import autoprefixer from 'autoprefixer'
 import terser from '@rollup/plugin-terser'
 
@@ -75,6 +76,7 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
         extract: true,
         //minimize: true,
         plugins: [
+          tailwindcss(),
           autoprefixer()
         ],
         use: {
