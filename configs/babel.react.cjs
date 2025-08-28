@@ -1,11 +1,10 @@
-const base = require('./babel.cjs')
-
-module.exports = {
+module.exports= { 
   presets: [
-    ...base.presets,
+    ["@babel/preset-env", {"targets": {"esmodules": true}}],
     "@babel/preset-react"
   ],
   plugins: [
-    ...base.plugins
+    // "babel-plugin-transform-import-meta"
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
   ]
 }

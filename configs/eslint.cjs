@@ -1,6 +1,3 @@
-
-const babelConfig = require ('./babel.cjs')
-
 module.exports = {
   root: true,
   parser: "@babel/eslint-parser",
@@ -17,7 +14,13 @@ module.exports = {
     "babelOptions": {
       // babelrc: false,
       // configFile: false,
-      ...babelConfig 
+      presets: [
+        ["@babel/preset-env", {"targets": {"esmodules": true}}]
+      ],
+      plugins: [
+        // "babel-plugin-transform-import-meta"
+        ["@babel/plugin-proposal-decorators", { "legacy": true }]
+      ]
     }
   },
   extends:  [

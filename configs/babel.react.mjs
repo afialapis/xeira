@@ -1,11 +1,12 @@
-import base from './babel.mjs'
-
-export default {
+export default { 
   presets: [
-    ...base.presets,
+    ["@babel/preset-env", {"targets": {"esmodules": true}}],
     "@babel/preset-react"
   ],
   plugins: [
-    ...base.plugins
+    // "babel-plugin-transform-import-meta"
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
   ]
 }
+
+

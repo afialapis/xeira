@@ -1,5 +1,3 @@
-import babelConfig from './babel.mjs'
-
 export default {
   root: true,
   parser: "@babel/eslint-parser",
@@ -16,7 +14,13 @@ export default {
     "babelOptions": {
       // babelrc: false,
       // configFile: false,
-      ...babelConfig 
+      presets: [
+        ["@babel/preset-env", {"targets": {"esmodules": true}}]
+      ],
+      plugins: [
+        // "babel-plugin-transform-import-meta"
+        ["@babel/plugin-proposal-decorators", { "legacy": true }]
+      ]
     }
   },
   extends:  [
