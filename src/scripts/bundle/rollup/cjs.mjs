@@ -68,7 +68,7 @@ async function rollupModulesForCjs(context, pkgJsonPath, pkgJson, input, bundleD
       scss({
         extract: true,
         plugins: [
-          tailwindcss(),
+          tailwindcss({base: context.pkgPath}),
           autoprefixer()
         ],
         use: {

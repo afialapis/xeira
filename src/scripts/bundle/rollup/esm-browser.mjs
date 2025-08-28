@@ -81,7 +81,7 @@ async function rollupModulesForEsm(context, pkgJsonPath, pkgJson, input, bundleM
       scss({
         extract: true,
         plugins: [
-          tailwindcss(),
+          tailwindcss({base: context.pkgPath}),
           autoprefixer()
         ],
         use: {
