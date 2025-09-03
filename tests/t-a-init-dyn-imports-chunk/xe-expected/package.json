@@ -24,10 +24,5 @@
   },
   "module": "./dist/mjs/index.js",
   "cjs": "./dist/cjs/index.js",
-  "browser": "./dist/t-a-init-dyn-imports-chunk.iife.js",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/xeira/configs/eslint.cjs"
-    ]
-  }
+  "browser": "./dist/t-a-init-dyn-imports-chunk.iife.js"
 }

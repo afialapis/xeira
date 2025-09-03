@@ -1,5 +1,3 @@
-import {getEslintConfigPath} from '../../config/eslint.mjs'
-
 function makePkgJsonValues(context) {
   const [_main_file_suffix, main_file] = context.getMainFile() 
 
@@ -27,11 +25,6 @@ function makePkgJsonValues(context) {
     pkgJsonValues.browser= iife || umd
   }
   
-  if (context.lintWithEslint) {
-    const eslintConfigPath = getEslintConfigPath(context)
-    pkgJsonValues['eslintConfig']= {"extends": [eslintConfigPath]}
-  }
-
   return pkgJsonValues
 }
 

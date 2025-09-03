@@ -1,0 +1,20 @@
+{
+  "product": "package",
+  "target": "both",
+  "source_index": "./src/index.js",
+  "linter": "eslint",
+  "transpile_folder": "./lib_custom",
+  "transpiler": "babel",
+  "minifier": "uglify",
+  "bundle_folder": "./dist",
+  "bundle_name": null,
+  "bundle_extension": null,
+  "bundle_inline_dynamic_imports": true,
+  "bundle_node_polyfill": false,
+  "bundler": "rollup",
+  "test_folder": "./test_custom",
+  "dev_server": "rollup",
+  "demo_mode": "auto",
+  "demo_demoer": "rollup",
+  "verbose": true
+}

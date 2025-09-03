@@ -1,6 +1,15 @@
 
 # Changelog
 
+## 2.0.0
+
+· Finally moved to _ESLint_ 9. `eslintConfig` in `package.json` is not supported anymore.
+· Simplified _ESLint_ and _Babel_ configs.
+· `React` _^19.1.1_. as peer dependency.
+
+## 1.3.1
+
+· `tailwindcss` support
 
 ## 1.2.3
 
@@ -8,13 +17,11 @@
 
 ## 1.2.2
 
-· bundle_extension fix
-
+· `bundle_extension` fix
 
 ## 1.2.1
 
-· bundle_extension can be a comma-separated list
-
+· `bundle_extension` can be a comma-separated list
 
 ## 1.1.9
 

@@ -24,10 +24,5 @@
   },
   "module": "./dist/t-a-init-dyn-imports-inline.mjs",
   "cjs": "./dist/t-a-init-dyn-imports-inline.cjs",
-  "browser": "./dist/t-a-init-dyn-imports-inline.iife.js",
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/xeira/configs/eslint.cjs"
-    ]
-  }
+  "browser": "./dist/t-a-init-dyn-imports-inline.iife.js"
 }

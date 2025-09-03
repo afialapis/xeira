@@ -37,15 +37,18 @@ async function transpileWithBabel(context, minimifyCallback, forceExtension= 'cj
   
   
   await transpileDirectory(context.pkgPath, theSourceFolder, context.transpileFolder, forceExtension, async (filepath, destpath) => {
+
     // Log clean filenames
     const cleanFrom= filepath.replace(context.pkgPath, '')
     const cleanTo= destpath.replace(context.pkgPath, '')
     context.log_always('transpile', `Transpiling ${cfilename(cleanFrom)} to ${cfilename(cleanTo)}`)
-    
-    // Merge all involved babel configs
-    const mergedConfig= await getBabelConfig(context, filepath, customBabelConfig)
+
+    let mergedConfig = {}
 
     try {
+      
+      // Merge all involved babel configs
+      mergedConfig= await getBabelConfig(context, filepath, customBabelConfig)      
 
       let { code } = await transformFileAsync(filepath, mergedConfig)
       code = await minimifyCallback(code)

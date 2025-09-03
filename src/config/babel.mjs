@@ -2,15 +2,10 @@ import path from 'path'
 import babelMerge from 'babel-merge'
 import { loadPartialConfig } from "@babel/core"
 import { getBabelPluginForResolvingAliases } from '../utils/aliases.mjs'
-
-function _getBabelConfigName (context, esm= false) { 
-  return `babel${context.usesReact ? '.react' : ''}.${esm ? 'mjs' : 'cjs'}`
-}
+import { readJsonFileSync } from '../utils/json.mjs'
 
 async function _getBabelDefaultConfig (context) { 
-  const configModule = await import(path.join('../../configs', _getBabelConfigName(context, /*esm=*/ true)))
-  let config= configModule.default
-
+  let config = readJsonFileSync(path.join('../../configs/babel.config.json'))
   const plugin = getBabelPluginForResolvingAliases(context)
   if (plugin) {
     config= babelMerge(config, {plugins: [plugin]})
