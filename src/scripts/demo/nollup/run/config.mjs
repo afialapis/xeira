@@ -43,7 +43,7 @@ const makeSimpleConfig = async (context, name, input, output) => {
       scss({
         extract: true,
         plugins: [
-          tailwindcss(),
+          tailwindcss({base: context.pkgPath}),
           autoprefixer()
         ],
         use: {

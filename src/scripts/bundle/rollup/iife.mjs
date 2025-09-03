@@ -76,7 +76,7 @@ async function rollupModulesForIife(context, pkgJsonPath, pkgJson, input, bundle
       scss({
         extract: true,
         plugins: [
-          tailwindcss(),
+          tailwindcss({base: context.pkgPath}),
           autoprefixer()
         ],
         use: {

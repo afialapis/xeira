@@ -76,7 +76,7 @@ async function rollupModulesForUmd(context, pkgJsonPath, pkgJson, input, bundleD
         extract: true,
         //minimize: true,
         plugins: [
-          tailwindcss(),
+          tailwindcss({base: context.pkgPath}),
           autoprefixer()
         ],
         use: {
