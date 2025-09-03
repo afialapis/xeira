@@ -1,11 +1,16 @@
 import path from 'path'
+import { fileURLToPath } from 'url'
 import babelMerge from 'babel-merge'
 import { loadPartialConfig } from "@babel/core"
 import { getBabelPluginForResolvingAliases } from '../utils/aliases.mjs'
 import { readJsonFileSync } from '../utils/json.mjs'
 
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 async function _getBabelDefaultConfig (context) { 
-  let config = readJsonFileSync(path.join('../../configs/babel.config.json'))
+  let config = readJsonFileSync(path.join(__dirname, '../../configs/babel.config.json'))
   const plugin = getBabelPluginForResolvingAliases(context)
   if (plugin) {
     config= babelMerge(config, {plugins: [plugin]})

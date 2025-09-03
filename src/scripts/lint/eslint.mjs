@@ -23,9 +23,6 @@ async function _findEslintConfig(folder) {
 
 
 async function lintWithEslint(context, sourcePath) {
-  // TODO
-  // We need to decide how to read possible custom config files
-
   const baseConfig = await getEslintConfig(context)
   const overrideConfig = {}
 
