@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",

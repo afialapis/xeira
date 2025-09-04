@@ -38,7 +38,7 @@ export default [
 
   // Configuración del parser, plugins y reglas para los archivos de código.
   {
-    files: ["**/*.js", "**/*.jsx", "**/*.mjs"],
+    files: ["**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs", "**/*.es6"],
     languageOptions: {
       parser: babelParser,
       parserOptions: {
