@@ -1,6 +1,7 @@
 import { getXeiraContexts } from "./context/index.mjs"
 import { cfilename } from "./utils/colors.mjs"
 import commands from '../bin/cmds/index.mjs'
+import eslintConfig from '../configs/eslint.config.mjs'
 
 function _makeCommandWrapper (command_name) {
   async function __runCommand(options, callback) {
@@ -41,5 +42,6 @@ export {
   xeiraTranspile,
   xeiraBundle,
   xeiraVersion,
-  xeiraSite
+  xeiraSite,
+  eslintConfig
 }
