@@ -9,6 +9,8 @@
 import { testWithMocha } from './mocha/index.mjs'
 //import { testWithMochaAPI } from './mocha_api/index.mjs'
 import {parseMochaTestPath, parseMochaExtraParams} from './params.mjs'
+//import { testWithVitest } from './vitest/index.mjs'
+
 async function xeiraTest(context) {
 
   const testPathStr= await parseMochaTestPath(context)
@@ -16,7 +18,7 @@ async function xeiraTest(context) {
 
   await testWithMocha(context, extraParams, testPathStr)
   //await testWithMochaAPI(context, extraParams, testPathStr)
-
+  //await testWithVitest(context, extraParams, testPathStr)
 }
 
 export default xeiraTest

@@ -5,6 +5,7 @@
     "x-reset": "rm -fr node_modules && rm -fr package-lock.json",
     "x-prepare": "npm run x-reset && npm i",
     "test": "npx xeira test --files=./test/unit.mjs",
+    "x-runX": "npm run --silent test",
     "x-run": "echo \"Skipping [npm run --silent test] \""
   },
   "dependencies": {
@@ -13,15 +14,5 @@
     "react-dom": "^19.1.1",
     "xeira": "file:../../"
   },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/xeira/configs/eslint.react.cjs"
-    ]
-  },
-  "version": "0.0.1",
-  "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@babel/preset-env": "^7.19.3",
-    "@babel/preset-react": "^7.18.6"
-  }
+  "version": "0.0.1"
 }

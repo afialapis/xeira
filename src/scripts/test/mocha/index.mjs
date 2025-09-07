@@ -31,7 +31,7 @@ async function testWithMocha(context, extraParams, testPathStr) {
   
   const babelRegPath= withAliases
     ? _makeBabelTempFile(context)
-    : path.join(__dirname, 'babel.mjs')
+    : path.join(__dirname, 'babel.cjs')
   
   const helpersDir = path.join(__dirname, 'helpers')
   const helperChaiPath=  path.join(helpersDir, 'chai.mjs')

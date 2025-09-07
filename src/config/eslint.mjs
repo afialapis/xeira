@@ -7,6 +7,6 @@ const __dirname = path.dirname(__filename)
 
 
 export async function getEslintConfig () { 
-  const config = await import(path.join(__dirname, '../../configs', 'eslint.config.js'))
+  const config = await import(path.join(__dirname, '../../configs', 'eslint.config.mjs'))
   return config.default
 }

@@ -12,10 +12,5 @@
     "trangallada": "^0.0.3",
     "xeira": "file:../../"
   },
-  "eslintConfig": {
-    "extends": [
-      "./node_modules/xeira/configs/eslint.cjs"
-    ]
-  },
   "version": "0.0.1"
 }

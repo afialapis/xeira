@@ -10,6 +10,7 @@ async function babelRegister() {
   // const babelConfig = await getBabelConfig(context);
 
   const register = await import("@babel/register/experimental-worker.js")
+
   register.default({ 
 
     // Array of ignore conditions, either a regex or a function. (Optional)
@@ -50,9 +51,19 @@ async function babelRegister() {
       }],
       "@babel/preset-react"
     ],
-    plugins: []  
+    plugins: []  ,
+    extensions: [".js", ".jsx", ".mjs", ".cjs", ".es6"],
   });
 }
 
 babelRegister()
 
+
+/*
+import register from "@babel/register";
+
+register({
+  presets: ["@babel/preset-env", "@babel/preset-react"],
+  extensions: [".js", ".jsx", ".mjs", ".cjs", ".es6"],
+});
+*/

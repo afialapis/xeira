@@ -1,6 +1,6 @@
 {
   "name": "xeira",
-  "version": "2.0.0-beta.5",
+  "version": "2.0.0-beta.6",
   "description": "One Web Dev stack tool to rule them all",
   "type": "module",
   "bin": "bin/xeira.mjs",
@@ -38,6 +38,7 @@
     "@babel/core": "^7.28.3",
     "@babel/eslint-parser": "^7.28.0",
     "@babel/eslint-plugin": "^7.27.1",
+    "@babel/node": "^7.28.0",
     "@babel/plugin-proposal-decorators": "^7.28.0",
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
     "@babel/preset-env": "^7.28.3",
@@ -89,6 +90,7 @@
     "sass": "^1.92.0",
     "tinguir": "^0.0.7",
     "uglify-js": "^3.19.3",
+    "vitest": "^3.2.4",
     "yargs-parser": "^22.0.0"
   },
   "peerDependencies": {
