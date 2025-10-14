@@ -24,13 +24,19 @@ async function _findEslintConfig(folder) {
 
 async function lintWithEslint(context, sourcePath) {
   const baseConfig = await getEslintConfig(context)
-  const overrideConfig = {}
-
-  const basePath = sourcePath
-    ? path.join(context.pkgPath, sourcePath)
-    : context.pkgPath
+  // const basePath = sourcePath
+  //   ? path.join(context.pkgPath, sourcePath)
+  //   : context.pkgPath
   
+  // let overrideConfig = {}
   const customConfigPath= await _findEslintConfig(context.pkgPath)
+  // f (customConfigPath) {
+  //  try {
+  //    overrideConfig = JSON.parse(fs.readFileSync(customConfigPath, 'utf8'))
+  //  } catch(e) {
+  //    console.log(`[xeira][lint] Error reading ${customConfigPath}: ${e}`)
+  //  }
+  // 
 
   const ignorePatterns = [
     "dist/",
@@ -51,13 +57,14 @@ async function lintWithEslint(context, sourcePath) {
   ]
   
   const options= {
-    cwd: basePath,
+    cwd: context.pkgPath,
     ignorePatterns,
     baseConfig,
-    overrideConfig,
+    //overrideConfig,
     errorOnUnmatchedPattern: false,
-    
-    overrideConfigFile: customConfigPath ? customConfigPath : true
+    // If there is no eslint.config.js in the project root,
+    //   we tell EsLiint to not search for a file (and avoid an error)
+    overrideConfigFile: customConfigPath ? null : true
   }
 
   // call eslint's node api

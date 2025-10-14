@@ -1,6 +1,9 @@
 import { JSDOM } from 'jsdom';
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>', {
+  // This will allow to avoid SecurityError if using localStorage in tests
+  url: "http://localhost"
+});
 const { window } = jsdom;
 
 function copyProps(src, target) {
