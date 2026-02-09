@@ -1811,12 +1811,12 @@ var tFBundleEsm = (function (exports) {
 	function requireIsBuffer () {
 		if (hasRequiredIsBuffer) return isBuffer.exports;
 		hasRequiredIsBuffer = 1;
-		(function (module, exports) {
+		(function (module, exports$1) {
 			var root = require_root(),
 			    stubFalse = requireStubFalse();
 
 			/** Detect free variable `exports`. */
-			var freeExports = exports && !exports.nodeType && exports;
+			var freeExports = exports$1 && !exports$1.nodeType && exports$1;
 
 			/** Detect free variable `module`. */
 			var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -2036,11 +2036,11 @@ var tFBundleEsm = (function (exports) {
 	function require_nodeUtil () {
 		if (hasRequired_nodeUtil) return _nodeUtil.exports;
 		hasRequired_nodeUtil = 1;
-		(function (module, exports) {
+		(function (module, exports$1) {
 			var freeGlobal = require_freeGlobal();
 
 			/** Detect free variable `exports`. */
-			var freeExports = exports && !exports.nodeType && exports;
+			var freeExports = exports$1 && !exports$1.nodeType && exports$1;
 
 			/** Detect free variable `module`. */
 			var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -2534,11 +2534,11 @@ var tFBundleEsm = (function (exports) {
 	function require_cloneBuffer () {
 		if (hasRequired_cloneBuffer) return _cloneBuffer.exports;
 		hasRequired_cloneBuffer = 1;
-		(function (module, exports) {
+		(function (module, exports$1) {
 			var root = require_root();
 
 			/** Detect free variable `exports`. */
-			var freeExports = exports && !exports.nodeType && exports;
+			var freeExports = exports$1 && !exports$1.nodeType && exports$1;
 
 			/** Detect free variable `module`. */
 			var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;

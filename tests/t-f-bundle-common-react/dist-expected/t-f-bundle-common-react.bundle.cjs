@@ -599,7 +599,7 @@ function requireReact_production () {
 	react_production.useTransition = function () {
 	  return ReactSharedInternals.H.useTransition();
 	};
-	react_production.version = "19.2.0";
+	react_production.version = "19.2.4";
 	return react_production;
 }
 
@@ -621,7 +621,7 @@ var hasRequiredReact_development;
 function requireReact_development () {
 	if (hasRequiredReact_development) return react_development.exports;
 	hasRequiredReact_development = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		"production" !== process.env.NODE_ENV &&
 		  (function () {
 		    function defineDeprecationWarning(methodName, info) {
@@ -1405,18 +1405,18 @@ function requireReact_development () {
 		        return children;
 		      }
 		    };
-		    exports.Activity = REACT_ACTIVITY_TYPE;
-		    exports.Children = fnName;
-		    exports.Component = Component;
-		    exports.Fragment = REACT_FRAGMENT_TYPE;
-		    exports.Profiler = REACT_PROFILER_TYPE;
-		    exports.PureComponent = PureComponent;
-		    exports.StrictMode = REACT_STRICT_MODE_TYPE;
-		    exports.Suspense = REACT_SUSPENSE_TYPE;
-		    exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE =
+		    exports$1.Activity = REACT_ACTIVITY_TYPE;
+		    exports$1.Children = fnName;
+		    exports$1.Component = Component;
+		    exports$1.Fragment = REACT_FRAGMENT_TYPE;
+		    exports$1.Profiler = REACT_PROFILER_TYPE;
+		    exports$1.PureComponent = PureComponent;
+		    exports$1.StrictMode = REACT_STRICT_MODE_TYPE;
+		    exports$1.Suspense = REACT_SUSPENSE_TYPE;
+		    exports$1.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE =
 		      ReactSharedInternals;
-		    exports.__COMPILER_RUNTIME = deprecatedAPIs;
-		    exports.act = function (callback) {
+		    exports$1.__COMPILER_RUNTIME = deprecatedAPIs;
+		    exports$1.act = function (callback) {
 		      var prevActQueue = ReactSharedInternals.actQueue,
 		        prevActScopeDepth = actScopeDepth;
 		      actScopeDepth++;
@@ -1527,19 +1527,19 @@ function requireReact_development () {
 		        }
 		      };
 		    };
-		    exports.cache = function (fn) {
+		    exports$1.cache = function (fn) {
 		      return function () {
 		        return fn.apply(null, arguments);
 		      };
 		    };
-		    exports.cacheSignal = function () {
+		    exports$1.cacheSignal = function () {
 		      return null;
 		    };
-		    exports.captureOwnerStack = function () {
+		    exports$1.captureOwnerStack = function () {
 		      var getCurrentStack = ReactSharedInternals.getCurrentStack;
 		      return null === getCurrentStack ? null : getCurrentStack();
 		    };
-		    exports.cloneElement = function (element, config, children) {
+		    exports$1.cloneElement = function (element, config, children) {
 		      if (null === element || void 0 === element)
 		        throw Error(
 		          "The argument must be a React element, but you passed " +
@@ -1596,7 +1596,7 @@ function requireReact_development () {
 		        validateChildKeys(arguments[key]);
 		      return props;
 		    };
-		    exports.createContext = function (defaultValue) {
+		    exports$1.createContext = function (defaultValue) {
 		      defaultValue = {
 		        $$typeof: REACT_CONTEXT_TYPE,
 		        _currentValue: defaultValue,
@@ -1614,7 +1614,7 @@ function requireReact_development () {
 		      defaultValue._currentRenderer2 = null;
 		      return defaultValue;
 		    };
-		    exports.createElement = function (type, config, children) {
+		    exports$1.createElement = function (type, config, children) {
 		      for (var i = 2; i < arguments.length; i++)
 		        validateChildKeys(arguments[i]);
 		      i = {};
@@ -1667,12 +1667,12 @@ function requireReact_development () {
 		        propName ? createTask(getTaskName(type)) : unknownOwnerDebugTask
 		      );
 		    };
-		    exports.createRef = function () {
+		    exports$1.createRef = function () {
 		      var refObject = { current: null };
 		      Object.seal(refObject);
 		      return refObject;
 		    };
-		    exports.forwardRef = function (render) {
+		    exports$1.forwardRef = function (render) {
 		      null != render && render.$$typeof === REACT_MEMO_TYPE
 		        ? console.error(
 		            "forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...))."
@@ -1713,8 +1713,8 @@ function requireReact_development () {
 		      });
 		      return elementType;
 		    };
-		    exports.isValidElement = isValidElement;
-		    exports.lazy = function (ctor) {
+		    exports$1.isValidElement = isValidElement;
+		    exports$1.lazy = function (ctor) {
 		      ctor = { _status: -1, _result: ctor };
 		      var lazyType = {
 		          $$typeof: REACT_LAZY_TYPE,
@@ -1734,7 +1734,7 @@ function requireReact_development () {
 		      lazyType._debugInfo = [{ awaited: ioInfo }];
 		      return lazyType;
 		    };
-		    exports.memo = function (type, compare) {
+		    exports$1.memo = function (type, compare) {
 		      null == type &&
 		        console.error(
 		          "memo: The first argument must be a component. Instead received: %s",
@@ -1762,7 +1762,7 @@ function requireReact_development () {
 		      });
 		      return compare;
 		    };
-		    exports.startTransition = function (scope) {
+		    exports$1.startTransition = function (scope) {
 		      var prevTransition = ReactSharedInternals.T,
 		        currentTransition = {};
 		      currentTransition._updatedFibers = new Set();
@@ -1800,23 +1800,23 @@ function requireReact_development () {
 		          (ReactSharedInternals.T = prevTransition);
 		      }
 		    };
-		    exports.unstable_useCacheRefresh = function () {
+		    exports$1.unstable_useCacheRefresh = function () {
 		      return resolveDispatcher().useCacheRefresh();
 		    };
-		    exports.use = function (usable) {
+		    exports$1.use = function (usable) {
 		      return resolveDispatcher().use(usable);
 		    };
-		    exports.useActionState = function (action, initialState, permalink) {
+		    exports$1.useActionState = function (action, initialState, permalink) {
 		      return resolveDispatcher().useActionState(
 		        action,
 		        initialState,
 		        permalink
 		      );
 		    };
-		    exports.useCallback = function (callback, deps) {
+		    exports$1.useCallback = function (callback, deps) {
 		      return resolveDispatcher().useCallback(callback, deps);
 		    };
-		    exports.useContext = function (Context) {
+		    exports$1.useContext = function (Context) {
 		      var dispatcher = resolveDispatcher();
 		      Context.$$typeof === REACT_CONSUMER_TYPE &&
 		        console.error(
@@ -1824,58 +1824,58 @@ function requireReact_development () {
 		        );
 		      return dispatcher.useContext(Context);
 		    };
-		    exports.useDebugValue = function (value, formatterFn) {
+		    exports$1.useDebugValue = function (value, formatterFn) {
 		      return resolveDispatcher().useDebugValue(value, formatterFn);
 		    };
-		    exports.useDeferredValue = function (value, initialValue) {
+		    exports$1.useDeferredValue = function (value, initialValue) {
 		      return resolveDispatcher().useDeferredValue(value, initialValue);
 		    };
-		    exports.useEffect = function (create, deps) {
+		    exports$1.useEffect = function (create, deps) {
 		      null == create &&
 		        console.warn(
 		          "React Hook useEffect requires an effect callback. Did you forget to pass a callback to the hook?"
 		        );
 		      return resolveDispatcher().useEffect(create, deps);
 		    };
-		    exports.useEffectEvent = function (callback) {
+		    exports$1.useEffectEvent = function (callback) {
 		      return resolveDispatcher().useEffectEvent(callback);
 		    };
-		    exports.useId = function () {
+		    exports$1.useId = function () {
 		      return resolveDispatcher().useId();
 		    };
-		    exports.useImperativeHandle = function (ref, create, deps) {
+		    exports$1.useImperativeHandle = function (ref, create, deps) {
 		      return resolveDispatcher().useImperativeHandle(ref, create, deps);
 		    };
-		    exports.useInsertionEffect = function (create, deps) {
+		    exports$1.useInsertionEffect = function (create, deps) {
 		      null == create &&
 		        console.warn(
 		          "React Hook useInsertionEffect requires an effect callback. Did you forget to pass a callback to the hook?"
 		        );
 		      return resolveDispatcher().useInsertionEffect(create, deps);
 		    };
-		    exports.useLayoutEffect = function (create, deps) {
+		    exports$1.useLayoutEffect = function (create, deps) {
 		      null == create &&
 		        console.warn(
 		          "React Hook useLayoutEffect requires an effect callback. Did you forget to pass a callback to the hook?"
 		        );
 		      return resolveDispatcher().useLayoutEffect(create, deps);
 		    };
-		    exports.useMemo = function (create, deps) {
+		    exports$1.useMemo = function (create, deps) {
 		      return resolveDispatcher().useMemo(create, deps);
 		    };
-		    exports.useOptimistic = function (passthrough, reducer) {
+		    exports$1.useOptimistic = function (passthrough, reducer) {
 		      return resolveDispatcher().useOptimistic(passthrough, reducer);
 		    };
-		    exports.useReducer = function (reducer, initialArg, init) {
+		    exports$1.useReducer = function (reducer, initialArg, init) {
 		      return resolveDispatcher().useReducer(reducer, initialArg, init);
 		    };
-		    exports.useRef = function (initialValue) {
+		    exports$1.useRef = function (initialValue) {
 		      return resolveDispatcher().useRef(initialValue);
 		    };
-		    exports.useState = function (initialState) {
+		    exports$1.useState = function (initialState) {
 		      return resolveDispatcher().useState(initialState);
 		    };
-		    exports.useSyncExternalStore = function (
+		    exports$1.useSyncExternalStore = function (
 		      subscribe,
 		      getSnapshot,
 		      getServerSnapshot
@@ -1886,10 +1886,10 @@ function requireReact_development () {
 		        getServerSnapshot
 		      );
 		    };
-		    exports.useTransition = function () {
+		    exports$1.useTransition = function () {
 		      return resolveDispatcher().useTransition();
 		    };
-		    exports.version = "19.2.0";
+		    exports$1.version = "19.2.4";
 		    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ &&
 		      "function" ===
 		        typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop &&
@@ -3706,12 +3706,12 @@ var hasRequiredIsBuffer;
 function requireIsBuffer () {
 	if (hasRequiredIsBuffer) return isBuffer.exports;
 	hasRequiredIsBuffer = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		var root = require_root(),
 		    stubFalse = requireStubFalse();
 
 		/** Detect free variable `exports`. */
-		var freeExports = exports && !exports.nodeType && exports;
+		var freeExports = exports$1 && !exports$1.nodeType && exports$1;
 
 		/** Detect free variable `module`. */
 		var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -3931,11 +3931,11 @@ var hasRequired_nodeUtil;
 function require_nodeUtil () {
 	if (hasRequired_nodeUtil) return _nodeUtil.exports;
 	hasRequired_nodeUtil = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		var freeGlobal = require_freeGlobal();
 
 		/** Detect free variable `exports`. */
-		var freeExports = exports && !exports.nodeType && exports;
+		var freeExports = exports$1 && !exports$1.nodeType && exports$1;
 
 		/** Detect free variable `module`. */
 		var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
@@ -4429,11 +4429,11 @@ var hasRequired_cloneBuffer;
 function require_cloneBuffer () {
 	if (hasRequired_cloneBuffer) return _cloneBuffer.exports;
 	hasRequired_cloneBuffer = 1;
-	(function (module, exports) {
+	(function (module, exports$1) {
 		var root = require_root();
 
 		/** Detect free variable `exports`. */
-		var freeExports = exports && !exports.nodeType && exports;
+		var freeExports = exports$1 && !exports$1.nodeType && exports$1;
 
 		/** Detect free variable `module`. */
 		var freeModule = freeExports && 'object' == 'object' && module && !module.nodeType && module;
